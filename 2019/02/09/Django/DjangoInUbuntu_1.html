@@ -18,17 +18,17 @@
 <p><strong>Error:</strong> django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: No module named MySQLdb.</p>
 <p><strong>Solve:</strong>  python2.7 + Django1.11 , 解决方案： <code>pip install mysql-server</code></p>
 <pre><code class="shell">root@iZwz969jm0y04abuhgx4byZ:~# pip install mysql-python
-<span class="meta">#</span>随后验证一下是否安装成功
+<span class="meta">#</span><span class="bash">随后验证一下是否安装成功</span>
 root@iZwz969jm0y04abuhgx4byZ:~# python
 Python 2.7.12 (default, Nov 12 2018, 14:36:49) 
 [GCC 5.4.0 20160609] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
-<span class="meta">&gt;</span>&gt;&gt; import MYSQLdb
+<span class="meta">&gt;</span><span class="bash">&gt;&gt; import MYSQLdb</span>
 Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 ImportError: No module named MYSQLdb
-<span class="meta">&gt;</span>&gt;&gt; import MySQLdb
-<span class="meta">&gt;</span>&gt;&gt; exit()
+<span class="meta">&gt;</span><span class="bash">&gt;&gt; import MySQLdb</span>
+<span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span>
 </code></pre>
 <h2 id="2-Django表单"><a href="#2-Django表单" class="headerlink" title="2. Django表单"></a>2. Django表单</h2><p>HTML表单是网站交互性的经典方式。 本章将介绍如何用Django对用户提交的表单数据进行处理。 </p>
 <hr>

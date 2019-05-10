@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="May">
 <meta property="og:description" content="Yolo训练自己的数据集1234567891011config:      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     ||---">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-10T16:08:03.172Z">
+<meta property="og:updated_time" content="2019-05-10T16:24:37.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="May">
 <meta name="twitter:description" content="Yolo训练自己的数据集1234567891011config:      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     ||---">
@@ -452,7 +452,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">./darknet detector train ./cfg/voc.data .cfg/tiny-yolo-voc.cfg darknet.conv.weights</span></span><br></pre></td></tr></table></figure>
 <p> 不过我没试成功，加上这个模型直接就除了final，不知道啥情况。当然也可以用自己训练的模型做参数初始化，万一训练的时候被人终端了，可以再用训练好的模型接上去接着训练。</p>
 <p>​       训练过程中会根据迭代次数保存训练的权重模型，然后就可以拿来测试了，测试的命令同理：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg results/tiny-yolo-voc_6000.weights data../../images.jpg</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg results/tiny-yolo-voc_6000.weights data/images.jpg</span><br></pre></td></tr></table></figure>
 <p>​      这样就完成了整个流程。</p>
 
       

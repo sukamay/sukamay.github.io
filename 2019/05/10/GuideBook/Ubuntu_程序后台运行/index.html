@@ -86,15 +86,15 @@
 <meta property="og:site_name" content="May">
 <meta property="og:description" content="Ubuntu_程序后台运行参考了nohup, linux 2&amp;gt;&amp;amp;1。 1.nohup用途：不挂断地运行命令。no hang up 语法：nohup Command [ Arg … ] [　&amp;amp; ] 　　无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 　　如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOM">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://sukamay.github.io/2019/05/10/images/798214-20170320154514377-1985478430.png">
-<meta property="og:image" content="https://sukamay.github.io/2019/05/10/images/798214-20170320154600658-246972161.png">
-<meta property="og:image" content="https://sukamay.github.io/2019/05/10/images/798214-20170320155041815-1272481492.png">
-<meta property="og:image" content="https://sukamay.github.io/2019/05/10/images/798214-20170320153728049-88100874.png">
-<meta property="og:updated_time" content="2019-05-10T16:08:03.194Z">
+<meta property="og:image" content="https://sukamay.github.io/images/798214-20170320154514377-1985478430.png">
+<meta property="og:image" content="https://sukamay.github.io/images/798214-20170320154600658-246972161.png">
+<meta property="og:image" content="https://sukamay.github.io/images/798214-20170320155041815-1272481492.png">
+<meta property="og:image" content="https://sukamay.github.io/images/798214-20170320153728049-88100874.png">
+<meta property="og:updated_time" content="2019-05-10T16:24:37.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="May">
 <meta name="twitter:description" content="Ubuntu_程序后台运行参考了nohup, linux 2&amp;gt;&amp;amp;1。 1.nohup用途：不挂断地运行命令。no hang up 语法：nohup Command [ Arg … ] [　&amp;amp; ] 　　无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。 　　如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOM">
-<meta name="twitter:image" content="https://sukamay.github.io/2019/05/10/images/798214-20170320154514377-1985478430.png">
+<meta name="twitter:image" content="https://sukamay.github.io/images/798214-20170320154514377-1985478430.png">
 
 
 
@@ -414,16 +414,16 @@
 <p>3.如果某个进程起不来，可能是某个端口被占用</p>
 <p>查看使用某端口的进程</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -<span class="selector-tag">i</span>:<span class="number">8090</span></span><br></pre></td></tr></table></figure>
-<p><img src="../../images/798214-20170320154514377-1985478430.png" alt="img"></p>
+<p><img src="/images/798214-20170320154514377-1985478430.png" alt="img"></p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ap<span class="string">|grep 8090</span></span><br></pre></td></tr></table></figure>
-<p><img src="../../images/798214-20170320154600658-246972161.png" alt="img"></p>
+<p><img src="/images/798214-20170320154600658-246972161.png" alt="img"></p>
 <p>查看到进程id之后，使用netstat命令查看其占用的端口</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nap<span class="string">|grep 7779</span></span><br></pre></td></tr></table></figure>
-<p><img src="../../images/798214-20170320155041815-1272481492.png" alt="img"></p>
+<p><img src="/images/798214-20170320155041815-1272481492.png" alt="img"></p>
 <p>使用kill杀掉进城后再启动</p>
 <p>4.终止后台运行的进程</p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`kill -<span class="number">9</span>  进程号`</span><br></pre></td></tr></table></figure>
-<p><img src="../../images/798214-20170320153728049-88100874.png" alt="img"></p>
+<p><img src="/images/798214-20170320153728049-88100874.png" alt="img"></p>
 
       
     </div>

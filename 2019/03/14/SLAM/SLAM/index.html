@@ -86,17 +86,17 @@
 <meta property="og:site_name" content="May">
 <meta property="og:description" content="SLAM漫谈SLAM技术（上） 漫谈SLAM技术（下） SLAM技术在国内的发展现状 SLAM介绍（算法基本流程） 详细分析SLAM的实现和应用 特征点的匹配 列举几个目前比较有名的SLAM算法：PTAM,MonoSLAM, ORB-SLAM,RGBD-SLAM,RTAB-SLAM,LSD-SLAM。 SLAM的两大类别： 根据传感器类别（激光雷达和摄像头）分为激光SLAM和视觉SLAM 传感器：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://sukamay.github.io/2019/03/14/images/1504852096638_6883_1504852096621.jpg">
-<meta property="og:image" content="https://sukamay.github.io/2019/03/14/images/1504852122988_7009_1504852122966.jpg">
-<meta property="og:image" content="https://sukamay.github.io/2019/03/14/images/1343711271_9118.png">
+<meta property="og:image" content="https://sukamay.github.io/images/1504852096638_6883_1504852096621.jpg">
+<meta property="og:image" content="https://sukamay.github.io/images/1504852122988_7009_1504852122966.jpg">
+<meta property="og:image" content="https://sukamay.github.io/images/1343711271_9118.png">
 <meta property="og:image" content="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png">
-<meta property="og:image" content="https://sukamay.github.io/2019/03/14/images/1343711271_9118-20190315191846967.png">
+<meta property="og:image" content="https://sukamay.github.io/images/1343711271_9118-20190315191846967.png">
 <meta property="og:image" content="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png">
-<meta property="og:updated_time" content="2019-05-10T16:08:03.071Z">
+<meta property="og:updated_time" content="2019-05-10T16:24:36.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="May">
 <meta name="twitter:description" content="SLAM漫谈SLAM技术（上） 漫谈SLAM技术（下） SLAM技术在国内的发展现状 SLAM介绍（算法基本流程） 详细分析SLAM的实现和应用 特征点的匹配 列举几个目前比较有名的SLAM算法：PTAM,MonoSLAM, ORB-SLAM,RGBD-SLAM,RTAB-SLAM,LSD-SLAM。 SLAM的两大类别： 根据传感器类别（激光雷达和摄像头）分为激光SLAM和视觉SLAM 传感器：">
-<meta name="twitter:image" content="https://sukamay.github.io/2019/03/14/images/1504852096638_6883_1504852096621.jpg">
+<meta name="twitter:image" content="https://sukamay.github.io/images/1504852096638_6883_1504852096621.jpg">
 
 
 
@@ -391,14 +391,14 @@
 <p>视觉SLAM方法根据使用图像信息的不同可分为直接法，间接法。</p>
 <p>直接法，常见于稠密或半稠密的SLAM中，指的是采用图像上每个像素的信息（亮度值）来估计相机位姿；间接法，常用于稀疏的SLAM中，只使用显著的图像部位（即特征）用于位姿估计的计算。</p>
 <p>直接法最基本的原理是亮度一致性约束，由于摄像机可以直接测量光的亮度，那么它的优化目标函数是光度误差（如下图），优化变量可以是两幅图像之间的位姿关系，也可以是特征Patch的位置。</p>
-<p><img src="../../images/1504852096638_6883_1504852096621.jpg" alt="img"></p>
-<p><img src="../../images/1504852122988_7009_1504852122966.jpg" alt="img"></p>
+<p><img src="/images/1504852096638_6883_1504852096621.jpg" alt="img"></p>
+<p><img src="/images/1504852122988_7009_1504852122966.jpg" alt="img"></p>
 <p>根据直接法使用的像素的不同，可以分为稠密直接法和半稠密直接法。在上述介绍的SLAM系统中，DTAM为稠密直接法，它使用了所有的像素；LSD-SLAM和DSO为半稠密直接法，它使用了梯度明显的像素；SVO也为半稠密直接法，它使用了FAST特征点周围邻域的像素。直接方法较多的使用了图像上像素的信息，在纹理较差的部分比间接法更鲁棒。但当场景中的光照变化后，直接法容易失效，亮度一致性约束要求两幅图像之间的光度误差尽可能地小。</p>
 <p>间接法使用图像中的特征（点或者线）进行匹配，然后根据匹配关系求解（如下图），它的优化目标函数是特征的重投影误差，优化的变量一般为相对位姿。间接法选取的特征一般要求比较显著，对视角和光照变化具有不变性，对模糊和噪声有一定的弹性，这需要在计算速度和特征质量上取得平衡。计算机视觉领域研究了很多不同的特征提取和特征描述，它们对旋转、尺度不变，和计算速度的性能都不一样。选择合适的特征依赖于平台的计算能力，视觉SLAM算法运行的环境，还有图像的帧率。可选的角点提取器如Harris角点（Harris and Stephens, 1988）、Shi-Tomasi角点（Shi and Tomasi, 1994），FAST角点（Mair et al, 2010）等，特征描述包括但不限于BRIEF，BRISK，SURF，SIFT，FREAK，ORB和像素级别局部区块特征等。</p>
 <h3 id="2、角点提取器"><a href="#2、角点提取器" class="headerlink" title="2、角点提取器"></a>2、角点提取器</h3><h4 id="Harris-角点："><a href="#Harris-角点：" class="headerlink" title="Harris 角点："></a>Harris 角点：</h4><h4 id="Shi-Tomasi角点："><a href="#Shi-Tomasi角点：" class="headerlink" title="Shi-Tomasi角点："></a>Shi-Tomasi角点：</h4><p>Shi-Tomasi 算法是Harris 算法的改进。Harris 算法最原始的定义是将矩阵 M 的行列式值与 M 的迹相减，再将差值同预先给定的阈值进行比较。后来Shi 和Tomasi 提出改进的方法，若两个特征值中较小的一个大于最小阈值，则会得到强角点。</p>
-<p>如上面第二幅图中，对自相关矩阵 M 进行特征值分析，产生两个特征值<img src="../../images/1343711271_9118.png" alt="img">和两个特征方向向量。因为较大的不确定度取决于较小的特征值，也就是<img src="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png" alt="img">，所以通过寻找最小特征值的最大值来寻找好的特征点也就解释的通了。<br>Shi 和Tomasi 的方法比较充分，并且在很多情况下可以得到比使用Harris 算法更好的结果。</p>
+<p>如上面第二幅图中，对自相关矩阵 M 进行特征值分析，产生两个特征值<img src="/images/1343711271_9118.png" alt="img">和两个特征方向向量。因为较大的不确定度取决于较小的特征值，也就是<img src="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png" alt="img">，所以通过寻找最小特征值的最大值来寻找好的特征点也就解释的通了。<br>Shi 和Tomasi 的方法比较充分，并且在很多情况下可以得到比使用Harris 算法更好的结果。</p>
 <h4 id="FAST角点"><a href="#FAST角点" class="headerlink" title="FAST角点:"></a>FAST角点:</h4><p>Shi-Tomasi 算法是Harris 算法的改进。Harris 算法最原始的定义是将矩阵 M 的行列式值与 M 的迹相减，再将差值同预先给定的阈值进行比较。后来Shi 和Tomasi 提出改进的方法，若两个特征值中较小的一个大于最小阈值，则会得到强角点。</p>
-<p>如上面第二幅图中，对自相关矩阵 M 进行特征值分析，产生两个特征值<img src="../../images/1343711271_9118-20190315191846967.png" alt="img">和两个特征方向向量。因为较大的不确定度取决于较小的特征值，也就是<img src="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png" alt="img">，所以通过寻找最小特征值的最大值来寻找好的特征点也就解释的通了。<br>Shi 和Tomasi 的方法比较充分，并且在很多情况下可以得到比使用Harris 算法更好的结果。</p>
+<p>如上面第二幅图中，对自相关矩阵 M 进行特征值分析，产生两个特征值<img src="/images/1343711271_9118-20190315191846967.png" alt="img">和两个特征方向向量。因为较大的不确定度取决于较小的特征值，也就是<img src="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png" alt="img">，所以通过寻找最小特征值的最大值来寻找好的特征点也就解释的通了。<br>Shi 和Tomasi 的方法比较充分，并且在很多情况下可以得到比使用Harris 算法更好的结果。</p>
 <h3 id="3、特征描述"><a href="#3、特征描述" class="headerlink" title="3、特征描述"></a>3、特征描述</h3><h4 id="SIFT"><a href="#SIFT" class="headerlink" title="SIFT"></a>SIFT</h4><p>提到特征点算法，首先就是大名鼎鼎的SIFT算法了。SIFT的全称是Scale Invariant Feature Transform，尺度不变特征变换，2004年由加拿大教授David G.Lowe提出的。SIFT特征对旋转、尺度缩放、亮度变化等保持不变性，是一种非常稳定的局部特征。<br>SIFT算法主要有以下几个步骤：</p>
 <ul>
 <li>高斯差分金字塔的构建<br>使用组和层的结构构建了一个具有线性关系的金字塔（尺度空间），这样可以在连续的高斯核尺度上查找图像的特征点；另外，它使用一阶的高斯差分来近似高斯的拉普拉斯核，大大的减少了运算量。</li>
