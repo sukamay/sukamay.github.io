@@ -1,0 +1,331 @@
+<hr>
+<p>title: Django拓展auth用户</p>
+<h2 id="categories-Django"><a href="#categories-Django" class="headerlink" title="categories: Django"></a>categories: Django</h2><h1 id="Django拓展auth-用户"><a href="#Django拓展auth-用户" class="headerlink" title="Django拓展auth 用户"></a>Django拓展auth 用户</h1><p>完成注册登录登出注销操作</p>
+<p>！！！拓展auth用户请务必在 <code>python manage.py migrate</code> 前进行！！！</p>
+<ol>
+<li><p>新建一个project：<code>closetUsers</code></p>
+</li>
+<li><p>修改 <code>settings.py</code></p>
+<pre><code class="python"><span class="comment">#closetUsers/settings.py</span>
+INSTALLED_APPS = [
+    <span class="string">'django.contrib.admin'</span>,
+    <span class="string">'django.contrib.auth'</span>,
+    <span class="string">'django.contrib.contenttypes'</span>,
+    <span class="string">'django.contrib.sessions'</span>,
+    <span class="string">'django.contrib.messages'</span>,
+    <span class="string">'django.contrib.staticfiles'</span>,
+    <span class="string">'users'</span>,  <span class="comment"># modify </span>
+    <span class="string">'rest_framework'</span>, <span class="comment"># modify </span>
+    <span class="string">'django_filters'</span>, <span class="comment"># modify </span>
+]
+<span class="comment">#update database config </span>
+DATABASES = {
+    <span class="string">'default'</span>: {
+        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,
+        <span class="string">'NAME'</span>: <span class="string">'closetUser'</span>,
+        <span class="string">'USER'</span>: <span class="string">'may'</span>,
+        <span class="string">'PASSWORD'</span>: <span class="string">'may233'</span>,
+        <span class="string">'HOST'</span>: <span class="string">'120.76.62.132'</span>,
+        <span class="string">'PORT'</span>: <span class="string">'3306'</span>,
+    }
+}
+<span class="comment">#add auth_user_model !after! add the extended user</span>
+AUTH_USER_MODEL = <span class="string">'users.User'</span>   <span class="comment">#pattern: &lt;appName&gt;.&lt;className&gt;</span>
+
+</code></pre>
+</li>
+<li><p>新建一个app：<code>users</code></p>
+</li>
+<li><p>修改 <code>users/__init__.py</code></p>
+<pre><code class="python"><span class="comment">#users/__init__.py</span>
+<span class="keyword">import</span> pymysql
+pymysql.install_as_MySQLdb()
+<span class="comment">#use for django2.x version to link mysql database</span>
+</code></pre>
+</li>
+<li><p>在 <code>users</code>底下添加文件 <code>urls.py</code> ，修改 <code>closetUsers.urls.py</code></p>
+<pre><code class="python"><span class="comment">#closetUsers/urls.py</span>
+<span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin
+<span class="keyword">from</span> django.urls <span class="keyword">import</span> path
+<span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> include  <span class="comment">#add this</span>
+
+urlpatterns = [
+    path(<span class="string">'admin/'</span>, admin.site.urls),
+    path(<span class="string">''</span>, include(<span class="string">'users.urls'</span>)), 
+    <span class="comment">#add this, pattern: &lt;appName&gt;.urls</span>
+]
+</code></pre>
+</li>
+<li><p>修改 <code>users.models.py</code>， 添加拓展的用户类，继承自 AbstractUser， 注：如原来的auth.User 已有的属性不需要再添加</p>
+<p><code>`</code>python<br>#users/models.py<br>from django.db import models<br>from django.contrib.auth.models import AbstractUser</p>
+</li>
+</ol>
+<h1 id="Create-your-models-here"><a href="#Create-your-models-here" class="headerlink" title="Create your models here."></a>Create your models here.</h1><p>   class User(AbstractUser):<br>       “””<br>       save the user info<br>       “””<br>       style = models.CharField(max_length=30, default=’casual’, null=True, blank=True)<br>       profile = models.URLField(default=’<a href="http://120.76.62.132:8080/photos/40padded.jpg&#39;">http://120.76.62.132:8080/photos/40padded.jpg&#39;</a>, blank=True)<br>       phone = models.CharField(max_length=11,  null=True, blank=True)</p>
+<pre><code>def __str__(self):
+    return self.username
+</code></pre><pre><code>
+7. 建表
+
+   ```shell
+   xxxdeMacBook-Pro:closetUsers xxx$ python3 manage.py migrate
+   xxxdeMacBook-Pro:closetUsers xxx$ python3 manage.py makemigrations users
+   xxxdeMacBook-Pro:closetUsers xxx$ python3 manage.py migrate users
+</code></pre><ol start="8">
+<li><p>重写UserCreationForm, UserChangeForm， 在users 底下新建 form.py文件，其实我只是想要提供一个restful的API而不是建立一个网站，因而应该不需要使用到表单创建，但Django文档中说明拓展User需要重写这两个表单因此还是重写了。</p>
+<p><code>`</code>python<br>#users/forms.py<br>from django.contrib.auth.forms import UserCreationForm, UserChangeForm<br>from django import forms<br>from .models import User</p>
+</li>
+</ol>
+<p>   class RegisterForm(UserCreationForm):</p>
+<pre><code>class Meta(UserCreationForm.Meta):
+    model = User
+    fields = (&apos;username&apos;, &apos;email&apos;, &apos;phone&apos;, &apos;style&apos;, &apos;profile&apos;)
+
+# check if email is valid
+def clean_email(self):
+    email = self.cleaned_data[&apos;email&apos;]
+    users = User.objects.filter(email=email)
+    if users:
+        raise forms.ValidationError(&quot;该邮箱已注册过，尝试登录？&quot;)
+    return email
+</code></pre><p>   class ChangeInfoForm(UserChangeForm):</p>
+<pre><code>class Meta(UserChangeForm.Meta):
+    model = User
+    fields = (&apos;username&apos;, &apos;email&apos;, &apos;phone&apos;, &apos;style&apos;, &apos;profile&apos;)
+</code></pre><pre><code>
+## 一、注册
+
+### 法一：暴力解决
+
+1. 在 views.py中添加相关类或函数
+
+   ```python
+   #users/views.py
+   from django.shortcuts import render
+   from django.http import JsonResponse, HttpResponse
+   from rest_framework import status
+   from .models import User
+
+
+   # Create your views here.
+   def sign_up(request):
+       username = request.data[&apos;username&apos;]
+       password = request.data[&apos;password&apos;]
+       users = User.objects.filter(username=username)
+       if users:
+           return HttpResponse(&apos;该用户已存在&apos;, status=status.HTTP_400_BAD_REQUEST)
+       user = User.objects.create_user(username=username, password=password)
+       return HttpResponse(&apos;创建成功，登录？&apos;, status=status.HTTP_200_OK)
+</code></pre><ol start="2">
+<li><p>在 urls.py 中添加相关路径</p>
+<pre><code class="python"><span class="comment">#users/urls.py</span>
+<span class="keyword">from</span> django.urls <span class="keyword">import</span> path
+<span class="keyword">from</span> rest_framework.urlpatterns <span class="keyword">import</span> format_suffix_patterns
+<span class="keyword">from</span> users <span class="keyword">import</span> views
+
+urlpatterns = format_suffix_patterns([
+    path(<span class="string">'users/add1/'</span>, views.sign_up),
+])
+</code></pre>
+</li>
+<li><p>使用 <a href="https://httpie.org">httpie</a> 模拟post请求</p>
+<pre><code class="shell"><span class="meta">#</span><span class="bash">pattern: http post &lt;urlAddress&gt; @&lt;jsonFileAddress&gt;</span>
+xxxdeMacBook-Pro:closetUsers xxx$ http --json post http://127.0.0.1:8000/users/add1/ @/Users/xxx/Desktop/closet/jsonTest/login.json
+HTTP/1.1 403 Forbidden
+</code></pre>
+<p><strong>Error:</strong>  HTTP/1.1 403 Forbidden,  CSRF verification failed. Request aborted.</p>
+<p><strong>Solve: </strong>  为了防止跨站伪造请求，django引入了csrf机制，引入csrf_exempt</p>
+<pre><code class="python"><span class="comment">#users/views.py</span>
+<span class="keyword">from</span> django.views.decorators.csrf <span class="keyword">import</span> csrf_exempt
+
+<span class="meta">@csrf_exempt</span>
+<span class="function"><span class="keyword">def</span> <span class="title">sign_up</span><span class="params">(request)</span>:</span>
+    <span class="keyword">pass</span>
+</code></pre>
+<p><strong>Error:  </strong>  HTTP/1.1 500 Internal Server Error,继续看报错信息，发现进行sign_up函数解析后出现错误，发现是request以json格式发送请求时，无法以<code>request.data[&#39;username&#39;]</code> 的方式获取数据</p>
+<p><strong>Solve：</strong> </p>
+<pre><code class="python"><span class="comment">#users/views.py  inside sign_up function </span>
+<span class="keyword">import</span> json
+post_body = request.body 
+<span class="comment">#django2.x use body, while django1.x use raw_post_data</span>
+data = json.loads(post_body)
+username = data[<span class="string">'username'</span>]
+password = data[<span class="string">'password'</span>]
+</code></pre>
+<p>再次尝试使用httpie发送请求，成功！开心！</p>
+<pre><code class="shell">xxxdeMacBook-Pro:closetUsers xxx$ http --json post http://127.0.0.1:8000/users/add1/ @/Users/xxx/Desktop/closet/jsonTest/login.json
+HTTP/1.1 200 OK
+Content-Length: 24
+Content-Type: text/html; charset=utf-8
+Date: Sat, 22 Dec 2018 05:17:42 GMT
+Server: WSGIServer/0.2 CPython/3.7.0
+X-Frame-Options: SAMEORIGIN
+
+创建成功，登录？
+
+xxxdeMacBook-Pro:closetUsers xxx$ 
+</code></pre>
+</li>
+<li><p>以上只是简单的注册，下面我们来拓展一下，加上对于信息的验证，加上了对于手机号码和邮箱的格式验证</p>
+<p><code>`</code>python<br>#users/views.py<br>from django.http import JsonResponse, HttpResponse<br>from rest_framework import status<br>from .models import User<br>from django.views.decorators.csrf import csrf_exempt<br>import json<br>from django.contrib.auth import login, authenticate, logout<br>import re</p>
+</li>
+</ol>
+<h1 id="Create-your-views-here"><a href="#Create-your-views-here" class="headerlink" title="Create your views here."></a>Create your views here.</h1><p>   @csrf_exempt<br>   def sign_up(request):</p>
+<pre><code>if request.method == &apos;POST&apos;:
+    post_body = request.body
+    data = json.loads(post_body)
+    if &apos;username&apos; in data:
+        username = data[&apos;username&apos;]
+    else:
+        username = &apos;may&apos;
+    password = data[&apos;password&apos;]
+    if &apos;email&apos; in data:
+        email = data[&apos;email&apos;]
+        # check if email is valid
+        email_pat = re.compile(r&apos;^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.[com,cn,net]{1,3}$&apos;)
+        if not re.match(email_pat, email):
+            return JsonResponse(data={&quot;msg&quot;: &quot;请输入正确的邮箱名&quot;}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        email = &apos;error&apos;
+    if &apos;phone&apos; in data:
+        phone = data[&apos;phone&apos;]
+        # check if phone is valid
+        phone_pat = re.compile(r&apos;^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}$&apos;)
+        if not re.match(phone_pat, phone):
+            return JsonResponse(data={&quot;msg&quot;: &quot;请输入正确的手机号&quot;}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        phone = &apos;error&apos;
+    if &apos;profile&apos; in data:
+        profile = data[&apos;profile&apos;]
+    else:
+        profile = &apos;http://120.76.62.132:8080/photos/default.jpg&apos;
+    if &apos;style&apos; in data:
+        style = data[&apos;style&apos;]
+    else:
+        style = &apos;casual&apos;
+    # users = User.objects.filter(username=username)
+    email_users = User.objects.filter(email=email)
+    phone_users = User.objects.filter(phone=phone)
+    name_users = User.objects.filter(username=username)
+    if email_users:
+        return JsonResponse(data={&quot;msg&quot;: &quot;该邮箱已注册过&quot;}, status=status.HTTP_400_BAD_REQUEST)
+    if phone_users:
+        return JsonResponse(data={&quot;msg&quot;: &quot;该手机号已注册过&quot;}, status=status.HTTP_400_BAD_REQUEST)
+    if name_users:
+        return JsonResponse(data={&quot;msg&quot;: &quot;该用户已存在&quot;}, status=status.HTTP_400_BAD_REQUEST)
+    if email == &apos;error&apos;:
+        email = &apos;&apos;
+    if phone == &apos;error&apos;:
+        phone = &apos;&apos;
+    user = User.objects.create_user(username=username, password=password, email=email,
+                                    phone=phone, style=style, profile=profile)
+    return JsonResponse(data={&quot;msg&quot;: &quot;创建成功，登录？&quot;}, status=status.HTTP_200_OK)
+</code></pre><pre><code>
+5. 
+
+### 法二：django-rest-framework
+
+尝试用django-rest-framework提供的方法实现
+
+
+
+## 二、登录
+
+### 法一：沿袭我们的暴力方案
+
+#### 2.1 使用auth模块提供的login
+
+使用username和password登录
+
+```python
+#users/views.py
+@csrf_exempt
+def sign_in(request):
+
+    if request.method == &apos;POST&apos;:
+        post_body = request.body
+        data = json.loads(post_body)
+        username = data[&apos;username&apos;]
+        password = data[&apos;password&apos;]
+        print(username)
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                print(request.user)
+                return JsonResponse(data={&quot;msg&quot;: &quot;OK&quot;}, status=status.HTTP_200_OK)
+            else:
+                return JsonResponse(data={&quot;msg&quot;: &quot;用户不存在&quot;}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return JsonResponse(data={&quot;msg&quot;: &quot;用户或密码错误&quot;}, status=status.HTTP_400_BAD_REQUEST)
+
+</code></pre><h4 id="2-2-拓展，自定义后端，使用邮箱登录"><a href="#2-2-拓展，自定义后端，使用邮箱登录" class="headerlink" title="2.2 拓展，自定义后端，使用邮箱登录"></a>2.2 拓展，自定义后端，使用邮箱登录</h4><p><a href="https://www.zmrenwu.com/post/50/">参考自定义认证后台</a></p>
+<ol>
+<li><p>添加 backends.py文件</p>
+<pre><code class="python"><span class="keyword">from</span> .models <span class="keyword">import</span> User
+
+<span class="class"><span class="keyword">class</span> <span class="title">EmailBackend</span><span class="params">(object)</span>:</span>
+
+    <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span><span class="params">(self, request, **credentials)</span>:</span>
+        <span class="comment"># 要注意登录表单中用户输入的用户名或者邮箱的 field 名均为 username</span>
+        email = credentials.get(<span class="string">'email'</span>, credentials.get(<span class="string">'username'</span>))
+        <span class="keyword">try</span>:
+            user = User.objects.get(email=email)
+        <span class="keyword">except</span> User.DoesNotExist:
+            <span class="keyword">pass</span>
+        <span class="keyword">else</span>:
+            <span class="keyword">if</span> user.check_password(credentials[<span class="string">"password"</span>]):
+                <span class="keyword">return</span> user
+
+    <span class="function"><span class="keyword">def</span> <span class="title">get_user</span><span class="params">(self, user_id)</span>:</span>
+        <span class="string">"""</span>
+<span class="string">        该方法是必须的</span>
+<span class="string">        """</span>
+        <span class="keyword">try</span>:
+            <span class="keyword">return</span> User.objects.get(pk=user_id)
+        <span class="keyword">except</span> User.DoesNotExist:
+            <span class="keyword">return</span> <span class="literal">None</span>
+
+</code></pre>
+</li>
+<li><p>在 setttings.py 中加入后端文件告诉Django 你使用了自定义后端</p>
+<pre><code class="python">AUTHENTICATION_BACKENDS = (
+    <span class="string">'django.contrib.auth.backends.ModelBackend'</span>,
+    <span class="string">'users.backends.EmailBackend'</span>,
+    <span class="string">'users.backends.PhoneBackend'</span>,
+)
+</code></pre>
+</li>
+</ol>
+<h4 id="2-3-同理拓展，自定义后端，使用手机登录"><a href="#2-3-同理拓展，自定义后端，使用手机登录" class="headerlink" title="2.3 同理拓展，自定义后端，使用手机登录"></a>2.3 同理拓展，自定义后端，使用手机登录</h4><p>代码大同小异，不赘述了</p>
+<h2 id="三、登出"><a href="#三、登出" class="headerlink" title="三、登出"></a>三、登出</h2><h3 id="法一：继续，暴力解决一切事物"><a href="#法一：继续，暴力解决一切事物" class="headerlink" title="法一：继续，暴力解决一切事物"></a>法一：继续，暴力解决一切事物</h3><pre><code class="python"><span class="comment">#users/views.py</span>
+<span class="meta">@csrf_exempt</span>
+<span class="function"><span class="keyword">def</span> <span class="title">sign_out</span><span class="params">(request)</span>:</span>
+
+    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:
+        logout(request)
+        <span class="keyword">return</span> JsonResponse(data={<span class="string">"msg"</span>: <span class="string">"登出成功"</span>}, status=status.HTTP_200_OK)
+</code></pre>
+<h2 id="四、注销"><a href="#四、注销" class="headerlink" title="四、注销"></a>四、注销</h2><h3 id="法一：继续，暴力解决一切事物-1"><a href="#法一：继续，暴力解决一切事物-1" class="headerlink" title="法一：继续，暴力解决一切事物"></a>法一：继续，暴力解决一切事物</h3><pre><code class="python"><span class="comment">#users/views.py</span>
+<span class="meta">@csrf_exempt</span>
+<span class="function"><span class="keyword">def</span> <span class="title">sign_off</span><span class="params">(request)</span>:</span>
+
+    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:
+        post_body = request.body
+        data = json.loads(post_body)
+        username = data[<span class="string">'username'</span>]
+        password = data[<span class="string">'password'</span>]
+        user = authenticate(username=username, password=password)
+        <span class="keyword">if</span> user:
+            email_pat = re.compile(<span class="string">r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.[com,cn,net]{1,3}$'</span>)
+            phone_pat = re.compile(<span class="string">r'^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}$'</span>)
+            <span class="keyword">if</span> re.match(email_pat, username):
+                delete_result = User.objects.filter(email=username).delete()
+            <span class="keyword">elif</span> re.match(phone_pat, username):
+                delete_result = User.objects.filter(phone=username).delete()
+            <span class="keyword">else</span>:
+                delete_result = User.objects.filter(username=username).delete()
+            <span class="keyword">if</span> delete_result:
+                <span class="keyword">return</span> JsonResponse(data={<span class="string">"msg"</span>: <span class="string">"注销成功"</span>}, status=status.HTTP_200_OK)
+        <span class="keyword">return</span> JsonResponse(data={<span class="string">"msg"</span>: <span class="string">"用户不存在"</span>}, status=status.HTTP_400_BAD_REQUEST)
+
+</code></pre>

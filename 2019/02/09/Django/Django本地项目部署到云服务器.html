@@ -1,0 +1,186 @@
+<hr>
+<p>title: Django本地项目部署到云服务器</p>
+<h2 id="categories-Django"><a href="#categories-Django" class="headerlink" title="categories: Django"></a>categories: Django</h2><h1 id="Django本地项目部署到云服务器"><a href="#Django本地项目部署到云服务器" class="headerlink" title="Django本地项目部署到云服务器"></a>Django本地项目部署到云服务器</h1><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>开发语言： Python<br>后台框架：Django<br>web服务器：nginx<br>wsgi服务器：uwsgi</p>
+<p>云服务器系统：Ubuntu</p>
+<p>查看本地项目Django和Python版本：</p>
+<p>（可以直接安装Django最新版本就可以了，Python版本不能低于3.4） </p>
+<pre><code class="shell">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# python3
+Python 3.5.2 (default, Nov 12 2018, 13:43:14) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+<span class="meta">&gt;</span><span class="bash">&gt;&gt; import django</span>
+<span class="meta">&gt;</span><span class="bash">&gt;&gt; django.VERSION</span>
+(2, 1, 4, 'final', 0)
+<span class="meta">&gt;</span><span class="bash">&gt;&gt; </span>
+</code></pre>
+<p><a href="https://blog.csdn.net/qq_30501975/article/details/80423547">参考了别家的教程</a></p>
+<h2 id="1-预备安装"><a href="#1-预备安装" class="headerlink" title="1. 预备安装"></a>1. 预备安装</h2><h3 id="1-1-安装数据库"><a href="#1-1-安装数据库" class="headerlink" title="1.1 安装数据库"></a>1.1 安装数据库</h3><p>安装mysql</p>
+<p><a href="./Ubuntu上的MySQL搭建.md">Ubuntu上的MySQL搭建</a></p>
+<h3 id="1-2-安装Django"><a href="#1-2-安装Django" class="headerlink" title="1.2 安装Django"></a>1.2 安装Django</h3><p><a href="./DjangoInUbuntu_0.md">安装Django</a></p>
+<p>Django初步使用移步Django系列教程：</p>
+<p><a href="./DjangoInUbuntu_1.md">Django数据库配置</a></p>
+<h3 id="1-3-安装uwsgi"><a href="#1-3-安装uwsgi" class="headerlink" title="1.3 安装uwsgi"></a>1.3 安装uwsgi</h3><h4 id="1-3-1-uwsgi安装"><a href="#1-3-1-uwsgi安装" class="headerlink" title="1.3.1 uwsgi安装"></a>1.3.1 uwsgi安装</h4><pre><code class="shell">root@iZwz969jm0y04abuhgx4byZ:~# python3 -m pip install uwsgi
+</code></pre>
+<p><code>Successfully installed uwsgi-2.0.17</code></p>
+<h4 id="1-3-2-uwsgi测试"><a href="#1-3-2-uwsgi测试" class="headerlink" title="1.3.2 uwsgi测试"></a>1.3.2 uwsgi测试</h4><p>测试 uwsgi 是否正常：</p>
+<p>新建 test.py 文件，内容如下：</p>
+<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span>
+    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>,<span class="string">'text/html'</span>)])
+    <span class="keyword">return</span> <span class="string">"cloestUsers World"</span>
+</code></pre>
+<p>然后在终端运行：</p>
+<pre><code class="shell">uwsgi --http :8001 --wsgi-file test.py
+</code></pre>
+<p>在浏览器内输入：<a href="http://127.0.0.1:8001，查看是否有&quot;cloestUsers">http://127.0.0.1:8001，查看是否有&quot;cloestUsers</a> World”输出，若没有输出，请检查你的安装过程。</p>
+<h4 id="1-3-3-uwsgi关闭"><a href="#1-3-3-uwsgi关闭" class="headerlink" title="1.3.3 uwsgi关闭"></a>1.3.3 uwsgi关闭</h4><pre><code class="shell">killall -9 uwsgi #     强行关闭
+<span class="meta">#</span><span class="bash"> 关闭某一个进程</span>
+root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# netstat -ntpl
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:8005          0.0.0.0:*               LISTEN      22256/java      
+tcp        0      0 0.0.0.0:8009            0.0.0.0:*               LISTEN      22256/java      
+tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      18840/mysqld    
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      3044/nginx.conf 
+tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      22256/java      
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      11022/sshd 
+root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# kill -9 22256
+<span class="meta">#</span><span class="bash"> 查看哪个要关闭的进程的pid，使用<span class="built_in">kill</span> -9 &lt;pid&gt; </span>
+</code></pre>
+<h3 id="1-4-安装nginx"><a href="#1-4-安装nginx" class="headerlink" title="1.4 安装nginx"></a>1.4 安装nginx</h3><h4 id="1-4-1-安装-Nginx"><a href="#1-4-1-安装-Nginx" class="headerlink" title="1.4.1 安装 Nginx"></a>1.4.1 安装 Nginx</h4><p>安装命令如下：</p>
+<pre><code>cd ~
+wget http://nginx.org/download/nginx-1.11.0.tar.gz
+tar xf nginx-1.11.0.tar.gz
+cd nginx-1.11.0
+./configure --prefix=/usr/local/nginx-1.11.0 \
+--with-http_stub_status_module \
+--with-http_gzip_static_module
+make &amp;&amp; make install
+</code></pre><p>你可以阅读 <a href="http://www.runoob.com/linux/nginx-install-setup.html">Nginx 安装配置</a> 了解更多内容。</p>
+<h4 id="1-4-2-测试nginx"><a href="#1-4-2-测试nginx" class="headerlink" title="1.4.2 测试nginx"></a>1.4.2 测试nginx</h4><p>查看nginx是否安装成功，查看nginx的版本：</p>
+<pre><code class="shell">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# nginx -v
+nginx version: nginx/1.10.3 (Ubuntu)
+</code></pre>
+<p>在/home/projects目录下新建一个test目录，在里面添加一个简单的html文件。然后在nginx.conf中简单配置：</p>
+<pre><code class="shell">events{}
+http{
+    server{
+        server_name www.sukamay.xyz;  # 域名或者ip地址
+        root /home/projects/test;
+        index index.html;
+    }
+}
+
+</code></pre>
+<p>启动该nginx：（启动之前，要将/usr/local/nginx/mime.types文件复制到该nginx.conf所在目录，并且必须使用绝对路径）</p>
+<pre><code class="shell">nginx -c /home/projects/test/nginx.conf
+</code></pre>
+<p>如果端口被占用，则先释放该端口,则使用<code>lsof -i :8082</code>查看占用端口进程的pid，并使用<code>kill -9 [pid]</code>关闭相应的进程。</p>
+<p>若想要关闭所有nginx打开的进程，可使用：</p>
+<pre><code>killall -9 nginx
+</code></pre><p>在浏览器中访问自己的域名<a href="http://www.sukamay.xyz，访问成功。（域名要先做好dns解析）">http://www.sukamay.xyz，访问成功。（域名要先做好dns解析）</a></p>
+<h4 id="1-4-3-关闭nginx"><a href="#1-4-3-关闭nginx" class="headerlink" title="1.4.3 关闭nginx"></a>1.4.3 关闭nginx</h4><pre><code class="shell">nginx -s stop
+<span class="meta">#</span><span class="bash"> or /etc/init.d/nginx stop</span>
+</code></pre>
+<h2 id="2-在线项目部署"><a href="#2-在线项目部署" class="headerlink" title="2. 在线项目部署"></a>2. 在线项目部署</h2><p>部署本地Django项目到服务器，结合uwsgi+Django+nginx。</p>
+<h3 id="2-1-项目代码上传到服务器"><a href="#2-1-项目代码上传到服务器" class="headerlink" title="2.1 项目代码上传到服务器"></a>2.1 项目代码上传到服务器</h3><p>clone本地项目代码到服务器/通过ftp复制项目到服务器</p>
+<p>我使用的是scp</p>
+<pre><code class="shell">xxxdeMacBook-Pro:~ xxx$ scp -r /Users/xxx/Desktop/closet/closetUsers root@120.76.62.132:/home/projects/closetTest1.0
+<span class="meta">#</span><span class="bash"> pattern: scp &lt;option&gt; &lt;local_file_path&gt; root@&lt;server_ip_address&gt;:&lt;goal_file_path&gt;</span>
+</code></pre>
+<p>在我的项目目录/home/projects里创建一个closet目录，并在里面创建一个conf目录，用来存放配置文件,这样分离开来，方便更新维护项目代码。</p>
+<pre><code class="shell">root@iZwz969jm0y04abuhgx4byZ:/home/projects# tree -L 3
+.
+├── closet
+│   ├── closetUsers
+│   │   ├── closetUsers
+│   │   ├── jsonTest
+│   │   ├── manage.py
+│   │   ├── __pycache__
+│   │   ├── static
+│   │   ├── users
+│   └── conf
+│       ├── mime.types    #copy from /usr/local/nginx/conf
+│       ├── nginx.conf    #configure file of nginx 
+│       ├── uwsgi.ini    #configure file of uwsgi
+│       └── uwsgi.log
+└── closetTest1.0
+    └── closetUsers
+        ├── closetUsers
+        ├── manage.py
+        └── users
+
+13 directories, 10 files
+
+</code></pre>
+<h3 id="2-2-修改项目代码"><a href="#2-2-修改项目代码" class="headerlink" title="2.2 修改项目代码"></a>2.2 修改项目代码</h3><h4 id="2-2-1-修改settings-py："><a href="#2-2-1-修改settings-py：" class="headerlink" title="2.2.1 修改settings.py："></a>2.2.1 修改settings.py：</h4><pre><code>DEBUG = False   # Django是否加载静态资源
+ALLOWED_HOSTS = [&apos;localhost&apos;,&apos;127.0.0.1&apos;,&apos;120.76.62.132&apos;] # 允许访问的主机地址
+
+STATIC_ROOT = os.path.join(BASE_DIR, &quot;static/&quot;) # 收集Django的静态文件到同一个static中
+</code></pre><h4 id="2-2-2-创建uwsgi-ini和uwsgi-log"><a href="#2-2-2-创建uwsgi-ini和uwsgi-log" class="headerlink" title="2.2.2 创建uwsgi.ini和uwsgi.log"></a>2.2.2 创建uwsgi.ini和uwsgi.log</h4><p>uwsgi.ini不变，依旧为：</p>
+<pre><code class="shell">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/conf# vim uwsgi.ini 
+
+<span class="meta">#</span><span class="bash"> closet uwsgi.ini file</span>
+[uwsgi]
+
+socket = 127.0.0.1:8002
+<span class="meta">#</span><span class="bash"> http = :8002 如果不通过nginx可以直接用http，但要通过web服务器就必须要用socket</span>
+<span class="meta">#</span><span class="bash"> http = 127.0.0.1:8002</span>
+
+<span class="meta">#</span><span class="bash"> the base directory (full path)</span>
+chdir           = /home/projects/closet/closetUsers
+
+<span class="meta">#</span><span class="bash"> Django<span class="string">'s wsgi file</span></span>
+module          = closetUsers.wsgi
+
+<span class="meta">#</span><span class="bash"> process-related settings</span>
+<span class="meta">#</span><span class="bash"> master</span>
+master          = true
+
+<span class="meta">#</span><span class="bash"> maximum number of worker processes</span>
+processes       = 4
+
+<span class="meta">#</span><span class="bash"> clear environment on <span class="built_in">exit</span></span>
+vacuum          = true
+
+processes = 4
+"uwsgi.ini" 29L, 549C                                                 1,0-1         Top
+
+</code></pre>
+<h4 id="2-2-3-创建nginx-conf"><a href="#2-2-3-创建nginx-conf" class="headerlink" title="2.2.3 创建nginx.conf"></a>2.2.3 创建nginx.conf</h4><pre><code class="shell">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/conf# vim nginx.conf 
+
+http{
+    include       mime.types;
+    server{       
+
+        listen 80;
+       # server_name www.sukamay.xyz;
+        server_name 120.76.62.132;
+        index index.html ;
+        root  /home/projects/closet/closetUsers;
+        charset utf-8;
+
+            location /static {
+                alias /home/projects/closet/closetUsers/static; # your Django project&#39;s static files - amend as required
+            }
+
+            # Finally, send all non-media requests to the Django server.
+            location / {
+                include     /etc/nginx/uwsgi_params; # the uwsgi_params file you installed              
+                uwsgi_pass 127.0.0.1:8002;
+            }   
+        }   
+}       
+
+</code></pre>
+<p>将 <code>/usr/local/nginx/conf/mime.types</code>文件copy到conf下</p>
+<h3 id="2-3-创建数据库、收集静态文件"><a href="#2-3-创建数据库、收集静态文件" class="headerlink" title="2.3 创建数据库、收集静态文件"></a>2.3 创建数据库、收集静态文件</h3><pre><code class="shell">python manage.py migrate 
+python manage.py collectstatic
+</code></pre>
+<h3 id="2-4-启动服务"><a href="#2-4-启动服务" class="headerlink" title="2.4 启动服务"></a>2.4 启动服务</h3><p>启动nginx</p>
+<pre><code class="shell">nginx -c /home/projects/closet/conf/nginx.conf
+</code></pre>
+<p>后台启动uwsgi</p>
+<pre><code class="shell">uwsgi /home/projects/closet/conf/uwsgi.ini -d /home/projects/closet/conf/uwsgi.log
+</code></pre>
+<p>访问 <a href="http://120.76.62.132/">http://120.76.62.132/</a> （我没写默认index.html，访问的是<a href="http://120.76.62.132/users/）可以看到接口写好的返回内容，">http://120.76.62.132/users/）可以看到接口写好的返回内容，</a> 则创建成功</p>
+<h2 id="3-error-summary"><a href="#3-error-summary" class="headerlink" title="3. error summary"></a>3. error summary</h2>

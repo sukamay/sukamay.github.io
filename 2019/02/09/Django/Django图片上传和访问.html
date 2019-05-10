@@ -1,0 +1,54 @@
+<hr>
+<p>title: Django图片上传和访问</p>
+<h2 id="categories-Django"><a href="#categories-Django" class="headerlink" title="categories: Django"></a>categories: Django</h2><h1 id="Django图片上传和访问"><a href="#Django图片上传和访问" class="headerlink" title="Django图片上传和访问"></a>Django图片上传和访问</h1><p>配置：</p>
+<p>nginx+Django</p>
+<h2 id="1-图片上传"><a href="#1-图片上传" class="headerlink" title="1. 图片上传"></a>1. 图片上传</h2><h3 id="1-1-settings-py"><a href="#1-1-settings-py" class="headerlink" title="1.1 settings.py"></a>1.1 settings.py</h3><pre><code class="python"><span class="comment"># closetUsers/settings.py</span>
+<span class="comment"># Static files (CSS, JavaScript, Images)</span>
+<span class="comment"># https://docs.djangoproject.com/en/2.1/howto/static-files/</span>
+<span class="comment"># 收集Django的静态文件到同一个static中</span>
+STATIC_ROOT = os.path.join(BASE_DIR, <span class="string">"static/"</span>)
+
+STATIC_URL = <span class="string">'/static/'</span>
+
+MEDIA_ROOT = os.path.join(STATIC_ROOT, <span class="string">"media/"</span>)
+MEDIA_URL = <span class="string">'/media/'</span>
+
+IMG_ROOT = os.path.join(STATIC_ROOT, <span class="string">"img"</span>)
+IMG_URL = <span class="string">'img/'</span>
+
+</code></pre>
+<h3 id="1-2-views-py"><a href="#1-2-views-py" class="headerlink" title="1.2 views.py"></a>1.2 views.py</h3><pre><code class="python"><span class="comment"># users/views.py</span>
+<span class="comment"># 上传图片到静态文件的文件夹</span>
+<span class="meta">@csrf_exempt</span>
+<span class="function"><span class="keyword">def</span> <span class="title">upload_img</span><span class="params">(request)</span>:</span>
+
+    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:
+        img = request.FILES.get(<span class="string">'file'</span>, <span class="literal">None</span>)
+        <span class="keyword">if</span> <span class="keyword">not</span> img:
+            <span class="keyword">return</span> JsonResponse(data={<span class="string">"msg"</span>: <span class="string">"没有上传的图片文件"</span>}, status=status.HTTP_400_BAD_REQUEST)
+        <span class="comment"># to do, 验证用户权限</span>
+        <span class="keyword">if</span> <span class="string">'name'</span> <span class="keyword">not</span> <span class="keyword">in</span> img:
+            <span class="keyword">return</span> JsonResponse(data={<span class="string">"msg"</span>: <span class="string">"无名文件无法上传"</span>}, status=status.HTTP_400_BAD_REQUEST)
+        file_path = os.path.join(settings.IMG_ROOT, img.name)
+        dest_img_path = open(file_path, <span class="string">'wb+'</span>)
+        <span class="keyword">for</span> chunk <span class="keyword">in</span> img.chunks():
+            dest_img_path.write(chunk)
+        dest_img_path.close()
+        <span class="keyword">return</span> JsonResponse(data={<span class="string">"msg"</span>: <span class="string">"图片上传成功"</span>, <span class="string">"url"</span>: file_path}, status=status.HTTP_202_ACCEPTED)
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> JsonResponse(data={<span class="string">"msg"</span>: <span class="string">"this method is not allowed"</span>}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+</code></pre>
+<h3 id="1-3-urls-py"><a href="#1-3-urls-py" class="headerlink" title="1.3 urls.py"></a>1.3 urls.py</h3><pre><code class="python"><span class="comment"># users/urls.py</span>
+   path(<span class="string">'upload/'</span>, views.upload_img),
+</code></pre>
+<h2 id="2-图片访问"><a href="#2-图片访问" class="headerlink" title="2. 图片访问"></a>2. 图片访问</h2><p>所有访问静态文件都可以使用该方法，图片访问为只读请求，不需要经过用户认证等权限处理，使用该方法的好处是不需要经过django的进一步处理，减轻服务器的压力。</p>
+<p>修改<code>nginx.conf</code>配置文件，添加一下部分</p>
+<pre><code class="javascript">location /img {
+    alias /home/projects/closet/closetUsers/tempPhotos; #存放图片的文件夹路径
+}
+</code></pre>
+<p>访问方式：<a href="http://120.76.62.132/img/tank_sample_4.jpeg">http://120.76.62.132/img/tank_sample_4.jpeg</a></p>
+<p><a href="https://blog.csdn.net/qq_35066345/article/details/79690322">403Forbbien</a></p>
+<p><a href="http://www.cnblogs.com/jiongchen/p/9139156.html">alwasy 404 </a></p>
