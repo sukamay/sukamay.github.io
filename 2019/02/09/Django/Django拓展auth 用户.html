@@ -128,7 +128,7 @@ urlpatterns = format_suffix_patterns([
 </code></pre>
 </li>
 <li><p>使用 <a href="https://httpie.org">httpie</a> 模拟post请求</p>
-<pre><code class="shell"><span class="meta">#</span><span class="bash">pattern: http post &lt;urlAddress&gt; @&lt;jsonFileAddress&gt;</span>
+<pre><code class="shell"><span class="meta">#</span>pattern: http post &lt;urlAddress&gt; @&lt;jsonFileAddress&gt;
 xxxdeMacBook-Pro:closetUsers xxx$ http --json post http://127.0.0.1:8000/users/add1/ @/Users/xxx/Desktop/closet/jsonTest/login.json
 HTTP/1.1 403 Forbidden
 </code></pre>
