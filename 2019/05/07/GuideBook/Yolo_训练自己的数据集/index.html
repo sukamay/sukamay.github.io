@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Yolo训练自己的数据集1234567891011config:      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     ||---">
+<meta property="og:type" content="article">
+<meta property="og:title" content="May">
+<meta property="og:url" content="https://sukamay.github.io/2019/05/07/GuideBook/Yolo_训练自己的数据集/index.html">
+<meta property="og:site_name" content="May">
+<meta property="og:description" content="Yolo训练自己的数据集1234567891011config:      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     ||---">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-10T08:33:40.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="May">
+<meta name="twitter:description" content="Yolo训练自己的数据集1234567891011config:      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     ||---">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sukamay.github.io/2019/05/07/GuideBook/Yolo_训练自己的数据集/">
+
+
+
+
+
+  <title> | May</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">May</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/07/GuideBook/Yolo_训练自己的数据集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-07T21:46:03+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/07/GuideBook/Yolo_训练自己的数据集/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/07/GuideBook/Yolo_训练自己的数据集/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Yolo训练自己的数据集"><a href="#Yolo训练自己的数据集" class="headerlink" title="Yolo训练自己的数据集"></a>Yolo训练自己的数据集</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">config:</span><br><span class="line">      </span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce GTX 960M    Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| N/A   52C    P0    N/A /  N/A |      0MiB /  2004MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br></pre></td></tr></table></figure>
+<p>错误递归逐渐忘记要干嘛。。。</p>
+<p>yolo训练时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// cpu yolov3</span><br><span class="line">xxxdeMacBook-Pro:darknet xxx$ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">    ...</span><br><span class="line">  106 yolo</span><br><span class="line">Loading weights from yolov3.weights...Done!</span><br><span class="line">data/dog.jpg: Predicted in 18.616094 seconds.</span><br><span class="line">bicycle: 99%</span><br><span class="line">truck: 92%</span><br><span class="line">dog: 100%</span><br><span class="line">// cpu yolov2</span><br><span class="line">xxxdeMacBook-Pro:darknet xxx$ ./darknet detect cfg/yolov2.cfg yolov2.weights data/dog.jpg </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">   ...</span><br><span class="line">   31 detection</span><br><span class="line">mask_scale: Using default '1.000000'</span><br><span class="line">Loading weights from yolov2.weights...Done!</span><br><span class="line">data/dog.jpg: Predicted in 8.660725 seconds.</span><br><span class="line">dog: 82%</span><br><span class="line">truck: 64%</span><br><span class="line">bicycle: 85%</span><br><span class="line">// gpu yolov2, in another computer, but I didn't try cpu version</span><br><span class="line">// at least 100x faster than cpu version</span><br><span class="line">mei@mei-luo:~/Desktop/cv/darknet$ ./darknet detect cfg/yolov2.cfg yolov2.weights </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">    ...</span><br><span class="line">   31 detection</span><br><span class="line">mask_scale: Using default '1.000000'</span><br><span class="line">Loading weights from yolov2.weights...Done!</span><br><span class="line">Enter Image Path: data/person.jpg</span><br><span class="line">data/person.jpg: Predicted in 0.122470 seconds.</span><br><span class="line">horse: 82%</span><br><span class="line">dog: 86%</span><br><span class="line">person: 86%</span><br></pre></td></tr></table></figure>
+<h2 id="一、数据集预准备"><a href="#一、数据集预准备" class="headerlink" title="一、数据集预准备"></a>一、数据集预准备</h2><p>VOC数据集目录结构如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├──VOC2019</span><br><span class="line">  ├── Annotations</span><br><span class="line">  ├── ImageSets</span><br><span class="line">    ├── Layout</span><br><span class="line">    ├── Main</span><br><span class="line">    └── Segmentation</span><br><span class="line">  └──  JPEGImages</span><br></pre></td></tr></table></figure>
+<h3 id="1-1-Annotations"><a href="#1-1-Annotations" class="headerlink" title="1.1 Annotations"></a>1.1 Annotations</h3><p>存放VOC格式的xml文件，每一个xml对应一张图像，并且每个xml中存放的是标记的各个目标的位置和类别信息，命名通常与对应的原始图像一样</p>
+<h3 id="1-2-ImageSets"><a href="#1-2-ImageSets" class="headerlink" title="1.2 ImageSets"></a>1.2 ImageSets</h3><p>ImageSets我们只需要用到Main文件夹，这里面存放的是一些文本文件，通常为train.txt、test.txt等，该文本文件里面的内容是需要用来训练或测试的图像的名字（无后缀无路径）</p>
+<h3 id="1-3-JPEGImages"><a href="#1-3-JPEGImages" class="headerlink" title="1.3 JPEGImages"></a>1.3 JPEGImages</h3><p>JPEGImages文件夹中放我们已按统一规则命名好的原始图像。</p>
+<p>以此次我收集的关于泡面的数据集为例</p>
+<p>数据来源：百度、京东、个人拍摄</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── JPEGImages</span><br><span class="line">  ├── class_LR</span><br><span class="line">  	├── LR00001.jpg</span><br><span class="line">  	├── ...</span><br><span class="line">  ├── class_XL</span><br><span class="line">  	├── XL00001.jpg</span><br><span class="line">  	├── ...</span><br><span class="line">  ├── rename_voc.py</span><br><span class="line">  ├── resize_pic.py</span><br><span class="line">  └── voc_spider.py</span><br></pre></td></tr></table></figure>
+<p>图片命名格式为<code>&lt;label_name&gt;&lt;num(len=5)&gt;.jpg</code>，例如：<code>LR00001.jpg</code></p>
+<h4 id="1-3-1-voc-spider-py"><a href="#1-3-1-voc-spider-py" class="headerlink" title="1.3.1 voc_spider.py"></a>1.3.1 voc_spider.py</h4><p>可以直接编译，爬取的图片存储在当前目录下。图片命名格式为<code>&lt;label_name&gt;&lt;num(len=5)&gt;.jpg</code>，例如：<code>LR00001.jpg</code>。</p>
+<h4 id="1-3-2-resize-pic-py"><a href="#1-3-2-resize-pic-py" class="headerlink" title="1.3.2 resize_pic.py"></a>1.3.2 resize_pic.py</h4><p>放缩图片大小，因为网络需要图片归一化，默认是处理成正方形的大小所以只需要输入一个数字，处理所在目录下的所有图片（递归式）。需要的图片尺寸大小应与<code>yolo.cfg</code> 中的大小一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># yolov2.cfg</span><br><span class="line">[net]</span><br><span class="line"># Testing</span><br><span class="line">batch=1</span><br><span class="line">subdivisions=1</span><br><span class="line">...</span><br><span class="line">width=608   !!!</span><br><span class="line">height=608  !!!</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="1-3-3-rename-voc-py"><a href="#1-3-3-rename-voc-py" class="headerlink" title="1.3.3 rename_voc.py"></a>1.3.3 rename_voc.py</h4><p>寻找文件夹下命名为<code>class_&lt;label_name&gt;</code>的文件并根据序号重命名。这个主要是针对自己拍摄的照片进行处理时需要统一命名。</p>
+<h3 id="1-4-Conclusion"><a href="#1-4-Conclusion" class="headerlink" title="1.4 Conclusion"></a>1.4 Conclusion</h3><p>VOC数据集构建推荐步骤：</p>
+<ol>
+<li>建立文件夹，目录结构如上述，建议命名为VOC+year，这样之后可以直接使用提供的<code>voc_label.py</code>。</li>
+<li><code>JPEGImages</code>下建立每个类的文件夹，我主要是为了方便区分，也不可以不分。</li>
+<li>使用上述的py文件获取图片</li>
+<li>最终所有图片都在<code>JPEGImages</code>文件夹下，不再另外区分。建议先做好这步！不然后期的xml文件夹还需要改动路径，不麻烦但是还是多了几步工作。</li>
+</ol>
+<h2 id="二、标记图像目标区域"><a href="#二、标记图像目标区域" class="headerlink" title="二、标记图像目标区域"></a>二、标记图像目标区域</h2><p>跑opencv，报错了。。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ python</span><br><span class="line">Python 2.7.10 (default, Feb 22 2019, 21:17:52) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.37.14)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import cv2</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/cv2/__init__.py", line 89, in &lt;module&gt;</span><br><span class="line">    bootstrap()</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/cv2/__init__.py", line 79, in bootstrap</span><br><span class="line">    import cv2</span><br><span class="line">ImportError: dlopen(/usr/local/lib/python2.7/site-packages/cv2/python-2.7/cv2.so, 2): Library not loaded: /usr/local/opt/ffmpeg/lib/libavcodec.58.dylib</span><br><span class="line">  Referenced from: /usr/local/lib/libopencv_videoio.3.4.dylib</span><br><span class="line">  Reason: image not found</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看了一下自己并没有安装 <code>ffmpeg</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ brew install ffmpeg</span><br></pre></td></tr></table></figure>
+<p>我吹爆brew！原来尝试源码安装疯狂报错。。。</p>
+<p>opencv能import了，然后numpy又报错了😭😭😭</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ python</span><br><span class="line">Python 2.7.10 (default, Feb 22 2019, 21:17:52) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.37.14)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import numpy</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/numpy/__init__.py", line 142, in &lt;module&gt;</span><br><span class="line">    from . import core</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/numpy/core/__init__.py", line 71, in &lt;module&gt;</span><br><span class="line">    raise ImportError(msg)</span><br><span class="line">ImportError: </span><br><span class="line"></span><br><span class="line">IMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!</span><br><span class="line"></span><br><span class="line">Importing the multiarray numpy extension module failed.  Most</span><br><span class="line">likely you are trying to import a failed build of numpy.</span><br><span class="line">Here is how to proceed:</span><br><span class="line">- If you're working with a numpy git repository, try `git clean -xdf`</span><br><span class="line">  (removes all files not under version control) and rebuild numpy.</span><br><span class="line">- If you are simply trying to use the numpy version that you have installed:</span><br><span class="line">  your installation is broken - please reinstall numpy.</span><br><span class="line">- If you have already reinstalled and that did not fix the problem, then:</span><br><span class="line">  1. Check that you are using the Python you expect (you're using /usr/bin/python),</span><br><span class="line">     and that you have no directories in your PATH or PYTHONPATH that can</span><br><span class="line">     interfere with the Python and numpy versions you're trying to use.</span><br><span class="line">  2. If (1) looks fine, you can open a new issue at</span><br><span class="line">     https://github.com/numpy/numpy/issues.  Please include details on:</span><br><span class="line">     - how you installed Python</span><br><span class="line">     - how you installed numpy</span><br><span class="line">     - your operating system</span><br><span class="line">     - whether or not you have multiple versions of Python installed</span><br><span class="line">     - if you built from source, your compiler versions and ideally a build log</span><br><span class="line"></span><br><span class="line">     Note: this error has many possible causes, so please don't comment on</span><br><span class="line">     an existing issue about this - open a new one instead.</span><br><span class="line"></span><br><span class="line">Original error was: No module named _multiarray_umath</span><br><span class="line">xxxdeMacBook-Pro:main xxx$ sudo find /usr/local/lib/python* | grep numpy</span><br></pre></td></tr></table></figure>
+<p>看了一下自己文件里的<code>numpy</code>，发现在<code>python3.7</code>下<code>import</code>是没有任何毛病的！干脆就把<code>/usr/local/lib/python2.7/site-pacages/</code> 下的<code>numpy</code>删了，再测试了一下，ojbk👌</p>
+<p>fine，我很ok的，我配环境配两天了，佛了，被环境工程劝退，又是头秃的一天啊！😃😃😃</p>
+<p>推测一下出现这么多错可能是因为我同时存在了多个python的版本，有的包可能同时存在几个版本，容易冲突，这个标记的demo是在<code>python2.7</code>的环境下跑的，所以这些包我都尽量装在<code>python2.7/site-pacages</code> 目录下，使用pip指定目录安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pip install --target=&lt;target_path&gt; &lt;pacakages&gt;</span></span><br><span class="line">xxxdeMacBook-Pro:main xxx$ pip install --target=/usr/local/lib/python2.7/site-pacages/ lxml</span><br></pre></td></tr></table></figure>
+<p>新的错，来自<code>lxml</code>，无法<code>import etree</code>，然鹅！<code>python3.6</code>下跑没有任何毛病= =</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ python</span><br><span class="line">Python 2.7.10 (default, Feb 22 2019, 21:17:52) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.37.14)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import lxml</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from lxml import etree</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">ImportError: cannot import name etree</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; 	</span></span><br><span class="line">xxxdeMacBook-Pro:main xxx$ python3</span><br><span class="line">Python 3.6.8 (v3.6.8:3c6b436a57, Dec 24 2018, 02:04:31) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from lxml import etree</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; etree.__version__</span></span><br><span class="line">'4.3.3'</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：出错还有另外的可能是你的Python项目中有名称为lxml的文件（夹），就有可能导致这种错误。这种情况的话，把项目中对应的文件名称修改即可</strong></p>
+<p>曲线救国了</p>
+<p>找到了另一个<code>labelImg</code>，好了！完美！</p>
+<p>git：<a href="https://github.com/tzutalin/labelImg" target="_blank" rel="noopener">labelImg的git地址</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> install lableImg <span class="keyword">in</span> Mac OS X 10.14</span></span><br><span class="line">pip3 install pyqt5 lxml # Install qt and lxml by pip</span><br><span class="line"></span><br><span class="line">make qt5py3</span><br><span class="line">python3 labelImg.py</span><br><span class="line">python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]</span><br></pre></td></tr></table></figure>
+<p>以下是xml的标准格式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">annotation</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">folder</span>&gt;</span>JPEGImages<span class="tag">&lt;/<span class="name">folder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filename</span>&gt;</span>LR00001.jpg<span class="tag">&lt;/<span class="name">filename</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">path</span>&gt;</span>/home/mei/Desktop/cv/darknet/scripts/VOCdevkit/NOODLE2019/JPEGImages/LR00001.jpg<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">database</span>&gt;</span>Unknown<span class="tag">&lt;/<span class="name">database</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">size</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">width</span>&gt;</span>608<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">height</span>&gt;</span>608<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">depth</span>&gt;</span>3<span class="tag">&lt;/<span class="name">depth</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">size</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">segmented</span>&gt;</span>0<span class="tag">&lt;/<span class="name">segmented</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>luxiang<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>393<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>304<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>583<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>465<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">annotation</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可能需要更改的地方：</p>
+<ol>
+<li><p>folder</p>
+<p>folder为最终跑模型的时候图片的放置位置。该命令运行在ubuntu 下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;folder&gt;class_LR|&lt;folder&gt;JPEGImages|g'</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filename</p>
+<p>可能导出的filename是没有文件后缀的，统一加上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;/filename&gt;|.jpg&lt;/filename&gt;|g'</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>path</p>
+<p>path为图片在跑的模型上的绝对路径（因为我需要移植到另外一台电脑上跑）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;path&gt;$(your_original_pic_path)|&lt;path&gt;$(your_final_pic_path)|g'</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>width, height</p>
+<p>有时候在Windows下用该工具label图像，可能会出现size那里的width和height都为0，如果在label之前已经归一化了图像大小那么就可以用下面两行命令来修改这个0值</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|0&lt;/width&gt;|608&lt;/width&gt;|g'</span><br><span class="line">find -name '*.xml' |xargs perl -pi -e 's|0&lt;/height&gt;|608&lt;/height&gt;|g'</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="三、用yolov2训练"><a href="#三、用yolov2训练" class="headerlink" title="三、用yolov2训练"></a>三、用yolov2训练</h2><h3 id="3-1-生成相关文件"><a href="#3-1-生成相关文件" class="headerlink" title="3.1 生成相关文件"></a>3.1 生成相关文件</h3><p>​    按darknet的说明编译好后，接下来在darknet-master/scripts文件夹中新建文件夹VOCdevkit，然后将整个VOC2007文件夹都拷到VOCdevkit文件夹下。</p>
+<p>​    然后，需要利用scripts文件夹中的voc_label.py文件生成一系列训练文件和label，具体操作如下：</p>
+<p>​    首先需要修改voc_label.py中的代码，这里主要修改数据集名，以及类别信息，我的是VOC2019，并且所有样本用来训练，有两类目标，因此按如下设置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"> </span><br><span class="line"><span class="comment">#sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#classes = ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]</span></span><br><span class="line"> </span><br><span class="line">sets=[(<span class="string">'2019'</span>, <span class="string">'train'</span>)]</span><br><span class="line">classes = [ <span class="string">"luxiang"</span>, <span class="string">"xiangla"</span>]</span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_annotation</span><span class="params">(year, image_id)</span>:</span></span><br><span class="line">    in_file = open(<span class="string">'VOCdevkit/VOC%s/Annotations/%s.xml'</span>%(year, image_id)) </span><br><span class="line">    <span class="comment">#（如果使用的不是VOC而是自设置数据集名字，则这里需要修改）</span></span><br><span class="line">    out_file = open(<span class="string">'VOCdevkit/VOC%s/labels/%s.txt'</span>%(year, image_id), <span class="string">'w'</span>)  </span><br><span class="line">    <span class="comment">#（同上）</span></span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> year, image_set <span class="keyword">in</span> sets:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'VOCdevkit/VOC%s/labels/'</span>%(year)):</span><br><span class="line">        os.makedirs(<span class="string">'VOCdevkit/VOC%s/labels/'</span>%(year))</span><br><span class="line">    image_ids = open(<span class="string">'VOCdevkit/VOC%s/ImageSets/Main/%s.txt'</span>%(year, image_set)).read().strip().split()</span><br><span class="line">    list_file = open(<span class="string">'%s_%s.txt'</span>%(year, image_set), <span class="string">'w'</span>)</span><br><span class="line">    <span class="keyword">for</span> image_id <span class="keyword">in</span> image_ids:</span><br><span class="line">        list_file.write(<span class="string">'%s/VOCdevkit/VOC%s/JPEGImages/%s.jpg\n'</span>%(wd, year, image_id))</span><br><span class="line">        convert_annotation(year, image_id)</span><br><span class="line">    list_file.close()</span><br></pre></td></tr></table></figure>
+<p>修改好后在该目录下运行命令：<code>python voc_label.py</code>，之后则在文件夹<code>script/VOCdevki/VOC2019</code>下生成了文件夹<code>labels</code>：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├──VOC2019</span><br><span class="line">  ├── labels</span><br><span class="line">  	├── LR00000<span class="selector-class">.txt</span>  </span><br><span class="line">  	├── LR00091.txt</span><br><span class="line">    ├── ...</span><br></pre></td></tr></table></figure>
+<p>同时在<code>scripts/</code>下应该也生成了<code>2019_train.txt</code>这个文件，里面包含了所有训练样本的绝对路径。</p>
+<p>❗️❗️❗️注意一下此时<code>darknet/</code>文件夹下是否也生成了<code>train.txt</code> 文件，如果有，检查一下是否为空，若为空就把 <code>2019_train.txt</code> 的内容移到 <code>train.txt</code>。</p>
+<h3 id="3-2-配置文件修改"><a href="#3-2-配置文件修改" class="headerlink" title="3.2 配置文件修改"></a>3.2 配置文件修改</h3><p>​      做好了上述准备，就可以根据不同的网络设置（cfg文件）来训练了。在文件夹cfg中有很多cfg文件，应该跟caffe中的prototxt文件是一个意思。这里以<code>yolov2.cfg</code>‘为例，主要修改参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">[convolutional]</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">filters=35</span><br><span class="line">//修改最后一层卷积层核参数个数，计算公式是依旧自己数据的类别数filter=num×（classes + coords + 1）=5×（1+4+1）=30</span><br><span class="line">activation=linear</span><br><span class="line"></span><br><span class="line">[region]</span><br><span class="line">anchors = 1.08,1.19,  3.42,4.41,  6.63,11.38,  9.42,5.11,  16.62,10.52</span><br><span class="line">bias_match=1</span><br><span class="line">classes=2  //类别数，本例为1类</span><br><span class="line">coords=4</span><br><span class="line">num=5</span><br><span class="line">softmax=1</span><br><span class="line">jitter=.2</span><br><span class="line">rescore=1</span><br><span class="line"></span><br><span class="line">object_scale=5</span><br><span class="line">noobject_scale=1</span><br><span class="line">class_scale=1</span><br><span class="line">coord_scale=1</span><br><span class="line"></span><br><span class="line">absolute=1</span><br><span class="line">thresh = .6</span><br><span class="line">random=1</span><br></pre></td></tr></table></figure>
+<p>​    另外也可根据需要修改learning_rate、max_batches等参数。</p>
+<p>​      修改好了cfg文件之后，就需要修改两个文件，首先是data文件下的voc.names。打开voc.names文件可以看到有20类的名称，本例中只有一类，检测人，因此将原来所有内容清空，写上自己数据集对应的类名并保存。名字仍然用这个名字，如果喜欢用其他名字则请按一开始制作自己数据集的时候的名字来修改。</p>
+<p>​      接着需要修改cfg文件夹中的voc.data文件。也是按自己需求修改，我的修改之后是这样的画风：</p>
+<ol>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">classes= 1  //类别数  </span><br><span class="line">train  = /home/mei/Desktop/cv/darknet/scripts/2019_train.txt  //训练样本的绝对路径文件，也就是上文2.1中最后生成的  </span><br><span class="line">//valid  = /home/pjreddie/data/voc/2007_test.txt  //本例未用到  </span><br><span class="line">names = data/voc.names  //上一步修改的voc.names文件  </span><br><span class="line">backup = backup/  //指示训练后生成的权重放在哪</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>修改后按原名保存最好，接下来就可以训练了。</p>
+<h3 id="3-3-运行训练"><a href="#3-3-运行训练" class="headerlink" title="3.3 运行训练"></a>3.3 运行训练</h3><p>​      上面完成了就可以命令训练了，可以在官网上找到一些预训练的模型作为参数初始值，也可以直接训练，训练命令为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">./darknet detector train ./cfg/voc.data cfg/tiny-yolo-voc.cfg</span></span><br></pre></td></tr></table></figure>
+<p>如果用官网的预训练模型<code>darknet.conv.weights</code>做初始化，则训练命令为 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">./darknet detector train ./cfg/voc.data .cfg/tiny-yolo-voc.cfg darknet.conv.weights</span></span><br></pre></td></tr></table></figure>
+<p> 不过我没试成功，加上这个模型直接就除了final，不知道啥情况。当然也可以用自己训练的模型做参数初始化，万一训练的时候被人终端了，可以再用训练好的模型接上去接着训练。</p>
+<p>​       训练过程中会根据迭代次数保存训练的权重模型，然后就可以拿来测试了，测试的命令同理：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg results/tiny-yolo-voc_6000.weights data/images.jpg</span><br></pre></td></tr></table></figure>
+<p>​      这样就完成了整个流程。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/07/SoftwareManagement/MgtPro_8_Quality/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/08/SoftwareManagement/MgtPro_9_MonteCarlo/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/profile.JPG" alt="May">
+            
+              <p class="site-author-name" itemprop="name">May</p>
+              <p class="site-description motion-element" itemprop="description">Life is fantastic!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">198</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sukamay" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Yolo训练自己的数据集"><span class="nav-number">1.</span> <span class="nav-text">Yolo训练自己的数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、数据集预准备"><span class="nav-number">1.1.</span> <span class="nav-text">一、数据集预准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Annotations"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 Annotations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-ImageSets"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 ImageSets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-JPEGImages"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 JPEGImages</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-voc-spider-py"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1.3.1 voc_spider.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-resize-pic-py"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">1.3.2 resize_pic.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-rename-voc-py"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">1.3.3 rename_voc.py</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Conclusion"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 Conclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、标记图像目标区域"><span class="nav-number">1.2.</span> <span class="nav-text">二、标记图像目标区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、用yolov2训练"><span class="nav-number">1.3.</span> <span class="nav-text">三、用yolov2训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-生成相关文件"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 生成相关文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-配置文件修改"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 配置文件修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-运行训练"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 运行训练</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">May</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://sukamay.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sukamay.github.io/2019/05/07/GuideBook/Yolo_训练自己的数据集/';
+          this.page.identifier = '2019/05/07/GuideBook/Yolo_训练自己的数据集/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://sukamay.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

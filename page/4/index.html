@@ -284,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/09/Guide_book/Tomcat配置/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/04/14/SoftwareManagement/MgtPro_5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -303,7 +303,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/09/Guide_book/Tomcat配置/" itemprop="url">Tomcat配置</a></h1>
+                <a class="post-title-link" href="/2019/04/14/SoftwareManagement/MgtPro_5/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T10:01:27+08:00">
-                2018-12-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T19:10:13+08:00">
+                2019-04-14
               </time>
             
 
@@ -334,8 +334,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/09/Guide_book/Tomcat配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/09/Guide_book/Tomcat配置/" itemprop="commentCount"></span>
+                <a href="/2019/04/14/SoftwareManagement/MgtPro_5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/14/SoftwareManagement/MgtPro_5/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,670 +365,248 @@
       
         
           
-            <p>服务器：阿里云</p>
-<h2 id="远程连接到服务器"><a href="#远程连接到服务器" class="headerlink" title="远程连接到服务器"></a>远程连接到服务器</h2><p><a href="https://help.aliyun.com/document_detail/59083.html?spm=5176.10173289.107.4.78de2e77rXaOJu#本地为%20Linux%20或支持%20SSH%20命令的环境" target="_blank" rel="noopener">远程连接到linux服务器</a></p>
-<h3 id="通过ssh连接"><a href="#通过ssh连接" class="headerlink" title="通过ssh连接"></a>通过ssh连接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:Guide book xxx$ ssh root@120.76.62.132 -i /Users/xxx/Desktop/i\ document/笔记/Guide\ book/xxx.pem</span><br></pre></td></tr></table></figure>
-<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><h3 id="1-给Mac安装jdk环境。"><a href="#1-给Mac安装jdk环境。" class="headerlink" title="1. 给Mac安装jdk环境。"></a>1. 给Mac安装jdk环境。</h3><p>　　　   直接百度”jdk for Mac“，找到其中一个版本进行安装就可以了，安装完成后，打开终端，输入“java”或“javac”，如果出现java命令的使用说明，那么说明你的Mac上的jdk环境已经配置好，这个比起windows系统来说，简单方便很多。</p>
-<h3 id="2-下载安装-Tomcat"><a href="#2-下载安装-Tomcat" class="headerlink" title="2. 下载安装 Tomcat"></a>2. 下载安装 Tomcat</h3><p>​    下载 Tomcat 地址（官方地址）：<a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-80.cgi</a></p>
-<p>​    下载文件：mac下载 zip 和 tar.gz 都行，我下载的是 tar.gz</p>
-<h3 id="3-安装："><a href="#3-安装：" class="headerlink" title="3. 安装："></a>3. 安装：</h3><ol>
-<li><p>压缩之后直接拷贝到资源库中，压缩后的文件夹名称为Tomcat8，记录此位置:<code>/Library/Tomcat8</code>（方便后续环境配置）</p>
-</li>
-<li><p>打开终端，输入以下命令<code>/Library/Tomcat8/bin/startup.sh</code>，浏览器中输入localhost:8080，就可以看到以下效果:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ Library/Tomcat8/bin/starup.sh</span><br><span class="line">-bash: Library/Tomcat8/bin/starup.sh: No such file or directory</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>如果遇到提示No such file or directory错误提示，需要执行sudo chmod 755 Library/Tomcat/bin/*.sh，然后重新执行startup.sh，若出现permission denied 的情况，则在sudo模式下执行startup.sh，如果想停止Tomcat，直接执行shutdown.sh即可。在执行sudo时，必须使用带密码的用户。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// or sudo chmod 755 /Library/Tomcat8/bin/*.sh</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo chmod +x /Library/Tomcat8/bin/*.sh</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">touch: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">/Library/Tomcat8/bin/catalina.sh: line 464: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
+            <h1 id="MgtPro-5"><a href="#MgtPro-5" class="headerlink" title="MgtPro_5"></a>MgtPro_5</h1><h2 id="1-risk-identification"><a href="#1-risk-identification" class="headerlink" title="1. risk identification"></a>1. risk identification</h2><h3 id="1-1-Diagramming"><a href="#1-1-Diagramming" class="headerlink" title="1.1 Diagramming"></a>1.1 Diagramming</h3><h4 id="Equipment"><a href="#Equipment" class="headerlink" title="Equipment"></a>Equipment</h4><ol>
+<li>设备未到位（缺失、不足</li>
+<li>设备因不可坑因素损坏</li>
 </ol>
-<p>​     如果每次写路径比较麻烦，这个时候需要设置环境变量。</p>
-<h3 id="4-设置-Tomcat-的环境变量"><a href="#4-设置-Tomcat-的环境变量" class="headerlink" title="4. 设置 Tomcat 的环境变量:"></a>4. 设置 Tomcat 的环境变量:</h3><p>ps：不要在root权限下设置</p>
-<p>　　①使用vim编辑bash_profile，输入命令打开：<code>vi .bash_profile</code>(<code>pico .bash_profile</code>亦可)</p>
-<p>　　②按 <code>i</code>进入编辑模式</p>
-<p>​      ③输入Tomcat存储路径    <code>export PATH=&quot;/Users/keso/Library/Tomcat8/bin:$PATH&quot;</code>（注意：此处路径是自己保存的 tomcat 存储路径）</p>
-<p>　　④esc退出编辑模式，输入 <code>:wq</code> 保存并退出vim</p>
-<p>​      ⑤更新配置的环境变量，输入命令：<code>source .bash_profile</code></p>
-<p>　　⑥终端中输入startup.sh， startup.sh后出现类似 “Permission denied” ，这个时候需要对目录进行权限设置：输入 sudo chmod 755 Library/Tomcat8/bin/*.sh 回车，设置文件的读写执行权限，参考第3步中的解决方案。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vi .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ source .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Password:</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ shutdown.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-<h3 id="5-设置完成"><a href="#5-设置完成" class="headerlink" title="5. 设置完成"></a>5. 设置完成</h3><p>之后，输入 <code>sudo startup.sh</code>会显示启动, 打开 localhost:8080 可测试，出现上述页面。</p>
-<p>  关闭使用 <code>shutdown.sh</code> 即可;</p>
-<p>   到此，Tomcat 配置完成。 </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/06/Guide_book/Ns3仿真基本流程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/06/Guide_book/Ns3仿真基本流程/" itemprop="url">Ns3网络仿真基本流程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T14:31:39+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/06/Guide_book/Ns3仿真基本流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/06/Guide_book/Ns3仿真基本流程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Ns3网络仿真基本流程："><a href="#Ns3网络仿真基本流程：" class="headerlink" title="Ns3网络仿真基本流程："></a>Ns3网络仿真基本流程：</h1><h2 id="1）-选择和开发相应模块；"><a href="#1）-选择和开发相应模块；" class="headerlink" title="1）  选择和开发相应模块；"></a>1）  选择和开发相应模块；</h2><p>根据实际仿真对象和仿真场景选择相应的仿真模块；如果搭建的网络比较新，读者就需要开发自己设计的协议。</p>
-<h2 id="2）-编写网络仿真脚本；"><a href="#2）-编写网络仿真脚本；" class="headerlink" title="2）  编写网络仿真脚本；"></a>2）  编写网络仿真脚本；</h2><p>生成节点node；</p>
-<p>安装信道Channel和相应的网络设备NetDevice，</p>
-<p>安装协议栈</p>
-<p>安装应用层协议</p>
-<p>其他配置等</p>
-<p>启动仿真</p>
-<h2 id="3）-仿真结果分析；"><a href="#3）-仿真结果分析；" class="headerlink" title="3）  仿真结果分析；"></a>3）  仿真结果分析；</h2><h2 id="4）-根据结果调试网络配置参数和修改源代码；"><a href="#4）-根据结果调试网络配置参数和修改源代码；" class="headerlink" title="4）  根据结果调试网络配置参数和修改源代码；"></a>4）  根据结果调试网络配置参数和修改源代码；</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/Guide_book/Android/Android_APP后台搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/Guide_book/Android/Android_APP后台搭建/" itemprop="url">AndroidAPP后台搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:53:58+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/Guide_book/Android/Android_APP后台搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/Guide_book/Android/Android_APP后台搭建/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="AndroidAPP后台搭建"><a href="#AndroidAPP后台搭建" class="headerlink" title="AndroidAPP后台搭建"></a>AndroidAPP后台搭建</h1><p>选取 jdk、tomcat、MySQL、FileZilla</p>
-<p><a href="https://blog.csdn.net/Mr_Megamind/article/details/71404618" target="_blank" rel="noopener">参考教程</a></p>
+<h4 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h4><h4 id="People"><a href="#People" class="headerlink" title="People"></a>People</h4><h4 id="Materials"><a href="#Materials" class="headerlink" title="Materials"></a>Materials</h4><h4 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h4><ol>
+<li>新的开发工具学习期比预期长</li>
+<li>开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；</li>
+</ol>
+<h4 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h4><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Possible risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Technology</td>
+<td></td>
+</tr>
+<tr>
+<td>People</td>
+<td></td>
+</tr>
+<tr>
+<td>Organizational</td>
+<td></td>
+</tr>
+<tr>
+<td>Tools</td>
+<td></td>
+</tr>
+<tr>
+<td>Requirements</td>
+<td></td>
+</tr>
+<tr>
+<td>Estimation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-2-type-based"><a href="#1-2-type-based" class="headerlink" title="1.2 type-based"></a>1.2 type-based</h3><h4 id="Technology"><a href="#Technology" class="headerlink" title="Technology"></a>Technology</h4><ol>
+<li>系统架构不合理</li>
+<li>可复用组件不适用</li>
+<li>数据库<ol>
+<li>对于并发性的支持</li>
+<li>事件的四大特性（一致性、持久性、原子性、隔离性）</li>
+<li>数据库数据丢失（</li>
+<li>数据库数据安全（恶意攻击，恶意入侵数据库，备份数据的保护</li>
+</ol>
+</li>
+<li>服务器<ol>
+<li>设备失效，宕机</li>
+</ol>
+</li>
+<li>设计质量低下，导致重复设计；</li>
+<li>一些必要的功能无法使用现有的代码和库实现，开发人员必须使用新的库或者自行开发新的功能；</li>
+<li>代码和库质量低下，导致需要进行额外的测试，修正错误，或重新制作；</li>
+<li>过高估计了增强型工具对计划进度的节省量；</li>
+<li>分别开发的模块无法有效集成，需要重新设计或制作。</li>
+</ol>
+<h4 id="People-1"><a href="#People-1" class="headerlink" title="People"></a>People</h4><ol>
+<li>人员的变更：人员辞职（底层程序员、管理层人员），关键人员因不可抗因素没办法工作，新的人员的加入</li>
+<li>人员技术水平不够</li>
+<li>人员培训效果不足</li>
+<li>人员消极怠工</li>
+<li>人员之间沟通不足引发冲突，导致工作因沟通不够出现错误或额外的重复工作</li>
+</ol>
+<h4 id="Organizational"><a href="#Organizational" class="headerlink" title="Organizational"></a>Organizational</h4><ol>
+<li>分工不合理（工作难度分配不合理、工作种类分工不合理）</li>
+<li>运转资金不足</li>
+<li>仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；</li>
+<li>低效的项目组结构降低生产率；</li>
+<li>管理层审查 决策的周期比预期的时间长；</li>
+<li>预算削减，打乱项目计划；</li>
+<li>缺乏必要的规范，导致工作失误与重复工作；</li>
+<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
+</ol>
+<h4 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h4><ol>
+<li>代码生成失误</li>
+<li>工具不兼容</li>
+<li>源码丢失</li>
+</ol>
+<h4 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h4><ol>
+<li>需求已经成为项目基准，但需求还在继续变化；</li>
+<li>需求定义欠佳，而进一步的定义会扩展项目范畴；</li>
+<li>产品定义含混的部分比预期需要更多的时间；</li>
+<li>在做需求中客户参与不够</li>
+</ol>
+<h4 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h4><ol>
+<li>工作量工作时间工作进度预估错误</li>
+<li>低估软件规模</li>
+<li>低估缺陷修复率</li>
+</ol>
+<h3 id="1-3-Brainstorm"><a href="#1-3-Brainstorm" class="headerlink" title="1.3 Brainstorm"></a>1.3 Brainstorm</h3><h4 id="客户风险："><a href="#客户风险：" class="headerlink" title="客户风险："></a>客户风险：</h4><ol>
+<li>客户对于交付的产品不满意</li>
+</ol>
+<h4 id="scope-risk："><a href="#scope-risk：" class="headerlink" title="scope risk："></a>scope risk：</h4><ol>
+<li>产品跨领域</li>
+</ol>
+<h3 id="1-4-Document-review"><a href="#1-4-Document-review" class="headerlink" title="1.4 Document review"></a>1.4 Document review</h3><h4 id="非功能需求"><a href="#非功能需求" class="headerlink" title="非功能需求"></a>非功能需求</h4><p>法律：</p>
 <ol>
-<li>内网穿透，使用ngrok</li>
+<li>某些地区有特定的法律法规，系统需要根据所在地区进行调整</li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/Guide_book/MySQL报错解决/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/Guide_book/MySQL报错解决/" itemprop="url">MySQL_errors</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:46:52+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/Guide_book/MySQL报错解决/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/Guide_book/MySQL报错解决/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>版本：MySQL8.0.11</p>
-<p>系统：MacOS 10.14.1</p>
-<h2 id="Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’"><a href="#Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’" class="headerlink" title="Q1：Unable to load authentication plugin ‘caching_sha2_password’."></a>Q1：Unable to load authentication plugin ‘caching_sha2_password’.</h2><p>​    datagrip连接的时候连接不到，原因是mysql8.0之前的版本用的是mysql_native_password, 但mysql8.0之后的版本连接使用的密码是caching_sha2_password。</p>
-<p>————————————————————2018.12.5—————————————————————————</p>
-<p>解决：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'1234'</span> PASSWORD EXPIRE NEVER; </span></span><br><span class="line">Query OK, 0 rows affected (0.08 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> FLUSH PRIVILEGES;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> alter user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/Guide_book/MySQL使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/Guide_book/MySQL使用/" itemprop="url">MySQL_使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T21:26:34+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/Guide_book/MySQL使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/Guide_book/MySQL使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL使用"><a href="#MySQL使用" class="headerlink" title="MySQL使用"></a>MySQL使用</h1><p>安装环境：mac</p>
-<h2 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h2><ol>
-<li><p>下载安装，我已经不太记得了，有点久远的事情</p>
-<p>从  <a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">官网</a>下载dmg，直接安装就好，有一步需要注意的就是弹出<strong>初始密码</strong>的时候记得记下来！！！</p>
+<h2 id="2-classification"><a href="#2-classification" class="headerlink" title="2. classification"></a>2. classification</h2><p>RBS</p>
+<h3 id="2-1-External-Unpredictable"><a href="#2-1-External-Unpredictable" class="headerlink" title="2.1 External Unpredictable"></a>2.1 External Unpredictable</h3><ol>
+<li>设备风险<ol>
+<li>Natural Hazards（设备因不可坑因素损坏</li>
+<li>设备未到位</li>
+</ol>
 </li>
-<li><p>配置环境变量</p>
+<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
+</ol>
+<h3 id="2-2-Externel-Predictable"><a href="#2-2-Externel-Predictable" class="headerlink" title="2.2 Externel Predictable"></a>2.2 Externel Predictable</h3><ol>
+<li>market risk： <ol>
+<li>软件功能不符合市场需求，投入市场后反映惨淡</li>
+<li>行业竞争</li>
+</ol>
+</li>
+<li>运营风险：<ol>
+<li>经营成本上升，宣传成本，人员成本上升</li>
+</ol>
+</li>
+<li>通货膨胀</li>
+<li>汇率</li>
+</ol>
+<h3 id="2-3-Internal-Non-technical"><a href="#2-3-Internal-Non-technical" class="headerlink" title="2.3 Internal Non-technical"></a>2.3 Internal Non-technical</h3><ol>
+<li>Environment<ol>
+<li>新的开发工具学习期比预期长</li>
+<li>开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；</li>
+</ol>
+</li>
+<li>People<ol>
+<li>人员的变更：人员辞职（底层程序员、管理层人员），关键人员因不可抗因素没办法工作，新的人员的加入</li>
+<li>人员技术水平不够</li>
+<li>人员培训效果不足</li>
+<li>人员消极怠工</li>
+<li>人员之间沟通不足引发冲突，导致工作因沟通不够出现错误或额外的重复工作</li>
+</ol>
+</li>
+<li>Organizational<ol>
+<li>分工不合理（工作难度分配不合理、工作种类分工不合理）</li>
+<li>运转资金不足</li>
+<li>仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；</li>
+<li>低效的项目组结构降低生产率；</li>
+<li>管理层审查 决策的周期比预期的时间长；</li>
+<li>预算削减，打乱项目计划；</li>
+<li>缺乏必要的规范，导致工作失误与重复工作；</li>
+<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
+</ol>
+</li>
+<li>Requirements<ol>
+<li>需求已经成为项目基准，但需求还在继续变化；</li>
+<li>需求定义欠佳，而进一步的定义会扩展项目范畴；</li>
+<li>产品定义含混的部分比预期需要更多的时间；</li>
+<li>在做需求中客户参与不够</li>
+</ol>
+</li>
+<li>Estimation<ol>
+<li>工作量工作时间工作进度预估错误</li>
+<li>低估软件规模</li>
+<li>低估缺陷修复率</li>
+</ol>
+</li>
+<li>客户风险<ol>
+<li>客户对于交付的产品不满意</li>
+</ol>
+</li>
+<li>scope risk：<ol>
+<li>产品跨领域发展</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-4-Technical"><a href="#2-4-Technical" class="headerlink" title="2.4 Technical"></a>2.4 Technical</h3><ol>
+<li>数据库<ol>
+<li>对于并发性的支持</li>
+<li>事件的四大特性（一致性、持久性、原子性、隔离性）</li>
+<li>数据库数据丢失（</li>
+<li>数据库数据安全（恶意攻击，恶意入侵数据库，备份数据的保护</li>
+</ol>
+</li>
+<li>服务器<ol>
+<li>设备失效，宕机</li>
+</ol>
+</li>
+<li>design：<ol>
+<li>设计质量低下，导致重复设计；</li>
+<li>一些必要的功能无法使用现有的代码和库实现，开发人员必须使用新的库或者自行开发新的功能；</li>
+<li>代码和库质量低下，导致需要进行额外的测试，修正错误，或重新制作；</li>
+<li>过高估计了增强型工具对计划进度的节省量；</li>
+<li>分别开发的模块无法有效集成，需要重新设计或制作。</li>
+</ol>
+</li>
+<li>Tools：<ol>
+<li>代码生成失误</li>
+<li>工具不兼容</li>
+<li>源码丢失</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-5-Legal"><a href="#2-5-Legal" class="headerlink" title="2.5 Legal"></a>2.5 Legal</h3><ol>
+<li>某些地区有特定的法律法规，系统需要根据所在地区进行调整</li>
+<li>专利问题，使用第三方库涉及的侵权问题</li>
+<li>消费者权益受损，平台未及时处理而遭诉讼</li>
+</ol>
+<h2 id="3-risk-analysis"><a href="#3-risk-analysis" class="headerlink" title="3. risk analysis"></a>3. risk analysis</h2><p>分工：各自按照流程风险分析，register，应对措施= =自己看ppt吧</p>
+<p>文添： 2.5+ppt</p>
+<p>陈超： 2.1、2.2（+补充</p>
+<p>陈润乾、罗媚、谈瑞： 2.3 3个人</p>
+<p>梁程伟： 2.4（+补充</p>
+<p>Pre 建议：</p>
+<p>资源分配，依据什么将资源分配给<strong>WBS</strong>中的任务</p>
+<p>介绍一下自己使用的风险管理工具</p>
+<p>WBS从不同的方面进行分解？合理分解（对于WBS不同的划分</p>
+<p>甘特图</p>
+<p>注意所写的风险是否与软件开发是否有关</p>
+<p>参考一些现有的技术文档</p>
+<p>现有的技术模型</p>
+<p>PPT流程：</p>
 <ol>
-<li><p>进入  <code>bash_profile</code> 文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按 i 进入编辑模式，在文件末尾加上mysql的文件路径：　</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=<span class="variable">$&#123;</span>PATH&#125;<span class="symbol">:/usr/local/mysql/bin</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输入 <code>:wq</code>  退出vim编辑，冒号不要忘记了！不然会进入 <code>recording@</code> 状态。</p>
-</li>
-<li><p>使得该文件生效</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
+<li>Risk Mgt Plan（略）</li>
+<li>Risk Identification<ol>
+<li>使用方法：brainstorm、diagramming、document review</li>
+<li>展示RBS</li>
 </ol>
 </li>
-<li><p>进入mysql</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br></pre></td></tr></table></figure>
-<p>随后输入密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 8</span><br><span class="line">Server version: 8.0.11 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
-</li>
+<li>Risk Analysis<ol>
+<li>定性分析：probability-impact矩阵，impact分析表</li>
+<li>定量分析：决策树、蒙特卡洛分析</li>
 </ol>
-<ul>
-<li><p>忘记密码了咋整，发现了一个很神奇的东西</p>
-<p>输入新的密码，再在终端上尝试一下你的新密码，你就会惊喜的发现it works！</p>
 </li>
-</ul>
-<p><img src="assets/mysql修改初始密码.png" alt="mysql修改初始密码"></p>
-<h2 id="MySQL使用-1"><a href="#MySQL使用-1" class="headerlink" title="MySQL使用"></a>MySQL使用</h2><p>ubuntu</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">service mysql restart</span><br><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
+<li>response<ol>
+<li>面对的态度：积极、消极</li>
+<li>strategy</li>
+</ol>
+</li>
+<li>WBS（使用工具：甘特图、ones.ai</li>
+</ol>
+<p>建议：</p>
+<p>schedule中包含工作的分配和资源的分配</p>
+<p>给这个分值的原因</p>
+<p>WBS分解的依据</p>
 
           
         
@@ -1077,7 +655,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/Guide_book/Ns3forUbuntu/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/04/14/SLAM/CNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1096,7 +674,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/05/Guide_book/Ns3forUbuntu/" itemprop="url">Ns3ForUbuntu</a></h1>
+                <a class="post-title-link" href="/2019/04/14/SLAM/CNN/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -1108,8 +686,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T17:01:02+08:00">
-                2018-12-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T16:47:10+08:00">
+                2019-04-14
               </time>
             
 
@@ -1127,8 +705,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/05/Guide_book/Ns3forUbuntu/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/Guide_book/Ns3forUbuntu/" itemprop="commentCount"></span>
+                <a href="/2019/04/14/SLAM/CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/14/SLAM/CNN/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1158,346 +736,22 @@
       
         
           
-            <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><h2 id="Q1-g-internal-compiler-error-Killed-program-cc1plus"><a href="#Q1-g-internal-compiler-error-Killed-program-cc1plus" class="headerlink" title="Q1:  g++: internal compiler error: Killed (program cc1plus)"></a>Q1:  g++: internal compiler error: Killed (program cc1plus)</h2><p><a href="https://www.jianshu.com/p/7aa7f3955233" target="_blank" rel="noopener">安装教程</a></p>
-<p>=====================================================================================</p>
-<p>环境：ubuntu 16.04</p>
-<p>安装： ns-3.28</p>
-<p>=======================================================================================</p>
-<p>Please submit a full bug report,</p>
-<p>查了很多资料，最后发现主要原因是内存不足, 临时使用交换分区来解决吧</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=/dev/zero of=/swapfile bs=64M count=16</span><br><span class="line"><span class="meta">#</span><span class="bash">count的大小就是增加的swap空间的大小，64M是块大小，所以空间大小是bs*count=1024MB</span></span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line"><span class="meta">#</span><span class="bash">把刚才空间格式化成swap格式</span></span><br><span class="line">sudo swapon /swapfile</span><br><span class="line"><span class="meta">#</span><span class="bash">使用刚才创建的swap空间</span></span><br></pre></td></tr></table></figure>
-<p>After compiling, you may wish to</p>
-<p>Code:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff /swapfile</span><br><span class="line">sudo rm /swapfile</span><br></pre></td></tr></table></figure>
-<p>开了个临时交换分区以后快了好多【引起舒适】</p>
-<h2 id="Q2-install-netanim"><a href="#Q2-install-netanim" class="headerlink" title="Q2: install netanim"></a>Q2: install netanim</h2><h3 id="Step1：安装必要的插件"><a href="#Step1：安装必要的插件" class="headerlink" title="Step1：安装必要的插件"></a>Step1：安装必要的插件</h3><p>先简单介绍下synaptic：</p>
-<p>新立得（Synaptic）是 debian 及其衍生版本如Ubuntu Linux操作系统的包管理工具apt的图形化前端。<br>它结合了图形界面的简单操作和 apt-get 命令行工具的强大功能。您可以使用新立得安装、删除、配置、升级软件包，对软件包列表进行浏览、排序、搜索以及管理软件仓库或者升级整个系统。<br>简单来说就是apt-get的图形化界面，也可以用apt-get代替，看个人爱好<br>安装很简单</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install synaptic</span></span><br></pre></td></tr></table></figure>
-<p>启动也很简单</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo synaptic</span></span><br></pre></td></tr></table></figure>
-<p>如果已经安装好了，请忽略上面讲述</p>
-<p>启动也很简单<br>sudo synaptic</p>
-<p>如果已经安装好了，请忽略上面讲述</p>
-<p>先用synaptic安装三个插件：</p>
-<p><code>qt4-qmake</code>：安装工具<br><code>libqt4-dev</code>：绘图所需<br><code>libxml2-dev</code>：netanim需要读取程序生成的xml文件，离线展示动画<br>搜索到对应的插件之后如果没有安装，就右键-&gt;mark for installation -&gt;Apply</p>
-<h3 id="Step2：安装"><a href="#Step2：安装" class="headerlink" title="Step2：安装"></a>Step2：安装</h3><p>进入ns3的文件夹，执行命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ns-allinone-3.xx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> netanim-3.xxx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make clean</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> qmake NetAnim.pro</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make</span></span><br></pre></td></tr></table></figure>
-<p>安装完毕</p>
-<h3 id="Step3：启动"><a href="#Step3：启动" class="headerlink" title="Step3：启动"></a>Step3：启动</h3><p>在当前文件夹下运行下面命令，启动软件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./NetAnim</span></span><br></pre></td></tr></table></figure>
-<p>出现界面 </p>
-<h3 id="Step4：运行"><a href="#Step4：运行" class="headerlink" title="Step4：运行"></a>Step4：运行</h3><p>在NS3提供的示例first.py中，并没有生成NetAnim所需要的xml文件，我们尝试用NetAnim来展示first.cc的仿真结果。</p>
-<p>首先在first.cc里面，加上头文件</p>
-<p><code>include &quot;ns3/netanim-module.h&quot;</code></p>
-<p>run前面加上三句代码</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">AnimationInterface <span class="title">anim</span><span class="params">(<span class="string">"first.xml"</span>)</span></span>;</span><br><span class="line">anim.SetConstantPosition(nodes.Get(<span class="number">0</span>), <span class="number">1.0</span>, <span class="number">2.0</span>);</span><br><span class="line">anim.SetConstantPosition(nodes.Get(<span class="number">1</span>), <span class="number">2.0</span>, <span class="number">3.0</span>);</span><br><span class="line"></span><br><span class="line">Simulator::Run();</span><br><span class="line">Simulator::Destroy();</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>保存后退出</p>
-<p>第二三行是描绘两个节点的坐标，也可以不要这两行</p>
-<p>在ns3文件夹下重新编译程序<code>./waf --run scracth/first</code><br>在netanim文件夹下重新启动<code>./NetAnim</code></p>
-<p>Open-&gt;first.xml-&gt;Play</p>
-<p>在2秒附近就可以看到动画演示。//生成的xml文件再ns3.xx文件夹下 </p>
-<h2 id="Q3-在NS3下如何用Python脚本，以及PyViz可视化"><a href="#Q3-在NS3下如何用Python脚本，以及PyViz可视化" class="headerlink" title="Q3: 在NS3下如何用Python脚本，以及PyViz可视化"></a>Q3: 在NS3下如何用Python脚本，以及PyViz可视化</h2><h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1:"></a>Method 1:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./waf shell</span><br><span class="line">python examples/tutorial/first.py</span><br></pre></td></tr></table></figure>
-<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method 2:"></a>Method 2:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --pyrun examples/tutorial/first.py</span><br></pre></td></tr></table></figure>
-<p>接下来是下载 <strong>PyViz</strong></p>
-<p>使用以下命令来安装：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev python-pygraphviz python-kiwi python-pygoocanvas \</span><br><span class="line">                     python-gnome2 python-gnomedesktop python-rsvg</span><br></pre></td></tr></table></figure>
-<p>安装完后运行一个简单的例子：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --pyrun src/contrib/flow-monitor/examples/wifi-olsr-flowmon.py --vis</span><br></pre></td></tr></table></figure>
-<p>然后你就会看到一个由9个节点组成的网络拓扑：</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/Guide_book/Mac终端_vim的简单使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/Guide_book/Mac终端_vim的简单使用/" itemprop="url">Mac_vim</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T11:26:30+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/Guide_book/Mac终端_vim的简单使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/Guide_book/Mac终端_vim的简单使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Mac终端-vim的简单使用"><a href="#Mac终端-vim的简单使用" class="headerlink" title="Mac终端 vim的简单使用"></a>Mac终端 vim的简单使用</h1><p><a href="https://www.cnblogs.com/fanxiaocong/p/7070130.html" target="_blank" rel="noopener">mac终端vim使用</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/Guide_book/StarUML 3.0.2破解方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/Guide_book/StarUML 3.0.2破解方法/" itemprop="url">StarUML破解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T11:05:19+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/Guide_book/StarUML 3.0.2破解方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/Guide_book/StarUML 3.0.2破解方法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Staruml-3-0-2破解方法（for-Mac"><a href="#Staruml-3-0-2破解方法（for-Mac" class="headerlink" title="Staruml 3.0.2破解方法（for Mac"></a>Staruml 3.0.2破解方法（for Mac</h1><ol>
-<li><p>安装homebrew，请移步另一教程</p>
-</li>
-<li><p>安装npm</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ brew install node</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装asar</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ npm install -g asar</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入staruml的包目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ cd /Applications/StarUML.app/Contents/Resources/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解压app.asar</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ asar extract app.asar app</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入验证license的文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim app/src/engine/license-manager.js</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改源代码</p>
+            <h1 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h1><p><img src="assets/20160107230058907.png" alt="20160107230058907"></p>
+<h2 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h2><p>原图像经过卷积模版之后得到的？</p>
+<h2 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h2><p>这里再展开叙述池化层的具体作用。</p>
 <ol>
-<li><p>写到这里的时候使用到了vim，先简单介绍一下</p>
+<li><p>特征不变性，也就是我们在图像处理中经常提到的特征的尺度不变性，池化操作就是图像的resize，平时一张狗的图像被缩小了一倍我们还能认出这是一张狗的照片，这说明这张图像中仍保留着狗最重要的特征，我们一看就能判断图像中画的是一只狗，图像压缩时去掉的信息只是一些无关紧要的信息，而留下的信息则是具有尺度不变性的特征，是最能表达图像的特征。</p>
 </li>
-<li><p>进入时先按 i 键</p>
+<li><p>特征降维，我们知道一幅图像含有的信息是很大的，特征也很多，但是有些信息对于我们做图像任务时没有太多用途或者有重复，我们可以把这类冗余信息去除，把最重要的特征抽取出来，这也是池化操作的一大作用。</p>
 </li>
-<li><p>随后找到 <code>checkLicenseValidity()</code> 更改</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">xcheckLicenseValidity () &#123;    </span><br><span class="line">    <span class="keyword">this</span>.validate().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;     </span><br><span class="line">        setStatus(<span class="keyword">this</span>, <span class="literal">true</span>)   </span><br><span class="line">    &#125;, () =&gt; &#123;     </span><br><span class="line">        <span class="comment">// 原来的代码，如果失败就会将状态设置成false    </span></span><br><span class="line">        <span class="comment">// setStatus(this, false)      </span></span><br><span class="line">        <span class="comment">// UnregisteredDialog.showDialog()     </span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//修改后的代码    </span></span><br><span class="line">        setStatus(<span class="keyword">this</span>, <span class="literal">true</span>)  </span><br><span class="line">    &#125;) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输入 <code>:wq</code> 退回到原先的终端界面</p>
+<li><p>在一定程度上防止过拟合，更方便优化。</p>
 </li>
 </ol>
-</li>
-<li><p>重新打包替换原来的app.asar</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ asar pack app app.asar</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<p>激活函数</p>
+<p>全连接层</p>
+<p><strong>卷积神经网络之 fine-tuning</strong><br>何谓fine-tuning？<br>fine-tuning就是使用已用于其他目标、预训练好模型的权重或者部分权重，作为初始值开始训练。</p>
+<p>那为什么我们不用随机选取选几个数作为权重初始值？原因很简单，第一，自己从头训练卷积神经网络容易出现问题；第二，fine-tuning能很快收敛到一个较理想的状态，省时又省心。</p>
+<p>那fine-tuning的具体做法是？<br>　　•    复用相同层的权重，新定义层取随机权重初始值<br>　　•    调大新定义层的的学习率，调小复用层学习率</p>
 
           
         
@@ -1546,7 +800,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/12/Guide_book/opencv配置/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/04/14/SLAM/Faster R-CNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1565,7 +819,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/12/Guide_book/opencv配置/" itemprop="url">OpenGL配置</a></h1>
+                <a class="post-title-link" href="/2019/04/14/SLAM/Faster R-CNN/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -1577,8 +831,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T10:44:21+08:00">
-                2018-10-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T12:45:44+08:00">
+                2019-04-14
               </time>
             
 
@@ -1596,8 +850,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/12/Guide_book/opencv配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/12/Guide_book/opencv配置/" itemprop="commentCount"></span>
+                <a href="/2019/04/14/SLAM/Faster R-CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/14/SLAM/Faster R-CNN/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1627,197 +881,1403 @@
       
         
           
-            <h1 id="openGL配置"><a href="#openGL配置" class="headerlink" title="openGL配置"></a>openGL配置</h1><p>OpenGL的长路谁陪我走</p>
-<p><a href="https://blog.csdn.net/feixiaku/article/details/51754663" target="_blank" rel="noopener">opencv配置</a></p>
-<h2 id="在XCode中使用OpenCV"><a href="#在XCode中使用OpenCV" class="headerlink" title="在XCode中使用OpenCV"></a>在XCode中使用OpenCV</h2><ol>
-<li><p>创建一个空的command line工程。</p>
-</li>
-<li><p>在main.cpp中写代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/highgui.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="comment">// insert code here...</span></span><br><span class="line">    Mat image;</span><br><span class="line">    image = imread(<span class="string">"/Users/luomei/Desktop/peggy.jpeg"</span>);<span class="comment">// 测试图片路径</span></span><br><span class="line">    <span class="keyword">if</span> ( !image.data )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"No image data \n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    namedWindow(<span class="string">"Display Image"</span>, WINDOW_AUTOSIZE );</span><br><span class="line">    waitKey(<span class="number">100</span>);</span><br><span class="line">    cvDestroyWindow(<span class="string">"Display Image"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加lib文件：右键点击工程名，选择“Add files to..”，在文件选择对话框弹出来时输入“/”，在弹出的路径框中输入：<code>/usr/local/lib</code>，全选该文件夹下的全部dylib文件，添加至工程。</p>
-</li>
-<li>添加lib文件查找支持: 点击工程名文件，进入“Build Settings”选项卡，在“Library Search Paths”栏中输入“<code>/usr/local/lib</code>”</li>
-<li>添加头文件：点击工程名文件，进入“Build Settings”选项卡，在“Header Search Paths”栏中输入：“<code>/usr/local/include   /usr/local/include/opencv</code>”</li>
-<li>编译运行整个工程，运行成功~~</li>
+            <p>Read time: 21 minutes</p>
+<p>Reading notes by may</p>
+<p>2019.4.13</p>
+<p>Confused:</p>
+<ol>
+<li>==ReLU==</li>
+<li>==max pooling==</li>
+<li>==softmax==</li>
+<li>==Fully-Connected layers==</li>
+<li>==convolutional layers==</li>
+<li>==Non-maximum Suppression==: specific implement?</li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/07/Guide_book/Android/Android_ErrorSummary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/Guide_book/Android/Android_ErrorSummary/" itemprop="url">Android_errors</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T10:10:27+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/07/Guide_book/Android/Android_ErrorSummary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/07/Guide_book/Android/Android_ErrorSummary/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>android</p>
-<p>=======================================================================================</p>
-<p>版本信息：</p>
-<p>Android Studio 3.1.4<br>Build #AI-173.4907809, built on July 24, 2018<br>JRE: 1.8.0_152-release-1024-b01 x86_64<br>JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o<br>Mac OS X 10.13.6</p>
-<p>=======================================================================================</p>
-<hr>
-<p>推荐使用官方文档</p>
-<p><a href="https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn" target="_blank" rel="noopener">https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn</a></p>
-<p>请链接vpn后进入</p>
-<hr>
+<p>Warming Reading Material :</p>
+<h1 id="Faster-R-CNN-Down-the-rabbit-hole-of-modern-object-detection"><a href="#Faster-R-CNN-Down-the-rabbit-hole-of-modern-object-detection" class="headerlink" title="Faster R-CNN: Down the rabbit hole of modern object detection"></a>Faster R-CNN: Down the rabbit hole of modern object detection</h1><p>Author : <a href="https://tryolabs.com/blog/authors/javier-rey/" target="_blank" rel="noopener">Javier</a> Thu, Jan 18, 2018 in <a href="https://tryolabs.com/blog/categories/machine-learning/" target="_blank" rel="noopener">MACHINE LEARNING</a></p>
 <ul>
-<li>error：Failed to download samples index, please check your connection and try again<ul>
-<li>solve：<a href="https://blog.csdn.net/qq_36556893/article/details/79278063" target="_blank" rel="noopener">https://blog.csdn.net/qq_36556893/article/details/79278063</a></li>
+<li><a href="https://tryolabs.com/blog/tags/deep-learning/" target="_blank" rel="noopener">DEEP LEARNING</a></li>
+<li><a href="https://tryolabs.com/blog/tags/object-detection/" target="_blank" rel="noopener">OBJECT DETECTION</a></li>
+<li><a href="https://tryolabs.com/blog/tags/computer-vision/" target="_blank" rel="noopener">COMPUTER VISION</a></li>
+<li><a href="https://tryolabs.com/blog/tags/luminoth/" target="_blank" rel="noopener">LUMINOTH</a></li>
+</ul>
+<p>Previously, we <a href="https://tryolabs.com/blog/2017/08/30/object-detection-an-overview-in-the-age-of-deep-learning/" target="_blank" rel="noopener">talked about object detection</a>, what it is and how it has been recently tackled using deep learning. If you haven’t read our previous blog post, we suggest you take a look at it before continuing.</p>
+<p>Last year, we decided to get into Faster R-CNN, reading the original paper, and all the referenced papers (and so on and on) until we got a clear understanding of how it works and how to implement it.</p>
+<p>We ended up implementing Faster R-CNN in <a href="http://github.com/tryolabs/luminoth" target="_blank" rel="noopener">Luminoth</a>, a computer vision toolkit based on TensorFlow which makes it easy to train, monitor and use these types of models. So far, Luminoth has raised an incredible amount of interest and we even talked about it at both <a href="https://www.youtube.com/watch?v=CAYn6A1zsrw" target="_blank" rel="noopener">ODSC Europe</a> and <a href="https://www.youtube.com/watch?v=SH8DCm_lW1Q" target="_blank" rel="noopener">ODSC West</a>.</p>
+<p>Based on all the work developing Luminoth and based on the presentations we did, we thought it would be a good idea to have a blog post with all the details and links we gathered in our research as a future reference for anyone is interested in the topic.</p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p><a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">Faster R-CNN</a> was originally published in NIPS 2015. After publication, it went through a couple of revisions which we’ll later discuss. As we mentioned in our previous blog post, Faster R-CNN is the third iteration of the R-CNN papers — which had Ross Girshick as author &amp; co-author.</p>
+<p>Everything started with “<a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="noopener">Rich feature hierarchies for accurate object detection and semantic segmentation</a>” (R-CNN) in 2014, which used an algorithm called <a href="https://koen.me/research/selectivesearch/" target="_blank" rel="noopener">Selective Search</a> to propose possible regions of interest and a standard Convolutional Neural Network (CNN) to classify and adjust them. It quickly evolved into <a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="noopener">Fast R-CNN</a>, published in early 2015, where a technique called Region of Interest Pooling allowed for sharing expensive computations and made the model much faster. Finally came <a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="noopener">Faster R-CNN</a>, where the first fully differentiable model was proposed.</p>
+<h1 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h1><p>The architecture of Faster R-CNN is complex because it has several moving parts. We’ll start with a high level overview, and then go over the details for each of the components.</p>
+<p>It all starts with an image, from which we want to obtain:</p>
+<ul>
+<li>a list of bounding boxes.</li>
+<li>a label assigned to each bounding box.</li>
+<li>a probability for each label and bounding box.</li>
+</ul>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/fasterrcnn-architecture.b9035cba.png" alt="img"><div align="center">Complete Faster R-CNN architecture</div></p>
+<p>The input images are represented as $Height×Width×Depth​$ tensors (multidimensional arrays), which are passed through a pre-trained CNN up until an intermediate layer, ending up with a convolutional feature map. We use this as a feature extractor for the next part.</p>
+<p>This technique is very commonly used in the context of ==Transfer Learning==, especially for training a classifier on a small dataset using the weights of a network trained on a bigger dataset. We’ll take a deeper look at this in the following sections.</p>
+<p>Next, we have what is called a Region Proposal Network (RPN, for short). Using the features that the CNN computed, it is used to find up to a <em>predefined number</em> of regions (bounding boxes), which may contain objects.</p>
+<p>Probably the hardest issue with using Deep Learning (DL) for object detection is generating a variable-length list of bounding boxes. When modeling deep neural networks, the last block is usually a fixed sized tensor output (except when using Recurrent Neural Networks, but that is for another post). For example, in image classification, the output is a (N,)(<em>N</em>,) shaped tensor, with N<em>N</em> being the number of classes, where each scalar in location i<em>i</em> contains the probability of that image being $label_i​$.</p>
+<p>The variable-length problem is solved in the RPN by using anchors: fixed sized reference bounding boxes which are placed uniformly throughout the original image. Instead of having to detect where objects are, we model the problem into two parts. For every anchor, we ask:</p>
+<ul>
+<li>Does this anchor contain a relevant object?</li>
+<li>How would we adjust this anchor to better fit the relevant object?</li>
+</ul>
+<p>This is probably getting confusing, but fear not, we’ll dive into this below.</p>
+<p>After having a list of possible relevant objects and their locations in the original image, it becomes a more straightforward problem to solve. Using the features extracted by the CNN and the bounding boxes with relevant objects, we apply Region of Interest (RoI) Pooling and extract those features which would correspond to the relevant objects into a new tensor.</p>
+<p>Finally, comes the R-CNN module, which uses that information to:</p>
+<ul>
+<li>Classify the content in the bounding box (or discard it, using “background” as a label).</li>
+<li>Adjust the bounding box coordinates (so it better fits the object).</li>
+</ul>
+<p>Obviously, some major bits of information are missing, but that’s basically the general idea of how Faster R-CNN works. Next, we’ll go over the details on both the architecture and loss/training for each of the components.</p>
+<h1 id="Base-network"><a href="#Base-network" class="headerlink" title="Base network"></a>Base network</h1><p>As we mentioned earlier, the first step is using a CNN pretrained for the task of classification (e.g. using <a href="http://www.image-net.org/" target="_blank" rel="noopener">ImageNet</a>) and using the output of an intermediate layer. This may sound really simple for people with a deep learning background, but it’s important to understand how and why it works, as well as visualize what the intermediate layer output looks like.</p>
+<p>There is no real consensus on which network architecture is best. The original Faster R-CNN used <a href="https://arxiv.org/abs/1311.2901" target="_blank" rel="noopener">ZF</a> and <a href="https://arxiv.org/abs/1409.1556" target="_blank" rel="noopener">VGG</a> pretrained on ImageNet but since then there have been lots of different networks with a varying number of weights. For example, <a href="https://arxiv.org/abs/1704.04861" target="_blank" rel="noopener">MobileNet</a>, a smaller and efficient network architecture optimized for speed, has approximately 3.3M parameters, while ResNet-152 (yes, 152 layers), once the state of the art in the ImageNet classification competition, has around 60M. Most recently, new architectures like <a href="https://arxiv.org/abs/1608.06993" target="_blank" rel="noopener">DenseNet</a> are both improving results while lowering the number of parameters.</p>
+<h2 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h2><p>Before we talk about which is better or worse, let’s try to understand how it all works using the standard VGG-16 as an example.</p>
+<p>==ReLU,max pooling, softmax==</p>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/vgg.b6e48b99.png" alt="img">VGG architecture</p>
+<p>VGG, whose name comes from the team which used it in the ImageNet ILSVRC 2014 competition, was published in the paper “Very Deep Convolutional Networks for Large-Scale Image Recognition” by <a href="http://www.robots.ox.ac.uk/~karen/" target="_blank" rel="noopener">Karen Simonyan</a> and <a href="http://www.robots.ox.ac.uk/~az/" target="_blank" rel="noopener">Andrew Zisserman</a>. By today’s standards it would not be considered very deep, but at the time it more than doubled the number of layers commonly used and kickstarted the “deeper → more capacity → better” wave (when training is possible).</p>
+<p>When using VGG for classification, the input is a 224×224×3224×224×3 tensor (that means a 224x224 pixel RGB image). This has to remain fixed for classification because the final block of the network uses fully-connected (FC) layers (instead of convolutional), which require a fixed length input. This is usually done by flattening the output of the last convolutional layer, getting a rank 1 tensor, before using the FC layers.</p>
+<p>Since we are going to use the output of an intermediate convolutional layer, the size of the input is not our problem. At least, it is not the problem of this module since only convolutional layers are used. Let’s get a bit more into low-level details and define which convolutional layer we are going to use. The paper does not specify which layer to use; but in the official implementation you can see they use the output of <code>conv5/conv5_1</code> layer.</p>
+<p>Each convolutional layer creates abstractions based on the previous information. The first layers usually learn edges, the second finds patterns in edges in order to activate for more complex shapes and so forth. Eventually we end up with a convolutional feature map which has spatial dimensions much smaller than the original image, but greater depth. ==The width and height of the feature map decrease because of the pooling applied between convolutional layers and the depth increases based on the number of filters the convolutional layer learns.==</p>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/image-to-feature-map.89f5aecb.png" alt="img">Image to convolutional feature map</p>
+<p>In its depth, the convolutional feature map has encoded all the information for the image while maintaining the location of the “things” it has encoded relative to the original image. For example, if there was a red square on the top left of the image and the convolutional layers activate for it, then the information for that red square would still be on the top left of the convolutional feature map.</p>
+<h2 id="VGG-vs-ResNet"><a href="#VGG-vs-ResNet" class="headerlink" title="VGG vs ResNet"></a>VGG vs ResNet</h2><p>Nowadays, ResNet architectures have mostly replaced VGG as a base network for extracting features. Three of the co-authors of Faster R-CNN (Kaiming He, Shaoqing Ren and Jian Sun) were also co-authors of “<a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="noopener">Deep Residual Learning for Image Recognition</a>”, the original paper describing ResNets.</p>
+<p>The obvious advantage of ResNet over VGG is that it is bigger, hence it has more capacity to actually learn what is needed. This is true for the classification task and should be equally true in the case of object detection.</p>
+<p>Also, ResNet makes it easy to train deep models with the use of <em>residual connections</em>and <em>batch normalization</em>, which was not invented when VGG was first released.</p>
+<h1 id="Anchors"><a href="#Anchors" class="headerlink" title="Anchors"></a>Anchors</h1><p>Now that we are working with a processed image, we need to find proposals, ie. regions of interest for classification. We previously mentioned that anchors are a way to solve the variable length problem, but we skipped most of the explanation.</p>
+<p>Our objective is to find bounding boxes in the image. These have rectangular shape and can come in different sizes and aspect ratios. Imagine we were trying to solve the problem knowing beforehand that there are two objects on the image. The first idea that comes to mind is to train a network that returns 8 values: two xmin,ymin,xmax,ymax<em>x<strong>m</strong>i**n</em>,<em>y<strong>m</strong>i**n</em>,<em>x<strong>m</strong>a**x</em>,<em>y<strong>m</strong>a**x</em> tuples defining a bounding box for each object. This approach has some fundamental problems. For example, images may have different sizes and aspect ratios, having a good model trained to predict raw coordinates can turn out to be very complicated (if not impossible). Another problem is invalid predictions: when predicting xmin<em>x<strong>m</strong>i**n</em> and xmax<em>x<strong>m</strong>a**x</em> we have to somehow enforce that xmin&lt;xmax<em>x<strong>m</strong>i**n</em>&lt;<em>x<strong>m</strong>a**x</em>.</p>
+<p>It turns out that there is a simpler approach to predicting bounding boxes by learning to predict offsets from reference boxes. We take a reference box xcenter,ycenter,width,height<em>x<strong>c</strong>e<strong>n</strong>t<strong>e</strong>r</em>,<em>y<strong>c</strong>e<strong>n</strong>t<strong>e</strong>r</em>,<em>w<strong>i</strong>d<strong>t</strong>h</em>,<em>h<strong>e</strong>i<strong>g</strong>h**t</em> and learn to predict Δxcenter,Δycenter,Δwidth,ΔheightΔ<em>x<strong>c</strong>e<strong>n</strong>t<strong>e</strong>r</em>,Δ<em>y<strong>c</strong>e<strong>n</strong>t<strong>e</strong>r</em>,Δ<em>w<strong>i</strong>d<strong>t</strong>h</em>,Δ<em>h<strong>e</strong>i<strong>g</strong>h**t</em>, which are usually small values that tweak the reference box to better fit what we want.</p>
+<p><strong>Anchors</strong> are fixed bounding boxes that are placed throughout the image with different sizes and ratios that are going to be used for reference when first predicting object locations.</p>
+<p>Since we are working with a convolutional feature map of size convwidth×convheight×convdepth<em>c<strong>o</strong>n<strong>v</strong>w<strong>i</strong>d<strong>t</strong>h</em>×<em>c<strong>o</strong>n<strong>v</strong>h<strong>e</strong>i<strong>g</strong>h**t</em>×<em>c<strong>o</strong>n<strong>v</strong>d<strong>e</strong>p<strong>t</strong>h</em>, we create a set of anchors for each of the points in convwidth×convheight<em>c<strong>o</strong>n<strong>v</strong>w<strong>i</strong>d<strong>t</strong>h</em>×<em>c<strong>o</strong>n<strong>v</strong>h<strong>e</strong>i<strong>g</strong>h**t</em>. It’s important to understand that even though anchors are defined based on the convolutional feature map, the final anchors reference the original image.</p>
+<p>Since we only have convolutional and pooling layers, the dimensions of the feature map will be proportional to those of the original image. Mathematically, if the image was w×h<em>w</em>×<em>h</em>, the feature map will end up w/r×h/r<em>w</em>/<em>r</em>×<em>h</em>/<em>r</em> where r<em>r</em> is called <em>subsampling ratio</em>. If we define one anchor per spatial position of the feature map, the final image will end up with a bunch of anchors separated by r<em>r</em> pixels. In the case of VGG, r=16<em>r</em>=16.</p>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/anchors-centers.141181d6.png" alt="img">Anchor centers throught the original image</p>
+<p>In order to choose the set of anchors we usually define a set of sizes (e.g. 64px, 128px, 256px) and a set of ratios between width and height of boxes (e.g. 0.5, 1, 1.5) and use all the possible combinations of sizes and ratios.</p>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/anchors-progress.119e1e92.png" alt="img">Left: Anchors, Center: Anchor for a single point, Right: All anchors</p>
+<h1 id="Region-Proposal-Network"><a href="#Region-Proposal-Network" class="headerlink" title="Region Proposal Network"></a>Region Proposal Network</h1><p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/rpn-architecture.99b6c089.png" alt="img">The RPN takes the convolutional feature map and generates proposals over the image</p>
+<p>As we mentioned before, the RPN takes all the reference boxes (anchors) and outputs a set of good proposals for objects. It does this by having two different outputs for each of the anchors.</p>
+<p>The first one is the probability that an anchor is an object. An “objectness score”, if you will. Note that the RPN doesn’t care what <em>class</em> of object it is, only that it does in fact look like an object (and not background). We are going to use this objectness score to filter out the bad predictions for the second stage. The second output is the bounding box regression for adjusting the anchors to better fit the object it’s predicting.</p>
+<p>The RPN is implemented efficiently in a fully convolutional way, using the convolutional feature map returned by the base network as an input. First, we use a convolutional layer with 512 channels and 3x3 kernel size and then we have two parallel convolutional layers using a 1x11<em>x</em>1 kernel, whose number of channels depends on the number of anchors per point.</p>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/rpn-conv-layers.63c5bf86.png" alt="img">Convolutional implementation of an RPN architecture, where k is the number of anchors.</p>
+<p>For the classification layer, we output two predictions per anchor: the score of it being background (not an object) and the score of it being foreground (an actual object).</p>
+<p>For the regression, or bounding box adjustment layer, we output 4 predictions: the deltas $Δx_{center},Δy_{center},Δwidth,Δheight$ which we will apply to the anchors to get the final proposals.</p>
+<p>Using the final proposal coordinates and their “objectness” score we then have a good set of proposals for objects.</p>
+<h2 id="Training-target-and-loss-functions"><a href="#Training-target-and-loss-functions" class="headerlink" title="Training, target and loss functions"></a>Training, target and loss functions</h2><p>The RPN does two different type of predictions: ==the binary classification and the bounding box regression adjustment.==</p>
+<p>For training, we take all the anchors and put them into two different categories. Those that overlap a ground-truth object with an <a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" target="_blank" rel="noopener">Intersection over Union</a> (IoU) bigger than 0.5 are considered “foreground” and those that don’t overlap any ground truth object or have less than 0.1 IoU with ground-truth objects are considered “background”.</p>
+<p>Then, we randomly sample those anchors to form a mini batch of size 256 — trying to maintain a balanced ratio between foreground and background anchors.</p>
+<p>The RPN uses all the anchors selected for the mini batch to calculate the classification loss using <a href="https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss" target="_blank" rel="noopener">binary cross entropy</a>. Then, it uses only those minibatch anchors marked as foreground to calculate the regression loss. For calculating the targets for the regression, we use the foreground anchor and the closest ground truth object and calculate the correct ΔΔ needed to transform the anchor into the object.</p>
+<p>Instead of using a simple L1 or L2 loss for the regression error, the paper suggests using Smooth L1 loss. Smooth L1 is basically L1, but when the L1 error is small enough, defined by a certain σ<em>σ</em>, the error is considered almost correct and the loss diminishes at a faster rate.</p>
+<p>Using dynamic batches can be challenging for a number of reasons. Even though we try to maintain a balanced ratio between anchors that are considered background and those that are considered foreground, that is not always possible. Depending on the ground truth objects in the image and the size and ratios of the anchors, it is possible to end up with zero foreground anchors. In those cases, we turn to using the anchors with the biggest IoU to the ground truth boxes. This is far from ideal, but practical in the sense that we always have foreground samples and targets to learn from.</p>
+<h2 id="Post-processing"><a href="#Post-processing" class="headerlink" title="Post processing"></a>Post processing</h2><p><strong>Non-maximum suppression</strong> Since anchors usually overlap, proposals end up also overlapping over the same object. To solve the issue of duplicate proposals we use a simple algorithmic approach called Non-Maximum Suppression (NMS). NMS takes the list of proposals sorted by score and iterateqs over the sorted list, discarding those proposals that have an IoU larger than some predefined threshold with a proposal that has a higher score.</p>
+<p>While this looks simple, it is very important to be cautious with the IoU threshold. Too low and you may end up missing proposals for objects; too high and you could end up with too many proposals for the same object. A value commonly used is 0.6.</p>
+<p><strong>Proposal selection</strong> After applying NMS, we keep the top N proposals sorted by score. In the paper N=2000<em>N</em>=2000 is used, but it is possible to lower that number to as little as 50 and still get quite good results.</p>
+<h2 id="Standalone-application"><a href="#Standalone-application" class="headerlink" title="Standalone application"></a>Standalone application</h2><p>The RPN can be used by itself without needing the second stage model. In problems where there is only a single class of objects, the objectness probability can be used as the final class probability. This is because for this case, “foreground” = “single class” and “background” = “<strong>not</strong> single class”.</p>
+<p>Some examples of machine learning problems that can benefit from a standalone usage of the RPN are the popular (but still challenging) face detection and text detection.</p>
+<p>One of the advantages of using only the RPN is the gain in speed both in training and prediction. Since the RPN is a very simple network which only uses convolutional layers, the prediction time can be faster than using the classification base network.</p>
+<h1 id="Region-of-Interest-Pooling"><a href="#Region-of-Interest-Pooling" class="headerlink" title="Region of Interest Pooling"></a>Region of Interest Pooling</h1><p>After the RPN step, we have a bunch of object proposals with no class assigned to them. Our next problem to solve is how to take these bounding boxes and classify them into our desired categories.</p>
+<p>The simplest approach would be to take each proposal, crop it, and then pass it through the pre-trained base network. Then, we can use the extracted features as input for a vanilla image classifier. The main problem is that running the computations for all the 2000 proposals is really inefficient and slow.</p>
+<p>Faster R-CNN tries to solve, or at least mitigate, this problem by reusing the existing convolutional feature map. This is done by extracting fixed-sized feature maps for each proposal using region of interest pooling. Fixed size feature maps are needed for the R-CNN in order to classify them into a fixed number of classes.</p>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/roi-architecture.7eaae6c2.png" alt="img">Region of Interest Pooling</p>
+<p>A simpler method, which is widely used by object detection implementations, including Luminoth’s Faster R-CNN, is to crop the convolutional feature map using each proposal and then resize each crop to a fixed sized 14×14×convdepth14×14×<em>c<strong>o</strong>n<strong>v</strong>d<strong>e</strong>p<strong>t</strong>h</em>using interpolation (usually bilinear). After cropping, max pooling with a 2x2 kernel is used to get a final 7×7×convdepth7×7×<em>c<strong>o</strong>n<strong>v</strong>d<strong>e</strong>p<strong>t</strong>h</em> feature map for each proposal.</p>
+<p>The reason for choosing those exact shapes is related to how it is used next by the next block (R-CNN). It is important to understand that those are customizable depending on the second stage use.</p>
+<h1 id="Region-based-Convolutional-Neural-Network"><a href="#Region-based-Convolutional-Neural-Network" class="headerlink" title="Region-based Convolutional Neural Network"></a>Region-based Convolutional Neural Network</h1><p>Region-based convolutional neural network (R-CNN) is the final step in Faster R-CNN’s pipeline. After getting a convolutional feature map from the image, using it to get object proposals with the RPN and finally extracting features for each of those proposals (via RoI Pooling), we finally need to use these features for classification. R-CNN tries to mimic the final stages of classification CNNs where a fully-connected layer is used to output a score for each possible object class.</p>
+<p>R-CNN has two different goals:</p>
+<ol>
+<li>Classify proposals into one of the classes, plus a background class (for removing bad proposals).</li>
+<li>Better adjust the bounding box for the proposal according to the predicted class.</li>
+</ol>
+<p>In the original Faster R-CNN paper, the R-CNN takes the feature map for each proposal, flattens it and uses two fully-connected layers of size 4096 with ReLU activation.</p>
+<p>Then, it uses two different fully-connected layers for each of the different objects:</p>
+<ul>
+<li>A fully-connected layer with N+1<em>N</em>+1 units where N<em>N</em> is the total number of classes and that extra one is for the background class.</li>
+<li>A fully-connected layer with 4N4<em>N</em> units. We want to have a regression prediction, thus we need Δcenterx,Δcentery,Δwidth,ΔheightΔ<em>c<strong>e</strong>n<strong>t</strong>e<strong>r</strong>x</em>,Δ<em>c<strong>e</strong>n<strong>t</strong>e<strong>r</strong>y</em>,Δ<em>w<strong>i</strong>d<strong>t</strong>h</em>,Δ<em>h<strong>e</strong>i<strong>g</strong>h**t</em> for each of the N possible classes.</li>
+</ul>
+<p><img src="https://tryolabs.com/images/blog/post-images/2018-01-18-faster-rcnn/rcnn-architecture.6732b9bd.png" alt="img">R-CNN architecture</p>
+<h2 id="Training-and-targets"><a href="#Training-and-targets" class="headerlink" title="Training and targets"></a>Training and targets</h2><p>Targets for R-CNN are calculated in almost the same way as the RPN targets, but taking into account the different possible classes. We take the proposals and the ground-truth boxes, and calculate the IoU between them.</p>
+<p>Those proposals that have a IoU greater than 0.5 with any ground truth box get assigned to that ground truth. Those that have between 0.1 and 0.5 get labeled as background. Contrary to what we did while assembling targets for the RPN, we ignore proposals without any intersection. This is because at this stage we are assuming that we have good proposals and we are more interested in solving the harder cases. Of course, all these values are hyperparameters that can be tuned to better fit the type of objects that you are trying to find.</p>
+<p>The targets for the bounding box regression are calculated as the offset between the proposal and its corresponding ground-truth box, only for those proposals that have been assigned a class based on the IoU threshold.</p>
+<p>We randomly sample a balanced mini batch of size 64 in which we have up to 25% foreground proposals (with class) and 75% background.</p>
+<p>Following the same path as we did for the RPNs losses, the classification loss is now a multiclass cross entropy loss, using all the selected proposals and the Smooth L1 loss for the 25% proposals that are matched to a ground truth box. We have to be careful when getting that loss since the output of the R-CNN fully connected network for bounding box regressions has one prediction for each of the classes. When calculating the loss, we only have to take into account the one for the correct class.</p>
+<h2 id="Post-processing-1"><a href="#Post-processing-1" class="headerlink" title="Post processing"></a>Post processing</h2><p>Similar to the RPN, we end up with a bunch of objects with classes assigned which need further processing before returning them.</p>
+<p>In order to apply the bounding box adjustments we have to take into account which is the class with the highest probability for that proposal. We also have to ignore those proposals that have the background class as the one with the highest probability.</p>
+<p>After getting the final objects and ignoring those predicted as background, we apply class-based NMS. This is done by grouping the objects by class, sorting them by probability and then applying NMS to each independent group before joining them again.</p>
+<p>For our final list of objects, we also can set a probability threshold and a limit on the number of objects for each class.</p>
+<h1 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h1><p>In the original paper, Faster R-CNN was trained using a multi-step approach, training parts independently and merging the trained weights before a final full training approach. Since then, it has been found that doing end-to-end, joint training leads to better results.</p>
+<p>After putting the complete model together we end up with 4 different losses, two for the RPN and two for R-CNN. We have the trainable layers in RPN and R-CNN, and we also have the base network which we can train (fine-tune) or not.</p>
+<p>The decision to train the base network depends on the nature of the objects we want to learn and the computing power available. If we want to detect objects that are similar to those that were on the original dataset on which the base network was trained on, then there is no real need except for trying to squeeze all the possible performance we can get. On the other hand, training the base network can be expensive both in time and on the necessary hardware, to be able to fit the complete gradients.</p>
+<p>The four different losses are combined using a weighted sum. This is because we may want to give classification losses more weight relative to regression ones, or maybe give R-CNN losses more power over the RPNs’.</p>
+<p>Apart from the regular losses, we also have the regularization losses which we skipped for the sake of brevity but can be defined both in RPN and in R-CNN. We use L2 regularization for some of the layers and depending on which base network being used and if it’s trained, it may also have regularization.</p>
+<p>We train using Stochastic Gradient Descent with momentum, setting the momentum value to 0.9. You can easily train Faster R-CNN with any other optimizer without bumping into any big problem.</p>
+<p>The learning rate starts at 0.0010.001 and then decreases to 0.00010.0001 after 50K steps. This is one of the hyperparameters that usually matters the most. When training with Luminoth, we usually start with the defaults and tune it from then on.</p>
+<h1 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h1><p>The evaluation is done using the standard Mean Average Precision (mAP) at some specific IoU threshold (e.g. <a href="mailto:mAP@0.5" target="_blank" rel="noopener">mAP@0.5</a>). mAP is a metric that comes from information retrieval, and is commonly used for calculating the error in ranking problems and for evaluating object detection problems.</p>
+<p>We won’t go into details since these type of metrics deserve a blogpost of their own, but the important takeway is that mAP penalizes you when you miss a box that you should have detected, as well as when you detect something that does not exist or detect the same thing multiple times.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>By now, you should have a clear idea of how Faster R-CNN works, why some decisions have been made and some idea on how to be able to tweak it for your specific case. If you want to get a deeper understanding on how it works you should check <a href="https://github.com/tryolabs/luminoth/tree/master/luminoth/models/fasterrcnn" target="_blank" rel="noopener">Luminoth’s implementation</a>.</p>
+<p>Faster R-CNN is one of the models that proved that it is possible to solve complex computer vision problems with the same principles that showed such amazing results at the start of this new deep learning revolution.</p>
+<p>New models are currently being built, not only for object detection, but for semantic segmentation, 3D-object detection, and more, that are based on this original model. Some borrow the RPN, some borrow the R-CNN, others just build on top of both. This is why it is important to fully understand what is under the hood so we are better prepared to tackle future problems.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p><a href="https://tryolabs.com/blog/2018/01/18/faster-r-cnn-down-the-rabbit-hole-of-modern-object-detection/" target="_blank" rel="noopener">Tryolabs Faster R-CNN</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/04/14/SLAM/basicConcepts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/14/SLAM/basicConcepts/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T11:18:22+08:00">
+                2019-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/14/SLAM/basicConcepts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/14/SLAM/basicConcepts/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h1><h2 id="1-Image-Classification"><a href="#1-Image-Classification" class="headerlink" title="1. Image Classification"></a>1. Image Classification</h2><p>It consists of classifying an image into one of many different categories.</p>
+<p>Known Dateset:     ImageNet</p>
+<h2 id="2-Localization"><a href="#2-Localization" class="headerlink" title="2. Localization"></a>2. Localization</h2><p>Similar to classification, localization finds the location of a single object inside the image.</p>
+<p>Known Dateset:</p>
+<p>Application:    smart scropping </p>
+<h2 id="3-Instance-segmentation"><a href="#3-Instance-segmentation" class="headerlink" title="3. Instance segmentation"></a>3. Instance segmentation</h2><h2 id="4-Object-detection"><a href="#4-Object-detection" class="headerlink" title="4. Object detection"></a>4. Object detection</h2><p>Object detection is the problem of finding and classifying a variable number of objects on an image.</p>
+<h3 id="4-1-Practical-uses"><a href="#4-1-Practical-uses" class="headerlink" title="4.1 Practical uses"></a>4.1 Practical uses</h3><ol>
+<li>Face detection</li>
+<li>Counting</li>
+<li>Visual Search Engine</li>
+<li>Aerial image analysis</li>
+</ol>
+<h3 id="4-2-Problems-and-challenges"><a href="#4-2-Problems-and-challenges" class="headerlink" title="4.2 Problems and challenges"></a>4.2 Problems and challenges</h3><ol>
+<li>Variable number of objects</li>
+<li>sizing</li>
+<li>modeling</li>
+</ol>
+<h3 id="4-3-Classical-approach"><a href="#4-3-Classical-approach" class="headerlink" title="4.3 Classical approach"></a>4.3 Classical approach</h3><h3 id="4-4-Deep-learning-approach"><a href="#4-4-Deep-learning-approach" class="headerlink" title="4.4 Deep learning approach"></a>4.4 Deep learning approach</h3><ol>
+<li>OverFeat</li>
+<li>R-CNN</li>
+<li>Fast R-CNN</li>
+</ol>
+<h2 id="5-Datasets"><a href="#5-Datasets" class="headerlink" title="5. Datasets"></a>5. Datasets</h2><table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong># Images (trainval)</strong></th>
+<th><strong># Classes</strong></th>
+<th><strong>Last updated</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ImageNet</td>
+<td>450k</td>
+<td>200</td>
+<td>2015</td>
+</tr>
+<tr>
+<td>COCO</td>
+<td>120k</td>
+<td>80</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>Pascal VOC</td>
+<td>12k</td>
+<td>20</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>Oxford-IIIT Pet</td>
+<td>7k</td>
+<td>37</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>KITTI Vision</td>
+<td>7k</td>
+<td>3</td>
+<td>2014</td>
+</tr>
+</tbody>
+</table>
+<p>Detection:</p>
+<p>Authentication:</p>
+<p>Verifycation:</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/04/14/SLAM/Mask R-CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/14/SLAM/Mask R-CNN/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T10:50:36+08:00">
+                2019-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/14/SLAM/Mask R-CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/14/SLAM/Mask R-CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h1><h2 id="1-Framework"><a href="#1-Framework" class="headerlink" title="1. Framework"></a>1. Framework</h2><p><img src="https://img-blog.csdn.net/20180306103049920" alt="img"></p>
+<h2 id="2-Algorithm"><a href="#2-Algorithm" class="headerlink" title="2. Algorithm"></a>2. Algorithm</h2><ul>
+<li>首先，输入一幅你想处理的图片，然后进行对应的预处理操作，或者预处理后的图片；</li>
+<li>然后，将其输入到一个预训练好的神经网络中（ResNeXt等）获得对应的feature map；</li>
+<li>接着，对这个feature map中的每一点设定预定个的ROI，从而获得多个候选ROI；</li>
+<li>接着，将这些候选的ROI送入RPN网络进行二值分类（前景或背景）和BB回归，过滤掉一部分候选的ROI；</li>
+<li>接着，对这些剩下的ROI进行ROIAlign操作（即先将原图和feature map的pixel对应起来，然后将feature map和固定的feature对应起来）；</li>
+<li>最后，对这些ROI进行分类（N类别分类）、BB回归和MASK生成（在每一个ROI里面进行FCN操作）。</li>
+</ul>
+<h2 id="3-Detail"><a href="#3-Detail" class="headerlink" title="3. Detail"></a>3. Detail</h2><h3 id="3-1-Faster-rcnn"><a href="#3-1-Faster-rcnn" class="headerlink" title="3.1 Faster-rcnn"></a>3.1 Faster-rcnn</h3><h3 id="3-2-FCN"><a href="#3-2-FCN" class="headerlink" title="3.2 FCN"></a>3.2 FCN</h3><h3 id="3-3-ROIAlign"><a href="#3-3-ROIAlign" class="headerlink" title="3.3 ROIAlign"></a>3.3 ROIAlign</h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="noopener"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/04/08/SoftwareManagement/MgtPro_4_SRS_part2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/08/SoftwareManagement/MgtPro_4_SRS_part2/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T19:39:11+08:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/08/SoftwareManagement/MgtPro_4_SRS_part2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/08/SoftwareManagement/MgtPro_4_SRS_part2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SRS-part2"><a href="#SRS-part2" class="headerlink" title="SRS part2"></a>SRS part2</h1><h1 id="2-Overall-Description"><a href="#2-Overall-Description" class="headerlink" title="2. Overall Description"></a>2. Overall Description</h1><p>This section of the SRS gives an overview description of the general factors that affect<br>the product and its requirements. This section does not state specific requirements.<br>Instead, it provides a background for those requirements.</p>
+<h2 id="2-1-Product-Perspective"><a href="#2-1-Product-Perspective" class="headerlink" title="2.1 Product Perspective"></a>2.1 Product Perspective</h2><p>\<describe the context and origin of product being specified in this srs. for example, state whether is a follow-on member family, replacement certain existing systems, or new, self-contained product. if srs defines component larger system, relate requirements system to functionality software identify interfaces between two. simple diagram that shows major components overall subsystem interconnections, external can be helpful.\></describe></p>
+<ul>
+<li>产品上下文关联（是否是产品系列的后续成员etc</li>
+</ul>
+<p>Online bookstore system is a new, web-based product design to provide online bookselling.</p>
+<p>While the web-based application is the main focus of the project, there is also a server- side component which will be responsible for database and synchronization services. And there should be a client-side smart phone application to provide necessary working information to drivers. The scope of the project encompasses both server- and client- side functionalities. </p>
+<p>The <strong>diagram</strong> shown above demonstrates the interactions between the user and the system, including the system structure. </p>
+<h2 id="2-2-Product-Functions"><a href="#2-2-Product-Functions" class="headerlink" title="2.2 Product Functions"></a>2.2 Product Functions</h2><p>\<summarize the major functions product must perform or let user perform. details will be provided in section 3, so only a high level summary (such as bullet list) is needed here. organize to make them understandable any reader of srs. picture groups related requirements and how they relate, such top data flow diagram object class **diagram**, often effective.\></summarize></p>
+<ul>
+<li>产品的主要功能（详细说明在后面）</li>
+<li><p>可用类图说明</p>
+</li>
+<li><p>图书系统</p>
+<ul>
+<li>图书信息管理<ul>
+<li>书籍上架/下架：图书管理员可以上架下架书籍，书籍下架后，客户无法购买该书籍。</li>
+<li>书籍信息修改：图书管理员可更改某本书籍的具体信息，如书的价格、标签、打折信息、促销信息、书的简介等</li>
+<li>书籍查询：系统所有用户均可查找书籍的相关信息</li>
 </ul>
 </li>
-<li>error:在android studio中新建android gradle project的时候connect refused：connect<ul>
-<li>solve:<a href="https://blog.csdn.net/clarketang/article/details/38420417" target="_blank" rel="noopener">https://blog.csdn.net/clarketang/article/details/38420417</a></li>
-<li>ps:本地端口设置可查看：shadow socks-&gt;http代理设置</li>
+<li>库存管理<ul>
+<li>增/减：【？仓库管理员】可以增加减少某本书的仓库容量</li>
+<li>查询：【？仓库管理员】可以查询书籍的仓库容量</li>
 </ul>
 </li>
-<li>Error: read timed out<ul>
-<li></li>
 </ul>
 </li>
+<li>订单系统<ul>
+<li>交易模块<ul>
+<li>支付(微信、支付宝、网银)：customers would pay by credit card, Alipay, or WeChat.</li>
+<li>计算价格：The system must calculate taxes and delivery fee as well as applying discounts to the sale when applicable.</li>
+</ul>
+</li>
+<li>订单管理模块<ul>
+<li>订单创建：客户可通过系统可以创建订单</li>
+<li>订单修改：客服可通过系统修改订单的部分信息（如订单的收货地址</li>
+<li>取消订单：在书籍未发货前，客户可通过系统取消自身的订单</li>
+<li>订单查询：<ul>
+<li>客户可通过系统查询自身产生的订单状态</li>
+<li>客服可通过系统查询自己所负责区域的客户所产生的所有订单</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务系统<ul>
+<li>销售服务<ul>
+<li>客服和用户沟通：客服可与客户沟通，帮助客户购买到想要的书籍</li>
+<li>物流跟踪：系统提供每个订单的物流状况</li>
+<li>退换货：系统支持客户退换购买的书籍</li>
+<li>投诉：系统支持客户投诉客服的服务态度</li>
+</ul>
+</li>
+<li>书籍服务<ul>
+<li>推荐：系统提供推荐书单，如年度榜单、本月/本季度最热销书籍</li>
+<li>收藏：客户可将书籍添加到自己的收藏书单内</li>
+<li>评论：客户可对某本书籍编写书评</li>
+<li>举报：客户可举报书籍</li>
+</ul>
+</li>
+<li>消息通知<ul>
+<li>出版社通知：当某本书的库存到达某一阈值时，系统将会给出版社发送进货通知</li>
+<li>用户通知：<ul>
+<li>系统发送流程信息提示（如登陆成功、订单创建成功</li>
+<li>若书籍缺货，系统应发送缺货提醒并给出确切的deadline，a compatible deadline is informed to the customer.</li>
+</ul>
+</li>
+<li>管理员通知：？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>统计分析系统<ul>
+<li>销量：The system must allow a manager to generate reports on bestselling books, and on most profitable customers</li>
+<li>书籍分析：</li>
+</ul>
+</li>
+<li>用户系统<ul>
+<li>管理员<ul>
+<li>超级管理员<ul>
+<li>封禁用户：超级管理员可以封禁普通用户账号</li>
+<li>修改用户信息：超级管理员可以修改普通用户信息</li>
+<li>删除评论：超级管理员可以删除含敏感信息的或不适宜的书籍评论</li>
+</ul>
+</li>
+<li>客服(订单管理员)</li>
+<li>图书管理员</li>
+</ul>
+</li>
+<li>普通用户<ul>
+<li>购物车<ul>
+<li>添加书：</li>
+<li>删除书</li>
+</ul>
+</li>
+<li>个人信息管理：修改个人基本信息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>After requirement classification, we got some subsystems mainly  based on the entity that function is related to. Details of functions that each subsystem implements are listed as follows.</p>
+<ul>
+<li>Book system<ul>
+<li>Book Information Management<ul>
+<li>Books on shelves / off shelves: Librarians can put books on the shelves. If a book is off shelves, customers could not buy the book via the system.</li>
+<li>Book information modification: The librarian can change the specific information of a book, such as book price, label, discount information, promotion information, book introduction, etc.</li>
+<li>Book search: All users of the system can find information about books.</li>
+</ul>
+</li>
+<li>Inventory management<ul>
+<li>Increase/decrease: [? Warehouse administrator] can increase the warehouse capacity of a book</li>
+<li>Inquire:【? Warehouse administrator] can query the warehouse capacity of books</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Order System<ul>
+<li>Trading module<ul>
+<li>Payment (WeChat, Alipay, online banking): customers would pay by credit card, Alipay, or WeChat.</li>
+<li>The system must calculate taxes and delivery fee as well as applying discounts to the sale when applicable.</li>
+</ul>
+</li>
+<li>Order Management Module<ul>
+<li>Order creation: Customers can create orders through the system</li>
+<li>Order modification: Customer service can modify part of the order information through the system (such as the order receipt address)</li>
+<li>Cancellation of orders: Customers can cancel their orders through the system before the books are shipped.</li>
+<li>Order Tracking:<ul>
+<li>Customers can check the status of their own orders through the system</li>
+<li>Customer service can query all orders generated from the area where  customers work in through the system</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>service system<ul>
+<li>Sales service<ul>
+<li>Customer service and user communication: Customer service can communicate with customers to help customers purchase the books they want.</li>
+<li>Logistics tracking: the system provides the logistics status of each order</li>
+<li>Return and exchange: the system supports customers to return or exchange the purchased books</li>
+<li>Complaint: System support customer complaints Customer service attitude</li>
+</ul>
+</li>
+<li>Book service<ul>
+<li>Recommendation: The system provides a list of book recommendations, such as the annual list, the best selled books during this month / this quarter</li>
+<li>Collection: Customers can add books to their collections</li>
+<li>Comments: Customers can write a book review of a book</li>
+<li>Report: Customers can report a  book if the book has some sensitive content.</li>
+</ul>
+</li>
+<li>notification<ul>
+<li>Publisher notice: When the inventory of a book reaches a certain threshold, the system will send a delivery notice to the publisher.</li>
+<li>User notification:<ul>
+<li>The system sends a process information prompt (if the login is successful, the order is created successfully)</li>
+<li>If the book is out of stock, the system should send a stockout reminder and a compatible deadline is informed to the customer.</li>
+</ul>
+</li>
+<li>Administrator notification:?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Statistical Analysis System<ul>
+<li>Sales: The system must allow a manager to generate reports on bestselling books, and on most profitable customers ？</li>
+<li>Book analysis: ？</li>
+</ul>
+</li>
+<li>User system<ul>
+<li>Administrator<ul>
+<li>Super administrator<ul>
+<li>Blocked users: Super administrators can block ordinary user accounts</li>
+<li>Modify user information: Super administrator can modify common user information</li>
+<li>Delete comments: Super administrators can delete book comments with sensitive information or inappropriate content.</li>
+</ul>
+</li>
+<li>Customer Service (Order Administrator) ?</li>
+<li>librarian ?</li>
+</ul>
+</li>
+<li>general user<ul>
+<li>shopping cart<ul>
+<li>Add a book: customers can add books to their shopping cart</li>
+<li>delete the book: customers can delete books from their shopping cart.</li>
+</ul>
+</li>
+<li>Personal Information Management:  Customers can modifying personal basic information through the system.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-2-Features"><a href="#2-2-2-Features" class="headerlink" title="2.2.2 Features"></a>2.2.2 Features</h4><ul>
+<li><p>The system should run on an internet-based environment. </p>
+</li>
+<li><p>The system is a web-service-based application. </p>
+</li>
+<li><p>The system should have a centralized database. </p>
+</li>
+<li><p>The system should have authentication functionality. </p>
+</li>
+<li><p>The system should be scalable and extendable, e.g. extend Mobile APP. </p>
+</li>
+<li><p>The system should have reasonable external interface, e.g. add new interface </p>
+<p>for PayPal. </p>
+</li>
+<li><p>The system should have a user-friendly UI and be easy to use. </p>
+</li>
+<li><p>The driver should be able to download his working schedule, see the routes, </p>
+<p>and commit the work when he is done via his smart phone. </p>
+</li>
+</ul>
+<h2 id="2-3-User-Classes-and-Characteristics"><a href="#2-3-User-Classes-and-Characteristics" class="headerlink" title="2.3 User Classes and Characteristics"></a>2.3 User Classes and Characteristics</h2><p>\<identify the various user classes that you anticipate will use this product. may be differentiated based on frequency of use, subset product functions used, technical expertise, security or privilege levels, educational level, experience. describe pertinent characteristics each class. certain requirements pertain only to classes. distinguish most important for from those who are less satisfy.\></identify></p>
+<ul>
+<li>用户类</li>
+<li>用户特征</li>
+</ul>
+<p>用户：</p>
+<p>客户：可以查询书籍信息，购买书籍</p>
+<p>仓库管理员：可查询书籍的库存信息，更改书籍的库存信息</p>
+<p>超级管理员：可以修改用户</p>
+<p>客服：可以与用户沟通，修改订单的部分信息</p>
+<p><strong>Customer</strong> can inquiry the information of book through the system without any particular prerequisite. But customer must log in the system before buying books, query orders or return book.</p>
+<p><strong>Warehouse administrator</strong> can query the inventory information of books and change the inventory information of books</p>
+<p><strong>Super administrator</strong> take charge of the common users and book reviews in the system. They can block the common users, modify user information and delete inappropriate book review. </p>
+<p><strong>Customer service</strong> can communicate with users and modify part of the order information.</p>
+<h2 id="2-4-Operating-Environment"><a href="#2-4-Operating-Environment" class="headerlink" title="2.4 Operating Environment"></a>2.4 Operating Environment</h2><p>\<describe the environment in which software will operate, including hardware platform, operating system and versions, any other components or applications with it must peacefully coexist.\></describe></p>
+<ul>
+<li>操作环境：硬件平台、操作系统、版本</li>
+</ul>
+<h2 id="2-5-Design-and-Implementation-Constraints"><a href="#2-5-Design-and-Implementation-Constraints" class="headerlink" title="2.5 Design and Implementation Constraints"></a>2.5 Design and Implementation Constraints</h2><p>\&lt;Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).></p>
+<ul>
+<li>项目设计和实现约束</li>
+</ul>
+<h2 id="2-6-User-Documentation"><a href="#2-6-User-Documentation" class="headerlink" title="2.6 User Documentation"></a>2.6 User Documentation</h2><p>\<list the user documentation components (such as manuals, on-line help, and tutorials) that will be delivered along with software. identify any known delivery formats or standards.\></list></p>
+<ul>
+<li>用户手册</li>
+</ul>
+<h2 id="2-7-Assumptions-and-Dependencies"><a href="#2-7-Assumptions-and-Dependencies" class="headerlink" title="2.7 Assumptions and Dependencies"></a>2.7 Assumptions and Dependencies</h2><p>\<list any assumed factors (as opposed to known facts) that could affect the requirements stated in srs. these include third-party or commercial components you plan use, issues around development operating environment, constraints. project be affected if assumptions are incorrect, not shared, change. also identify dependencies has on external factors, such as software intend reuse from another project, unless they already documented elsewhere (for example, vision and scope document plan).\></list></p>
+<ul>
+<li>假设和依赖，可能使用的第三方组件</li>
 </ul>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/04/05/WebAR/周工作汇报4.5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/05/WebAR/周工作汇报4.5/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-05T21:55:20+08:00">
+                2019-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/05/WebAR/周工作汇报4.5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/05/WebAR/周工作汇报4.5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一. 本周学习情况 </p>
+<p>周工作汇报 </p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>学习内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.1-4.5</td>
+<td>视觉 SLAM 学习，高翔十四讲学习至第十三课，对 VSLAM 有了基本了解</td>
+</tr>
+</tbody>
+</table>
+<p>二. 下周学习计划 </p>
+<ol>
+<li>购买设备</li>
+<li>WebAR􏰃􏰄ARKit 开发继续 </li>
+<li>继续学习视觉 SLAM </li>
+</ol>
+<p>附件：</p>
+<p>SLAM学习进度汇报</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/31/GuideBook/OpenCV安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/31/GuideBook/OpenCV安装/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T09:28:26+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/31/GuideBook/OpenCV安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/31/GuideBook/OpenCV安装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="OpenCV安装"><a href="#OpenCV安装" class="headerlink" title="OpenCV安装"></a>OpenCV安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:opencv-3.4.5 luomei$ mkdir build &amp;&amp; cd build</span><br><span class="line">luomeideMacBook-Pro:opencv-3.4.5 luomei$ cmake -G "Unix Makefiles" ..</span><br><span class="line">luomeideMacBook-Pro:opencv-3.4.5 luomei$ make -j8</span><br><span class="line">luomeideMacBook-Pro:opencv-3.4.5 luomei$ sudo make install</span><br></pre></td></tr></table></figure>
+<p>哭了，用这个方法装opencv3.4.0失败了，但是装3.4.5就好了/🤦‍♀️</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/28/SoftwareManagement/CaseStudy_0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/28/SoftwareManagement/CaseStudy_0/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-28T10:29:06+08:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/28/SoftwareManagement/CaseStudy_0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/28/SoftwareManagement/CaseStudy_0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Case-Study"><a href="#Case-Study" class="headerlink" title="Case Study"></a>Case Study</h1><p>risk</p>
+<p>Identification:</p>
+<ol>
+<li>Weather</li>
+<li>cooking fuel</li>
+<li>Transportation</li>
+</ol>
+<p>analysis:</p>
+<p>Plan:</p>
+<p>Monitor:</p>
+<p>交通、决策、天气</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/28/Master/算法谜题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/28/Master/算法谜题/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-28T10:07:54+08:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/28/Master/算法谜题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/28/Master/算法谜题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="算法谜题"><a href="#算法谜题" class="headerlink" title="算法谜题"></a>算法谜题</h1>
           
         
       
@@ -1856,7 +2316,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1904,7 +2364,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

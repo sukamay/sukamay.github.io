@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Bitmap的分析与使用 Bitmap的创建  创建Bitmap的时候，Java不提供new Bitmap()的形式去创建，而是通过BitmapFactory中的静态方法去创建,如:BitmapFactory.decodeStream(is);//通过InputStream去解析生成Bitmap(这里就不贴BitmapFactory中创建Bitmap的方法了，大家可以自己去看它的源码)，我们跟进B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="May">
+<meta property="og:url" content="https://sukamay.github.io/2019/03/11/GuideBook/Android/Bitmap的分析与使用/index.html">
+<meta property="og:site_name" content="May">
+<meta property="og:description" content="Bitmap的分析与使用 Bitmap的创建  创建Bitmap的时候，Java不提供new Bitmap()的形式去创建，而是通过BitmapFactory中的静态方法去创建,如:BitmapFactory.decodeStream(is);//通过InputStream去解析生成Bitmap(这里就不贴BitmapFactory中创建Bitmap的方法了，大家可以自己去看它的源码)，我们跟进B">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-11T13:43:13.071Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="May">
+<meta name="twitter:description" content="Bitmap的分析与使用 Bitmap的创建  创建Bitmap的时候，Java不提供new Bitmap()的形式去创建，而是通过BitmapFactory中的静态方法去创建,如:BitmapFactory.decodeStream(is);//通过InputStream去解析生成Bitmap(这里就不贴BitmapFactory中创建Bitmap的方法了，大家可以自己去看它的源码)，我们跟进B">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Bitmap的分析与使用/">
+
+
+
+
+
+  <title> | May</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">May</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Bitmap的分析与使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/11/GuideBook/Android/Bitmap的分析与使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/Bitmap的分析与使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Bitmap的分析与使用"><a href="#Bitmap的分析与使用" class="headerlink" title="Bitmap的分析与使用"></a><strong>Bitmap</strong>的分析与使用</h2><ul>
+<li><p>Bitmap的创建</p>
+<ul>
+<li><p>创建Bitmap的时候，Java不提供<code>new Bitmap()</code>的形式去创建，而是通过<code>BitmapFactory</code>中的静态方法去创建,如:<code>BitmapFactory.decodeStream(is);//通过InputStream去解析生成Bitmap</code>(这里就不贴<code>BitmapFactory</code>中创建<code>Bitmap</code>的方法了，大家可以自己去看它的源码)，我们跟进<code>BitmapFactory</code>中创建<code>Bitmap</code>的源码，最终都可以追溯到这几个native函数</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> Bitmap nativeDecodeStream(InputStream is, <span class="keyword">byte</span>[] storage,</span><br><span class="line">            Rect padding, Options opts);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> Bitmap nativeDecodeFileDescriptor(FileDescriptor fd,</span><br><span class="line">        Rect padding, Options opts);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="function">Bitmap <span class="title">nativeDecodeAsset</span><span class="params">(<span class="keyword">long</span> nativeAsset, Rect padding, Options opts)</span></span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> Bitmap nativeDecodeByteArray(<span class="keyword">byte</span>[] data, <span class="keyword">int</span> offset,</span><br><span class="line">        <span class="keyword">int</span> length, Options opts);</span><br></pre></td></tr></table></figure>
+<p>而<code>Bitmap</code>又是Java对象，这个Java对象又是从native，也就是C/C++中产生的，所以，在Android中Bitmap的内存管理涉及到两部分，一部分是<em>native</em>，另一部分是<em>dalvik</em>，也就是我们常说的java堆(如果对java堆与栈不了解的同学可以戳)，到这里基本就已经了解了创建Bitmap的一些内存中的特性(大家可以使用<code>adb shell dumpsys meminfo</code>去查看Bitmap实例化之后的内存使用情况)。</p>
+</li>
+</ul>
+</li>
+<li><p>Bitmap的使用</p>
+<ul>
+<li><p>我们已经知道了<code>BitmapFactory</code>是如何通过各种资源创建<code>Bitmap</code>了，那么我们如何合理的使用它呢？以下是几个我们使用<code>Bitmap</code>需要关注的点</p>
+<ol>
+<li><p><strong>Size</strong></p>
+<ul>
+<li>这里我们来算一下，在Android中，如果采用<code>Config.ARGB_8888</code>的参数去创建一个<code>Bitmap</code>，<a href="https://developer.android.com/reference/android/graphics/Bitmap.Config.html" target="_blank" rel="noopener">这是Google推荐的配置色彩参数</a>，也是Android4.4及以上版本默认创建Bitmap的Config参数(<code>Bitmap.Config.inPreferredConfig</code>的默认值)，那么每一个像素将会占用4byte，如果一张手机照片的尺寸为1280×720，那么我们可以很容易的计算出这张图片占用的内存大小为 1280x720x4 = 3686400(byte) = 3.5M，一张未经处理的照片就已经3.5M了! 显而易见，在开发当中，这是我们最需要关注的问题，否则分分钟OOM!</li>
+<li><p><em>那么，我们一般是如何处理Size这个重要的因素的呢？</em>，当然是调整<code>Bitmap</code>的大小到适合的程度啦！辛亏在<code>BitmapFactory</code>中，我们可以很方便的通过<code>BitmapFactory.Options</code>中的<code>options.inSampleSize</code>去设置<code>Bitmap</code>的压缩比，官方给出的说法是 </p>
+<blockquote>
+<p>If set to a value &gt; 1, requests the decoder to subsample the original image, returning a smaller image to save memory….For example, inSampleSize == 4 returns<br>an image that is 1/4 the width/height of the original, and 1/16 the<br>number of pixels. Any value &lt;= 1 is treated the same as 1.</p>
+</blockquote>
+<p>很简洁明了啊！也就是说，只要按计算方法设置了这个参数，就可以完成我们Bitmap的Size调整了。那么，应该怎么调整姿势才比较舒服呢？下面先介绍其中一种通过<code>InputStream</code>的方式去创建<code>Bitmap</code>的方法，上一段从Gallery中获取照片并且将图片Size调整到合适手机尺寸的代码：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> final <span class="keyword">int</span> PICK_PICS = <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startGallery</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Intent i = <span class="keyword">new</span> Intent();</span><br><span class="line">    i.setAction(Intent.ACTION_PICK);</span><br><span class="line">    i.setType(<span class="string">"image/*"</span>);</span><br><span class="line">    startActivityForResult(i,PICK_PICS);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">int</span>[] <span class="title">getScreenWithAndHeight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);</span><br><span class="line">    DisplayMetrics dm = <span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">    wm.getDefaultDisplay().getMetrics(dm);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;dm.widthPixels,dm.heightPixels&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param actualWidth 图片实际的宽度，也就是options.outWidth</span></span><br><span class="line"><span class="comment"> * @param actualHeight 图片实际的高度，也就是options.outHeight</span></span><br><span class="line"><span class="comment"> * @param desiredWidth 你希望图片压缩成为的目的宽度</span></span><br><span class="line"><span class="comment"> * @param desiredHeight 你希望图片压缩成为的目的高度</span></span><br><span class="line"><span class="comment"> * @return</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findBestSampleSize</span>(<span class="params"><span class="keyword">int</span> actualWidth, <span class="keyword">int</span> actualHeight, <span class="keyword">int</span> desiredWidth, <span class="keyword">int</span> desiredHeight</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">double</span> wr = (<span class="keyword">double</span>) actualWidth / desiredWidth;</span><br><span class="line">    <span class="keyword">double</span> hr = (<span class="keyword">double</span>) actualHeight / desiredHeight;</span><br><span class="line">    <span class="keyword">double</span> ratio = Math.min(wr, hr);</span><br><span class="line">    <span class="keyword">float</span> n = <span class="number">1.0f</span>;</span><br><span class="line">    <span class="comment">//这里我们为什么要寻找 与ratio最接近的2的倍数呢？</span></span><br><span class="line">    <span class="comment">//原因就在于API中对于inSimpleSize的注释：最终的inSimpleSize应该为2的倍数，我们应该向上取与压缩比最接近的2的倍数。</span></span><br><span class="line">    <span class="keyword">while</span> ((n * <span class="number">2</span>) &lt;= ratio) &#123;</span><br><span class="line">        n *= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span>(<span class="params"><span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(resultCode == RESULT_OK)&#123;</span><br><span class="line">        <span class="keyword">switch</span> (requestCode)&#123;</span><br><span class="line">            <span class="keyword">case</span> PICK_PICS:</span><br><span class="line">                Uri uri = data.getData();</span><br><span class="line">                InputStream <span class="keyword">is</span> = <span class="literal">null</span>;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">is</span> = getContentResolver().openInputStream(uri);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">        </span><br><span class="line">                BitmapFactory.Options options = <span class="keyword">new</span> BitmapFactory.Options();</span><br><span class="line">                <span class="comment">//当这个参数为true的时候,意味着你可以在解析时候不申请内存的情况下去获取Bitmap的宽和高</span></span><br><span class="line">                <span class="comment">//这是调整Bitmap Size一个很重要的参数设置</span></span><br><span class="line">                options.inJustDecodeBounds = <span class="literal">true</span>;</span><br><span class="line">                BitmapFactory.decodeStream( <span class="keyword">is</span>,<span class="literal">null</span>,options );</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">int</span> realHeight = options.outHeight;</span><br><span class="line">                <span class="keyword">int</span> realWidth = options.outWidth;</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">int</span> screenWidth = getScreenWithAndHeight()[<span class="number">0</span>];</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">int</span> simpleSize = findBestSampleSize(realWidth,realHeight,screenWidth,<span class="number">300</span>);</span><br><span class="line">                options.inSampleSize = simpleSize;</span><br><span class="line">                <span class="comment">//当你希望得到Bitmap实例的时候，不要忘了将这个参数设置为false</span></span><br><span class="line">                options.inJustDecodeBounds = <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">is</span> = getContentResolver().openInputStream(uri);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">        </span><br><span class="line">                Bitmap bitmap = BitmapFactory.decodeStream(<span class="keyword">is</span>,<span class="literal">null</span>,options);</span><br><span class="line">        </span><br><span class="line">                iv.setImageBitmap(bitmap);</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">is</span>.close();</span><br><span class="line">                    <span class="keyword">is</span> = <span class="literal">null</span>;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code> 我们来看看这段代码的功效：
+ 压缩前：![压缩前](https://leanote.com/api/file/getImage?fileId=578d9ed8ab644135ea01684c)
+ 压缩后：![压缩后](https://leanote.com/api/file/getImage?fileId=578d9f76ab644135ea016851)
+ **对比条件为：1080P的魅族Note3拍摄的高清无码照片**
+
+    2. **Reuse**
+    上面介绍了``BitmapFactory``通过``InputStream``去创建`Bitmap`的这种方式，以及``BitmapFactory.Options.inSimpleSize`` 和 ``BitmapFactory.Options.inJustDecodeBounds``的使用方法，但将单个Bitmap加载到UI是简单的，但是如果我们需要一次性加载大量的图片，事情就会变得复杂起来。`Bitmap`是吃内存大户，我们不希望多次解析相同的`Bitmap`，也不希望可能不会用到的`Bitmap`一直存在于内存中，所以，这个场景下，`Bitmap`的重用变得异常的重要。
+    *在这里只介绍一种``BitmapFactory.Options.inBitmap``的重用方式，下一篇文章会介绍使用三级缓存来实现Bitmap的重用。*
+
+          根据官方文档[在Android 3.0 引进了BitmapFactory.Options.inBitmap](https://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inBitmap)，如果这个值被设置了，decode方法会在加载内容的时候去重用已经存在的bitmap. 这意味着bitmap的内存是被重新利用的，这样可以提升性能, 并且减少了内存的分配与回收。然而，使用inBitmap有一些限制。特别是在Android 4.4 之前，只支持同等大小的位图。
+        我们看来看看这个参数最基本的运用方法。
+
+        <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> BitmapFactory.<span class="keyword">Options</span> <span class="keyword">options</span> = <span class="keyword">new</span> BitmapFactory.<span class="keyword">Options</span>();</span><br><span class="line"><span class="comment">//inBitmap只有当inMutable为true的时候是可用的。</span></span><br><span class="line"><span class="keyword">options</span>.inMutable = <span class="keyword">true</span>;</span><br><span class="line">Bitmap reusedBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.reused_btimap,<span class="keyword">options</span>);</span><br><span class="line"><span class="keyword">options</span>.inBitmap = reusedBitmap;</span><br></pre></td></tr></table></figure>
+
+
+          这样，当你在下一次decodeBitmap的时候，将设置了`options.inMutable=true`以及`options.inBitmap`的`Options`传入，Android就会复用你的Bitmap了，具体实例：
+
+        <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> onCreate(@Nullable Bundle savedInstanceState) &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(reuseBitmap());</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span> LinearLayout reuseBitmap()&#123;</span><br><span class="line">    LinearLayout linearLayout = <span class="keyword">new</span> LinearLayout(<span class="keyword">this</span>);</span><br><span class="line">    linearLayout.setLayoutParams(<span class="keyword">new</span> ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));</span><br><span class="line">    linearLayout.setOrientation(LinearLayout.VERTICAL);</span><br><span class="line">        </span><br><span class="line">    ImageView iv = <span class="keyword">new</span> ImageView(<span class="keyword">this</span>);</span><br><span class="line">    iv.setLayoutParams(<span class="keyword">new</span> ViewGroup.LayoutParams(<span class="number">500</span>,<span class="number">300</span>));</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">options</span> = <span class="keyword">new</span> BitmapFactory.<span class="keyword">Options</span>();</span><br><span class="line">    <span class="keyword">options</span>.inJustDecodeBounds = <span class="keyword">true</span>;</span><br><span class="line">    <span class="comment">//inBitmap只有当inMutable为true的时候是可用的。</span></span><br><span class="line">    <span class="keyword">options</span>.inMutable = <span class="keyword">true</span>;</span><br><span class="line">    BitmapFactory.decodeResource(getResources(),R.drawable.big_pic,<span class="keyword">options</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//压缩Bitmap到我们希望的尺寸</span></span><br><span class="line">    <span class="comment">//确保不会OOM</span></span><br><span class="line">    <span class="keyword">options</span>.inSampleSize = findBestSampleSize(<span class="keyword">options</span>.outWidth,<span class="keyword">options</span>.outHeight,<span class="number">500</span>,<span class="number">300</span>);</span><br><span class="line">    <span class="keyword">options</span>.inJustDecodeBounds = <span class="keyword">false</span>;</span><br><span class="line">        </span><br><span class="line">    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.big_pic,<span class="keyword">options</span>);</span><br><span class="line">    <span class="keyword">options</span>.inBitmap = bitmap;</span><br><span class="line">        </span><br><span class="line">    iv.setImageBitmap(bitmap);</span><br><span class="line">        </span><br><span class="line">    linearLayout.addView(iv);</span><br><span class="line">        </span><br><span class="line">    ImageView iv1 = <span class="keyword">new</span> ImageView(<span class="keyword">this</span>);</span><br><span class="line">    iv1.setLayoutParams(<span class="keyword">new</span> ViewGroup.LayoutParams(<span class="number">500</span>,<span class="number">300</span>));</span><br><span class="line">    iv1.setImageBitmap( BitmapFactory.decodeResource(getResources(),R.drawable.big_pic,<span class="keyword">options</span>));</span><br><span class="line">    linearLayout.addView(iv1);</span><br><span class="line">        </span><br><span class="line">    ImageView iv2 = <span class="keyword">new</span> ImageView(<span class="keyword">this</span>);</span><br><span class="line">    iv2.setLayoutParams(<span class="keyword">new</span> ViewGroup.LayoutParams(<span class="number">500</span>,<span class="number">300</span>));</span><br><span class="line">    iv2.setImageBitmap( BitmapFactory.decodeResource(getResources(),R.drawable.big_pic,<span class="keyword">options</span>));</span><br><span class="line">    linearLayout.addView(iv2);</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> linearLayout;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+         以上代码中，我们在解析了一次一张1080P分辨率的图片，并且设置在`options.inBitmap`中，然后分别decode了同一张图片，并且传入了相同的`options`。最终只占用一份第一次解析`Bitmap`的内存。
+
+    3. **Recycle**
+    一定要记得及时回收Bitmap，否则如上分析，你的native以及dalvik的内存都会被一直占用着，最终导致OOM
+
+
+    <figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先判断是否已经回收</span></span><br><span class="line"><span class="keyword">if</span>(bitmap != <span class="built_in">null</span> &amp;&amp; !bitmap.<span class="built_in">isRecycled</span>())&#123;</span><br><span class="line">    <span class="comment">// 回收并且置为null</span></span><br><span class="line">    bitmap.recycle();</span><br><span class="line">    bitmap = <span class="built_in">null</span>;</span><br><span class="line">&#125;</span><br><span class="line">System.gc();</span><br></pre></td></tr></table></figure>
+
+
+- Enjoy Android  :) 如果有误，轻喷，欢迎指正。
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/11/Mess/软工经验汇总：/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/11/GuideBook/Android/开源框架源码分析/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/profile.JPG" alt="May">
+            
+              <p class="site-author-name" itemprop="name">May</p>
+              <p class="site-description motion-element" itemprop="description">Life is fantastic!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">198</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sukamay" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bitmap的分析与使用"><span class="nav-number">1.</span> <span class="nav-text">Bitmap的分析与使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">May</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://sukamay.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sukamay.github.io/2019/03/11/GuideBook/Android/Bitmap的分析与使用/';
+          this.page.identifier = '2019/03/11/GuideBook/Android/Bitmap的分析与使用/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://sukamay.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

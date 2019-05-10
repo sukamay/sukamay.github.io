@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="still a long way to go   测试集的编写，单元测试 学习进程的记录和定期的温习和进程阶段check 优雅的代码习惯： 写完代码记得加注释！！！   教程： acm训练教程，刷题应该怎么刷 论文养成，认真跟着研究生做 typing    过个生日，给自己的520赞歌。✔️ 写作业卡顿了怎么办= = 读书 擅长寻找好用的工具，工欲善其事，必先利其器 学会写教程 ✔️ on the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="May">
+<meta property="og:url" content="https://sukamay.github.io/2018/10/10/toDoList/index.html">
+<meta property="og:site_name" content="May">
+<meta property="og:description" content="still a long way to go   测试集的编写，单元测试 学习进程的记录和定期的温习和进程阶段check 优雅的代码习惯： 写完代码记得加注释！！！   教程： acm训练教程，刷题应该怎么刷 论文养成，认真跟着研究生做 typing    过个生日，给自己的520赞歌。✔️ 写作业卡顿了怎么办= = 读书 擅长寻找好用的工具，工欲善其事，必先利其器 学会写教程 ✔️ on the">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-27T06:14:56.935Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="May">
+<meta name="twitter:description" content="still a long way to go   测试集的编写，单元测试 学习进程的记录和定期的温习和进程阶段check 优雅的代码习惯： 写完代码记得加注释！！！   教程： acm训练教程，刷题应该怎么刷 论文养成，认真跟着研究生做 typing    过个生日，给自己的520赞歌。✔️ 写作业卡顿了怎么办= = 读书 擅长寻找好用的工具，工欲善其事，必先利其器 学会写教程 ✔️ on the">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sukamay.github.io/2018/10/10/toDoList/">
+
+
+
+
+
+  <title> | May</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">May</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/10/toDoList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-10T10:32:24+08:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/10/toDoList/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/10/toDoList/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>still a long way to go </p>
+<ul>
+<li>测试集的编写，单元测试</li>
+<li>学习进程的记录和定期的温习和进程阶段check</li>
+<li>优雅的代码习惯：<ul>
+<li>写完代码记得加注释！！！</li>
+</ul>
+</li>
+<li>教程：<ul>
+<li>acm训练教程，刷题应该怎么刷</li>
+<li>论文养成，认真跟着研究生做</li>
+<li>typing </li>
+</ul>
+</li>
+<li>过个生日，给自己的520赞歌。✔️</li>
+<li>写作业卡顿了怎么办= =</li>
+<li>读书</li>
+<li>擅长寻找好用的工具，工欲善其事，必先利其器</li>
+<li>学会写教程 ✔️ on the way</li>
+<li>当你很颓丧，什么都不想干的时候，你应该怎么办</li>
+<li>云端搭一个服务器 ✔️ 不用搭了，直接用的阿里云的轻量应用服务器</li>
+<li>搭一个自己的博客</li>
+<li>列一个时间表</li>
+<li>当你坚持不下去的时候，你应该怎么做</li>
+<li>android studio学习提上日程</li>
+<li>机器翻译了解一下</li>
+<li>写个脚本网页更新发个通知 ✔️</li>
+<li>maya人物建模，啊啊啊我的小长歌</li>
+<li>给自己一个放假期间想要达成的目标<ul>
+<li>小长歌</li>
+<li>小程序</li>
+<li>web简单网站搭建</li>
+</ul>
+</li>
+<li>google翻译接口，期末复习专用 ✔️ ==其实google自带的翻译插件就可以实现==</li>
+<li>期末整理资料：<ul>
+<li>资料上传到云盘</li>
+<li>代码上传到git</li>
+<li>教程发布到CSDN、简书、git.io等平台</li>
+<li>笔记整理后上传到自己搭的博客，hexo git.io</li>
+<li>清理软件安装包，有的软件安装了两个，比如vscode，startuml<ul>
+<li>软工整理代码结构</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>python封装成库安装？</li>
+<li>申请网站备案</li>
+<li>写一个我和小傻子的小程序/doge/</li>
+<li>使用一定的过程管理工具记录自己的开发，例如<a href="https://ones.ai/project/#/home" target="_blank" rel="noopener">ones.ai</a></li>
+<li>练习打字，买个键盘？</li>
+<li>软工经验汇总：<ul>
+<li>保存每次的会议记录，每次开会找一个会议记录员（Q&amp;A，ToDoList，讨论内容。目标，讨论结果，分工安排</li>
+<li>项目初期寻找一个合适的项目管理平台，包括项目需求跟踪、任务完成进度等等</li>
+<li>找文档的模版！</li>
+<li>工作量的合理预估！给一个弹性的时间！（哭了，忽略的前后端的整合让人头秃</li>
+<li>阶段性的项目检查！（比如，前端的孩子写的是纯静态的，使用的位置都是绝对位置，后期调起来相当不方便</li>
+<li>找相关的工具：<ul>
+<li>项目进度：ones.ai</li>
+<li>讨论：在线腾讯文档</li>
+<li>uml绘制：staruml</li>
+<li>开发工具，求问有没有代码直接导出图的</li>
+<li>数据库图：powerDesign</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>汽车管理后台系统？？？</li>
+<li>给小傻子的新年礼物</li>
+<li>哭了，麻烦安卓学习和深度学习提上日程吧</li>
+<li>麻烦英语学习也提上日程吧，日常被菜哭</li>
+<li>图像生成线稿</li>
+<li>预习下个学期的项目，准备一下实习的事情，哭了 ✔️ ==实习get==</li>
+<li>学一下git吧！</li>
+<li>立一波2019的flag<ul>
+<li>假期学一下安卓，把我们项目的app完善一下，重构一下代码</li>
+<li>国家宝藏的四大博物馆想要拥有两个！（南京去过啦，想去武汉找巫玩！）</li>
+<li>学习一门技能（比如做一下手帐，嗷，这个坑有点难填</li>
+</ul>
+</li>
+</ul>
+<h2 id="——11-24——"><a href="#——11-24——" class="headerlink" title="——11.24——"></a>——11.24——</h2><p>啊啊啊事情一件接一件，烦</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 百日<ul>
+<li style="list-style: none"><input type="checkbox" checked> 图片到位</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> sp完成手提箱的渲染，坦克渲染完主体<ul>
+<li style="list-style: none"><input type="checkbox" checked> 手提箱</li>
+<li style="list-style: none"><input type="checkbox"> 坦克主体</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox" checked> webAR的调研报告</li>
+<li style="list-style: none"><input type="checkbox" checked> 寒假支教的面试</li>
+<li style="list-style: none"><input type="checkbox"> 计算机网络的作业</li>
+<li style="list-style: none"><input type="checkbox"> 计算机网络的实验考虑一下写什么</li>
+<li style="list-style: none"><input type="checkbox"> 软工的需求分析文档</li>
+<li style="list-style: none"><input type="checkbox"> 短信群发平台弄好<ul>
+<li style="list-style: none"><input type="checkbox"> 等爹爹弄好企业账户的网银</li>
+</ul>
+</li>
+</ul>
+<h2 id="——11-26——"><a href="#——11-26——" class="headerlink" title="——11.26——"></a>——11.26——</h2><ul>
+<li style="list-style: none"><input type="checkbox"> 百日<ul>
+<li style="list-style: none"><input type="checkbox" checked> 画手准备一下</li>
+<li style="list-style: none"><input type="checkbox"> ps准备一下</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox" checked> 软工需求分析文档汇总一下，部署一下概要设计</li>
+<li style="list-style: none"><input type="checkbox"> sp完成坦克主体</li>
+<li style="list-style: none"><input type="checkbox" checked> 计算机网络的作业</li>
+<li style="list-style: none"><input type="checkbox" checked> webAR部署一下</li>
+<li style="list-style: none"><input type="checkbox" checked> webar真机测试？开个http-server？</li>
+<li style="list-style: none"><input type="checkbox" checked> 数字图像处理傅立叶实验</li>
+<li style="list-style: none"><input type="checkbox"> 数字图像处理：周期噪声</li>
+<li style="list-style: none"><input type="checkbox"> 数字图像处理：自适应中值滤波</li>
+<li style="list-style: none"><input type="checkbox"> 计算机图形学思考题</li>
+</ul>
+<h2 id="——11-27——"><a href="#——11-27——" class="headerlink" title="——11.27——"></a>——11.27——</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> 百日</li>
+<li style="list-style: none"><input type="checkbox" checked> sp完成坦克主体</li>
+<li style="list-style: none"><input type="checkbox" checked> webar真机测试</li>
+</ul>
+<h2 id="——11-28——"><a href="#——11-28——" class="headerlink" title="——11.28——"></a>——11.28——</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> box贴图导入maya完成渲染（这个等明天上课之后问了老师要怎么操作再做吧</li>
+<li style="list-style: none"><input type="checkbox" checked> 软工课程设计的第三次讨论（周六）ps系统总体流程描述文字部分分配一下（昊玥写）</li>
+<li style="list-style: none"><input type="checkbox" checked> ar.js测试，如何在真机测试？three.js的应用？webxr了解一下？</li>
+<li style="list-style: none"><input type="checkbox" checked> 企业支付宝注册一下</li>
+</ul>
+<h2 id="——11-29——"><a href="#——11-29——" class="headerlink" title="——11.29——"></a>——11.29——</h2><ul>
+<li style="list-style: none"><input type="checkbox"> 软工下一次讨论</li>
+</ul>
+<h2 id="——11-30——"><a href="#——11-30——" class="headerlink" title="——11.30——"></a>——11.30——</h2><p>今天不想干活= =</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 算了看一下软工的分析吧，算了，都没干，一回来就看番了</li>
+<li style="list-style: none"><input type="checkbox" checked> 计网的实验，哭了，什么都没弄好</li>
+<li style="list-style: none"><input type="checkbox" checked> maya重新导出一下tank，看一下sp的材质介绍，tank分开导出，整理一下outlier</li>
+</ul>
+<h2 id="——12-1——周末"><a href="#——12-1——周末" class="headerlink" title="——12.1——周末"></a>——12.1——周末</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> 软工的讨论<ul>
+<li style="list-style: none"><input type="checkbox" checked> 业务类的划分</li>
+<li style="list-style: none"><input type="checkbox" checked> 概要设计</li>
+<li style="list-style: none"><input type="checkbox" checked> modeling和coding如何并进</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> 计网<ul>
+<li style="list-style: none"><input type="checkbox"> 实验报告</li>
+<li style="list-style: none"><input type="checkbox"> 第二次作业</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox" checked> maya<ul>
+<li style="list-style: none"><input type="checkbox" checked> 导出tank的文件</li>
+<li style="list-style: none"><input type="checkbox" checked> 看一下sp材质介绍</li>
+<li style="list-style: none"><input type="checkbox" checked> tank的贴图</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox" checked> 短信平台<ul>
+<li style="list-style: none"><input type="checkbox" checked> 等回信= =，阿里云不支持，用秒嘀吧，哭泣</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> webar<ul>
+<li style="list-style: none"><input type="checkbox"> ar hit test demo</li>
+<li style="list-style: none"><input type="checkbox"> ar.js demo</li>
+<li style="list-style: none"><input type="checkbox"> webxr调研报告</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> 计算机图形学思考题</li>
+<li style="list-style: none"><input type="checkbox"> DIP，神tm= =matlab许可证到期了，天公不作美<ul>
+<li style="list-style: none"><input type="checkbox"> 周期噪声的产生</li>
+<li style="list-style: none"><input type="checkbox"> 自适应中值滤波</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> 马原</li>
+<li style="list-style: none"><input type="checkbox" checked> 注册一下uml</li>
+</ul>
+<h2 id="——12-8——周末"><a href="#——12-8——周末" class="headerlink" title="——12.8——周末"></a>——12.8——周末</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> web课程设计的框架了解一下：<ul>
+<li style="list-style: none"><input type="checkbox" checked> 完成进度：可加载模型</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> 软工的讨论和技术上的实现</li>
+<li style="list-style: none"><input type="checkbox"> 马原的论文</li>
+<li style="list-style: none"><input type="checkbox"> 计网的实验报告</li>
+<li style="list-style: none"><input type="checkbox"> 计网的作业</li>
+<li style="list-style: none"><input type="checkbox"> maya制作简单动画</li>
+</ul>
+<h2 id="——2-27——"><a href="#——2-27——" class="headerlink" title="——2.27——"></a>——2.27——</h2><p>计算机视觉</p>
+<p>web</p>
+<p>软管：文档？</p>
+<p>软测：文档？</p>
+<p>专综 :语义slam</p>
+<p>虚拟现实：webar？</p>
+<p>游戏程序设计</p>
+<p>脚本程序设计</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/10/By-talk/日语/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/10/课程建议/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/profile.JPG" alt="May">
+            
+              <p class="site-author-name" itemprop="name">May</p>
+              <p class="site-description motion-element" itemprop="description">Life is fantastic!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">198</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sukamay" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#——11-24——"><span class="nav-number">1.</span> <span class="nav-text">——11.24——</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——11-26——"><span class="nav-number">2.</span> <span class="nav-text">——11.26——</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——11-27——"><span class="nav-number">3.</span> <span class="nav-text">——11.27——</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——11-28——"><span class="nav-number">4.</span> <span class="nav-text">——11.28——</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——11-29——"><span class="nav-number">5.</span> <span class="nav-text">——11.29——</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——11-30——"><span class="nav-number">6.</span> <span class="nav-text">——11.30——</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——12-1——周末"><span class="nav-number">7.</span> <span class="nav-text">——12.1——周末</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——12-8——周末"><span class="nav-number">8.</span> <span class="nav-text">——12.8——周末</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#——2-27——"><span class="nav-number">9.</span> <span class="nav-text">——2.27——</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">May</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://sukamay.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sukamay.github.io/2018/10/10/toDoList/';
+          this.page.identifier = '2018/10/10/toDoList/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://sukamay.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
