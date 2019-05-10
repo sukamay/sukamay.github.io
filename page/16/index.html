@@ -286,167 +286,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/15/GuideBook/Django/DjangoInUbuntu_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/15/GuideBook/Django/DjangoInUbuntu_1/" itemprop="url">DjangoInUbuntu_1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T10:15:59+08:00">
-                2018-12-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/15/GuideBook/Django/DjangoInUbuntu_1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/12/15/GuideBook/Django/DjangoInUbuntu_1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Django-In-Ubuntu-part1"><a href="#Django-In-Ubuntu-part1" class="headerlink" title="Django In Ubuntu part1"></a>Django In Ubuntu part1</h1><h2 id="1-数据库配置"><a href="#1-数据库配置" class="headerlink" title="1. 数据库配置"></a>1. 数据库配置</h2><p>我们在项目的 settings.py 文件中找到 DATABASES 配置项，将其信息修改为：</p>
-<h2 id="HelloWorld-HelloWorld-settings-py-文件代码："><a href="#HelloWorld-HelloWorld-settings-py-文件代码：" class="headerlink" title="HelloWorld/HelloWorld/settings.py: 文件代码："></a>HelloWorld/HelloWorld/settings.py: 文件代码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;     </span><br><span class="line">    <span class="string">'default'</span>: &#123;         </span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,  </span><br><span class="line">        <span class="comment"># 或者使用 mysql.connector.django         </span></span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'test'</span>,         </span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'test'</span>,         </span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'test123'</span>,         </span><br><span class="line">        <span class="string">'HOST'</span>:<span class="string">'localhost'</span>,         </span><br><span class="line">        <span class="string">'PORT'</span>:<span class="string">'3306'</span>,     </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里添加了中文注释，所以你需要在 HelloWorld/settings.py 文件头部添加 <strong># -*- coding: UTF-8 -*-</strong>。</p>
-<p>上面包含数据库名称和用户的信息，它们与 MySQL 中对应数据库和用户的设置相同。Django 根据这一设置，与 MySQL 中相应的数据库和用户连接起来</p>
-<p><strong>Error:</strong> django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: No module named MySQLdb.</p>
-<p><strong>Solve:</strong>  python2.7 + Django1.11 , 解决方案： <code>pip install mysql-server</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# pip install mysql-python</span><br><span class="line"><span class="meta">#</span><span class="bash">随后验证一下是否安装成功</span></span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python</span><br><span class="line">Python 2.7.12 (default, Nov 12 2018, 14:36:49) </span><br><span class="line">[GCC 5.4.0 20160609] on linux2</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import MYSQLdb</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">ImportError: No module named MYSQLdb</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import MySQLdb</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-Django表单"><a href="#2-Django表单" class="headerlink" title="2. Django表单"></a>2. Django表单</h2><p>HTML表单是网站交互性的经典方式。 本章将介绍如何用Django对用户提交的表单数据进行处理。 </p>
-<hr>
-<h3 id="HTTP-请求"><a href="#HTTP-请求" class="headerlink" title="HTTP 请求"></a>HTTP 请求</h3><p>HTTP协议以”请求－回复”的方式工作。客户发送请求时，可以在请求中附加数据。服务器通过解析请求，就可以获得客户传来的数据，并根据URL来提供特定的服务。</p>
-<h4 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h4><p>我们在之前的项目中创建一个 search.py 文件，用于接收用户的请求：</p>
-<p>/HelloWorld/HelloWorld/search.py 文件代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render_to_response</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 表单</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search_form</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_to_response(<span class="string">'search_form.html'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 接收请求数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(request)</span>:</span>  </span><br><span class="line">    request.encoding=<span class="string">'utf-8'</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'q'</span> <span class="keyword">in</span> request.GET:</span><br><span class="line">        message = <span class="string">'你搜索的内容为: '</span> + request.GET[<span class="string">'q'</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        message = <span class="string">'你提交了空表单'</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(message)</span><br></pre></td></tr></table></figure>
-<p>在模板目录 templates 中添加 search_form.html 表单：</p>
-<p>/HelloWorld/templates/search_form.html 文件代码：</p>
-<p>&lt;!DOCTYPE html&gt;</p>
-<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta charset="utf-8"><br><title>菜鸟教程(runoob.com)</title><br></head><br><body><br>    <form action="/search" method="get"><br>        <input type="text" name="q"><br>        <input type="submit" value="搜索"><br>    </form><br></body><br></html>
-
-<p>urls.py 规则修改为如下形式：</p>
-<p>/HelloWorld/HelloWorld/urls.py 文件代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> view,testdb,search</span><br><span class="line"> </span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^hello$'</span>, view.hello),</span><br><span class="line">    url(<span class="string">r'^testdb$'</span>, testdb.testdb),</span><br><span class="line">    url(<span class="string">r'^search-form$'</span>, search.search_form),</span><br><span class="line">    url(<span class="string">r'^search$'</span>, search.search),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p>访问地址 <a href="http://120.76.62.132:8000/search-form" target="_blank" rel="noopener">http://120.76.62.132:8000/search-form</a> 并搜索</p>
-<p><strong>Error:</strong> 在Django视图函数中经常出现类似于’ascii’ codec can’t decode byte 0xef in position 0:ordinal not in range(128)的错误。</p>
-<p><strong>Solve:</strong> 使用同一套编码，将字符串全都转成byte string或unicode string</p>
-<p>​      1.将字符串全都转成byte string。<br>​            self.response.out.write(“你好”+self.request.get(“argu”).encode(“utf-8”))<br>​        2.将字符串全都转成unicode string。<br>​           self.response.out.write(u”你好”+self.request.get(“argu”))<br>​            byte string转换成unicode string可以这样转unicode(unicodestring, “utf-8”)    </p>
-<p><a href="https://blog.csdn.net/use_my_heart/article/details/51303317" target="_blank" rel="noopener">python编码错误</a></p>
-<p><strong>Error:</strong> django.db.utils.ProgrammingError: (1146, u”Table’’ doesn’t exist”)解决办法</p>
-<p><strong>Slove:</strong>  原因：访问了数据库里不存在的表，可能是因为在model改变之后表结构没有更新</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~/HelloWorld# python manage.py migrate</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~/HelloWorld# python manage.py makemigrations TestModel</span><br><span class="line">Migrations for 'TestModel':</span><br><span class="line">  TestModel/migrations/0002_contact_tag.py</span><br><span class="line">    - Create model Contact</span><br><span class="line">    - Create model Tag</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~/HelloWorld# python manage.py migrate TestModel</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/15/Guide_book/Django/DjangoInUbuntu_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1784,6 +1623,150 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/09/Guide_book/Mac终端_root权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/09/Guide_book/Mac终端_root权限/" itemprop="url">Mac_root</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T10:37:31+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/09/Guide_book/Mac终端_root权限/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/12/09/Guide_book/Mac终端_root权限/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mac终端-root权限"><a href="#Mac终端-root权限" class="headerlink" title="Mac终端_root权限"></a>Mac终端_root权限</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ su root </span><br><span class="line">Password:</span><br><span class="line">su: Sorry</span><br><span class="line">//在平常打开的命令行下无法打开，我输入的是我的开机密码</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo -i</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ root# su root</span><br><span class="line">sh-3.2# su xxx</span><br><span class="line">shell-init: error retrieving current directory: getcwd: cannot access parent directories: Permission denied</span><br><span class="line">bash-3.2$ exit</span><br><span class="line">exit</span><br><span class="line">sh-3.2# logout</span><br><span class="line">sh: logout: not login shell: use `exit'</span><br><span class="line">sh-3.2# exit</span><br><span class="line">exit</span><br><span class="line">xxxdeMacBook-Pro:~ root# exit</span><br><span class="line">logout</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo -i</span><br><span class="line">xxxdeMacBook-Pro:~ root# logout</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
+<h2 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1:"></a>Method 1:</h2><h3 id="login："><a href="#login：" class="headerlink" title="login："></a>login：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ su root </span><br><span class="line">Password:</span><br><span class="line">su: Sorry</span><br><span class="line">//在平常打开的命令行下无法打开，我输入的是我的开机密码</span><br></pre></td></tr></table></figure>
+<h3 id="logout："><a href="#logout：" class="headerlink" title="logout："></a>logout：</h3><ol>
+<li>输入<code>su 用户名</code>，回车。</li>
+<li>输入此用户密码，回车即可切换回此用户</li>
+</ol>
+<ol>
+<li>直接输入 <code>exit</code>也可以</li>
+</ol>
+<h2 id="Method-2"><a href="#Method-2" class="headerlink" title="Method 2:"></a>Method 2:</h2><h3 id="login：-1"><a href="#login：-1" class="headerlink" title="login："></a>login：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo -i</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ root#</span><br></pre></td></tr></table></figure>
+<p>输入密码时，不会显示任何字符，只管输入就好了</p>
+<h3 id="logout：-1"><a href="#logout：-1" class="headerlink" title="logout："></a>logout：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//method 0</span><br><span class="line">xxxdeMacBook-Pro:~ root# logout</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ </span><br><span class="line">//method 1</span><br><span class="line">xxxdeMacBook-Pro:~ root# exit</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1838,7 +1821,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">200</span>
+                  <span class="site-state-item-count">199</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
