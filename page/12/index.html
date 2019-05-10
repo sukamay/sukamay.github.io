@@ -1232,188 +1232,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/Guide_book/hexo搭建github博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/17/Guide_book/hexo搭建github博客/" itemprop="url">Djangohexo搭建github博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T17:48:03+08:00">
-                2019-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/17/Guide_book/hexo搭建github博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/17/Guide_book/hexo搭建github博客/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="hexo搭建github博客"><a href="#hexo搭建github博客" class="headerlink" title="hexo搭建github博客"></a>hexo搭建github博客</h1><h2 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a>1. 前提条件</h2><ul>
-<li>已有GitHub账号</li>
-<li>（Mac）已安装Xcode command line tools</li>
-<li>安装的工具我使用的是npm和brew</li>
-</ul>
-<h2 id="2-安装git与Node-js"><a href="#2-安装git与Node-js" class="headerlink" title="2. 安装git与Node.js"></a>2. 安装git与Node.js</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line">brew install node</span><br></pre></td></tr></table></figure>
-<h2 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3. 安装Hexo"></a>3. 安装Hexo</h2><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
-<p>为了便于发布到GitHub上，建议同时安装<code>hexo-deployer-git</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-初始化，建立博客项目"><a href="#4-初始化，建立博客项目" class="headerlink" title="4. 初始化，建立博客项目"></a>4. 初始化，建立博客项目</h2><p>选定博客网站项目程序文件的存放位置，如<code>~/develop/hexo/github/</code>，Bash中cd进入该目录下，执行命令：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo init</span></span><br></pre></td></tr></table></figure>
-<p>执行完毕后，该命令将在当前目录下生成一套标准的Hexo博客项目模板</p>
-<h2 id="5-生成网站"><a href="#5-生成网站" class="headerlink" title="5. 生成网站"></a>5. 生成网站</h2><p>上面的操作只是生成了一套网站构成所需的“源代码”，实际发布时需要根据这套“源代码”当中的配置文件、博客文档（.md文件）、主题模板等，进行组合构建，生成服务器可识别的标准HTML网站目录，此时可使用该命令：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo g</span></span><br></pre></td></tr></table></figure>
-<p>执行完毕后，在<code>public</code>目录下可看到我们自己书写的博客文档（.md文件）与所选的博客主题模板链接组合，生成的最终静态网站文件，该目录也差不多就是之后发布到GitHub上的实际文件（实际发布到GitHub的是.deploy_git目录），外部的网站“源代码”不会上传到<code>github.io</code>库</p>
-<h2 id="6-启动本地服务器"><a href="#6-启动本地服务器" class="headerlink" title="6. 启动本地服务器"></a>6. 启动本地服务器</h2><p>启动本地服务器可即时查看网站运行效果：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo s</span></span><br></pre></td></tr></table></figure>
-<p>默认地址是 <a href="http://localhost:4000/" target="_blank" rel="noopener">localhost:4000</a></p>
-<h2 id="7-选择主题"><a href="#7-选择主题" class="headerlink" title="7. 选择主题"></a>7. 选择主题</h2><p>Hexo可随时使用、更换博客主题</p>
-<p>主题文件可在<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo官方主题网页</a>中下载，以Material为例，点击主题预览图下方的主题名称链接即可进入该主题的源码发布页面 <a href="https://github.com/viosey/hexo-theme-material" target="_blank" rel="noopener">GitHub - viosey/hexo-theme-material: Material Design theme for hexo.</a></p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-15f0804b1a0593e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/875" alt="img"></p>
-<p>根据主题安装指导，下载项目至博客项目下的<code>themes</code>目录中，文件夹命名为<code>material</code>，并在博客配置文件<code>_config.yml</code>中指定使用该主题：</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">theme:</span> material</span><br></pre></td></tr></table></figure>
-<p>将material主题目录下的<code>_config.template.yaml</code>重命名为<code>_config.yaml</code></p>
-<p>参考<a href="https://material.viosey.com/docs/#/" target="_blank" rel="noopener">Material主题文档</a>进行必要配置</p>
-<p>再次执行 <code>hexo g</code>将会根据新主题重新构建整个博客</p>
-<p><strong>注意：</strong><br>1.5.6版本在执行<code>hexo g</code>时会报出TypeError错误，可参考<a href="https://github.com/viosey/hexo-theme-material/issues/686" target="_blank" rel="noopener">Issue686</a>修改dnsprefetch.ejs文件解决</p>
-<h2 id="8-发布博客"><a href="#8-发布博客" class="headerlink" title="8. 发布博客"></a>8. 发布博客</h2><h3 id="8-1-创建github-io仓库"><a href="#8-1-创建github-io仓库" class="headerlink" title="8.1 创建github.io仓库"></a>8.1 创建github.io仓库</h3><p>在自己的GitHub中，创建新仓库，标准命名为<code>GitHub用户名.github.io</code>，例如我的：wavky.github.io</p>
-<p>仓库Readme、License之类的留空即可，之后在发布上传时会被强制覆盖抹掉</p>
-<h3 id="8-2-配置SSH密钥"><a href="#8-2-配置SSH密钥" class="headerlink" title="8.2 配置SSH密钥"></a>8.2 配置SSH密钥</h3><p>参考 <a href="https://my.oschina.net/ryaneLee/blog/638440" target="_blank" rel="noopener">https://my.oschina.net/ryaneLee/blog/638440</a>配置SSH密钥一节</p>
-<h3 id="8-3-修改博客配置文件-config-yml"><a href="#8-3-修改博客配置文件-config-yml" class="headerlink" title="8.3 修改博客配置文件_config.yml"></a>8.3 修改博客配置文件<code>_config.yml</code></h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: GitHub上传仓库的完整路径，如 <span class="attribute">https</span>:<span class="comment">//github.com/wavky/wavky.github.io.git</span></span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
-<h3 id="8-4-发布到GitHub"><a href="#8-4-发布到GitHub" class="headerlink" title="8.4 发布到GitHub"></a>8.4 发布到GitHub</h3><p>在<code>hexo g</code>生成完毕后，可执行该命令发布博客到GitHub上：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo d</span></span><br></pre></td></tr></table></figure>
-<p>或在生成网站的同时进行发布：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo g -d</span></span><br></pre></td></tr></table></figure>
-<h3 id="8-5-查看效果"><a href="#8-5-查看效果" class="headerlink" title="8.5 查看效果"></a>8.5 查看效果</h3><p>点击仓库页面中的GH Pages按钮，应该可以看到真正发布在互联网上的效果</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-62b64349e01800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000" alt="img"></p>
-<h2 id="9-绑定域名"><a href="#9-绑定域名" class="headerlink" title="9. 绑定域名"></a>9. 绑定域名</h2><p>GitHub Pages 默认提供的是 <code>GitHub用户名.github.io</code>（例如我的：wavky.github.io）作为博客访问地址，可设置绑定自定义域名</p>
-<p>在博客项目目录的source文件夹中，创建一个CNAME文件，存储预备使用的个人域名，如：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在<span class="keyword">source</span>目录下</span><br><span class="line"><span class="keyword">echo</span> story.wavky.<span class="keyword">com</span> &gt; CNAME</span><br></pre></td></tr></table></figure>
-<p>清理Hexo缓存并重新生成发布</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br><span class="line"><span class="attribute">hexo g -d</span></span><br></pre></td></tr></table></figure>
-<p>GitHub项目页面中Setting设置界面，滚到GitHub Pages部分确认域名无误</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-470936f5e8311d8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/961" alt="img"></p>
-<p>在个人域名提供商（如阿里云万网）中，进入DNS设置界面，追加一条CNAME记录，这里我指定以story前缀的个人域名跳转到原来的默认的博客域名<code>wavky.github.io</code>，记录如下：</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-b1c03461cd7dcc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/842" alt="img"></p>
-<p><strong>注：其他类型的域名绑定方式（例如IP指向等），在最后一步DNS设置中操作会不一样</strong></p>
-<p>作者：Wavky</p>
-<p>链接：<a href="https://www.jianshu.com/p/cb0750324e26" target="_blank" rel="noopener">https://www.jianshu.com/p/cb0750324e26</a></p>
-<p>來源：简书</p>
-<p>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1894,194 +1712,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/Guide_book/QT_tablewidget/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/17/Guide_book/QT_tablewidget/" itemprop="url">QT_tablewidget</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T10:14:13+08:00">
-                2019-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/17/Guide_book/QT_tablewidget/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/17/Guide_book/QT_tablewidget/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="qt-tablewidget"><a href="#qt-tablewidget" class="headerlink" title="qt tablewidget"></a>qt tablewidget</h1><p>2018-6-11</p>
-<p>基于qt的tablewidget 实现文件系统的模拟，treewidget实现树形目录</p>
-<p>配置：mac 10.13。 Qt 5.9</p>
-<p>参考博文：<a href="https://www.cnblogs.com/zhoug2020/p/3789076.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhoug2020/p/3789076.html</a></p>
-<p>//前面一部分基本都是按照这个博主写的来的，后面基本都是随便找的🌚🙈，这里当总结一下，因为不这样下次依旧不记得咋整。。。</p>
-<h2 id="文件系统提供的操作："><a href="#文件系统提供的操作：" class="headerlink" title="文件系统提供的操作："></a>文件系统提供的操作：</h2><ul>
-<li><ul>
-<li>格式化   报错了。。。吐血。。🙃，调了半天了，太难过了，我还是洗洗睡了吧</li>
-<li>创建子目录。  ok😃</li>
-<li>删除子目录。  Ok</li>
-<li>显示目录。    ok</li>
-<li>更改当前目录。 Ok，一点树形目录就可以啦</li>
-<li>创建文件。ok</li>
-<li>打开文件。ok</li>
-<li>关闭文件。还没写，ok？直接关就好了啊。。。</li>
-<li>写文件。 需要界面，害没写</li>
-<li>读文件。 同上，两功能一起，害没写，关写了个界面。。丑到哭泣，美工弱鸡哭唧唧</li>
-<li>删除文件。 Ok</li>
-<li>属性界面，害没写，o得k？</li>
-</ul>
-</li>
-</ul>
-<p>使用tablewidget 实现： 好多功能，看着心疼=. =</p>
-<p>操作表单，（添加删除行 ✔️</p>
-<p>双击某行打开该行文件</p>
-<p>右键菜单 ✔️</p>
-<p>打开某行重命名 ✔️</p>
-<p>嗷嗷！重命名还么有写成功！</p>
-<h3 id="1-qt-tablewidget初始化"><a href="#1-qt-tablewidget初始化" class="headerlink" title="1. qt tablewidget初始化"></a>1. qt tablewidget初始化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//å¯¹tablewidgetçš„åˆå§‹åŒ–</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;setColumnCount(<span class="number">4</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setDefaultSectionSize(<span class="number">150</span>);</span><br><span class="line">      <span class="comment">//è®¾ç½®è¡¨å¤´</span></span><br><span class="line">   QStringList header;</span><br><span class="line">   header&lt;&lt;tr(<span class="string">"åç§°"</span>)&lt;&lt;tr(<span class="string">"ä¿®æ”¹æ—¥æœŸ"</span>)&lt;&lt;tr(<span class="string">"å¤§å°"</span>)&lt;&lt;tr(<span class="string">"ç§ç±»"</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setHorizontalHeaderLabels(header);</span><br><span class="line">      <span class="comment">//è®¾ç½®è¡¨åç§°åŠ ç²—</span></span><br><span class="line">   QFont font = ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;font();</span><br><span class="line">   font.setBold(<span class="literal">true</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setFont(font);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setStretchLastSection(<span class="literal">true</span>); <span class="comment">//è®¾ç½®å……æ»¡è¡¨å®½åº¦</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;sectionResizeMode(QHeaderView::ResizeToContents);</span><br><span class="line">   <span class="comment">//ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setResizeMode(QHeaderView::ResizeToContents);</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setDefaultSectionSize(<span class="number">20</span>); <span class="comment">//è®¾ç½®è¡Œé«˜</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;setFrameShape(QFrame::NoFrame); </span><br><span class="line">   ui-&gt;tableWidget-&gt;setShowGrid(<span class="literal">false</span>); </span><br><span class="line">   ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setVisible(<span class="literal">false</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setSelectionMode(QAbstractItemView::ExtendedSelection);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setSelectionBehavior(QAbstractItemView::SelectRows);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setEditTriggers(QAbstractItemView::SelectedClicked);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;resizeSection(<span class="number">0</span>,<span class="number">150</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setFixedHeight(<span class="number">25</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;setStyleSheet(<span class="string">"selection-background-color:lightblue;"</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setAlternatingRowColors(<span class="literal">true</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setStyleSheet(<span class="string">"QHeaderView::section&#123;background:lightgray;&#125;"</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalScrollBar()-&gt;setStyleSheet(<span class="string">"QScrollBar&#123;background:transparent; height:10px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle&#123;background:lightgray; border:2px solid transparent; border-radius:5px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle:hover&#123;background:gray;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::sub-line&#123;background:transparent;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::add-line&#123;background:transparent;&#125;"</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;verticalScrollBar()-&gt;setStyleSheet(<span class="string">"QScrollBar&#123;background:transparent; width: 10px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle&#123;background:lightgray; border:2px solid transparent; border-radius:5px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle:hover&#123;background:gray;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::sub-line&#123;background:transparent;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::add-line&#123;background:transparent;&#125;"</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setHighlightSections(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-<p>什么鬼什么鬼</p>
-<h3 id="2-创建目录文件"><a href="#2-创建目录文件" class="headerlink" title="2. 创建目录文件"></a>2. 创建目录文件</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">QCursor cur = <span class="keyword">this</span>-&gt;cursor();</span><br><span class="line">QMenu* popMenu = <span class="keyword">new</span> QMenu(<span class="keyword">this</span>);</span><br><span class="line">QPoint point = QCursor::pos();</span><br><span class="line">QTableWidgetItem *item = ui-&gt;tableWidget-&gt;itemAt(point);</span><br><span class="line"></span><br><span class="line">popMenu-&gt;addAction(rMenu.action_open);</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_rename);</span><br><span class="line">popMenu-&gt;addSeparator();</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_delete);</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_atrribute);</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_flush);</span><br><span class="line">popMenu-&gt;addSeparator();</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_create_folder);</span><br><span class="line"></span><br><span class="line"><span class="comment">//è®¾ç½®å¿«æ·é”®     这就是我坚持用英文写注释的原因= =</span></span><br><span class="line">rMenu.action_open-&gt;setShortcut(QKeySequence::Open);</span><br><span class="line">rMenu.action_create_folder-&gt;setShortcut(QKeySequence::New);</span><br><span class="line">rMenu.action_flush-&gt;setShortcut(QKeySequence::Refresh);</span><br><span class="line">rMenu.action_delete-&gt;setShortcut(QKeySequence::Delete);</span><br><span class="line"></span><br><span class="line">popMenu-&gt;exec(QCursor::pos());</span><br><span class="line">event-&gt;accept();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Connect 方法需要写在ui初始化函数里，写在成员函数里会被多次唤醒导致一些奇奇怪怪的东西？</li>
-</ul>
-<h3 id="3-右键菜单创建"><a href="#3-右键菜单创建" class="headerlink" title="3. 右键菜单创建"></a>3. 右键菜单创建</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> rootItem = <span class="keyword">new</span>     QTreeWidgetItem(ui&gt;treeWidget,QStringList(“myFile<span class="string">"));</span></span><br><span class="line"><span class="string">rootItem-&gt;setIcon(0,folderIcon);</span></span><br><span class="line"><span class="string">itemNode.insert(root,rootItem);</span></span><br></pre></td></tr></table></figure>
-<p>对于tablewidget 表的初始化，设置表头表的格式等等</p>
-<p>2018.6.20</p>
-<p>//made by may   乱糟糟的重新整理一遍？</p>
-<h3 id="4-文件相关操作"><a href="#4-文件相关操作" class="headerlink" title="4. 文件相关操作"></a>4. 文件相关操作</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    QDir dir = QDir::current();</span><br><span class="line">    <span class="keyword">if</span>(!dir.exists(<span class="string">"myFile"</span>))&#123;</span><br><span class="line">        dir.mkdir(<span class="string">"myFile"</span>);</span><br><span class="line">    &#125;   <span class="comment">//mkdir为创建新的目录</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(root!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">        qDebug()&lt;&lt;<span class="string">"i am so cool!  "</span>&lt;&lt;root-&gt;fileName;</span><br><span class="line">    &#125;</span><br><span class="line">    QDir dir = QDir::current();</span><br><span class="line">    QString path = dir.absolutePath();</span><br><span class="line">    qDebug()&lt;&lt;path;</span><br><span class="line">    path = path + QDir::separator() + <span class="string">"myFile"</span>;</span><br><span class="line">    QFile* tempFile = <span class="keyword">new</span> QFile;</span><br><span class="line">    dir.mkpath(path);</span><br><span class="line">    dir.setCurrent(path);</span><br><span class="line">    dir.setPath(path);      <span class="comment">//此处修改了当前路径</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">补充：file-&gt;setFileName(fileName) 为在该路径下创建一个新的文件，默认为txt，其实吧。。。。我也还不知道怎么创建其他形式的文件（比如ppt啥的，但是印象中mac好像都是要打开对应的app才能新建文件的</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">QFileInfoList Widget::getFileList(QString path,node* root)&#123;</span><br><span class="line">    <span class="function">QDir <span class="title">dir</span><span class="params">(path)</span></span>;</span><br><span class="line">    QDir absDir = QDir::currentPath();</span><br><span class="line">    QString absPath = absDir.absolutePath();</span><br><span class="line">    qDebug()&lt;&lt;<span class="string">"absPath : "</span>&lt;&lt;absPath;</span><br><span class="line">    QFileIconProvider fileIconPro;</span><br><span class="line">    QIcon icon;</span><br><span class="line">    QString fileName;</span><br><span class="line">    QFileInfoList fileInfoList = dir.entryInfoList();</span><br><span class="line">    dir.setSorting(QDir::Name);</span><br><span class="line">    QFileInfoList folderList = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Dirs|QDir::Files);</span><br><span class="line">    qDebug()&lt;&lt;<span class="string">"now path: "</span>&lt;&lt;path;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i != folderList.size();i++)&#123;</span><br><span class="line">        QString name = folderList.at(i).absoluteFilePath();</span><br><span class="line">        <span class="keyword">if</span>(absPath.contains(<span class="string">'/'</span>))&#123;</span><br><span class="line">            fileName = name.replace(path+<span class="string">"/"</span>,<span class="string">""</span>);</span><br><span class="line">            fileName = fileName.replace(absPath+<span class="string">"/"</span>,<span class="string">""</span>);   qDebug()&lt;&lt;<span class="string">"parent: "</span>&lt;&lt;root-&gt;fileName&lt;&lt;<span class="string">" child: "</span>&lt;&lt;fileName;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            fileName = name.replace(path+<span class="string">"\\"</span>,<span class="string">""</span>);</span><br><span class="line">            fileName = fileName.replace(absPath+<span class="string">"\\"</span>,<span class="string">""</span>);   qDebug()&lt;&lt;<span class="string">"parent: "</span>&lt;&lt;root-&gt;fileName&lt;&lt;<span class="string">" child: "</span>&lt;&lt;fileName;</span><br><span class="line">        &#125;</span><br><span class="line">        QFileInfo fileInfo = folderList.at(i);</span><br><span class="line">        QString type;</span><br><span class="line">        <span class="keyword">int</span> permission;</span><br><span class="line">        <span class="keyword">if</span>(fileInfo.suffix() == <span class="string">""</span>)&#123;</span><br><span class="line">            type = <span class="string">"folder"</span>;</span><br><span class="line">            permission = ReadOnly;</span><br><span class="line">            icon = fileIconPro.icon(QFileIconProvider::Folder);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            type = fileInfo.suffix();</span><br><span class="line">            permission = Write;</span><br><span class="line">            icon = fileIconPro.icon(fileInfo);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> locate = <span class="number">0</span>;</span><br><span class="line">        <span class="function">FCB <span class="title">fcb</span><span class="params">(count++,fileName,type,fileInfo.created(),fileInfo.lastModified(),locate,fileInfo.size(),permission,<span class="number">0</span>)</span></span>;</span><br><span class="line">        catalog.insert(root,fileName,fcb);</span><br><span class="line">        qDebug()&lt;&lt;<span class="string">"path :"</span>&lt;&lt;name;</span><br><span class="line">        node* childRoot = catalog.find(root,fileName);</span><br><span class="line">        <span class="keyword">auto</span> item = insertTreeItem(root,fileName,icon);</span><br><span class="line">        <span class="keyword">if</span>(childRoot != <span class="literal">NULL</span> &amp;&amp; item != <span class="literal">NULL</span>)</span><br><span class="line">            itemNode.insert(childRoot,item);</span><br><span class="line">        QFileInfoList childFileList = getFileList(name,childRoot);</span><br><span class="line">        fileInfoList.append(childFileList);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileInfoList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>图标获取，</p>
-<p>qt提供了相当方便的图标获取，但提供的图标有限，此处我只用了文本的和文件夹的，也还够用 </p>
-</li>
-<li><p>创建新的文件或文件夹</p>
-</li>
-<li><p>treewidget操作: 添加item</p>
-</li>
-<li><p>获取某一个文件下的所有文件getFileList</p>
-</li>
-<li><p>获取表单此时选择的列</p>
-</li>
-<li><p>右键菜单相应事件</p>
-</li>
-</ol>
-<p>//相当生气了辣鸡pages！我决定去官网下wps，再见pages，辣鸡玩意，表格绕文本能不能别叠起来，能不能别乱跑，操碎老妈子的心了，文档从开始到放弃啊啊啊</p>
-<p>//md真好用</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/GuideBook/OpenGL环境的建立/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2213,11 +1843,308 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/GuideBook/xcode真机测试 无开发者模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/17/GuideBook/xcode真机测试 无开发者模式/" itemprop="url">xcode真机测试（无开发者模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T10:07:38+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/17/GuideBook/xcode真机测试 无开发者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/17/GuideBook/xcode真机测试 无开发者模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="xcode真机测试-无开发者模式"><a href="#xcode真机测试-无开发者模式" class="headerlink" title="xcode真机测试 无开发者模式"></a>xcode真机测试 无开发者模式</h1><p>%&gt;. &lt; 作为交不起开发者账号年费的穷逼，hci作业要用到真机测试只能酱紫了噗</p>
+<p>% 希望哪天可以自己做个app上架，不求发家致富只求流量钱能够我交个年费</p>
+<p>测试设备：mac 10.13.4； xcode9.4； iphone ios 11.3</p>
+<ol>
+<li><p>将自己的手机用数据线连到电脑上，开启信任</p>
+</li>
+<li><p>xcode打开需要模拟的工程，此处为ARPra1，将测试设备调整为自己的设备 </p>
+<p><img src="/images/xcode真机测试0.png" alt="xcode真机测试0"></p>
+</li>
+<li><p>添加开发者账户，xcode-&gt;prefrence-&gt;account ,点击“+” -&gt; apple ID,输入自己的apple ID，点击manage，添加开发者证书  </p>
+<p><img src="/images/image-20190117101052287.png" alt="image-20190117101052287"></p>
+<p><img src="/images/image-20190117101104047.png" alt="image-20190117101104047"></p>
+</li>
+<li><p>返回工程，打开general，将identify处的bundle id 改为未出现过的id名，team处改成刚刚添加的apple id </p>
+<p><img src="/images/image-20190117101114509.png" alt="image-20190117101114509"></p>
+</li>
+<li><p>run一下这个项目你就会发现手机上装了个app，如果无法打开，打开手机上的 设置——通用——设备管理——将Apple id所对应的开发者设置为信任</p>
+</li>
+<li><p>ok，现在可以愉快的测试啦</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/04/GuideBook/Django/Django实现衣型识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/04/GuideBook/Django/Django实现衣型识别/" itemprop="url">Django实现衣型识别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T08:22:35+08:00">
+                2019-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/04/GuideBook/Django/Django实现衣型识别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/04/GuideBook/Django/Django实现衣型识别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Django实现衣型识别"><a href="#Django实现衣型识别" class="headerlink" title="Django实现衣型识别"></a>Django实现衣型识别</h1><p>衣型识别出：类型、颜色、款式</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 主要物体提取（目标检测），<a href="https://imageai-cn.readthedocs.io/zh_CN/latest/ImageAI_Object_Detection.html#" target="_blank" rel="noopener">imageAI</a></li>
+<li style="list-style: none"><input type="checkbox"> 裁剪图片，cv2</li>
+<li style="list-style: none"><input type="checkbox"> 生成透明背景的图片</li>
+<li style="list-style: none"><input type="checkbox"> 类型识别：CNN网络， tf</li>
+<li style="list-style: none"><input type="checkbox" checked> 颜色和配色提取：haishoku 库，获取主要颜色和配色，<a href="https://github.com/LanceGin/haishoku" target="_blank" rel="noopener">haishoku</a></li>
+<li style="list-style: none"><input type="checkbox"> 一些小函数：<ul>
+<li style="list-style: none"><input type="checkbox" checked> RGB（Tuple、十六进制互转</li>
+<li style="list-style: none"><input type="checkbox"> string、url互转</li>
+<li style="list-style: none"><input type="checkbox"> 向数据库中批量添加数据</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2265,7 +2192,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">163</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2276,7 +2203,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2287,7 +2214,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
