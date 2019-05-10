@@ -284,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/07/Mess/面试/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/插件化技术学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -303,7 +303,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/07/Mess/面试/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="url">Android动态加载dex技术初探</a></h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T19:00:58+08:00">
-                2019-03-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
               </time>
             
 
@@ -326,6 +326,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -334,8 +367,379 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/07/Mess/面试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/07/Mess/面试/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/插件化技术学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###Android动态加载dex技术初探</p>
+<p><a href="http://blog.csdn.net/u013478336/article/details/50734108" target="_blank" rel="noopener">http://blog.csdn.net/u013478336/article/details/50734108</a></p>
+<p>Android使用Dalvik虚拟机加载可执行程序，所以不能直接加载基于class的jar，而是需要将class转化为dex字节码。</p>
+<p>Android支持动态加载的两种方式是：DexClassLoader和PathClassLoader，DexClassLoader可加载jar/apk/dex，且支持从SD卡加载；PathClassLoader据说只能加载已经安装在Android系统内APK文件。</p>
+<p>###Android插件化基础</p>
+<p>Android简单来说就是如下操作：</p>
+<ul>
+<li>开发者将插件代码封装成Jar或者APK</li>
+<li>宿主下载或者从本地加载Jar或者APK到宿主中</li>
+<li>将宿主调用插件中的算法或者Android特定的Class（如Activity）</li>
+</ul>
+<p>###插件化开发—动态加载技术加载已安装和未安装的apk</p>
+<p><a href="http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="noopener">http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a><br>为什么引入动态加载技术？</p>
+<ul>
+<li>一个应用程序dex文件的方法数最大不能超过65536个</li>
+<li>可以让应用程序实现插件化、插拔式结构，对后期维护有益</li>
+</ul>
+<p>什么是动态加载技术</p>
+<p>动态加载技术就是使用类加载器加载相应的apk、dex、jar(必须含有dex文件)，再通过反射获得该apk、dex、jar内部的资源（class、图片、color等等）进而供宿主app使用。</p>
+<p>关于动态加载使用的类加载器</p>
+<ul>
+<li>PathClassLoader - 只能加载已经安装的apk，即/data/app目录下的apk。</li>
+<li>DexClassLoader  - 能加载手机中未安装的apk、jar、dex，只要能在找到对应的路径。</li>
+</ul>
+<h2 id="插件化技术学习"><a href="#插件化技术学习" class="headerlink" title="#插件化技术学习"></a>#插件化技术学习</h2><p>原因：</p>
+<p>各大厂商都碰到了AndroidNative平台的瓶颈：</p>
+<ol>
+<li>从技术上讲，业务逻辑的复杂代码急剧膨胀，各大厂商陆续触到65535方法数的天花板；同时，对模块热更新提出了更高的要求。</li>
+<li>在业务层面上，功能模块的解耦以及维护团队的分离也是大势所趋。</li>
+</ol>
+<p>插件化技术主要解决两个问题：</p>
+<ol>
+<li>代码加载</li>
+<li>资源加载</li>
+</ol>
+<p>###代码加载<br>类的加载可以使用Java的ClassLoader机制，还需要组件生命周期管理。</p>
+<p>###资源加载<br>用AssetManager的隐藏方法addAssetPath。</p>
+<p>##Android插件化原理解析——Hook机制之动态代理 </p>
+<p>使用代理机制进行API Hook进而达到方法增强。</p>
+<p>静态代理</p>
+<p>动态代理：可以简单理解为JVM可以在运行时帮我们动态生成一系列的代理类。</p>
+<p>###代理Hook</p>
+<p>如果我们自己创建代理对象，然后把原始对象替换为我们的代理对象，就可以在这个代理对象中为所欲为了；修改参数，替换返回值，称之为Hook。</p>
+<p>整个Hook过程简要总结如下：</p>
+<ol>
+<li>寻找Hook点，原则是静态变量或者单例对象，尽量Hook public的对象和方法，非public不保证每个版本都一样，需要适配。</li>
+<li>选择合适的代理方式，如果是接口可以用动态代理；如果是类可以手动写代理也可以使用cglib。</li>
+<li>偷梁换柱－用代理对象替换原始对象</li>
+</ol>
+<p>##Android插件化原理解析——Hook机制之Binder Hook </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/软工经验汇总：/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/Mess/软工经验汇总：/" itemprop="url">软工经验汇总：</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mess/" itemprop="url" rel="index">
+                    <span itemprop="name">Mess</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/Mess/软工经验汇总：/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/软工经验汇总：/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="软工经验汇总："><a href="#软工经验汇总：" class="headerlink" title="软工经验汇总："></a>软工经验汇总：</h1><ul>
+<li>保存每次的会议记录，每次开会找一个会议记录员（Q&amp;A，ToDoList，讨论内容。目标，讨论结果，分工安排</li>
+<li>项目初期寻找一个合适的项目管理平台，包括项目需求跟踪、任务完成进度等等</li>
+<li>找文档的模版！</li>
+<li>工作量的合理预估！给一个弹性的时间！（哭了，忽略的前后端的整合让人头秃</li>
+<li>阶段性的项目检查！（比如，前端的孩子写的是纯静态的，使用的位置都是绝对位置，后期调起来相当不方便</li>
+<li>找相关的工具：<ul>
+<li>项目进度：ones.ai</li>
+<li>讨论：在线腾讯文档</li>
+<li>uml绘制：staruml</li>
+<li>开发工具，求问有没有代码直接导出图的</li>
+<li>数据库图：powerDesign</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/面试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/Mess/面试/" itemprop="url">面试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mess/" itemprop="url" rel="index">
+                    <span itemprop="name">Mess</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/Mess/面试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/面试/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -455,7 +859,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/07/Web/Web_2/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/专业综合项目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -474,7 +878,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/07/Web/Web_2/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/Mess/专业综合项目/" itemprop="url">专业综合项目</a></h1>
         
 
         <div class="post-meta">
@@ -486,8 +890,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T09:06:34+08:00">
-                2019-03-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -497,6 +901,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mess/" itemprop="url" rel="index">
+                    <span itemprop="name">Mess</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -505,8 +931,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/07/Web/Web_2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/07/Web/Web_2/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/Mess/专业综合项目/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/专业综合项目/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -538,880 +964,528 @@
       
         
           
-            <h1 id="Web-2-HTML-basis"><a href="#Web-2-HTML-basis" class="headerlink" title="Web_2 HTML basis"></a>Web_2 HTML basis</h1><p>Markup language</p>
-<p><strong>Exercise：</strong>简历（html+css</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/07/By-talk/减肥大计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/07/By-talk/减肥大计/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T07:58:33+08:00">
-                2019-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/07/By-talk/减肥大计/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/07/By-talk/减肥大计/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="减肥大计"><a href="#减肥大计" class="headerlink" title="减肥大计"></a>减肥大计</h1><p>一起减肥吧姐妹们，管住嘴，迈开腿</p>
+            <p>专业综合项目</p>
+<p>从第3周开始：</p>
+<p>每周选择3组来进行汇报</p>
+<p>每两周研究生会来面对面交流</p>
+<p>可选topic：</p>
 <ol>
-<li>饮食控制</li>
-<li>运动</li>
+<li>环视图像中语义视觉目标的分割：识别目标：方向标志、减速带、泊车位</li>
+<li>inverse tone mapping with deep learning，低维到高维的映射（LDR-HDR）</li>
+<li>基于单目相机的时间里程器。15221927149</li>
+<li>移动端游戏平台（休闲类小游戏，时长为几分钟）游戏大厅+游戏 15801758610</li>
+<li>ros驱动的移动机器人</li>
+<li>人脸表情和姿态迁移，facerig</li>
+<li>云书籍，类似豆瓣的东西</li>
+<li>语义slam相关研究</li>
+<li>手写数字串识别：切片+单字识别，CRNN</li>
+<li>为图片自动加标签（微软有相关的API</li>
 </ol>
-<p>不吃零食</p>
-<p>分享三餐</p>
-<p>运动分享</p>
-<p>本群制度：</p>
-<p>每周每个人立个目标，其余人监督</p>
-<p>个人本周目标：</p>
-<p>控制饮食，不吃零食（每日打卡）</p>
-<p>每天睡前保证十五分钟及以上的运动（第二天早上打卡或者当天晚上打卡）</p>
-<p>我的睡前运动：</p>
-<ol>
-<li>腿贴墙保持到累了？</li>
-<li>空中自行车</li>
-<li>仰卧起坐 12 * 5</li>
+<p>室内导航？</p>
+<p>VIO？</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Plan/newYearResolution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/Plan/newYearResolution/" itemprop="url">newYearResolution</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Plan/" itemprop="url" rel="index">
+                    <span itemprop="name">Plan</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/Plan/newYearResolution/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Plan/newYearResolution/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="newYearResolution"><a href="#newYearResolution" class="headerlink" title="newYearResolution"></a>newYearResolution</h1><ol>
+<li>保研！</li>
+<li>找到一份实习！ ✔️</li>
+<li>把脸养到上妆不浮粉！   ✔️</li>
+<li>瘦到小可爱的身体比例！</li>
+<li>每周给爸妈打个电话！</li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/06/GameDesign/GameDesign_0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/06/GameDesign/GameDesign_0/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T13:38:24+08:00">
-                2019-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/06/GameDesign/GameDesign_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/06/GameDesign/GameDesign_0/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="GameDesign-0"><a href="#GameDesign-0" class="headerlink" title="GameDesign_0"></a>GameDesign_0</h1><p>tomb rainder</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/06/SoftwareTesting/SoftwareTesting_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/06/SoftwareTesting/SoftwareTesting_1/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T10:58:54+08:00">
-                2019-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/06/SoftwareTesting/SoftwareTesting_1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/06/SoftwareTesting/SoftwareTesting_1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SoftwareTesting-1"><a href="#SoftwareTesting-1" class="headerlink" title="SoftwareTesting_1"></a>SoftwareTesting_1</h1><p>SAP system for test?</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/05/SoftwareManagement/Management_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/05/SoftwareManagement/Management_2/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T10:21:09+08:00">
-                2019-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/05/SoftwareManagement/Management_2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/05/SoftwareManagement/Management_2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Management-2"><a href="#Management-2" class="headerlink" title="Management_2"></a>Management_2</h1><h2 id="Software-price"><a href="#Software-price" class="headerlink" title="Software price"></a>Software price</h2><h2 id="Plan-driven-deveploment"><a href="#Plan-driven-deveploment" class="headerlink" title="Plan-driven deveploment"></a>Plan-driven deveploment</h2><p>plan sections </p>
-<p>​    introduction</p>
-<p>​    project organization</p>
-<blockquote>
-<p>never stop learning</p>
-</blockquote>
-<h2 id="Project-scheduling"><a href="#Project-scheduling" class="headerlink" title="Project scheduling"></a>Project scheduling</h2><p>using barchart to represent your schedule</p>
-<h2 id="Agile-planning"><a href="#Agile-planning" class="headerlink" title="Agile planning"></a>Agile planning</h2><h2 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/05/Master/leetcode_medium/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/05/Master/leetcode_medium/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T09:37:05+08:00">
-                2019-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/05/Master/leetcode_medium/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/05/Master/leetcode_medium/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Leetcode-medium"><a href="#Leetcode-medium" class="headerlink" title="Leetcode_medium"></a>Leetcode_medium</h1><h2 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h2><h2 id="Time-recording"><a href="#Time-recording" class="headerlink" title="Time recording"></a>Time recording</h2><table>
+<p>学会做计划并学会分析达到结果和预期结果的差异，年末盘点</p>
+<p>复盘：周、月、学期</p>
+<p>学会记录自己的生活</p>
+<h2 id="打卡计划："><a href="#打卡计划：" class="headerlink" title="打卡计划："></a>打卡计划：</h2><p>始于2019.2.25</p>
+<table>
 <thead>
 <tr>
-<th>order</th>
-<th>start</th>
-<th>end</th>
-<th>time</th>
+<th>week/day</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>33</td>
-<td>20:27</td>
-<td>21:00</td>
+<td>1</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️□</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>2</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️□</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️□</td>
+</tr>
+<tr>
+<td>3</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️□</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>4</td>
+<td>✗</td>
+<td>✗</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>5</td>
+<td>✗</td>
+<td>✗</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>6</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>7</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>8</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>9</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>10</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>11</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr>
-<td>34</td>
-<td>21:01</td>
-<td>21:07</td>
+<td>12</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr>
+<td>13</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="Question-solving"><a href="#Question-solving" class="headerlink" title="Question solving"></a>Question solving</h2><h3 id="Q503：下一个最大元素-Ⅱ"><a href="#Q503：下一个最大元素-Ⅱ" class="headerlink" title="Q503：下一个最大元素 Ⅱ"></a>Q503：下一个最大元素 Ⅱ</h3><blockquote>
-<p>给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">输入: [1,2,1]</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">输出: [2,-1,2]</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">解释: 第一个 1 的下一个更大的数是 2；</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">数字 2 找不到下一个更大的数； </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">第二个 1 的下一个最大的数需要循环搜索，结果也是 2。</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>注意:</strong> 输入数组的长度不会超过 10000。</p>
-</blockquote>
-<p>解法一：</p>
-<p>暴力解，对于每个解都循环一遍数组长度直到找到下一个大的数</p>
-<p>解法二：</p>
-<p>参考 ” 下一个最大元素 Ⅰ “，按数组遍历顺序，使用栈，第一个元素入栈，若之后的元素比它小，则入栈，若比它大，则栈顶元素的下一个最大的数就是当前遍历到的数，同时开个队列，存一个递增序列，遍历完毕，栈中元素为找不到的，继续处理，栈顶元素与队列元素对比，栈顶小，队列头为栈顶下一个最大的数，队列小，出队列</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nextGreaterElements(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.empty())</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec(nums.size(),<span class="number">-1</span>);</span><br><span class="line">        <span class="built_in">stack</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; s;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">        s.push(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&#123;nums[<span class="number">0</span>],<span class="number">0</span>&#125;);</span><br><span class="line">        q.push(nums[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(;i &lt; nums.size();i++)&#123;</span><br><span class="line">           <span class="keyword">while</span>(!s.empty() &amp;&amp; nums[i] &gt; s.top().first)&#123;</span><br><span class="line">               vec[s.top().second] = nums[i];</span><br><span class="line">               s.pop();</span><br><span class="line">           &#125;</span><br><span class="line">            s.push(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&#123;nums[i],i&#125;);</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt; q.back())&#123;</span><br><span class="line">                q.push(nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!s.empty())&#123;</span><br><span class="line">            i = s.top().second;</span><br><span class="line">            <span class="keyword">while</span>(!q.empty() &amp;&amp; nums[i] &gt;= q.front())&#123;</span><br><span class="line">                q.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!q.empty() &amp;&amp; i &gt;= <span class="number">0</span> &amp;&amp; nums[i] &lt; q.front())&#123;</span><br><span class="line">                vec[i] = q.front();</span><br><span class="line">            &#125;</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/05/Web/Web_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/05/Web/Web_1/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T08:09:41+08:00">
-                2019-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/05/Web/Web_1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/05/Web/Web_1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Web-1-web-architecture"><a href="#Web-1-web-architecture" class="headerlink" title="Web_1 web architecture?"></a>Web_1 web architecture?</h1><p>HyperText Markup Language</p>
-<p>主动指针（多媒体：图片、音频等</p>
-<p>被动指针（href</p>
-<h2 id="Web-Browser-Architecture"><a href="#Web-Browser-Architecture" class="headerlink" title="Web Browser Architecture"></a>Web Browser Architecture</h2><p>A controller </p>
-<p>A set of clients</p>
-<p>A set of interpreters</p>
-<h2 id="Web-type"><a href="#Web-type" class="headerlink" title="Web type"></a>Web type</h2><h3 id="Static-web-document"><a href="#Static-web-document" class="headerlink" title="Static web document"></a>Static web document</h3><h3 id="Active-web-document"><a href="#Active-web-document" class="headerlink" title="Active web document"></a>Active web document</h3><ol>
-<li>Textual representation: js，可以改变网页内控件</li>
-<li>Binary representation: 相对独立，与网页的控件没有交互</li>
+<h3 id="Daily-Plan✔️✗："><a href="#Daily-Plan✔️✗：" class="headerlink" title="Daily Plan✔️✗："></a>Daily Plan✔️✗：</h3><ul>
+<li style="list-style: none"><input type="checkbox"> 每天走够一万步或运动十分钟以上</li>
+<li style="list-style: none"><input type="checkbox"> 早睡早起</li>
+<li style="list-style: none"><input type="checkbox"> 刷leetcode</li>
+<li style="list-style: none"><input type="checkbox"> 记账/每月没有财政赤字/能存下钱来/最好能养活自己</li>
+</ul>
+<h3 id="Weekly-Plan■□："><a href="#Weekly-Plan■□：" class="headerlink" title="Weekly Plan■□："></a>Weekly Plan■□：</h3><ul>
+<li style="list-style: none"><input type="checkbox"> 每周敷两次面膜</li>
+<li style="list-style: none"><input type="checkbox"> 预习复习cv、软测</li>
+<li style="list-style: none"><input type="checkbox"> 给我爹打电话</li>
+</ul>
+<p>week 11：</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 联系导师</li>
+<li style="list-style: none"><input type="checkbox"> 软管第二次文档</li>
+<li style="list-style: none"><input type="checkbox"> 软测讨论</li>
+<li style="list-style: none"><input type="checkbox"> cv作业，ddl：5.19</li>
+<li style="list-style: none"><input type="checkbox"> SLAM：ORB_SLAM2继续配一下环境，考虑讲一下源码或者考虑语义部分</li>
+<li style="list-style: none"><input type="checkbox"> leetcode本周专题：字符串，数学</li>
+<li style="list-style: none"><input type="checkbox"> 每天都动一动！</li>
+<li style="list-style: none"><input type="checkbox"> cv项目开始准备一下：PyTorch环境，Caffe环境，源码下载</li>
+</ul>
+<p>week 10:</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 叉院报名 ==放弃==</li>
+<li style="list-style: none"><input type="checkbox" checked> 复旦报名</li>
+<li style="list-style: none"><input type="checkbox"> 联系导师 ==还没有开始联系呜呜==</li>
+</ul>
+<p>week 9：五一假期，全浪了= =，因为准备保研的事情心情不好，什么都没有干，很慌张</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> web hw2 ==已完成==</li>
+<li style="list-style: none"><input type="checkbox" checked> leetcode ==277/859，本周一直忙着准备材料，就没有写呜呜==</li>
+</ul>
+<p>week 8：本周奖励！！！刻刀一套+橡皮章材料！（又入坑= =）30以内？没有钱可以败了😢</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> SLAM论文：Mask R-CNN，DA-RNN，SLAM环境搭建（ORB_SLAM2，semantic）==进度：ORB_SLAM2环境搭建基本完成？语义部分还没清楚怎么跑==</li>
+<li style="list-style: none"><input type="checkbox"> 保研准备！给我好好准备！</li>
+<li style="list-style: none"><input type="checkbox" checked> leetcode本周专题：堆、深搜   ==进度：273/837==</li>
+<li style="list-style: none"><input type="checkbox" checked> web项目开始准备   ==进度： HTML部分==</li>
+<li style="list-style: none"><input type="checkbox"> cv项目开始准备 </li>
+<li style="list-style: none"><input type="checkbox"> 游戏程序设计项目开始准备</li>
+<li style="list-style: none"><input type="checkbox" checked> 软管的pre</li>
+<li style="list-style: none"><input type="checkbox"> 算法竞赛100pages？看心情吧🙃</li>
+</ul>
+<p>week 7：本周奖励！！！气味图书馆的香水～，预算60？ </p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 系统学习html ==进度：算是在系统学习吧==</li>
+<li style="list-style: none"><input type="checkbox" checked> 算法200pages ==进度：200/527，不太想看了，但是这周leetcode刷题刷得忘乎所以==</li>
+<li style="list-style: none"><input type="checkbox" checked> leetcode本周专题：队列、树，每天至少一个小时的编程时间，至少两道题 ==进度：251/829==</li>
+<li style="list-style: none"><input type="checkbox" checked> SLAM两篇论文，记录看论文的时间 ==进度：Faster R-CNN， Mask R-CNN，没看具体论文，看了纲要==</li>
+<li style="list-style: none"><input type="checkbox" checked> 保研材料要准备好了！先跟导师联系一下 ==进度：55555就是不想动怎么办哭了==</li>
+<li style="list-style: none"><input type="checkbox"> 不吃零食！这么热的天不适合吃零食！==进度：对不起，某个下午破戒了==</li>
+<li style="list-style: none"><input type="checkbox"> 线性代数基础知识汇总，概率论基础知识汇总。==进度：并没有进度🤦‍♀️==</li>
+</ul>
+<p>week 6：本周奖励！！！</p>
+<p>本周只有三天/🤦‍♀️，其余4、5、6、7都去玩了，就不弄这么多任务了，奖励？奖励就是好好玩吧嘻嘻</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 看完CPP ==进度：看完了！但是还是不太记得，需要重复记忆一下==</li>
+<li style="list-style: none"><input type="checkbox" checked> leetcode本周专题：队列、树 ==进度：事实是看了但是都不会写，195/852==</li>
+<li style="list-style: none"><input type="checkbox" checked> 脚本作业 ==进度：👌，没毛病，原来有个小问题调布局的小问题但是都解决啦开心哈哈哈==</li>
+</ul>
+<p>week 5：本周奖励：！！！气味图书馆香水一套！</p>
+<p>？？？这周我都干了什么？？？整周摸鱼？？？我完了</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> leetcode本周专题：<strong>数组、栈</strong>，每天至少一个小时的编程时间，题量至少20+ ==进度：184/844，时间完成了但是好像题量不大够==</li>
+<li style="list-style: none"><input type="checkbox" checked> 算法竞赛200pages ==进度：还是127/500==</li>
+<li style="list-style: none"><input type="checkbox" checked> 语义SLAM继续看，开始了解框架，从发展历史开始（SLAM概念的提出、LIDAR SLAM、Real-time、PAM、DTAM）==进度：做完报告之后开始躺尸，🤪==</li>
+<li style="list-style: none"><input type="checkbox" checked> 手帐了解一下嘻嘻 ==进度：总有那么几天忘记事情。。==</li>
+<li style="list-style: none"><input type="checkbox"> 不吃零食！！！不要吃撑！每天记录一下吃了啥！ ==进度：对不起，又破戒了，很忧伤==</li>
+<li style="list-style: none"><input type="checkbox" checked> 啊啊啊啊傻子的生礼！海欣的生礼！ ==进度：准备就绪？算了就这样吧==</li>
+<li style="list-style: none"><input type="checkbox" checked> cv Assignment1 ==被自己菜到哭泣的一天，无比忧伤==</li>
+<li style="list-style: none"><input type="checkbox"> optional：完成一个自己的网站</li>
+</ul>
+<p>week 4：本周奖励：手帐胶带5卷！预算30？（花花、基础款（方格纹、波点纹、英文字）、可爱系列、爱丽丝茶会 ✔️</p>
+<p>哭泣！周末都在弄PPT！生气！</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> leetcode以数据结构为专题的训练，每天一个专题（顺序：数组、链表、栈、队列、多维数组、树（两周：二叉树、线索二叉树、Huffman树）、堆、集合、字典、二叉搜索树、AVL树、红黑树、B树、图、排序），本周专题：<strong>链表，数组</strong>，每天至少一个小时的编程时间 ==进度：只有周日这天没达到，哭泣/😭，我马上写！==</li>
+<li style="list-style: none"><input type="checkbox" checked> 算法竞赛200pages ==进度：120/500（后面一直没有空看了嘤嘤嘤，下周开始看！）== </li>
+<li style="list-style: none"><input type="checkbox" checked> 看完数据结构 ==进度：469/512，嗷，姑且算是看完了==</li>
+<li style="list-style: none"><input type="checkbox" checked> CPP300pages，尽量看完 ==进度：654/917， 啊啊啊差一点！==</li>
+<li style="list-style: none"><input type="checkbox"> 保研准备资料，保研复习的时间表规划好</li>
+<li style="list-style: none"><input type="checkbox"> 周末：完成一个自己的网站（先做好梁爽姐姐给的作业 吧</li>
+<li style="list-style: none"><input type="checkbox" checked> 语义SLAM看完十四讲，看些基础论文 ==进度：看完了前端部分，多亏庭杰帮理逻辑！庭杰牛逼！==</li>
+<li style="list-style: none"><input type="checkbox" checked> 每天十分钟记录当天的安排和心情，啊手帐手帐！想乱涂乱画 ==进度：嘻嘻，摸鱼使我快乐，没了周末令我忧伤==</li>
+<li style="list-style: none"><input type="checkbox" checked> 软测讨论。==进度：👌，就等小可爱的ppt了==</li>
+<li style="list-style: none"><input type="checkbox" checked> 脚本程序设计作业 ==进度：交辣！绿色令人愉悦==</li>
+</ul>
+<p>week 3:</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 保研资料再整理一波❗️❗️❗️</li>
+<li style="list-style: none"><input type="checkbox" checked> 复习数据结构！至少基本的先看一遍（线性表、栈、堆、图、树、）==进度：140/300==</li>
+<li style="list-style: none"><input type="checkbox"> 复习算法！（动归、分治、减治 ==进度：对不起还没有开始QAQ==</li>
+<li style="list-style: none"><input type="checkbox" checked> leetcode中等题每天2道，简单题1道，了解算法，记录写题的时间，写解析和注释！！！==进度：题量达到了，时间没记，注释没写==</li>
+<li style="list-style: none"><input type="checkbox" checked> CPP看完一半   ==进度：405/917==</li>
+<li style="list-style: none"><input type="checkbox" checked> 投递简历（阿里、SAP、字节跳动、网易、旷视、商汤。 ==进度：阿里投了还没测评，字节跳动周六笔试，旷视和商汤就学好cv再投吧==</li>
+<li style="list-style: none"><input type="checkbox"> 瘦一斤！不吃零食！！==对不起，破戒了，吃撑很难受，怀疑自己都有自虐倾向QAQ，but好像轻了一丢丢？就一丢丢/🤦‍♀️==</li>
+<li style="list-style: none"><input type="checkbox" checked> 看SLAM的基础知识，确定自己负责的模块。 ==进度：SLAM For Dummies刚看开头，大致了解流程==</li>
+<li style="list-style: none"><input type="checkbox" checked> 了解一下typescript。==进度：基本搭建，react第一步，css基本语法=</li>
+<li style="list-style: none"><input type="checkbox" checked> 软管讨论，第一次pre ==进度：虽然并没有讨论出什么==</li>
+<li style="list-style: none"><input type="checkbox" checked> 软测讨论，第一次pre  ==进度：推迟到下周==</li>
+<li style="list-style: none"><input type="checkbox" checked> 游戏程序设计确定自己需要制作的游戏，先玩一下尝试一下。==进度：对不起不会装模拟器= ===</li>
+</ul>
+<p>week 2:</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 看完CPP三分之一，复习C++基础知识 ==进度：200/917==</li>
+<li style="list-style: none"><input type="checkbox" checked> 买好去扬州的票，看一下住宿     ==进度：买了去镇江的票，定了当晚的酒店==</li>
+<li style="list-style: none"><input type="checkbox" checked> 本周刷50题leetcode，总结回顾， 搭配复习基础知识。==进度：50题👌，算法知识还未开始复习==</li>
+<li style="list-style: none"><input type="checkbox" checked> 完成简历 ==进度： 有需要更新的地方没有更新==</li>
+</ul>
+<p>week 1:</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 保研相关：整理好保研相关资料的表格，确定想去的学校及相关的材料，技能，针对性的练习</li>
+<li style="list-style: none"><input type="checkbox" checked> 粗略看一下本学期所学习课程的课件、了解课程项目</li>
+<li style="list-style: none"><input type="checkbox" checked> 记住自己的课表</li>
+<li style="list-style: none"><input type="checkbox"> 定好去扬州的计划</li>
+<li style="list-style: none"><input type="checkbox" checked> 定好刷leetcode的时间节点，刷的题量</li>
+<li style="list-style: none"><input type="checkbox"> 业余时间的安排</li>
+<li style="list-style: none"><input type="checkbox"> 买辆自行车</li>
+<li style="list-style: none"><input type="checkbox"> 复习线代和微积分</li>
+<li style="list-style: none"><input type="checkbox" checked> 记录刷leetcode题目的时间</li>
+</ul>
+<h3 id="Monthly-Plan●○："><a href="#Monthly-Plan●○：" class="headerlink" title="Monthly Plan●○："></a>Monthly Plan●○：</h3><p>month 5：</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 机试</li>
+<li style="list-style: none"><input type="checkbox"> 笔试部分</li>
+</ul>
+<p>month 3：</p>
+<p>month 1:</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 读两本书：追风筝的人、养瘦</li>
+<li style="list-style: none"><input type="checkbox"> 体检</li>
+</ul>
+<h2 id="综合目标"><a href="#综合目标" class="headerlink" title="综合目标"></a>综合目标</h2><p>希望新的一年的自己，变得独立、坚强、自信</p>
+<h3 id="一、专业知识"><a href="#一、专业知识" class="headerlink" title="一、专业知识"></a>一、专业知识</h3><ol>
+<li>刷算法的题目</li>
+<li>阅读论文</li>
+<li>写一份满意的简历</li>
+<li>练习打字</li>
+<li>保研</li>
 </ol>
-<p>==typescript==</p>
-<h3 id="Dynamic-web-document"><a href="#Dynamic-web-document" class="headerlink" title="Dynamic web document"></a>Dynamic web document</h3><p>runs on web server : can create a html document each time a request arrives</p>
-<p>Common Gateway Interface</p>
-<p>==install php(first) , apache==</p>
-<p>不考虑网页状态，不断动态更新可能会导致服务器压力很大</p>
-<p>由此，Ajax诞生</p>
+<h3 id="二、个人健康"><a href="#二、个人健康" class="headerlink" title="二、个人健康"></a>二、个人健康</h3><ol>
+<li>每天走够一万步或者运动十分钟以上</li>
+<li>早睡：每晚十二点前睡，早起：每天七点半起床</li>
+<li>饮食规律，养成良好的饮食习惯，【饮食有效与健康</li>
+<li>寻找一个有效的缓解自己低落的情绪的方法并记录下来：手帐</li>
+<li>学习心理学</li>
+</ol>
+<h3 id="三、休闲娱乐"><a href="#三、休闲娱乐" class="headerlink" title="三、休闲娱乐"></a>三、休闲娱乐</h3><ol>
+<li>去三座没有去过的城市：</li>
+<li>每周看一部电影或者看几集番</li>
+</ol>
+<h3 id="四、家庭生活"><a href="#四、家庭生活" class="headerlink" title="四、家庭生活"></a>四、家庭生活</h3><ol>
+<li>自动动手做3道菜</li>
+<li>给父母过生日，给父母买生日礼物</li>
+</ol>
+<h3 id="五、个人成长"><a href="#五、个人成长" class="headerlink" title="五、个人成长"></a>五、个人成长</h3><ol>
+<li>学好英语</li>
+<li>学会日语的基本日常交流</li>
+<li>学会读书，如何读取主要信息，文学类倒不用，若是阅读专业书籍，掌握主心骨</li>
+<li>读10本书</li>
+</ol>
+<h3 id="六、职业发展"><a href="#六、职业发展" class="headerlink" title="六、职业发展"></a>六、职业发展</h3><ol>
+<li>做好自身职业规划</li>
+<li>get新技能<ol>
+<li>学会使用彩铅</li>
+<li>学一些简单的手帐排版</li>
+<li>练习圆体</li>
+<li>刻一个橡皮章</li>
+<li>学会一些拍照的技能！</li>
+<li>。。。</li>
+</ol>
+</li>
+</ol>
+<h3 id="七、财务状况"><a href="#七、财务状况" class="headerlink" title="七、财务状况"></a>七、财务状况</h3><ol>
+<li>看一些关于理财的书</li>
+<li>了解关于基金的知识，并学会分析</li>
+<li>明确财务分配</li>
+</ol>
+<p>财务分配：</p>
+<p>每月1500： 食物800（水果250+食堂饭卡250）+护肤妆品300+每月一浪400</p>
+<p>时间分配：</p>
+<p>每周周三、周六，敷面膜时间，周六加上清洁面膜</p>
+<p>每两周去一次角质</p>
+<p>每周给自己定一个阶段性的小目标</p>
 
           
         
@@ -1460,7 +1534,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/01/JavaScript/js_0/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/项目主要成果/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1479,7 +1553,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/01/JavaScript/js_0/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/Mess/项目主要成果/" itemprop="url">项目主要成果</a></h1>
         
 
         <div class="post-meta">
@@ -1491,8 +1565,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-01T13:33:57+08:00">
-                2019-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -1502,6 +1576,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mess/" itemprop="url" rel="index">
+                    <span itemprop="name">Mess</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1510,8 +1606,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/01/JavaScript/js_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/01/JavaScript/js_0/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/Mess/项目主要成果/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/项目主要成果/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1543,16 +1639,30 @@
       
         
           
-            <p>Email : <a href="mailto:shuangliang@tongji.edu.cn" target="_blank" rel="noopener">shuangliang@tongji.edu.cn</a></p>
-<p>Tel: 69585491</p>
-<p>徐凯老师：<a href="mailto:luics.xu@gmail.com" target="_blank" rel="noopener">luics.xu@gmail.com</a></p>
-<p>Class participation 10% + Assignments 40% + Project 50% + bonus（active 10%)</p>
-<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p>what is Internet?</p>
-<p>——connection of computer, 节点独立而自治，有公开的标准</p>
-<p>what is the difference between Internet and www?</p>
-<p>——互联网更注重于底层的网络架构，www是基于这种架构提供的一种服务，</p>
-<p>what is url? the function?</p>
-<p>——统一资源定位符，相当于文件的地址，文件传输协议+域名+文件在服务器上的路径</p>
+            <h1 id="项目主要成果"><a href="#项目主要成果" class="headerlink" title="项目主要成果"></a>项目主要成果</h1><p>​    我们制作了android平台的应用，应用软件工程的相关知识，我们进行了需求分析、需求建模、概要设计、详细设计、编程、测试的过程，产生了一系列说明文档，对于产品的各个方面进行了详细的描述，各文档说明如下：</p>
+<p>需求规约文档：</p>
+<p>进行项目初期的市场调研，对于项目的需求以及项目的整体流程、涉及的范围有大体的了解。</p>
+<p>需求分析文档：以需求规约中得到的大体需求进行一定的抽象和细化，抽离出符合软件开发要求的需求，主要使用系统总体流程图来描述系统整体的业务流程，使用用例图来描述抽离出的功能点，使用活动图和序列图来描述用例的业务逻辑。</p>
+<p>概要设计文档：对于项目的开发进行概要的设计，包括软件结构设计、接口设计、界面设计、数据库设计以及系统出错处理设计。其中使用架构图描述软件结构设计，类图和子类图描述组件间的接口，制作产品原型来描述界面设计，绘制ER图来描述数据库的表设计以及使用相关文档说明描述系统出错处理设计。</p>
+<p>详细设计文档：在概要设计的基础上进行更详细的设计，考虑使用的算法，类的设计和函数的设计等。</p>
+<p>​    我们制作了一个已经可运行的应用，应用实现了我们进行需求建模时所总结归纳的基本功能，包括：</p>
+<ol>
+<li>对于用户的注册登录注销，修改用户信息</li>
+<li>拍照以及上传照片</li>
+<li>增删改某件衣物信息，查看衣物信息，查看衣柜</li>
+<li>接收推送消息，可根据天气进行当日搭配推荐</li>
+<li>评价、收藏货更新某个搭配</li>
+<li>选择生成某个搭配，可挑选场合，系统将会针对该场合生成对应的搭配</li>
+<li>对于系统的增删改用户</li>
+<li>衣型识别</li>
+<li>生成搭配</li>
+</ol>
+<p>项目主要成果：</p>
+<p>心得体会：</p>
+<p>项目图片：</p>
+<p>硬件研制：</p>
+<p>项目日志：</p>
+<p>其他：</p>
 
           
         
@@ -1601,7 +1711,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/28/SoftwareManagement/Management_1/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Plan/码书单/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1620,7 +1730,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/28/SoftwareManagement/Management_1/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/Plan/码书单/" itemprop="url">码书单</a></h1>
         
 
         <div class="post-meta">
@@ -1632,8 +1742,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T10:52:34+08:00">
-                2019-02-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -1643,6 +1753,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Plan/" itemprop="url" rel="index">
+                    <span itemprop="name">Plan</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1651,8 +1783,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/28/SoftwareManagement/Management_1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/28/SoftwareManagement/Management_1/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/Plan/码书单/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Plan/码书单/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1684,14 +1816,496 @@
       
         
           
-            <h1 id="Management-1-Software-Process"><a href="#Management-1-Software-Process" class="headerlink" title="Management_1 Software Process"></a>Management_1 Software Process</h1><h2 id="Software-process-model"><a href="#Software-process-model" class="headerlink" title="Software process model"></a>Software process model</h2><h3 id="Software-Process"><a href="#Software-Process" class="headerlink" title="Software Process"></a>Software Process</h3><p>structured process : such as waterfall model , Agile model  etc</p>
-<p>basic activities: specification, development, validation and evolution</p>
-<h2 id="Some-models"><a href="#Some-models" class="headerlink" title="Some models"></a>Some models</h2><p>waterfall model </p>
-<p>incremetntal development</p>
-<p>reuse-oriented software engineering: the systems is assembled from existing components.  May be plan-driven or agile.</p>
-<h3 id="waterfall"><a href="#waterfall" class="headerlink" title="waterfall"></a>waterfall</h3><p>inflexible, </p>
-<h3 id="Agile-scrum"><a href="#Agile-scrum" class="headerlink" title="Agile/scrum"></a>Agile/scrum</h3><h2 id="Process-activities"><a href="#Process-activities" class="headerlink" title="Process activities"></a>Process activities</h2><h2 id="Coping-with-change"><a href="#Coping-with-change" class="headerlink" title="Coping with change"></a>Coping with change</h2><h2 id="the-Rational-Unified-process"><a href="#the-Rational-Unified-process" class="headerlink" title="the Rational Unified process"></a>the Rational Unified process</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	inception--&gt;elaboration</span><br><span class="line">	elaboration--&gt;construction</span><br><span class="line">	construction--&gt;transaction</span><br></pre></td></tr></table></figure>
-<p>configuration management</p>
+            <p>码书单</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 资本论</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/CNN/" itemprop="url">CNN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h1><p><img src="/images/20160107230058907.png" alt="20160107230058907"></p>
+<h2 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h2><p>原图像经过卷积模版之后得到的？</p>
+<h2 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h2><p>这里再展开叙述池化层的具体作用。</p>
+<ol>
+<li><p>特征不变性，也就是我们在图像处理中经常提到的特征的尺度不变性，池化操作就是图像的resize，平时一张狗的图像被缩小了一倍我们还能认出这是一张狗的照片，这说明这张图像中仍保留着狗最重要的特征，我们一看就能判断图像中画的是一只狗，图像压缩时去掉的信息只是一些无关紧要的信息，而留下的信息则是具有尺度不变性的特征，是最能表达图像的特征。</p>
+</li>
+<li><p>特征降维，我们知道一幅图像含有的信息是很大的，特征也很多，但是有些信息对于我们做图像任务时没有太多用途或者有重复，我们可以把这类冗余信息去除，把最重要的特征抽取出来，这也是池化操作的一大作用。</p>
+</li>
+<li><p>在一定程度上防止过拟合，更方便优化。</p>
+</li>
+</ol>
+<p>激活函数</p>
+<p>全连接层</p>
+<p><strong>卷积神经网络之 fine-tuning</strong><br>何谓fine-tuning？<br>fine-tuning就是使用已用于其他目标、预训练好模型的权重或者部分权重，作为初始值开始训练。</p>
+<p>那为什么我们不用随机选取选几个数作为权重初始值？原因很简单，第一，自己从头训练卷积神经网络容易出现问题；第二，fine-tuning能很快收敛到一个较理想的状态，省时又省心。</p>
+<p>那fine-tuning的具体做法是？<br>　　•    复用相同层的权重，新定义层取随机权重初始值<br>　　•    调大新定义层的的学习率，调小复用层学习率</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/Mask R-CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/Mask R-CNN/" itemprop="url">Mask R-CNN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/Mask R-CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/Mask R-CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h1><h2 id="1-Framework"><a href="#1-Framework" class="headerlink" title="1. Framework"></a>1. Framework</h2><p><img src="https://img-blog.csdn.net/20180306103049920" alt="img"></p>
+<h2 id="2-Algorithm"><a href="#2-Algorithm" class="headerlink" title="2. Algorithm"></a>2. Algorithm</h2><ul>
+<li>首先，输入一幅你想处理的图片，然后进行对应的预处理操作，或者预处理后的图片；</li>
+<li>然后，将其输入到一个预训练好的神经网络中（ResNeXt等）获得对应的feature map；</li>
+<li>接着，对这个feature map中的每一点设定预定个的ROI，从而获得多个候选ROI；</li>
+<li>接着，将这些候选的ROI送入RPN网络进行二值分类（前景或背景）和BB回归，过滤掉一部分候选的ROI；</li>
+<li>接着，对这些剩下的ROI进行ROIAlign操作（即先将原图和feature map的pixel对应起来，然后将feature map和固定的feature对应起来）；</li>
+<li>最后，对这些ROI进行分类（N类别分类）、BB回归和MASK生成（在每一个ROI里面进行FCN操作）。</li>
+</ul>
+<h2 id="3-Detail"><a href="#3-Detail" class="headerlink" title="3. Detail"></a>3. Detail</h2><h3 id="3-1-Faster-rcnn"><a href="#3-1-Faster-rcnn" class="headerlink" title="3.1 Faster-rcnn"></a>3.1 Faster-rcnn</h3><h3 id="3-2-FCN"><a href="#3-2-FCN" class="headerlink" title="3.2 FCN"></a>3.2 FCN</h3><h3 id="3-3-ROIAlign"><a href="#3-3-ROIAlign" class="headerlink" title="3.3 ROIAlign"></a>3.3 ROIAlign</h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="noopener"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/R-CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/R-CNN/" itemprop="url">R-CNN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/R-CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/R-CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><p><a href="https://blog.csdn.net/v1_vivian/article/details/78599229" target="_blank" rel="noopener">R-CNN论文解析</a></p>
 
           
         
@@ -1779,7 +2393,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">166</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1790,7 +2404,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

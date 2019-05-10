@@ -284,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/事件分发机制/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Asynctask源码分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -303,7 +303,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/事件分发机制/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Asynctask源码分析/" itemprop="url">AsyncTask</a></h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
               </time>
             
 
@@ -326,6 +326,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -334,8 +367,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/11/GuideBook/Android/事件分发机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/事件分发机制/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Asynctask源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Asynctask源码分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -367,16 +400,10 @@
       
         
           
-            <h1 id="事件分发机制"><a href="#事件分发机制" class="headerlink" title="事件分发机制"></a>事件分发机制</h1><hr>
-<ul>
-<li>对于一个根ViewGroup来说,发生点击事件首先调用dispatchTouchEvent</li>
-<li>如果这个ViewGroup的onIterceptTouchEvent返回true就表示它要拦截当前事件,接着这个ViewGroup的onTouchEvent就会被调用.如果onIterceptTouchEvent返回false,那么就会继续向下调用子View的dispatchTouchEvent方法</li>
-<li>当一个View需要处理事件的时候,如果它没有设置onTouchListener,那么直接调用onTouchEvent.如果设置了Listenter 那么就要看Listener的onTouch方法返回值.为true就不调,为false就调onTouchEvent</li>
-<li>View的默认实现会在onTouchEvent里面把touch事件解析成Click之类的事件</li>
-<li>点击事件传递顺序 Activity -&gt; Window -&gt; View</li>
-<li>一旦一个元素拦截了某事件,那么一个事件序列里面后续的Move,Down事件都会交给它处理.并且它的onInterceptTouchEvent不会再调用</li>
-<li>View的onTouchEvent默认都会消耗事件,除非它的clickable和longClickable都是false(不可点击),但是enable属性不会影响</li>
-</ul>
+            <h2 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="#AsyncTask"></a>#AsyncTask</h2><p>首先从Android3.0开始，系统要求网络访问必须在子线程中进行，否则网络访问将会失败并抛出NetworkOnMainThreadException这个异常，这样做是为了避免主线程由于耗时操作所阻塞从而出现ANR现象。AsyncTask封装了线程池和Handler。AsyncTask有两个线程池：SerialExecutor和THREAD_POOL_EXECUTOR。前者是用于任务的排队，默认是串行的线程池：后者用于真正的执行任务。AsyncTask还有一个Handler，叫InternalHandler，用于将执行环境从线程池切换到主线程。AsyncTask内部就是通过InternalHandler来发送任务执行的进度以及执行结束等消息。</p>
+<p>AsyncTask排队执行过程：系统先把参数Params封装为FutureTask对象，它相当于Runnable，接着FutureTask交给SerialExcutor的execute方法，它先把FutureTask插入到任务队列tasks中，如果这个时候没有正在活动的AsyncTask任务，那么就会执行下一个AsyncTask任务，同时当一个AsyncTask任务执行完毕之后，AsyncTask会继续执行其他任务直到所有任务都被执行为止。</p>
+<hr>
+<p>关于线程池，AsyncTask对应的线程池ThreadPoolExecutor都是进程范围内共享的，都是static的，所以是AsyncTask控制着进程范围内所有的子类实例。由于这个限制的存在，当使用默认线程池时，如果线程数超过线程池的最大容量，线程池就会爆掉(3.0默认串行执行，不会出现这个问题)。针对这种情况。可以尝试自定义线程池，配合AsyncTask使用。</p>
 
           
         
@@ -425,7 +452,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/ANR问题/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Binder机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -444,7 +471,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/ANR问题/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Binder机制/" itemprop="url">Binder机制</a></h1>
         
 
         <div class="post-meta">
@@ -456,8 +483,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
               </time>
             
 
@@ -467,6 +494,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -475,8 +535,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/11/GuideBook/Android/ANR问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/ANR问题/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Binder机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Binder机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -508,60 +568,35 @@
       
         
           
-            <h2 id="ANR"><a href="#ANR" class="headerlink" title="#ANR"></a>#ANR</h2><p>1、ANR排错一般有三种类型</p>
+            <h2 id="Binder机制"><a href="#Binder机制" class="headerlink" title="#Binder机制"></a>#Binder机制</h2><p>首先Binder是Android系统进程间通信(IPC)方式之一。</p>
+<p>Binder使用Client－Server通信方式。Binder框架定义了四个角色：Server,Client,ServiceManager以及Binder驱动。其中Server,Client,ServiceManager运行于用户空间，驱动运行于内核空间。Binder驱动程序提供设备文件/dev/binder与用户空间交互，Client、Server和Service Manager通过open和ioctl文件操作函数与Binder驱动程序进行通信。</p>
+<p>Server创建了Binder实体，为其取一个字符形式，可读易记的名字，将这个Binder连同名字以数据包的形式通过Binder驱动发送给ServiceManager，通知ServiceManager注册一个名字为XX的Binder，它位于Server中。驱动为这个穿过进程边界的Binder创建位于内核中的实体结点以及ServiceManager对实体的引用，将名字以及新建的引用打包给ServiceManager。ServiceManager收数据包后，从中取出名字和引用填入一张查找表中。但是一个Server若向ServiceManager注册自己Binder就必须通过0这个引用和ServiceManager的Binder通信。Server向ServiceManager注册了Binder实体及其名字后，Client就可以通过名字获得该Binder的引用了。Clent也利用保留的0号引用向ServiceManager请求访问某个Binder：我申请名字叫XX的Binder的引用。ServiceManager收到这个连接请求，从请求数据包里获得Binder的名字，在查找表里找到该名字对应的条目，从条目中取出Binder引用，将该引用作为回复发送给发起请求的Client。</p>
+<p>当然，不是所有的Binder都需要注册给ServiceManager广而告之的。Server端可以通过已经建立的Binder连接将创建的Binder实体传给Client，当然这条已经建立的Binder连接必须是通过实名Binder实现。由于这个Binder没有向ServiceManager注册名字，所以是匿名Binder。Client将会收到这个匿名Binder的引用，通过这个引用向位于Server中的实体发送请求。匿名Binder为通信双方建立一条私密通道，只要Server没有把匿名Binder发给别的进程，别的进程就无法通过穷举或猜测等任何方式获得该Binder的引用，向该Binder发送请求。</p>
+<hr>
+<p>###为什么Binder只进行了一次数据拷贝？</p>
+<p>Linux内核实际上没有从一个用户空间到另一个用户空间直接拷贝的函数，需要先用copy_from_user()拷贝到内核空间，再用copy_to_user()拷贝到另一个用户空间。为了实现用户空间到用户空间的拷贝，mmap()分配的内存除了映射进了接收方进程里，还映射进了内核空间。所以调用copy_from_user()将数据拷贝进内核空间也相当于拷贝进了接收方的用户空间，这就是Binder只需一次拷贝的‘秘密’。</p>
+<p>最底层的是Android的ashmen(Anonymous shared memory)机制，它负责辅助实现内存的分配，以及跨进程所需要的内存共享。AIDL(android interface definition language)对Binder的使用进行了封装，可以让开发者方便的进行方法的远程调用，后面会详细介绍。Intent是最高一层的抽象，方便开发者进行常用的跨进程调用。</p>
+<p>从英文字面上意思看，Binder具有粘结剂的意思那么它是把什么东西粘接在一起呢？在Android系统的Binder机制中，由一系统组件组成，分别是Client、Server、Service Manager和Binder驱动，其中Client、Server、Service Manager运行在用户空间，Binder驱动程序运行内核空间。Binder就是一种把这四个组件粘合在一起的粘连剂了，其中，核心组件便是Binder驱动程序了，ServiceManager提供了辅助管理的功能，Client和Server正是Binder驱动和ServiceManager提供的基础设施上，进行Client-Server之间的通信。</p>
 <ol>
-<li>KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应</li>
-<li>BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成</li>
-<li>ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成</li>
+<li>Client、Server和ServiceManager实现在用户空间中，Binder驱动实现在内核空间中</li>
+<li>Binder驱动程序和ServiceManager在Android平台中已经实现，开发者只需要在用户空间实现自己的Client和Server</li>
+<li>Binder驱动程序提供设备文件/dev/binder与用户空间交互，Client、Server和ServiceManager通过open和ioctl文件操作函数与Binder驱动程序进行通信</li>
+<li>Client和Server之间的进程间通信通过Binder驱动程序间接实现</li>
+<li>ServiceManager是一个守护进程，用来管理Server，并向Client提供查询Server接口的能力</li>
 </ol>
-<p>2、哪些操作会导致ANR<br>在主线程执行以下操作：</p>
+<p>服务器端：一个Binder服务器就是一个Binder类的对象。当创建一个Binder对象后，内部就会开启一个线程，这个线程用户接收binder驱动发送的消息，收到消息后，会执行相关的服务代码。</p>
+<p>Binder驱动：当服务端成功创建一个Binder对象后，Binder驱动也会相应创建一个mRemote对象，该对象的类型也是Binder类，客户就可以借助这个mRemote对象来访问远程服务。</p>
+<p>客户端：客户端要想访问Binder的远程服务，就必须获取远程服务的Binder对象在binder驱动层对应的binder驱动层对应的mRemote引用。当获取到mRemote对象的引用后，就可以调用相应Binde对象的服务了。</p>
+<p>在这里我们可以看到，客户是通过Binder驱动来调用服务端的相关服务。首先，在服务端创建一个Binder对象，接着客户端通过获取Binder驱动中Binder对象的引用来调用服务端的服务。在Binder机制中正是借着Binder驱动将不同进程间的组件bind(粘连)在一起，实现通信。</p>
+<p>mmap将一个文件或者其他对象映射进内存。文件被映射进内存。文件被映射到多个页上，如果文件的大小不是所有页的大小之和，最后一个页不被使用的空间将会凋零。munmap执行相反的操作，删除特定地址区域的对象映射。</p>
+<p>当使用mmap映射文件到进程后，就可以直接操作这段虚拟地址进行文件的读写等操作，不必再调用read,write等系统调用。但需注意，直接对该段内存写时不会写入超过当前文件大小的内容。</p>
+<p>使用共享内存通信的一个显而易见的好处是效率高，因为进程可以直接读写内存，而不需要任何数据的拷贝。对于像管道和消息队列等通信方式，则需要在内核和用户空间进行四次的数据拷贝，而共享内存则只拷贝两次内存数据：一次从输入文件到共享内存区，另一次从共享内存到输出文件。实际上，进程之间在共享内存时，并不总是读写少量数据后就解除映射，有新的通信时，再重新建立共享内存区域，而是保持共享区域，直到通信完成为止，这样，数据内容一直保存在共享内存中，并没有写回文件。共享内存中的内容往往是在解除内存映射时才写回文件的。因此，采用共享内存的通信方式效率是非常高的。</p>
+<p>aidl主要就帮助了我们完成了包装数据和解包的过程，并调用了transact过程，而用来传递的数据包我们就称为parcel</p>
+<p>AIDL:xxx.aidl -&gt; xxx.java ,注册service</p>
 <ol>
-<li>高耗时的操作，如图像变换</li>
-<li>磁盘读写，数据库读写操作</li>
-<li>大量的创建新对象</li>
-</ol>
-<p>3、如何避免</p>
-<ol>
-<li>UI线程尽量只做跟UI相关的工作</li>
-<li>耗时的操作(比如数据库操作，I/O，连接网络或者别的有可能阻塞UI线程的操作)把它放在单独的线程处理</li>
-<li>尽量用Handler来处理UIThread和别的Thread之间的交互</li>
-</ol>
-<p>4、解决的逻辑</p>
-<ol>
-<li>使用AsyncTask<ol>
-<li>在doInBackground()方法中执行耗时操作</li>
-<li>在onPostExecuted()更新UI</li>
-</ol>
-</li>
-<li>使用Handler实现异步任务<ol>
-<li>在子线程中处理耗时操作</li>
-<li>处理完成之后，通过handler.sendMessage()传递处理结果</li>
-<li>在handler的handleMessage()方法中更新UI</li>
-<li>或者使用handler.post()方法将消息放到Looper中</li>
-</ol>
-</li>
-</ol>
-<p>5、如何排查</p>
-<ol>
-<li>首先分析log</li>
-<li>从trace.txt文件查看调用stack，adb pull data/anr/traces.txt ./mytraces.txt</li>
-<li>看代码</li>
-<li>仔细查看ANR的成因(iowait?block?memoryleak?)</li>
-</ol>
-<p>6、监测ANR的Watchdog</p>
-<p>最近出来一个叫LeakCanary</p>
-<p>#FC(Force Close)</p>
-<p>##什么时候会出现</p>
-<ol>
-<li>Error</li>
-<li>OOM，内存溢出</li>
-<li>StackOverFlowError</li>
-<li>Runtime,比如说空指针异常</li>
-</ol>
-<p>##解决的办法</p>
-<ol>
-<li>注意内存的使用和管理</li>
-<li>使用Thread.UncaughtExceptionHandler接口</li>
+<li>用aidl定义需要被调用方法接口</li>
+<li>实现这些方法</li>
+<li>调用这些方法</li>
 </ol>
 
           
@@ -611,7 +646,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/自定义控件/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Activity启动过程全解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -630,7 +665,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/自定义控件/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Activity启动过程全解析/" itemprop="url">Activity启动过程</a></h1>
         
 
         <div class="post-meta">
@@ -642,8 +677,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
               </time>
             
 
@@ -653,482 +688,38 @@
           </span>
 
           
-
-          
+            <span class="post-category">
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/11/GuideBook/Android/自定义控件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/自定义控件/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
-            
-          
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
 
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="自定义控件"><a href="#自定义控件" class="headerlink" title="#自定义控件"></a>#自定义控件</h2><p>自定义View的步骤：</p>
-<ul>
-<li>自定义View的属性</li>
-<li>在View的构造方法中获得我们自定义View的步骤</li>
-<li>［3.重写onMeasure］(不必须)</li>
-<li>重写onDraw</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Android图片中的三级缓存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/Android图片中的三级缓存/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/11/GuideBook/Android/Android图片中的三级缓存/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/Android图片中的三级缓存/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Android图片中的三级缓存"><a href="#Android图片中的三级缓存" class="headerlink" title="#Android图片中的三级缓存"></a>#Android图片中的三级缓存</h2><p>##为什么要使用三级缓存</p>
-<ul>
-<li>如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了</li>
-<li>假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响</li>
-<li>特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而知</li>
-<li>所以提出三级缓存策略，通过网络、本地、内存三级缓存图片，来减少不必要的网络交互，避免浪费流量</li>
-</ul>
-<p>##什么是三级缓存</p>
-<ul>
-<li>网络加载，不优先加载，速度慢，浪费流量</li>
-<li>本地缓存，次优先加载，速度快</li>
-<li>内存缓存，优先加载，速度最快</li>
-</ul>
-<p>##三级缓存原理</p>
-<ul>
-<li>首次加载 Android App 时，肯定要通过网络交互来获取图片，之后我们可以将图片保存至本地SD卡和内存中</li>
-<li>之后运行 App 时，优先访问内存中的图片缓存，若内存中没有，则加载本地SD卡中的图片</li>
-<li>总之，只在初次访问新内容时，才通过网络获取图片资源</li>
-</ul>
-<p>参考链接</p>
-<p><a href="http://www.jianshu.com/p/2cd59a79ed4a" target="_blank" rel="noopener">http://www.jianshu.com/p/2cd59a79ed4a</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Android性能优化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/Android性能优化/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/11/GuideBook/Android/Android性能优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/Android性能优化/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Android性能优化"><a href="#Android性能优化" class="headerlink" title="#Android性能优化"></a>#Android性能优化</h2><h2 id="合理管理内存"><a href="#合理管理内存" class="headerlink" title="##合理管理内存"></a>##合理管理内存</h2><p>###节制的使用Service<br>如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执行结束后会自动停止，避免了Service的内存泄漏。</p>
-<p>###当界面不可见时释放内存<br>当用户打开了另外一个程序，我们的程序界面已经不可见的时候，我们应当将所有和界面相关的资源进行释放。重写Activity的onTrimMemory()方法，然后在这个方法中监听TRIM_MEMORY_UI_HIDDEN这个级别，一旦触发说明用户离开了程序，此时就可以进行资源释放操作了。</p>
-<p>###当内存紧张时释放内存<br>onTrimMemory()方法还有很多种其他类型的回调，可以在手机内存降低的时候及时通知我们，我们应该根据回调中传入的级别来去决定如何释放应用程序的资源。</p>
-<p>###避免在Bitmap上浪费内存<br>读取一个Bitmap图片的时候，千万不要去加载不需要的分辨率。可以压缩图片等操作。</p>
-<p>###是有优化过的数据集合<br>Android提供了一系列优化过后的数据集合工具类，如SparseArray、SparseBooleanArray、LongSparseArray，使用这些API可以让我们的程序更加高效。HashMap工具类会相对比较低效，因为它需要为每一个键值对都提供一个对象入口，而SparseArray就避免掉了基本数据类型转换成对象数据类型的时间。</p>
-<p>###知晓内存的开支情况</p>
-<ul>
-<li>使用枚举通常会比使用静态常量消耗两倍以上的内存，尽可能不使用枚举</li>
-<li>任何一个Java类，包括匿名类、内部类，都要占用大概500字节的内存空间</li>
-<li>任何一个类的实例要消耗12-16字节的内存开支，因此频繁创建实例也是会在一定程序上影响内存的</li>
-<li>使用HashMap时，即使你只设置了一个基本数据类型的键，比如说int，但是也会按照对象的大小来分配内存，大概是32字节，而不是4字节，因此最好使用优化后的数据集合</li>
-</ul>
-<p>###谨慎使用抽象编程<br>在Android使用抽象编程会带来额外的内存开支，因为抽象的编程方法需要编写额外的代码，虽然这些代码根本执行不到，但是也要映射到内存中，不仅占用了更多的内存，在执行效率上也会有所降低。所以需要合理的使用抽象编程。</p>
-<p>###尽量避免使用依赖注入框架<br>使用依赖注入框架貌似看上去把findViewById()这一类的繁琐操作去掉了，但是这些框架为了要搜寻代码中的注解，通常都需要经历较长的初始化过程，并且将一些你用不到的对象也一并加载到内存中。这些用不到的对象会一直站用着内存空间，可能很久之后才会得到释放，所以可能多敲几行代码是更好的选择。</p>
-<p>###使用多个进程<br>谨慎使用，多数应用程序不该在多个进程中运行的，一旦使用不当，它甚至会增加额外的内存而不是帮我们节省内存。这个技巧比较适用于哪些需要在后台去完成一项独立的任务，和前台是完全可以区分开的场景。比如音乐播放，关闭软件，已经完全由Service来控制音乐播放了，系统仍然会将许多UI方面的内存进行保留。在这种场景下就非常适合使用两个进程，一个用于UI展示，另一个用于在后台持续的播放音乐。关于实现多进程，只需要在Manifast文件的应用程序组件声明一个android:process属性就可以了。进程名可以自定义，但是之前要加个冒号，表示该进程是一个当前应用程序的私有进程。</p>
-<h2 id="分析内存的使用情况"><a href="#分析内存的使用情况" class="headerlink" title="##分析内存的使用情况"></a>##分析内存的使用情况</h2><p>系统不可能将所有的内存都分配给我们的应用程序，每个程序都会有可使用的内存上限，被称为堆大小。不同的手机堆大小不同，如下代码可以获得堆大小：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ActivityManager manager</span> = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);</span><br><span class="line"><span class="attribute">int heapSize</span> = manager.getMemoryClass();</span><br></pre></td></tr></table></figure>
-<p>结果以MB为单位进行返回，我们开发时应用程序的内存不能超过这个限制，否则会出现OOM。</p>
-<p>###Android的GC操作<br>Android系统会在适当的时机触发GC操作，一旦进行GC操作，就会将一些不再使用的对象进行回收。GC操作会从一个叫做Roots的对象开始检查，所有它可以访问到的对象就说明还在使用当中，应该进行保留，而其他的对系那个就表示已经不再被使用了。</p>
-<p>###Android中内存泄漏<br>Android中的垃圾回收机制并不能防止内存泄漏的出现导致内存泄漏最主要的原因就是某些长存对象持有了一些其它应该被回收的对象的引用，导致垃圾回收器无法去回收掉这些对象，也就是出现内存泄漏了。比如说像Activity这样的系统组件，它又会包含很多的控件甚至是图片，如果它无法被垃圾回收器回收掉的话，那就算是比较严重的内存泄漏情况了。<br>举个例子，在MainActivity中定义一个内部类，实例化内部类对象，在内部类新建一个线程执行死循环，会导致内部类资源无法释放，MainActivity的控件和资源无法释放，导致OOM,可借助一系列工具，比如LeakCanary。</p>
-<h2 id="高性能编码优化"><a href="#高性能编码优化" class="headerlink" title="##高性能编码优化"></a>##高性能编码优化</h2><p>都是一些微优化，在性能方面看不出有什么显著的提升的。使用合适的算法和数据结构是优化程序性能的最主要手段。</p>
-<p>###避免创建不必要的对象<br>不必要的对象我们应该避免创建：</p>
-<ul>
-<li>如果有需要拼接的字符串，那么可以优先考虑使用StringBuffer或者StringBuilder来进行拼接，而不是加号连接符，因为使用加号连接符会创建多余的对象，拼接的字符串越长，加号连接符的性能越低。</li>
-<li>在没有特殊原因的情况下，尽量使用基本数据类型来代替封装数据类型，int比Integer要更加有效，其它数据类型也是一样。</li>
-<li>当一个方法的返回值是String的时候，通常需要去判断一下这个String的作用是什么，如果明确知道调用方会将返回的String再进行拼接操作的话，可以考虑返回一个StringBuffer对象来代替，因为这样可以将一个对象的引用进行返回，而返回String的话就是创建了一个短生命周期的临时对象。</li>
-<li>基本数据类型的数组也要优于对象数据类型的数组。另外两个平行的数组要比一个封装好的对象数组更加高效，举个例子，Foo[]和Bar[]这样的数组，使用起来要比Custom(Foo,Bar)[]这样的一个数组高效的多。</li>
-</ul>
-<p>尽可能地少创建临时对象，越少的对象意味着越少的GC操作。</p>
-<p>###静态优于抽象<br>如果你并不需要访问一个对系那个中的某些字段，只是想调用它的某些方法来去完成一项通用的功能，那么可以将这个方法设置成静态方法，调用速度提升15%-20%，同时也不用为了调用这个方法去专门创建对象了，也不用担心调用这个方法后是否会改变对象的状态(静态方法无法访问非静态字段)。</p>
-<p>###对常量使用static final修饰符<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> intVal = <span class="number">42</span>;  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">String</span> strVal = <span class="string">"Hello, world!"</span>;</span><br></pre></td></tr></table></figure></p>
-<p>编译器会为上面的代码生成一个初始方法，称为<clinit>方法，该方法会在定义类第一次被使用的时候调用。这个方法会将42的值赋值到intVal当中，从字符串常量表中提取一个引用赋值到strVal上。当赋值完成后，我们就可以通过字段搜寻的方式去访问具体的值了。</clinit></p>
-<p>final进行优化:</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> intVal = <span class="number">42</span>;  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">String</span> strVal = <span class="string">"Hello, world!"</span>;</span><br></pre></td></tr></table></figure>
-<p>这样，定义类就不需要<clinit>方法了，因为所有的常量都会在dex文件的初始化器当中进行初始化。当我们调用intVal时可以直接指向42的值，而调用strVal会用一种相对轻量级的字符串常量方式，而不是字段搜寻的方式。</clinit></p>
-<p>这种优化方式只对基本数据类型以及String类型的常量有效，对于其他数据类型的常量是无效的。</p>
-<p>###使用增强型for循环语法</p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> mCount;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">Counter[] mArray = ...  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> zero() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mArray.length; ++i) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += mArray[i].mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> one() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    Counter[] localArray = mArray;  </span><br><span class="line">    <span class="keyword">int</span> len = localArray.length;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += localArray[i].mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> two() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> (Counter a : mArray) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += a.mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>zero()最慢，每次都要计算mArray的长度，one()相对快得多，two()fangfa在没有JIT(Just In Time Compiler)的设备上是运行最快的，而在有JIT的设备上运行效率和one()方法不相上下，需要注意这种写法需要JDK1.5之后才支持。</p>
-<p>Tips:ArrayList手写的循环比增强型for循环更快，其他的集合没有这种情况。因此默认情况下使用增强型for循环，而遍历ArrayList使用传统的循环方式。</p>
-<p>###多使用系统封装好的API</p>
-<p>系统提供不了的Api完成不了我们需要的功能才应该自己去写，因为使用系统的Api很多时候比我们自己写的代码要快得多，它们的很多功能都是通过底层的汇编模式执行的。<br>举个例子，实现数组拷贝的功能，使用循环的方式来对数组中的每一个元素一一进行赋值当然可行，但是直接使用系统中提供的System.arraycopy()方法会让执行效率快9倍以上。</p>
-<p>###避免在内部调用Getters/Setters方法</p>
-<p>面向对象中封装的思想是不要把类内部的字段暴露给外部，而是提供特定的方法来允许外部操作相应类的内部字段。但在Android中，字段搜寻比方法调用效率高得多，我们直接访问某个字段可能要比通过getters方法来去访问这个字段快3到7倍。但是编写代码还是要按照面向对象思维的，我们应该在能优化的地方进行优化，比如避免在内部调用getters/setters方法。</p>
-<h2 id="布局优化技巧"><a href="#布局优化技巧" class="headerlink" title="##布局优化技巧"></a>##布局优化技巧</h2><p>###重用布局文件<br><strong><include></include></strong></p>
-<p><include>标签可以允许在一个布局当中引入另一个布局，那么比如说我们程序的所有界面都有一个公共的部分，这个时候最好的做法就是将这个公共的部分提取到一个独立的布局中，然后每个界面的布局文件当中来引用这个公共的布局。</include></p>
-<p>Tips:如果我们要在<include>标签中覆写layout属性，必须要将layout_width和layout_height这两个属性也进行覆写，否则覆写xiaoguo将不会生效。</include></p>
-<p><strong><merge></merge></strong></p>
-<p><merge>标签是作为<include>标签的一种辅助扩展来使用的，它的主要作用是为了防止在引用布局文件时引用文件时产生多余的布局嵌套。布局嵌套越多，解析起来就越耗时，性能就越差。因此编写布局文件时应该让嵌套的层数越少越好。</include></merge></p>
-<p>举例：比如在LinearLayout里边使用一个<include>布局。<include>里边又有一个LinearLayout，那么其实就存在了多余的布局嵌套，使用merge可以解决这个问题。</include></include></p>
-<p>###仅在需要时才加载布局</p>
-<p>某个布局当中的元素不是一起显示出来的，普通情况下只显示部分常用的元素，而那些不常用的元素只有在用户进行特定操作时才会显示出来。</p>
-<p>举例：填信息时不是需要全部填的，有一个添加更多字段的选项，当用户需要添加其他信息的时候，才将另外的元素显示到界面上。用VISIBLE性能表现一般，可以用ViewStub。ViewStub也是View的一种，但是没有大小，没有绘制功能，也不参与布局，资源消耗非常低，可以认为完全不影响性能。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ViewStub   </span><br><span class="line">        android:<span class="attribute">id</span>=<span class="string">"@+id/view_stub"</span>  </span><br><span class="line">        android:<span class="attribute">layout</span>=<span class="string">"@layout/profile_extra"</span>  </span><br><span class="line">        android:<span class="attribute">layout_width</span>=<span class="string">"match_parent"</span>  </span><br><span class="line">        android:<span class="attribute">layout_height</span>=<span class="string">"wrap_content"</span>  </span><br><span class="line">        /&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">public</span> void <span class="literal">on</span>MoreClick() &#123;  </span><br><span class="line">    <span class="attribute">ViewStub</span> viewStub = (ViewStub) findViewById(R.id.view_stub);  </span><br><span class="line">    <span class="attribute">if</span> (viewStub != null) &#123;  </span><br><span class="line">        <span class="attribute">View</span> inflatedView = viewStub.inflate();  </span><br><span class="line">        <span class="attribute">editExtra1</span> = (EditText) inflatedView.findViewById(R.id.edit_extra1);  </span><br><span class="line">        <span class="attribute">editExtra2</span> = (EditText) inflatedView.findViewById(R.id.edit_extra2);  </span><br><span class="line">        <span class="attribute">editExtra3</span> = (EditText) inflatedView.findViewById(R.id.edit_extra3);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>tips：ViewStub所加载的布局是不可以使用<merge>标签的，因此这有可能导致加载出来出来的布局存在着多余的嵌套结构。</merge></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Activity启动过程全解析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+                  ， 
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/Activity启动过程全解析/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
+            </span>
           
 
           
@@ -1138,8 +729,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/11/GuideBook/Android/Activity启动过程全解析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/Activity启动过程全解析/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Activity启动过程全解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Activity启动过程全解析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1324,7 +915,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Android基础知识/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/EventBus用法详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1343,7 +934,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/Android基础知识/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/EventBus用法详解/" itemprop="url">EventBus</a></h1>
         
 
         <div class="post-meta">
@@ -1355,8 +946,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
               </time>
             
 
@@ -1366,6 +957,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1374,8 +998,211 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/11/GuideBook/Android/Android基础知识/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/Android基础知识/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/EventBus用法详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/EventBus用法详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="EventBus"><a href="#EventBus" class="headerlink" title="#EventBus"></a>#EventBus</h2><p>###概述</p>
+<p>EventBus是一款针对Android优化的发布/订阅（publish/subscribe）事件总线。主要功能是替代Intent,Handler,BroadCast在Fragment，Activity，Service，线程之间传递消息。简化了应用程序内各组件间、组件与后台线程间的通信。优点是开销小，代码更优雅。以及将发送者和接收者解耦。比如请求网络，等网络返回时通过Handler或Broadcast通知UI，两个Fragment之间需要通过Listener通信，这些需求都可以通过EventBus实现。</p>
+<p>###EventBus作为一个消息总线，有三个主要的元素：</p>
+<ul>
+<li>Event：事件。可以是任意类型的对象</li>
+<li>Subscriber：事件订阅者，接收特定的事件。在EventBus中，使用约定来指定事件订阅者以简化使用。即所有事件订阅都都是以onEvent开头的函数，具体来说，函数的名字是onEvent,onEventMainThread，onEventBackgroundThread，onEventAsync这四个，这个和<br>ThreadMode（下面讲）有关。</li>
+<li>Publisher：事件发布者，用于通知 Subscriber 有事件发生。可以在任意线程任意位置发送事件，直接调用eventBus.post(Object) 方法，可以自己实例化 EventBus<br>对象，但一般使用默认的单例就好了：EventBus.getDefault()， 根据post函数参数的类型，会自动调用订阅相应类型事件的函数。</li>
+</ul>
+<p>###关于ThreadMode</p>
+<p>前面说了，Subscriber的函数只能是那4个，因为每个事件订阅函数都是和一个ThreadMode相关联的，ThreadMode指定了会调用的函数。有以下四个ThreadMode：</p>
+<ul>
+<li>PostThread：事件的处理在和事件的发送在相同的进程，所以事件处理时间不应太长，不然影响事件的发送线程，而这个线程可能是UI线程。对应的函数名是onEvent。</li>
+<li>MainThread: 事件的处理会在UI线程中执行。事件处理时间不能太长，这个不用说的，长了会ANR的，对应的函数名是onEventMainThread。</li>
+<li>BackgroundThread：事件的处理会在一个后台线程中执行，对应的函数名是onEventBackgroundThread，虽然名字是BackgroundThread，事件处理是在后台线程，但事件处理时间还是不应该太长，因为如果发送事件的线程是后台线程，会直接执行事件，如果当前线程是UI线程，事件会被加到一个队列中，由一个线程依次处理这些事件，如果某个事件处理时间太长，会阻塞后面的事件的派发或处理。</li>
+<li>Async：事件处理会在单独的线程中执行，主要用于在后台线程中执行耗时操作，每个事件会开启一个线程（有线程池），但最好限制线程的数目。</li>
+</ul>
+<p>根据事件订阅都函数名称的不同，会使用不同的ThreadMode，比如果在后台线程加载了数据想在UI线程显示，订阅者只需把函数命名onEventMainThread。</p>
+<p>对相应的函数名，进一步解释一下：</p>
+<p><strong>onEvent</strong>:如果使用onEvent作为订阅函数，那么该事件在哪个线程发布出来的，onEvent就会在这个线程中运行，也就是说发布事件和接收事件线程在同一个线程。使用这个方法时，在onEvent方法中不能执行耗时操作，如果执行耗时操作容易导致事件分发延迟。</p>
+<p><strong>onEventMainThread</strong>:如果使用onEventMainThread作为订阅函数，那么不论事件是在哪个线程中发布出来的，onEventMainThread都会在UI线程中执行，接收事件就会在UI线程中运行，这个在Android中是非常有用的，因为在Android中只能在UI线程中跟新UI，所以在onEvnetMainThread方法中是不能执行耗时操作的。</p>
+<p><strong>onEventBackground</strong>:如果使用onEventBackgrond作为订阅函数，那么如果事件是在UI线程中发布出来的，那么onEventBackground就会在子线程中运行，如果事件本来就是子线程中发布出来的，那么onEventBackground函数直接在该子线程中执行。</p>
+<p><strong>onEventAsync</strong>：使用这个函数作为订阅函数，那么无论事件在哪个线程发布，都会创建新的子线程在执行onEventAsync。</p>
+<p>##基本用法</p>
+<p>###引入EventBus:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">compile</span> <span class="string">'org.greenrobot:eventbus:3.0.0'</span></span><br></pre></td></tr></table></figure>
+<p>定义事件:</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageEvent</span> </span>&#123; <span class="comment">/* Additional fields if needed */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>注册事件接收者：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventBus.<span class="keyword">register</span>(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>发送事件:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventBus.post(<span class="keyword">event</span>)</span><br></pre></td></tr></table></figure>
+<p>接收消息并处理:</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3.0后不再要求事件以 onEvent 开头，而是采用注解的方式</span></span><br><span class="line"><span class="meta">@Subscribe</span>(threadMode = ThreadMode.MAIN)</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">receive</span><span class="params">(MessageEvent event)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>注销事件接收：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventBus.unregister(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>索引加速：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3.0 后引入了索引加速(默认不开启)的功能，即通过 apt 编译插件的方式，在代码编译的时候对注解进行索引，避免了以往通过反射造成的性能损耗。</span><br><span class="line">如何使用可以参考[<span class="string">官方文档</span>](<span class="link">http://greenrobot.org/eventbus/documentation/subscriber-index/</span>)</span><br></pre></td></tr></table></figure>
+<p>最后，proguard 需要做一些额外处理:</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#EventBus</span></span><br><span class="line"> -keepclassmembers <span class="class"><span class="keyword">class</span> ** </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> onEvent*(**);</span><br><span class="line">    <span class="keyword">void</span> onEvent*(**);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android基础知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android基础知识/" itemprop="url">Android：</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/Android基础知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Android基础知识/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1718,7 +1545,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/MVC,MVP,MVVM的区别/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1737,7 +1564,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="url">Handler内存泄漏分析及解决</a></h1>
         
 
         <div class="post-meta">
@@ -1749,8 +1576,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
               </time>
             
 
@@ -1760,6 +1587,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1768,8 +1628,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/11/GuideBook/Android/MVC,MVP,MVVM的区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1801,31 +1661,245 @@
       
         
           
-            <h2 id="MVC-MVP-MVVM的区别"><a href="#MVC-MVP-MVVM的区别" class="headerlink" title="#MVC,MVP,MVVM的区别"></a>#MVC,MVP,MVVM的区别</h2><p>#MVC<br>软件可以分为三部分</p>
+            <h2 id="Handler内存泄漏分析及解决"><a href="#Handler内存泄漏分析及解决" class="headerlink" title="#Handler内存泄漏分析及解决"></a>#Handler内存泄漏分析及解决</h2><p>###一、介绍</p>
+<p>首先，请浏览下面这段handler代码：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Handler</span> mLeakyHandler = <span class="keyword">new</span> <span class="type">Handler</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="comment">// ... </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在使用handler时，这是一段很常见的代码。但是，它却会造成严重的内存泄漏问题。在实际编写中，我们往往会得到如下警告：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">⚠ In <span class="keyword">Android, </span>Handler classes <span class="keyword">should </span><span class="keyword">be </span>static <span class="keyword">or </span>leaks might occur.</span><br></pre></td></tr></table></figure>
+<p>###二、分析</p>
+<p>1、 Android角度</p>
+<p>当Android应用程序启动时，framework会为该应用程序的主线程创建一个Looper对象。这个Looper对象包含一个简单的消息队列Message Queue，并且能够循环的处理队列中的消息。这些消息包括大多数应用程序framework事件，例如Activity生命周期方法调用、button点击等，这些消息都会被添加到消息队列中并被逐个处理。</p>
+<p>另外，主线程的Looper对象会伴随该应用程序的整个生命周期。</p>
+<p>然后，当主线程里，实例化一个Handler对象后，它就会自动与主线程Looper的消息队列关联起来。所有发送到消息队列的消息Message都会拥有一个对Handler的引用，所以当Looper来处理消息时，会据此回调[Handler#handleMessage(Message)]方法来处理消息。</p>
+<p>2、 Java角度</p>
+<p>在java里，非静态内部类 和 匿名类 都会潜在的引用它们所属的外部类。但是，静态内部类却不会。</p>
+<p>###三、泄漏来源</p>
+<p>请浏览下面一段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Handler mLeakyHandler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mLeakyHandler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">    &#125;, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当activity结束(finish)时，里面的延时消息在得到处理前，会一直保存在主线程的消息队列里持续10分钟。而且，由上文可知，这条消息持有对handler的引用，而handler又持有对其外部类（在这里，即SampleActivity）的潜在引用。这条引用关系会一直保持直到消息得到处理，从而，这阻止了SampleActivity被垃圾回收器回收，同时造成应用程序的泄漏。</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
+<p>=======<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>c67abfcfd66909095068cb5f0c8632dc5547131b</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>###四、泄漏解决方案</p>
+<p>首先，上面已经明确了内存泄漏来源：</p>
+<p>只要有未处理的消息，那么消息会引用handler，非静态的handler又会引用外部类，即Activity，导致Activity无法被回收，造成泄漏；</p>
+<p>Runnable类属于非静态匿名类，同样会引用外部类。</p>
+<p>为了解决遇到的问题，我们要明确一点：静态内部类不会持有对外部类的引用。所以，我们可以把handler类放在单独的类文件中，或者使用静态内部类便可以避免泄漏。</p>
+<p>另外，如果想要在handler内部去调用所在的外部类Activity，那么可以在handler内部使用弱引用的方式指向所在Activity，这样统一不会导致内存泄漏。</p>
+<p>对于匿名类Runnable，同样可以将其设置为静态类。因为静态的匿名类不会持有对外部类的引用。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of static inner classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt; mActivity;</span><br><span class="line"></span><br><span class="line">    public <span class="type">MyHandler</span>(<span class="type">SampleActivity</span> activity) &#123;</span><br><span class="line">      mActivity = <span class="keyword">new</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt;(activity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="type">SampleActivity</span> activity = mActivity.get();</span><br><span class="line">      <span class="keyword">if</span> (activity != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">MyHandler</span> mHandler = <span class="keyword">new</span> <span class="type">MyHandler</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of anonymous classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class when they are "static".</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="keyword">final</span> <span class="type">Runnable</span> sRunnable = <span class="keyword">new</span> <span class="type">Runnable</span>() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      public void run() &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mHandler.postDelayed(sRunnable, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###五、小结</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
+<p>原文链接：</p>
+<h1 id="http-www-jianshu-com-p-cb9b4b71a820"><a href="#http-www-jianshu-com-p-cb9b4b71a820" class="headerlink" title="http://www.jianshu.com/p/cb9b4b71a820"></a><a href="http://www.jianshu.com/p/cb9b4b71a820" target="_blank" rel="noopener">http://www.jianshu.com/p/cb9b4b71a820</a></h1><p>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
+<p>原文链接：</p>
+<p><a href="http://www.jianshu.com/p/cb9b4b71a820" target="_blank" rel="noopener">http://www.jianshu.com/p/cb9b4b71a820</a></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>c67abfcfd66909095068cb5f0c8632dc5547131b</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Listview详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Listview详解/" itemprop="url">ListView详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/Listview详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Listview详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ListView详解"><a href="#ListView详解" class="headerlink" title="#ListView详解"></a>#ListView详解</h2><p>直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。</p>
+<p>Adpater在ListView和数据源之间起到了一个桥梁的作用</p>
+<p>###RecycleBin机制</p>
+<p>RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类。</p>
 <ul>
-<li>视图（View）:用户界面</li>
-<li>控制器（Controller）:业务逻辑</li>
-<li>模型（Model）:数据保存</li>
+<li>RecycleBin当中使用mActiveViews这个数组来存储View，调用这个方法后就会根据传入的参数来将ListView中的指定元素存储到mActiveViews中。</li>
+<li>mActiveViews当中所存储的View，一旦被获取了之后就会从mActiveViews当中移除，下次获取同样位置的时候将会返回null，所以mActiveViews不能被重复利用。</li>
+<li>addScrapView()用于将一个废弃的View进行缓存，该方法接收一个View参数，当有某个View确定要废弃掉的时候（比如滚动出了屏幕）就应该调用这个方法来对View进行缓存，RecycleBin当中使用mScrapV</li>
+<li>iews和mCurrentScrap这两个List来存储废弃View。</li>
+<li>getScrapView 用于从废弃缓存中取出一个View，这些废弃缓存中的View是没有顺序可言的，因此getScrapView()方法中的算法也非常简单，就是直接从mCurrentScrap当中获取尾部的一个scrap view进行返回。</li>
+<li>我们都知道Adapter当中可以重写一个getViewTypeCount()来表示ListView中有几种类型的数据项，而setViewTypeCount()方法的作用就是为每种类型的数据项都单独启用一个RecycleBin缓存机制。</li>
 </ul>
-<p>各部分之间的通信方式如下：</p>
-<ol>
-<li>View传送指令到Controller</li>
-<li>Controller完成业务逻辑后，要求Model改变状态</li>
-<li>Model将新的数据发送到View，用户得到反馈</li>
-</ol>
-<p>Tips：所有的通信都是单向的。</p>
-<p>#互动模式<br>接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。</p>
-<p>另一种是直接通过Controller接受指令</p>
-<p>#MVP</p>
-<p>MVP模式将Controller改名为Presenter，同时改变了通信方向。</p>
-<ol>
-<li>各部分之间的通信，都是双向的</li>
-<li>View和Model不发生联系，都通过Presenter传递</li>
-<li>View非常薄，不部署任何业务逻辑，称为”被动视图”(Passive View)，即没有任何主动性，而Presenter非常厚，所有逻辑都部署在那里。</li>
-</ol>
-<p>#MVVM</p>
-<p>MVVM模式将Presenter改名为ViewModel，基本上与MVP模式完全一致。</p>
-<p>唯一的区别是，它采用双向绑定(data-binding)：View的变动，自动反映在ViewModel，反之亦然。</p>
+<p>View的流程分三步，onMeasure()用于测量View的大小，onLayout()用于确定View的布局，onDraw()用于将View绘制到界面上。</p>
 
           
         
@@ -1874,7 +1948,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Android系统机制/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Fragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1893,7 +1967,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/Android系统机制/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Fragment/" itemprop="url">Fragment</a></h1>
         
 
         <div class="post-meta">
@@ -1905,8 +1979,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
               </time>
             
 
@@ -1916,162 +1990,38 @@
           </span>
 
           
-
-          
+            <span class="post-category">
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/11/GuideBook/Android/Android系统机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/Android系统机制/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
-            
-          
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
 
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Android系统机制"><a href="#Android系统机制" class="headerlink" title="#Android系统机制"></a>#Android系统机制</h2><p>###APP启动过程</p>
-<ol>
-<li>Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。</li>
-<li>Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Instrumentation，调用Instrumentation.execStartActivity</li>
-<li></li>
-</ol>
-<p>###Android内核解读-应用的安装过程</p>
-<p><a href="http://blog.csdn.net/singwhatiwanna/article/details/19578947" target="_blank" rel="noopener">http://blog.csdn.net/singwhatiwanna/article/details/19578947</a><br>apk的安装过程分为两步：</p>
-<ol>
-<li>将apk文件复制到程序目录下(/data/app/)</li>
-<li>为应用创建数据目录(/data/data/package name/)、提取dex文件到指定目录(/data/delvik-cache/)、修改系统包管理信息。</li>
-</ol>
-<p>###View的事件体系</p>
-<p>###Handler消息机制</p>
-<p>###AsyncTask<br>AyncTask是一个抽象类。</p>
-<p>需要重写的方法有四个：</p>
-<ol>
-<li>onPreExecute()<br> 这个方法会在后台任务开始之前调用，用于进行一些界面上的初始化操作，比如显示一个进度条对话框等</li>
-<li>doInBackGround(Params…)<br> 在子线程中运行，不可更新UI，返回的是执行结果，第三个参数为Void不返回</li>
-<li>onProgressUpdate(Progress…)<br> 利用参数可以进行UI操作。</li>
-<li>onPostExecute(Result)<br> 返回的数据会作为参数传递到此方法中，可以利用返回的一些数据来进行一些UI操作。</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DownloadTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask&lt;Void</span>, <span class="title">Integer</span>, <span class="title">Boolean&gt;</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onPreExecute() &#123;  </span><br><span class="line">        progressDialog.show();  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> <span class="type">Boolean</span> doInBackground(<span class="type">Void</span>... params) &#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;  </span><br><span class="line">                int downloadPercent = doDownload();  </span><br><span class="line">                publishProgress(downloadPercent);  </span><br><span class="line">                <span class="keyword">if</span> (downloadPercent &gt;= <span class="number">100</span>) &#123;  </span><br><span class="line">                    <span class="keyword">break</span>;  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="type">Exception</span> e) &#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onProgressUpdate(<span class="type">Integer</span>... values) &#123;  </span><br><span class="line">        progressDialog.setMessage(<span class="string">"当前下载进度："</span> + values[<span class="number">0</span>] + <span class="string">"%"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onPostExecute(<span class="type">Boolean</span> result) &#123;  </span><br><span class="line">        progressDialog.dismiss();  </span><br><span class="line">        <span class="keyword">if</span> (result) &#123;  </span><br><span class="line">            <span class="type">Toast</span>.makeText(context, <span class="string">"下载成功"</span>, <span class="type">Toast</span>.<span class="type">LENGTH_SHORT</span>).show();  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="type">Toast</span>.makeText(context, <span class="string">"下载失败"</span>, <span class="type">Toast</span>.<span class="type">LENGTH_SHORT</span>).show();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>启动这个任务：</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="type">DownloadTask</span>().execute();</span><br></pre></td></tr></table></figure>
-<p>###图片缓存机制</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/11/GuideBook/Android/Fragment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/11/GuideBook/Android/Fragment/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+                
+                  ， 
+                
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:43:13+08:00">
-                2019-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
+            </span>
           
 
           
@@ -2081,8 +2031,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/11/GuideBook/Android/Fragment/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/11/GuideBook/Android/Fragment/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Fragment/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Fragment/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2300,6 +2250,389 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="url">MVC,MVP,MVVM的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MVC-MVP-MVVM的区别"><a href="#MVC-MVP-MVVM的区别" class="headerlink" title="#MVC,MVP,MVVM的区别"></a>#MVC,MVP,MVVM的区别</h2><p>#MVC<br>软件可以分为三部分</p>
+<ul>
+<li>视图（View）:用户界面</li>
+<li>控制器（Controller）:业务逻辑</li>
+<li>模型（Model）:数据保存</li>
+</ul>
+<p>各部分之间的通信方式如下：</p>
+<ol>
+<li>View传送指令到Controller</li>
+<li>Controller完成业务逻辑后，要求Model改变状态</li>
+<li>Model将新的数据发送到View，用户得到反馈</li>
+</ol>
+<p>Tips：所有的通信都是单向的。</p>
+<p>#互动模式<br>接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。</p>
+<p>另一种是直接通过Controller接受指令</p>
+<p>#MVP</p>
+<p>MVP模式将Controller改名为Presenter，同时改变了通信方向。</p>
+<ol>
+<li>各部分之间的通信，都是双向的</li>
+<li>View和Model不发生联系，都通过Presenter传递</li>
+<li>View非常薄，不部署任何业务逻辑，称为”被动视图”(Passive View)，即没有任何主动性，而Presenter非常厚，所有逻辑都部署在那里。</li>
+</ol>
+<p>#MVVM</p>
+<p>MVVM模式将Presenter改名为ViewModel，基本上与MVP模式完全一致。</p>
+<p>唯一的区别是，它采用双向绑定(data-binding)：View的变动，自动反映在ViewModel，反之亦然。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVP/" itemprop="url">MVP</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/MVP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVP/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MVP"><a href="#MVP" class="headerlink" title="#MVP"></a>#MVP</h2><p>###为什么需要MVP</p>
+<ol>
+<li>尽量简单<br> 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需要回调函数。View逻辑变成十分直接。</li>
+<li>后台任务<br> 当你编写一个Actviity、Fragment、自定义View的时候，你会把所有的和后台任务相关的方法写在一个静态类或者外部类中。这样，你的Task不再和Activity联系在一起，这既不会导致内存泄露，也不依赖于Activity的重建。</li>
+</ol>
+<p>###优缺点</p>
+<p>优点：</p>
+<ol>
+<li>降低耦合度，实现了Model和View真正的完全分离，可以修改View而不影响Modle</li>
+<li>模块职责划分明显，层次清晰</li>
+<li>隐藏数据</li>
+<li>Presenter可以复用，一个Presenter可以用于多个View，而不需要更改Presenter的逻辑（当然是在View的改动不影响业务逻辑的前提下）</li>
+<li>利于测试驱动开发。以前的Android开发是难以进行单元测试的（虽然很多Android开发者都没有写过测试用例，但是随着项目变得越来越复杂，没有测试是很难保证软件质量的；而且近几年来Android上的测试框架已经有了长足的发展——开始写测试用例吧），在使用MVP的项目中Presenter对View是通过接口进行，在对Presenter进行不依赖UI环境的单元测试的时候。可以通过Mock一个View对象，这个对象只需要实现了View的接口即可。然后依赖注入到Presenter中，单元测试的时候就可以完整的测试Presenter应用逻辑的正确性。</li>
+<li>View可以进行组件化。在MVP当中，View不依赖Model。这样就可以让View从特定的业务场景中脱离出来，可以说View可以做到对业务完全无知。它只需要提供一系列接口提供给上层操作。这样就可以做到高度可复用的View组件。</li>
+<li>代码灵活性</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>Presenter中除了应用逻辑以外，还有大量的View-&gt;Model，Model-&gt;View的手动同步逻辑，造成Presenter比较笨重，维护起来会比较困难。</li>
+<li>由于对视图的渲染放在了Presenter中，所以视图和Presenter的交互会过于频繁。</li>
+<li>如果Presenter过多地渲染了视图，往往会使得它与特定的视图的联系过于紧密。一旦视图需要变更，那么Presenter也需要变更了。</li>
+<li>额外的代码复杂度及学习成本。</li>
+</ol>
+<p><strong>在MVP模式里通常包含4个要素：</strong></p>
+<ol>
+<li>View :负责绘制UI元素、与用户进行交互(在Android中体现为Activity);</li>
+<li>View interface :需要View实现的接口，View通过View interface与Presenter进行交互，降低耦合，方便进行单元测试;</li>
+<li>Model :负责存储、检索、操纵数据(有时也实现一个Model interface用来降低耦合);</li>
+<li>Presenter :作为View与Model交互的中间纽带，处理与用户交互的负责逻辑。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2352,7 +2685,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">166</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2363,7 +2696,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

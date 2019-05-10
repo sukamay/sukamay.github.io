@@ -284,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/27/SoftwareTesting/SoftwareTesting_0/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -303,7 +303,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/27/SoftwareTesting/SoftwareTesting_0/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM/" itemprop="url">SLAM</a></h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T13:31:31+08:00">
-                2019-02-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -326,6 +326,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -334,8 +356,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/27/SoftwareTesting/SoftwareTesting_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/27/SoftwareTesting/SoftwareTesting_0/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SLAM/SLAM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -367,37 +389,92 @@
       
         
           
-            <h1 id="SoftwareTesting-0"><a href="#SoftwareTesting-0" class="headerlink" title="SoftwareTesting_0"></a>SoftwareTesting_0</h1><p>Introduction</p>
-<h2 id="Testing-Terms"><a href="#Testing-Terms" class="headerlink" title="Testing Terms"></a><strong>Testing Terms</strong></h2><p>• Test object </p>
-<p>• Test data </p>
-<p>• Test planning </p>
-<p>• Test design </p>
-<p>• Test implementation :</p>
-<p>• Test analysis : strategy</p>
-<p>• Test run/test suite :  may be unordered test case</p>
-<p>• Test case<br> – Test conditions (preconditions, inputs, expected </p>
-<p>outputs/behavior) </p>
-<p>• Test scenario :  ordered step test case </p>
-<h2 id="Software-quality"><a href="#Software-quality" class="headerlink" title="Software quality:"></a>Software quality:</h2><p>more than just eliminating failures </p>
+            <h1 id="SLAM"><a href="#SLAM" class="headerlink" title="SLAM"></a>SLAM</h1><p><a href="https://www.cnblogs.com/qcloud1001/p/7978238.html" target="_blank" rel="noopener">漫谈SLAM技术（上）</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1005893?fromSource=gwzcw.700232.700232.700232" target="_blank" rel="noopener">漫谈SLAM技术（下）</a></p>
+<p><a href="https://www.cnblogs.com/slamtec/p/9686610.html" target="_blank" rel="noopener">SLAM技术在国内的发展现状</a></p>
+<p><a href="https://www.cnblogs.com/zengcv/p/5994587.html" target="_blank" rel="noopener">SLAM介绍（算法基本流程）</a></p>
+<p><a href="http://m.elecfans.com/article/776880.html" target="_blank" rel="noopener">详细分析SLAM的实现和应用</a></p>
+<p><a href="https://www.cnblogs.com/wangguchangqing/p/8076061.html" target="_blank" rel="noopener">特征点的匹配</a></p>
+<p>列举几个目前比较有名的SLAM算法：<strong>PTAM,MonoSLAM, ORB-SLAM,RGBD-SLAM,RTAB-SLAM,LSD-SLAM。</strong></p>
+<p>SLAM的两大类别：</p>
+<p>根据传感器类别（激光雷达和摄像头）分为激光SLAM和视觉SLAM</p>
+<p>传感器：</p>
+<p>激光雷达：单线多线</p>
+<p>摄像头：单目、双目、单目结构光、双目结构光、ToF</p>
+<p>不同相机的区别？ 基于单目、双目、全景相机的算法？</p>
+<p>IMU</p>
+<h2 id="名词介绍："><a href="#名词介绍：" class="headerlink" title="名词介绍："></a>名词介绍：</h2><h3 id="1、视觉SLAM方法："><a href="#1、视觉SLAM方法：" class="headerlink" title="1、视觉SLAM方法："></a>1、视觉SLAM方法：</h3><p>（1）图像信息使用</p>
+<p>视觉SLAM方法根据使用图像信息的不同可分为直接法，间接法。</p>
+<p>直接法，常见于稠密或半稠密的SLAM中，指的是采用图像上每个像素的信息（亮度值）来估计相机位姿；间接法，常用于稀疏的SLAM中，只使用显著的图像部位（即特征）用于位姿估计的计算。</p>
+<p>直接法最基本的原理是亮度一致性约束，由于摄像机可以直接测量光的亮度，那么它的优化目标函数是光度误差（如下图），优化变量可以是两幅图像之间的位姿关系，也可以是特征Patch的位置。</p>
+<p><img src="/images/1504852096638_6883_1504852096621.jpg" alt="img"></p>
+<p><img src="/images/1504852122988_7009_1504852122966.jpg" alt="img"></p>
+<p>根据直接法使用的像素的不同，可以分为稠密直接法和半稠密直接法。在上述介绍的SLAM系统中，DTAM为稠密直接法，它使用了所有的像素；LSD-SLAM和DSO为半稠密直接法，它使用了梯度明显的像素；SVO也为半稠密直接法，它使用了FAST特征点周围邻域的像素。直接方法较多的使用了图像上像素的信息，在纹理较差的部分比间接法更鲁棒。但当场景中的光照变化后，直接法容易失效，亮度一致性约束要求两幅图像之间的光度误差尽可能地小。</p>
+<p>间接法使用图像中的特征（点或者线）进行匹配，然后根据匹配关系求解（如下图），它的优化目标函数是特征的重投影误差，优化的变量一般为相对位姿。间接法选取的特征一般要求比较显著，对视角和光照变化具有不变性，对模糊和噪声有一定的弹性，这需要在计算速度和特征质量上取得平衡。计算机视觉领域研究了很多不同的特征提取和特征描述，它们对旋转、尺度不变，和计算速度的性能都不一样。选择合适的特征依赖于平台的计算能力，视觉SLAM算法运行的环境，还有图像的帧率。可选的角点提取器如Harris角点（Harris and Stephens, 1988）、Shi-Tomasi角点（Shi and Tomasi, 1994），FAST角点（Mair et al, 2010）等，特征描述包括但不限于BRIEF，BRISK，SURF，SIFT，FREAK，ORB和像素级别局部区块特征等。</p>
+<h3 id="2、角点提取器"><a href="#2、角点提取器" class="headerlink" title="2、角点提取器"></a>2、角点提取器</h3><h4 id="Harris-角点："><a href="#Harris-角点：" class="headerlink" title="Harris 角点："></a>Harris 角点：</h4><h4 id="Shi-Tomasi角点："><a href="#Shi-Tomasi角点：" class="headerlink" title="Shi-Tomasi角点："></a>Shi-Tomasi角点：</h4><p>Shi-Tomasi 算法是Harris 算法的改进。Harris 算法最原始的定义是将矩阵 M 的行列式值与 M 的迹相减，再将差值同预先给定的阈值进行比较。后来Shi 和Tomasi 提出改进的方法，若两个特征值中较小的一个大于最小阈值，则会得到强角点。</p>
+<p>如上面第二幅图中，对自相关矩阵 M 进行特征值分析，产生两个特征值<img src="/images/1343711271_9118.png" alt="img">和两个特征方向向量。因为较大的不确定度取决于较小的特征值，也就是<img src="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png" alt="img">，所以通过寻找最小特征值的最大值来寻找好的特征点也就解释的通了。<br>Shi 和Tomasi 的方法比较充分，并且在很多情况下可以得到比使用Harris 算法更好的结果。</p>
+<h4 id="FAST角点"><a href="#FAST角点" class="headerlink" title="FAST角点:"></a>FAST角点:</h4><p>Shi-Tomasi 算法是Harris 算法的改进。Harris 算法最原始的定义是将矩阵 M 的行列式值与 M 的迹相减，再将差值同预先给定的阈值进行比较。后来Shi 和Tomasi 提出改进的方法，若两个特征值中较小的一个大于最小阈值，则会得到强角点。</p>
+<p>如上面第二幅图中，对自相关矩阵 M 进行特征值分析，产生两个特征值<img src="/images/1343711271_9118-20190315191846967.png" alt="img">和两个特征方向向量。因为较大的不确定度取决于较小的特征值，也就是<img src="https://img-my.csdn.net/uploads/201207/31/1343711386_9399.png" alt="img">，所以通过寻找最小特征值的最大值来寻找好的特征点也就解释的通了。<br>Shi 和Tomasi 的方法比较充分，并且在很多情况下可以得到比使用Harris 算法更好的结果。</p>
+<h3 id="3、特征描述"><a href="#3、特征描述" class="headerlink" title="3、特征描述"></a>3、特征描述</h3><h4 id="SIFT"><a href="#SIFT" class="headerlink" title="SIFT"></a>SIFT</h4><p>提到特征点算法，首先就是大名鼎鼎的SIFT算法了。SIFT的全称是Scale Invariant Feature Transform，尺度不变特征变换，2004年由加拿大教授David G.Lowe提出的。SIFT特征对旋转、尺度缩放、亮度变化等保持不变性，是一种非常稳定的局部特征。<br>SIFT算法主要有以下几个步骤：</p>
 <ul>
-<li><p>–  Functionality: adequacy, accuracy, interoperability, </p>
-</li>
-<li><p>–  Reliability: maturity, fault tolerance, recoverability </p>
-</li>
-<li><p>–  Usability: understandability, ease of learning, operability, attractiveness, compliance to xyz </p>
-</li>
-<li><p>–  Efficiency: required time, consumption of resources </p>
-</li>
-<li><p>–  Maintainability: analyzability, changeability, stability, </p>
-<p>testability </p>
-</li>
-<li><p>–  Portability: adaptability, ease of installation, conformity, interchangeability </p>
-<p>• Quality characteristics must be prioritized </p>
-</li>
+<li>高斯差分金字塔的构建<br>使用组和层的结构构建了一个具有线性关系的金字塔（尺度空间），这样可以在连续的高斯核尺度上查找图像的特征点；另外，它使用一阶的高斯差分来近似高斯的拉普拉斯核，大大的减少了运算量。</li>
+<li>尺度空间的极值检测及特征点的定位<br>搜索上一步建立的高斯尺度空间，通过高斯差分来识别潜在的对尺度和旋转不变的特征点。但是，在离散空间中，局部极值点可能并不是真正意义的极值点，真正的极值点有可能落在离散点的间隙中，SIFT通过尺度空间DoG函数进行曲线拟合寻找极值点。</li>
+<li>特征方向赋值<br>基于图像局部的梯度方向，分配给每个关键点位置一个或多个方向，后续的所有操作都是对于关键点的方向、尺度和位置进行变换，从而提供这些特征的不变性。</li>
+<li>特征描述子的生成<br>通过上面的步骤已经找到的SIFT特征点的位置、方向、尺度信息，最后使用一组向量来描述特征点及其周围邻域像素的信息。</li>
 </ul>
-<h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><p>illegal input:</p>
-<p>[0,-1,2];  [1,2,3]; [3,3,4]; [3,4,5]; [4,4,4]</p>
-<p>[2^31,2^31,2^31]; [MAX, 9, 9 ], [MAX, MAX, 44], [MAX,MAX,MAX]</p>
+<p>SIFT算法中及包含了特征点的提取算法，也有如何生成描述子的算法，更进一步的SIFT算法介绍可参看<a href="http://www.cnblogs.com/wangguchangqing/p/4853263.html" target="_blank" rel="noopener">SIFT特征详解</a></p>
+<h4 id="SURF"><a href="#SURF" class="headerlink" title="SURF"></a>SURF</h4><p>SURF全称 Speeded Up Robust Features，是在SIFT算法的基础上提出的，主要针对SIFT算法运算速度慢，计算量大的缺点进行了改进。<br>SURF的流程和SIFT比较类似，这些改进体现在以下几个方面：</p>
+<ul>
+<li>特征点检测是基于Hessian矩阵，依据Hessian矩阵行列式的极值来定位特征点的位置。并且将Hession特征计算与高斯平滑结合在一起，两个操作通过近似处理得到一个核模板。</li>
+<li>在构建尺度空间时，使用box filter与源图像卷积，而不是使用DoG算子。</li>
+<li>SURF使用一阶Haar小波在x、y两个方向的响应作为构建特征向量的分布信息。</li>
+</ul>
+<h4 id="FAST特征点提取算法"><a href="#FAST特征点提取算法" class="headerlink" title="FAST特征点提取算法"></a>FAST特征点提取算法</h4><p>SIFT和SURF是非常好的，稳定的特征点算法，但运算速度是其一大弊端，无法做到实时的特征提取和匹配，其应用就有了很大的局限性。FAST特征提取算法弥补了这一局限，<strong>检测局部像素灰度变化明显的地方</strong>，以速度快而著称，其全称为：Features From Accelerated Segment Test。在FAST算法的思想很简单：如果一个像素与周围邻域的像素差别较大（过亮或者过暗），那么可以认为该像素是一个角点。和其他的特征点提取算法相比，FAST算法只需要比较像素和其邻域像素的灰度值大小，十分便捷。<br>FAST算法提取角点的步骤：</p>
+<ul>
+<li>在图像中选择像素p，假设其灰度值为：IpIp</li>
+<li>设置一个阈值T，例如：IpIp的20%</li>
+<li>选择p周围半径为3的圆上的16个像素，作为比较像素</li>
+<li>假设选取的圆上有连续的N个像素大于Ip+TIp+T或者Ip−TIp−T，那么可以认为像素p就是一个特征点。（N通常取12，即为FAST-12；常用的还有FAST-9,FAST-11）。</li>
+</ul>
+<p>FAST算法只检测像素的灰度值，其运算速度极快，同时不可避免的也有一些缺点</p>
+<ul>
+<li>检测到的特征点过多并且会出现“扎堆”的现象。这可以在第一遍检测完成后，使用非最大值抑制（Non-maximal suppression），在一定区域内仅保留响应极大值的角点，避免角点集中的情况。</li>
+<li>FAST提取到的角点没有方向和尺度信息</li>
+</ul>
+<p>上面的介绍的SIFT和SURF算法都包含有各自的特征点描述子的计算方法，而FAST不包含特征点描述子的计算，仅仅只有特征点的提取方法，这就需要一个特征点描述方法来描述FAST提取到的特征点，以方便特征点的匹配。下面介绍一个专门的特征点描述子的计算算法。</p>
+<h4 id="BRIEF描述子"><a href="#BRIEF描述子" class="headerlink" title="BRIEF描述子"></a>BRIEF描述子</h4><p>BRIEF是一种二进制的描述子，其描述向量是0和1表示的二进制串。0和1表示特征点邻域内两个像素（p和q）灰度值的大小：如果p比q大则选择1，反正就取0。在特征点的周围选择128对这样的p和q的像素对，就得到了128维由0，1组成的向量。那么p和q的像素对是怎么选择的呢？通常都是按照某种概率来随机的挑选像素对的位置。<br>BRIEF使用随机选点的比较，速度很快，而且使用二进制串表示最终生成的描述子向量，在存储以及用于匹配的比较时都是非常方便的，其和FAST的搭配起来可以组成非常快速的特征点提取和描述算法。</p>
+<h4 id="ORB算法"><a href="#ORB算法" class="headerlink" title="ORB算法"></a>ORB算法</h4><p>ORB的全称是Oriented FAST and Rotated BRIEF，是目前来说非常好的能够进行的实时的图像特征提取和描述的算法，它改进了FAST特征提取算法，并使用速度极快的二进制描述子BRIEF。<br>针对FAST特征提取的算法的一些确定，ORB也做了相应的改进。</p>
+<ul>
+<li>使用非最大值抑制，在一定区域内仅仅保留响应极大值的角点，避免FAST提取到的角点过于集中。</li>
+<li>FAST提取到的角点数量过多且不是很稳定，ORB中可以指定需要提取到的角点的数量N，然后对FAST提取到的角点分别计算Harris响应值，选择前N个具有最大响应值的角点作为最终提取到的特征点集合。</li>
+<li>FAST提取到的角点不具有尺度信息，在ORB中使用图像金字塔，并且在每一层金字塔上检测角点，以此来保持尺度的不变性。</li>
+<li>FAST提取到的角点不具有方向信息，在ORB中使用灰度质心法(Intensity Centroid)来保持特征的旋转不变性。</li>
+</ul>
+<h4 id="像素级别局部区块特征"><a href="#像素级别局部区块特征" class="headerlink" title="像素级别局部区块特征"></a>像素级别局部区块特征</h4><h3 id="4、相机"><a href="#4、相机" class="headerlink" title="4、相机"></a>4、相机</h3><h4 id="单目"><a href="#单目" class="headerlink" title="单目"></a>单目</h4><p>只需要一个操作数，获取深度图的原理不同。</p>
+<h4 id="双目"><a href="#双目" class="headerlink" title="双目"></a>双目</h4><p>需要两个操作数，双目视觉系统，是通过左右两个对齐的摄像机的成像结果，基于极限约束计算视差图，再由几何关系得到深度数据的，但是这样做的局限是：1、两个摄像机的位置距离限制了深度数据的获取。2、由于抖动等不稳定因素使得两个摄像机的对齐困难。</p>
+<p>双目<br>双目可以通过标定（几何）或实时匹配（视觉匹配）得到相机的（一般为相对的）位姿<br>（稀疏点云）再通过匹配同名点，前方交会，得到深度。<br>（摄影测量）根据核线和匹配代价，交会所有点，得到所有点深度。<br>（密集匹配）各种密集匹配算法或策略和匹配代价，交会所有点，得到深度。</p>
+<p>单目<br>1.RGDB<br>2.基于特征（如灭点特征）<br>确定要求深度的对象，设计变换函数和相对应的变换参数，通过特征提取提取特征，根据特征计算变化参数，根据多个特征观测，估计得到变换函数，对对象使用变换函数计算其深度。</p>
+<p>如，拍一个正方体，我已知其在物方的规则形态，如果在单目中也提取了此正方体的特征（如线特征），根据这个特征的成像结合透视成像关系，计算得到特征的变换函数，然后对整个正方体的每个像素，都带入这一特征关系，得到整个正方形的深度。<br>3.深度学习 </p>
+<p>类型第二种，只不过，这个特征和函数我们都不显示的找到它，而是让超参去自己找，自己拟合，通过大量的样本训练 ，就可以得到近似的结果。</p>
+<p>to do：</p>
+<p>SLAM发展的历史</p>
+<p>关于SLAM的一些名词解释，输入输出是什么</p>
+<p>视觉里程计、IMU</p>
+<p>2d-2d对级几何</p>
+<p>pnp，icp（输入输出、作用），</p>
+<p>要具体理解每个名称的意义</p>
+<p>一些SLAM框架的介绍，各自的优劣比较</p>
+<p>后端优化的方式（EKF，</p>
+<p>数学推导式（式子参数的意义、怎么来的</p>
+<p>雅可比矩阵是什么</p>
+<p>opencv中常用的函数</p>
+<p>k聚类</p>
+<p>语义SLAM是什么</p>
+<p>缩写的全称</p>
+<p>参考：作者，论文名称，发表时间，发表刊物</p>
+<p>SLAM部分：</p>
+<p>历史发展，综述</p>
+<p>基本原理：</p>
 
           
         
@@ -446,7 +523,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/26/By-talk/Daydream/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_0_forDummies/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -465,7 +542,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/26/By-talk/Daydream/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM_0_forDummies/" itemprop="url">SLAM_0 SLAM for dummies</a></h1>
         
 
         <div class="post-meta">
@@ -477,8 +554,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T11:07:17+08:00">
-                2019-02-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -488,6 +565,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -496,8 +595,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/26/By-talk/Daydream/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/26/By-talk/Daydream/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SLAM/SLAM_0_forDummies/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM_0_forDummies/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -529,72 +628,773 @@
       
         
           
-            <h1 id="Daydream"><a href="#Daydream" class="headerlink" title="Daydream"></a>Daydream</h1><ul>
-<li style="list-style: none"><input type="checkbox"> 停车场寻找停车位辅助程序</li>
-<li style="list-style: none"><input type="checkbox"> 虚拟试衣间</li>
-<li style="list-style: none"><input type="checkbox"> 铝材开料</li>
-<li style="list-style: none"><input type="checkbox"> 写个脚本，网页更新通知一下</li>
-<li style="list-style: none"><input type="checkbox"> 思维导图和笔记的互转，解析器</li>
-<li style="list-style: none"><input type="checkbox"> 记录日常，基于定位</li>
+            <h1 id="SLAM-0-SLAM-for-dummies"><a href="#SLAM-0-SLAM-for-dummies" class="headerlink" title="SLAM_0 SLAM for dummies"></a>SLAM_0 SLAM for dummies</h1><p>Concept:</p>
+<p>SLAM is concerned with the problem of building a map of an unknown environment<br>by a mobile robot while at the same time navigating the environment using the map.</p>
+<p>SLAM consists of:</p>
+<ul>
+<li>Landmark extraction</li>
+<li>Data association</li>
+<li>State estimation</li>
+<li>state update</li>
+<li>landmark update</li>
 </ul>
-<table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_1_视觉SLAM十四讲/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM_1_视觉SLAM十四讲/" itemprop="url">SLAM_1 视觉SLAM十四讲</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/SLAM_1_视觉SLAM十四讲/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM_1_视觉SLAM十四讲/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SLAM-1-视觉SLAM十四讲"><a href="#SLAM-1-视觉SLAM十四讲" class="headerlink" title="SLAM_1 视觉SLAM十四讲"></a>SLAM_1 视觉SLAM十四讲</h1><h2 id="第二讲：初识SLAM"><a href="#第二讲：初识SLAM" class="headerlink" title="第二讲：初识SLAM"></a>第二讲：初识SLAM</h2><h3 id="2-1-相机："><a href="#2-1-相机：" class="headerlink" title="2.1 相机："></a>2.1 相机：</h3><h4 id="2-1-1-相机的本质："><a href="#2-1-1-相机的本质：" class="headerlink" title="2.1.1 相机的本质："></a>2.1.1 相机的本质：</h4><ul>
+<li>以二维投影形式记录了三维世界的信息</li>
+<li>此过程丢掉了一个维度：距离</li>
+</ul>
+<h4 id="2-1-2-各类相机主要区别："><a href="#2-1-2-各类相机主要区别：" class="headerlink" title="2.1.2 各类相机主要区别："></a>2.1.2 各类相机主要区别：</h4><p>有没有深度信息</p>
+<ul>
+<li>单目：没有深度，必须通过移动相机产生深度 Moving View Stereo</li>
+<li>双目：通过视差计算深度Stereo</li>
+<li>RGBD：通过物理方法测量深度<ul>
+<li>深度相机：<ul>
+<li>物理手段测量深度</li>
+<li>结构光ToF</li>
+<li>主动测量，功耗大</li>
+<li>深度值较准确</li>
+<li>量程较小，易受干扰</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>单目相机计算量比较大，需要初始化。单张图像不具备尺度信息。</p>
+<h4 id="2-1-3-相机公共点："><a href="#2-1-3-相机公共点：" class="headerlink" title="2.1.3 相机公共点："></a>2.1.3 相机公共点：</h4><ul>
+<li>利用图像和场景的几何关系，计算相机运动和场景结构Motion &amp; Structure</li>
+<li>三维空间的运动和结构</li>
+<li>图像来自连续的视频</li>
+</ul>
+<h2 id="第三讲-：-三维空间刚体运动"><a href="#第三讲-：-三维空间刚体运动" class="headerlink" title="第三讲 ： 三维空间刚体运动"></a>第三讲 ： 三维空间刚体运动</h2><p>向量：</p>
+<p>内积、外积</p>
+<p>Q：坐标系之间的转换？</p>
+<p>旋转矩阵</p>
+<h3 id="3-3、旋转向量，欧拉角"><a href="#3-3、旋转向量，欧拉角" class="headerlink" title="3.3、旋转向量，欧拉角"></a>3.3、旋转向量，欧拉角</h3><p>Q：角轴描述旋转，和旋转矩阵的相互转换？</p>
+<p>描述两个坐标系之间的转换：</p>
+<ol>
+<li>旋转矩阵</li>
+<li>角轴</li>
+<li>欧拉角（Z-Y-X轴分别转多少度）存在奇异性问题</li>
+</ol>
+<h3 id="3-4、四元数"><a href="#3-4、四元数" class="headerlink" title="3.4、四元数"></a>3.4、四元数</h3><p>eigen开源库</p>
+<p><a href="https://blog.csdn.net/qq_17032807/article/details/84928910" target="_blank" rel="noopener">第三讲课后习题</a></p>
+<h2 id="第四讲：李代数和李群"><a href="#第四讲：李代数和李群" class="headerlink" title="第四讲：李代数和李群"></a>第四讲：李代数和李群</h2><p><a href="https://blog.csdn.net/qq_17032807/article/details/84942548" target="_blank" rel="noopener">第四讲课后习题</a></p>
+<p>雅可比矩阵</p>
+<h2 id="第五讲：相机的成像"><a href="#第五讲：相机的成像" class="headerlink" title="第五讲：相机的成像"></a>第五讲：相机的成像</h2><h2 id="第六讲：非线性优化"><a href="#第六讲：非线性优化" class="headerlink" title="第六讲：非线性优化"></a>第六讲：非线性优化</h2><p>关于函数的求导？</p>
+<h2 id="第七讲：视觉里程计"><a href="#第七讲：视觉里程计" class="headerlink" title="第七讲：视觉里程计"></a>第七讲：视觉里程计</h2><p>图像特征点性质：</p>
+<ol>
+<li>可重复性</li>
+<li>可区别性</li>
+<li>高效率</li>
+<li>本地性</li>
+</ol>
+<p>特征点由关键点和描述子组成。</p>
+<p>FAST角点检测</p>
+<p>灰度质心法</p>
+<p>快速近似最近邻（FLANN）</p>
+<p>RANSAC(随机采样一致性)</p>
+<p>三角测量</p>
+<h3 id="7-7-3D-2D：-PnP"><a href="#7-7-3D-2D：-PnP" class="headerlink" title="7.7 3D-2D： PnP"></a>7.7 3D-2D： PnP</h3><h4 id="7-7-1-直接线性变换"><a href="#7-7-1-直接线性变换" class="headerlink" title="7.7.1 直接线性变换"></a>7.7.1 直接线性变换</h4><h4 id="7-7-2-Bundle-Adjustment"><a href="#7-7-2-Bundle-Adjustment" class="headerlink" title="7.7.2 Bundle Adjustment"></a>7.7.2 Bundle Adjustment</h4><h3 id="7-9-3D-3D：ICP"><a href="#7-9-3D-3D：ICP" class="headerlink" title="7.9 3D-3D：ICP"></a>7.9 3D-3D：ICP</h3><h4 id="7-9-1-SVD"><a href="#7-9-1-SVD" class="headerlink" title="7.9.1 SVD"></a>7.9.1 SVD</h4><p>矩阵的范数</p>
+<h2 id="第八讲：视觉里程计-2"><a href="#第八讲：视觉里程计-2" class="headerlink" title="第八讲：视觉里程计 2"></a>第八讲：视觉里程计 2</h2><h3 id="直接法"><a href="#直接法" class="headerlink" title="直接法"></a>直接法</h3><h4 id="Lucas-Kanade-光流"><a href="#Lucas-Kanade-光流" class="headerlink" title="Lucas-Kanade 光流"></a>Lucas-Kanade 光流</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_2_矩阵相关知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM_2_矩阵相关知识/" itemprop="url">SLAM_2_矩阵相关知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/SLAM_2_矩阵相关知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM_2_矩阵相关知识/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SLAM-2-矩阵相关知识"><a href="#SLAM-2-矩阵相关知识" class="headerlink" title="SLAM_2_矩阵相关知识"></a>SLAM_2_矩阵相关知识</h1><p>参考：</p>
+<p>矩阵分析，Roger A.Horn，Charles R.Johnson</p>
+<p>矩阵分析与应用，张贤达</p>
+<p>单应矩阵及其分解</p>
+<p>SVD分解</p>
+<p>本质矩阵及其分解</p>
+<p>奇异值矩阵</p>
+<p>最小二乘和随机采样一致性（RANSAC）</p>
+<p>三角测量</p>
+<p>啊啊啊啊！线代令人忧伤</p>
+<p>​     </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/CaseStudy_0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/CaseStudy_0/" itemprop="url">Case Study</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SoftwareManagement/CaseStudy_0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/CaseStudy_0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Case-Study"><a href="#Case-Study" class="headerlink" title="Case Study"></a>Case Study</h1><p>risk</p>
+<p>Identification:</p>
+<ol>
+<li>Weather</li>
+<li>cooking fuel</li>
+<li>Transportation</li>
+</ol>
+<p>analysis:</p>
+<p>Plan:</p>
+<p>Monitor:</p>
+<p>交通、决策、天气</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/basicConcepts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/basicConcepts/" itemprop="url">Concepts</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/basicConcepts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/basicConcepts/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h1><h2 id="1-Image-Classification"><a href="#1-Image-Classification" class="headerlink" title="1. Image Classification"></a>1. Image Classification</h2><p>It consists of classifying an image into one of many different categories.</p>
+<p>Known Dateset:     ImageNet</p>
+<h2 id="2-Localization"><a href="#2-Localization" class="headerlink" title="2. Localization"></a>2. Localization</h2><p>Similar to classification, localization finds the location of a single object inside the image.</p>
+<p>Known Dateset:</p>
+<p>Application:    smart scropping </p>
+<h2 id="3-Instance-segmentation"><a href="#3-Instance-segmentation" class="headerlink" title="3. Instance segmentation"></a>3. Instance segmentation</h2><h2 id="4-Object-detection"><a href="#4-Object-detection" class="headerlink" title="4. Object detection"></a>4. Object detection</h2><p>Object detection is the problem of finding and classifying a variable number of objects on an image.</p>
+<h3 id="4-1-Practical-uses"><a href="#4-1-Practical-uses" class="headerlink" title="4.1 Practical uses"></a>4.1 Practical uses</h3><ol>
+<li>Face detection</li>
+<li>Counting</li>
+<li>Visual Search Engine</li>
+<li>Aerial image analysis</li>
+</ol>
+<h3 id="4-2-Problems-and-challenges"><a href="#4-2-Problems-and-challenges" class="headerlink" title="4.2 Problems and challenges"></a>4.2 Problems and challenges</h3><ol>
+<li>Variable number of objects</li>
+<li>sizing</li>
+<li>modeling</li>
+</ol>
+<h3 id="4-3-Classical-approach"><a href="#4-3-Classical-approach" class="headerlink" title="4.3 Classical approach"></a>4.3 Classical approach</h3><h3 id="4-4-Deep-learning-approach"><a href="#4-4-Deep-learning-approach" class="headerlink" title="4.4 Deep learning approach"></a>4.4 Deep learning approach</h3><ol>
+<li>OverFeat</li>
+<li>R-CNN</li>
+<li>Fast R-CNN</li>
+</ol>
+<h2 id="5-Datasets"><a href="#5-Datasets" class="headerlink" title="5. Datasets"></a>5. Datasets</h2><table>
 <thead>
 <tr>
-<th><a href="http://eecs.pku.edu.cn/personnel/YJS/RecruitStudents/6805.shtml" target="_blank" rel="noopener">信科</a></th>
+<th><strong>Name</strong></th>
+<th><strong># Images (trainval)</strong></th>
+<th><strong># Classes</strong></th>
+<th><strong>Last updated</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="http://www.sz.tsinghua.edu.cn/publish/sz/293/2018/20180427105015415645904/20180427105015415645904_.html" target="_blank" rel="noopener">清华深圳</a></td>
+<td>ImageNet</td>
+<td>450k</td>
+<td>200</td>
+<td>2015</td>
 </tr>
 <tr>
-<td><a href="https://mp.weixin.qq.com/s/uC2V2imvEFy3mL3au0GPpA" target="_blank" rel="noopener">北大深圳</a></td>
+<td>COCO</td>
+<td>120k</td>
+<td>80</td>
+<td>2014</td>
 </tr>
 <tr>
-<td><a href="http://www.cs.tsinghua.edu.cn/publish/cs/4723/2018/20180523112520325519314/20180523112520325519314_.html" target="_blank" rel="noopener">清华</a></td>
+<td>Pascal VOC</td>
+<td>12k</td>
+<td>20</td>
+<td>2012</td>
 </tr>
 <tr>
-<td><a href="http://www.thss.tsinghua.edu.cn/publish/soft/3649/2018/20180425140246849832299/20180425140246849832299_.html" target="_blank" rel="noopener">清软</a></td>
+<td>Oxford-IIIT Pet</td>
+<td>7k</td>
+<td>37</td>
+<td>2012</td>
 </tr>
 <tr>
-<td><a href="http://www.tbsi.edu.cn/index.php?s=/cms/index/detail/id/804.html" target="_blank" rel="noopener">清华伯克利</a></td>
-</tr>
-<tr>
-<td><a href="http://www.aais.pku.edu.cn/tongzhi/shownews.php?lang=cn&amp;id=595" target="_blank" rel="noopener">北大交叉</a></td>
-</tr>
-<tr>
-<td><a href="http://admission.iiis.tsinghua.edu.cn/2018/" target="_blank" rel="noopener">清华交叉</a></td>
-</tr>
-<tr>
-<td><a href="https://cs.nju.edu.cn/zhouzh/zhouzh.files/recruit.htm" target="_blank" rel="noopener">lamda</a></td>
-</tr>
-<tr>
-<td><a href="http://csopenday.nju.edu.cn/" target="_blank" rel="noopener">南大</a></td>
-</tr>
-<tr>
-<td><a href="#rd">哈工NLP</a></td>
-</tr>
-<tr>
-<td><a href="http://www.ict.ac.cn/shye/tzgg/201805/t20180508_5008632.html" target="_blank" rel="noopener">计算所</a></td>
-</tr>
-<tr>
-<td><a href="http://www.ia.cas.cn/yjsjy/zs/sszs/201805/t20180503_5006085.html" target="_blank" rel="noopener">自动化</a></td>
-</tr>
-<tr>
-<td><a href="http://www.ia.cas.cn/yjsjy/zs/sszs/201805/t20180503_5006085.html" target="_blank" rel="noopener">自动化</a></td>
-</tr>
-<tr>
-<td><a href="http://yjwb.seiee.sjtu.edu.cn/yjwb/info/13836.htm" target="_blank" rel="noopener">上交</a></td>
-</tr>
-<tr>
-<td><a href="http://www.cs.fudan.edu.cn/?p=23278" target="_blank" rel="noopener">复旦</a></td>
-</tr>
-<tr>
-<td><a href="http://xly.ustc.edu.cn/news.php?newsid=580" target="_blank" rel="noopener">中科大</a></td>
+<td>KITTI Vision</td>
+<td>7k</td>
+<td>3</td>
+<td>2014</td>
 </tr>
 </tbody>
 </table>
-<p>qq SMTP 服务授权码： <strong>ojqn**</strong>tywm<strong><strong>xoxk</strong></strong>bhde**</p>
+<p>Detection:</p>
+<p>Authentication:</p>
+<p>Verifycation:</p>
 
           
         
@@ -643,7 +1443,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/26/SoftwareManagement/Management_0/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/Management_0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -662,7 +1462,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/26/SoftwareManagement/Management_0/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/Management_0/" itemprop="url">SoftwareManagement_ 0 overview</a></h1>
         
 
         <div class="post-meta">
@@ -674,8 +1474,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T10:02:02+08:00">
-                2019-02-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -685,6 +1485,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -693,8 +1515,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/26/SoftwareManagement/Management_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/26/SoftwareManagement/Management_0/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/Management_0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/Management_0/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -799,7 +1621,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/26/Web/Web_0/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_3_进度汇报/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -818,7 +1640,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/26/Web/Web_0/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM_3_进度汇报/" itemprop="url">SLAM_3_进度汇报</a></h1>
         
 
         <div class="post-meta">
@@ -830,8 +1652,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T08:01:20+08:00">
-                2019-02-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -841,6 +1663,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -849,8 +1693,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/26/Web/Web_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/26/Web/Web_0/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SLAM/SLAM_3_进度汇报/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM_3_进度汇报/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -882,47 +1726,13 @@
       
         
           
-            <h1 id="Web-0"><a href="#Web-0" class="headerlink" title="Web_0"></a>Web_0</h1><p>May  2019.2.26</p>
-<p>Introduction</p>
-<p>服务器、数据库</p>
-<p>Web项目：个人项目</p>
-<p>内容：更注重前端</p>
-<p>主要技术：</p>
-<ol>
-<li>Socket编程</li>
-<li>HTTP协议</li>
-<li>SSL协议</li>
-</ol>
-<p>Web文档类型：</p>
-<ol>
-<li>静态网页：html和css</li>
-<li>活动网页：<ul>
-<li>code run in browser</li>
-<li><strong>js</strong>、flash</li>
-</ul>
-</li>
-<li>动态网页：<ul>
-<li>code run in web server</li>
-<li>Java EE，NET ASP， PHP， Python</li>
-</ul>
-</li>
-</ol>
-<p>基本技术</p>
-<ul>
-<li style="list-style: none"><input type="checkbox"> Q：H5特性？</li>
-<li style="list-style: none"><input type="checkbox"> Q：并发性测试工具？</li>
-<li style="list-style: none"><input type="checkbox"> Q：Web的发展</li>
-</ul>
-<p>可了解：</p>
-<ul>
-<li>网页前端Bootstrap</li>
-<li>编程前端JQuery Framework</li>
-<li>编程后端PHP语言</li>
-<li>WeChat</li>
-<li>TypeScript</li>
-<li>Web Security</li>
-<li>Web可视化echart</li>
-</ul>
+            <h1 id="SLAM-3-进度汇报"><a href="#SLAM-3-进度汇报" class="headerlink" title="SLAM_3_进度汇报"></a>SLAM_3_进度汇报</h1><p>ppt汇报内容：</p>
+<p>符号定义：<br>$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$<br>运动和观测方程记为：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$<br>去除噪声的理想情况下：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) \  z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
+<p>纯视觉SLAM（$z_{k,j}​$ 为像素坐标）：<br>$$<br>\begin{matrix} z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$<br>纯视觉SLAM（$y_{k,j}$为相机坐标）：<br>$$<br>\begin{matrix} y’_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
+<p>对于方程（4）已知任意两个量可求第三个量，$y_j，x_k​$ 待求</p>
+<p>初始化：零时刻相机坐标与世界坐标重合，即 $y_{0,j} = y’_{0,j}$</p>
+<p>后端优化（考虑噪声影响）：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
+<p>初始化已知3d信息——ICP——单目中，只得到像素坐标，二维和三维获取位姿——对级几何</p>
 
           
         
@@ -971,7 +1781,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/25/Master/leetcode_easy/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/Management_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -990,7 +1800,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/25/Master/leetcode_easy/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/Management_2/" itemprop="url">Management_2</a></h1>
         
 
         <div class="post-meta">
@@ -1002,8 +1812,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T17:51:59+08:00">
-                2019-02-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -1013,6 +1823,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1021,8 +1853,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/25/Master/leetcode_easy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/25/Master/leetcode_easy/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/Management_2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/Management_2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1054,146 +1886,14 @@
       
         
           
-            <h1 id="Summary-0"><a href="#Summary-0" class="headerlink" title="Summary_0"></a>Summary_0</h1><p>about easy problem in leetcode</p>
-<ul>
-<li style="list-style: none"><input type="checkbox"> 学会使用hashmap</li>
-<li style="list-style: none"><input type="checkbox"> 整数溢出的检测</li>
-<li style="list-style: none"><input type="checkbox"> 整数与字符串的转换</li>
-<li style="list-style: none"><input type="checkbox"> 字符串相关运算</li>
-<li style="list-style: none"><input type="checkbox"> 注意判断空！</li>
-<li style="list-style: none"><input type="checkbox"> 数组越界问题</li>
-<li style="list-style: none"><input type="checkbox"> 多用指针</li>
-<li style="list-style: none"><input type="checkbox"> KMP</li>
-</ul>
-<p>Q13:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">auto</span> io_sync_off = []() &#123;</span><br><span class="line">	<span class="built_in">std</span>::ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
-<p>时间记录：</p>
-<table>
-<thead>
-<tr>
-<th>Q</th>
-<th>start</th>
-<th>End</th>
-<th>Time</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>125</td>
-<td>3.3 14:21</td>
-<td>3.3 14:41</td>
-<td>20’</td>
-</tr>
-<tr>
-<td>136</td>
-<td>14:52</td>
-<td>15:03</td>
-<td>11’</td>
-</tr>
-<tr>
-<td>141</td>
-<td>15:07</td>
-<td>15:18</td>
-<td>11’</td>
-</tr>
-<tr>
-<td>142</td>
-<td>15:20</td>
-<td>16:06</td>
-<td>14’</td>
-</tr>
-<tr>
-<td>155</td>
-<td>16:09</td>
-<td>17:14</td>
-<td>65’</td>
-</tr>
-<tr>
-<td>160</td>
-<td>17:29</td>
-<td>17:49</td>
-<td>20’</td>
-</tr>
-<tr>
-<td>167</td>
-<td>18:00</td>
-<td>18:26</td>
-<td>26’</td>
-</tr>
-<tr>
-<td>168</td>
-<td>18:30</td>
-<td>18:44</td>
-<td>14’</td>
-</tr>
-<tr>
-<td>169</td>
-<td>18:45</td>
-<td>19:01</td>
-<td>16’</td>
-</tr>
-<tr>
-<td>171</td>
-<td>19:18</td>
-<td>19:22</td>
-<td>4’</td>
-</tr>
-<tr>
-<td>172</td>
-<td>19:32</td>
-<td>19:45</td>
-<td>13’</td>
-</tr>
-<tr>
-<td>189</td>
-<td>20:00</td>
-<td>20:08</td>
-<td>8’</td>
-</tr>
-<tr>
-<td>190</td>
-<td>20:10</td>
-<td>20:55</td>
-<td>45’</td>
-</tr>
-<tr>
-<td>257</td>
-<td>13:46</td>
-<td>14:30</td>
-<td>46’</td>
-</tr>
-<tr>
-<td>292</td>
-<td>17:25</td>
-<td>18:00</td>
-<td>35’</td>
-</tr>
-<tr>
-<td>349</td>
-<td>19:39</td>
-<td>19:50</td>
-<td>11‘</td>
-</tr>
-<tr>
-<td>443</td>
-<td>9:18</td>
-<td>9:27</td>
-<td>9’</td>
-</tr>
-<tr>
-<td>447</td>
-<td>9:27</td>
-<td>10:08</td>
-<td>30‘</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
+            <h1 id="Management-2"><a href="#Management-2" class="headerlink" title="Management_2"></a>Management_2</h1><h2 id="Software-price"><a href="#Software-price" class="headerlink" title="Software price"></a>Software price</h2><h2 id="Plan-driven-deveploment"><a href="#Plan-driven-deveploment" class="headerlink" title="Plan-driven deveploment"></a>Plan-driven deveploment</h2><p>plan sections </p>
+<p>​    introduction</p>
+<p>​    project organization</p>
+<blockquote>
+<p>never stop learning</p>
+</blockquote>
+<h2 id="Project-scheduling"><a href="#Project-scheduling" class="headerlink" title="Project scheduling"></a>Project scheduling</h2><p>using barchart to represent your schedule</p>
+<h2 id="Agile-planning"><a href="#Agile-planning" class="headerlink" title="Agile planning"></a>Agile planning</h2><h2 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h2>
           
         
       
@@ -1241,7 +1941,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/25/Mess/专业综合项目/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/Management_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1260,7 +1960,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/25/Mess/专业综合项目/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/Management_1/" itemprop="url">Management_1 Software Process</a></h1>
         
 
         <div class="post-meta">
@@ -1272,8 +1972,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T13:37:56+08:00">
-                2019-02-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
               </time>
             
 
@@ -1283,6 +1983,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1291,8 +2013,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/25/Mess/专业综合项目/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/25/Mess/专业综合项目/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/Management_1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/Management_1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1324,595 +2046,14 @@
       
         
           
-            <p>专业综合项目</p>
-<p>从第3周开始：</p>
-<p>每周选择3组来进行汇报</p>
-<p>每两周研究生会来面对面交流</p>
-<p>可选topic：</p>
-<ol>
-<li>环视图像中语义视觉目标的分割：识别目标：方向标志、减速带、泊车位</li>
-<li>inverse tone mapping with deep learning，低维到高维的映射（LDR-HDR）</li>
-<li>基于单目相机的时间里程器。15221927149</li>
-<li>移动端游戏平台（休闲类小游戏，时长为几分钟）游戏大厅+游戏 15801758610</li>
-<li>ros驱动的移动机器人</li>
-<li>人脸表情和姿态迁移，facerig</li>
-<li>云书籍，类似豆瓣的东西</li>
-<li>语义slam相关研究</li>
-<li>手写数字串识别：切片+单字识别，CRNN</li>
-<li>为图片自动加标签（微软有相关的API</li>
-</ol>
-<p>室内导航？</p>
-<p>VIO？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/22/WebAR/周工作汇报/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/22/WebAR/周工作汇报/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T18:41:07+08:00">
-                2019-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/22/WebAR/周工作汇报/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/22/WebAR/周工作汇报/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong> 周工作汇报</strong></p>
-<p><strong>一.</strong> <strong>本周学习情况</strong></p>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th>学习内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2.15-2.22</td>
-<td>论文阅读：<a href="https://ieeexplore.ieee.org/document/6162873?tp=&amp;arnumber=6162873&amp;contentType=Conference%20Publications&amp;refinements%3D4291944822%26sortType%3Ddesc_p_Publication_Year%26ranges%3D2011_2011_p_Publication_Year%26pageNumber%3D258%26rowsPerPage%3D100" target="_blank" rel="noopener">The Argon AR Web Browser and standards-based AR application environment</a> ; Web前端中的增强现实开发技术研究_庄夏</td>
-</tr>
-</tbody>
-</table>
-<p><strong>二.</strong> <strong>下周学习计划</strong></p>
-<ol>
-<li><p>了解ARCore的开发流程，进一步完善开发准备</p>
-</li>
-<li><p>继续阅读WebAR方向paper，了解最前沿动态</p>
-</li>
-<li>了解WebAR相关产品及使用的库</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/17/By-talk/想陪你做的事/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/17/By-talk/想陪你做的事/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-17T18:31:11+08:00">
-                2019-02-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/17/By-talk/想陪你做的事/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/17/By-talk/想陪你做的事/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>想陪你做的事</p>
-<ul>
-<li style="list-style: none"><input type="checkbox"> 一起做个小房子，缩小版的房子哈哈哈，太可爱了</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/16/By-talk/护肤_0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/16/By-talk/护肤_0/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T15:45:04+08:00">
-                2019-02-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/16/By-talk/护肤_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/16/By-talk/护肤_0/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="护肤-part0"><a href="#护肤-part0" class="headerlink" title="护肤 part0"></a>护肤 part0</h1><p>干性皮肤，t区比较油，特别是鼻子，上妆的时候总是会出油，碰碰就会变红，应该是角质层受损了</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/02/09/Master/保研_准备/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/Master/保研_准备/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T16:33:58+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/Master/保研_准备/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/09/Master/保研_准备/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="保研准备阶段"><a href="#保研准备阶段" class="headerlink" title="保研准备阶段"></a>保研准备阶段</h1><h2 id="1-了解夏令营消息"><a href="#1-了解夏令营消息" class="headerlink" title="1. 了解夏令营消息"></a>1. 了解夏令营消息</h2><p>汇总夏令营信息资料，夏令营的基本条件，保送资料，相关活动，时长</p>
-<p>——汇总成表格</p>
-<p>推免生源</p>
-<p>英文介绍自己的专业</p>
-<h2 id="2-准备报名资料"><a href="#2-准备报名资料" class="headerlink" title="2. 准备报名资料"></a>2. 准备报名资料</h2><h2 id="3-联系导师"><a href="#3-联系导师" class="headerlink" title="3. 联系导师"></a>3. 联系导师</h2><h2 id="练习！！！机试！！！"><a href="#练习！！！机试！！！" class="headerlink" title="练习！！！机试！！！"></a>练习！！！机试！！！</h2><p>bailian.openjudge.cn</p>
-<p>noi.openjudge.cn</p>
-<ol>
-<li>确定要去的院</li>
-<li>个人准备方面：<ol>
-<li>机试</li>
-<li>基础知识</li>
-<li>简历</li>
-<li>推荐信</li>
-<li>阅读想要去的老师的论文，了解科学前沿</li>
-</ol>
-</li>
-</ol>
+            <h1 id="Management-1-Software-Process"><a href="#Management-1-Software-Process" class="headerlink" title="Management_1 Software Process"></a>Management_1 Software Process</h1><h2 id="Software-process-model"><a href="#Software-process-model" class="headerlink" title="Software process model"></a>Software process model</h2><h3 id="Software-Process"><a href="#Software-Process" class="headerlink" title="Software Process"></a>Software Process</h3><p>structured process : such as waterfall model , Agile model  etc</p>
+<p>basic activities: specification, development, validation and evolution</p>
+<h2 id="Some-models"><a href="#Some-models" class="headerlink" title="Some models"></a>Some models</h2><p>waterfall model </p>
+<p>incremetntal development</p>
+<p>reuse-oriented software engineering: the systems is assembled from existing components.  May be plan-driven or agile.</p>
+<h3 id="waterfall"><a href="#waterfall" class="headerlink" title="waterfall"></a>waterfall</h3><p>inflexible, </p>
+<h3 id="Agile-scrum"><a href="#Agile-scrum" class="headerlink" title="Agile/scrum"></a>Agile/scrum</h3><h2 id="Process-activities"><a href="#Process-activities" class="headerlink" title="Process activities"></a>Process activities</h2><h2 id="Coping-with-change"><a href="#Coping-with-change" class="headerlink" title="Coping with change"></a>Coping with change</h2><h2 id="the-Rational-Unified-process"><a href="#the-Rational-Unified-process" class="headerlink" title="the Rational Unified process"></a>the Rational Unified process</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	inception--&gt;elaboration</span><br><span class="line">	elaboration--&gt;construction</span><br><span class="line">	construction--&gt;transaction</span><br></pre></td></tr></table></figure>
+<p>configuration management</p>
 
           
         
@@ -2000,7 +2141,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">166</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2011,7 +2152,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
