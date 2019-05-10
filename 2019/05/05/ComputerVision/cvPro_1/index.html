@@ -86,13 +86,13 @@
 <meta property="og:site_name" content="May">
 <meta property="og:description" content="Assignment 2Computer Vision 1652820 luomeiProblem 1:​    I have implemented a model of fitting a straight 2D line using RANSAC in hw2_1_1652820_ransac.m (running in Matlab 2016b). ​    The result of f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://sukamay.github.io/2019/05/05/ComputerVision/cvPro_1/assets/ransac.png">
-<meta property="og:image" content="https://sukamay.github.io/2019/05/05/ComputerVision/cvPro_1/assets/adaboost.png">
-<meta property="og:updated_time" content="2019-05-07T13:24:03.632Z">
+<meta property="og:image" content="https://sukamay.github.io/images/ransac.png">
+<meta property="og:image" content="https://sukamay.github.io/images/adaboost.png">
+<meta property="og:updated_time" content="2019-05-10T14:19:47.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="May">
 <meta name="twitter:description" content="Assignment 2Computer Vision 1652820 luomeiProblem 1:​    I have implemented a model of fitting a straight 2D line using RANSAC in hw2_1_1652820_ransac.m (running in Matlab 2016b). ​    The result of f">
-<meta name="twitter:image" content="https://sukamay.github.io/2019/05/05/ComputerVision/cvPro_1/assets/ransac.png">
+<meta name="twitter:image" content="https://sukamay.github.io/images/ransac.png">
 
 
 
@@ -373,14 +373,14 @@
 <h1 id="1652820-luomei"><a href="#1652820-luomei" class="headerlink" title="1652820 luomei"></a>1652820 luomei</h1><h2 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem 1:"></a>Problem 1:</h2><p>​    I have implemented a model of fitting a straight 2D line using RANSAC in <code>hw2_1_1652820_ransac.m</code> (running in Matlab 2016b).</p>
 <p>​    The result of fitting model from sample points is as follows.</p>
 <p>​    Just change variable x and y if you want to test other sample points in 2D platform.</p>
-<p><img src="assets/ransac.png" alt="ransac"></p>
+<p><img src="/images/ransac.png" alt="ransac"></p>
 <h2 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem 2:"></a>Problem 2:</h2><p>​    Test demo is available in <code>hw2_1_1652820_AdaBoost.m</code> (runnning in Matlab 2016b), just run the script then you will see the result of my training model and test data.</p>
 <p>​    If you want to change parameters of training model, turn to <code>trainClassifier.m</code>,  parameters are no need to change except parameter T, data or show. </p>
 <p>​    <strong>T</strong> is times of iteration which changes according to concrete applications. </p>
 <p>​    <strong>Data</strong> is training data. </p>
 <p>​    <strong>Show</strong> is switch which you chould decide whether the classify process will be shown graphically or not.</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% result of given training data:</span></span><br><span class="line"><span class="comment">% I use T = 3 in my implementation</span></span><br><span class="line"><span class="comment">% alpha = [0.4236 0.6496 0.9229]</span></span><br><span class="line"><span class="comment">% weak classifier = [306 1;</span></span><br><span class="line"><span class="comment">%											86 3;</span></span><br><span class="line"><span class="comment">%										 135 1]</span></span><br><span class="line"><span class="comment">% precision: 100%</span></span><br></pre></td></tr></table></figure>
-<p><img src="assets/adaboost.png" alt="adaboost"></p>
+<p><img src="/images/adaboost.png" alt="adaboost"></p>
 <h2 id="Problem-3"><a href="#Problem-3" class="headerlink" title="Problem 3:"></a>Problem 3:</h2><h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1:"></a>Method 1:</h3><p>​    Thus, $\alpha_1$ should be the Eigen-vector of  $C$  corresponding to the largest eigen-value of $C$. </p>
 <p>​    Now we try to find another orientation $\alpha_2$ , orthogonal to  $\alpha_1$ , and along which the data can have the second largest variation.</p>
 <p>​    Based on Lagrange multipiler method, we need to,<br>$$<br>arg \space max_{\alpha}(\alpha^TC\alpha - \lambda_1 \alpha_1^T \alpha - \lambda_2 (\alpha^T\alpha - 1))<br>$$<br>​    The first partial derivative of function $F =  \alpha^TC\alpha - \lambda_1 \alpha_1^T \alpha - \lambda_2 (\alpha^T\alpha - 1)$ with respect to each its independent variable is :<br>$$<br>\begin{align}<br>\frac{\partial F}{\partial \alpha} &amp; = 2 C \alpha - \lambda_1 \alpha_1 - 2\lambda_2 \alpha = 0 \<br>\frac{\partial F}{\partial \lambda_1} &amp;= \alpha_1^T \alpha = 0 \ \frac{\partial F}{\partial \lambda_2} &amp;= \alpha^T \alpha - 1 = 0<br>\end{align}<br>$$<br>     Formula (2) could be transformed to:<br>$$<br>\begin{align} \nonumber 2C\alpha - \lambda_1 \alpha_1 - 2 \lambda_2 \alpha &amp;=  0 \<br>2C\alpha \alpha^T - \lambda_1 \alpha_1 \alpha^T - 2 \lambda_2 \alpha \alpha^T &amp;=  0<br>\end{align}<br>$$<br>​    Bring into Formula (3), we get:<br>$$<br>\begin{align}<br>\nonumber 2C \alpha \alpha^T - 2 \lambda_2 \alpha \alpha^T &amp;=  0 \<br>2C \alpha \alpha^T \alpha - 2 \lambda_2 \alpha \alpha^T \alpha &amp;=  0<br>\end{align}<br>$$<br>​    Bring into Formula(4), we get:<br>$$<br>\begin{align}<br>\nonumber 2C \alpha - 2\lambda_2 \alpha &amp;= 0 \<br>C\alpha &amp;= \lambda_2 \alpha<br>\end{align}<br>$$<br>​    From Formula (7) we could know $\lambda_2$ is $C’s$ eigen-vector.</p>
