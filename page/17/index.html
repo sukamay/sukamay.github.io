@@ -284,165 +284,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/09/Guide_book/Tomcat配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/Guide_book/Tomcat配置/" itemprop="url">Tomcat配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T10:01:27+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/09/Guide_book/Tomcat配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/09/Guide_book/Tomcat配置/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>服务器：阿里云</p>
-<h2 id="远程连接到服务器"><a href="#远程连接到服务器" class="headerlink" title="远程连接到服务器"></a>远程连接到服务器</h2><p><a href="https://help.aliyun.com/document_detail/59083.html?spm=5176.10173289.107.4.78de2e77rXaOJu#本地为%20Linux%20或支持%20SSH%20命令的环境" target="_blank" rel="noopener">远程连接到linux服务器</a></p>
-<h3 id="通过ssh连接"><a href="#通过ssh连接" class="headerlink" title="通过ssh连接"></a>通过ssh连接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:Guide book xxx$ ssh root@120.76.62.132 -i /Users/xxx/Desktop/i\ document/笔记/Guide\ book/xxx.pem</span><br></pre></td></tr></table></figure>
-<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><h3 id="1-给Mac安装jdk环境。"><a href="#1-给Mac安装jdk环境。" class="headerlink" title="1. 给Mac安装jdk环境。"></a>1. 给Mac安装jdk环境。</h3><p>　　　   直接百度”jdk for Mac“，找到其中一个版本进行安装就可以了，安装完成后，打开终端，输入“java”或“javac”，如果出现java命令的使用说明，那么说明你的Mac上的jdk环境已经配置好，这个比起windows系统来说，简单方便很多。</p>
-<h3 id="2-下载安装-Tomcat"><a href="#2-下载安装-Tomcat" class="headerlink" title="2. 下载安装 Tomcat"></a>2. 下载安装 Tomcat</h3><p>​    下载 Tomcat 地址（官方地址）：<a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-80.cgi</a></p>
-<p>​    下载文件：mac下载 zip 和 tar.gz 都行，我下载的是 tar.gz</p>
-<h3 id="3-安装："><a href="#3-安装：" class="headerlink" title="3. 安装："></a>3. 安装：</h3><ol>
-<li><p>压缩之后直接拷贝到资源库中，压缩后的文件夹名称为Tomcat8，记录此位置:<code>/Library/Tomcat8</code>（方便后续环境配置）</p>
-</li>
-<li><p>打开终端，输入以下命令<code>/Library/Tomcat8/bin/startup.sh</code>，浏览器中输入localhost:8080，就可以看到以下效果:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ Library/Tomcat8/bin/starup.sh</span><br><span class="line">-bash: Library/Tomcat8/bin/starup.sh: No such file or directory</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>如果遇到提示No such file or directory错误提示，需要执行sudo chmod 755 Library/Tomcat/bin/*.sh，然后重新执行startup.sh，若出现permission denied 的情况，则在sudo模式下执行startup.sh，如果想停止Tomcat，直接执行shutdown.sh即可。在执行sudo时，必须使用带密码的用户。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// or sudo chmod 755 /Library/Tomcat8/bin/*.sh</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo chmod +x /Library/Tomcat8/bin/*.sh</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">touch: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">/Library/Tomcat8/bin/catalina.sh: line 464: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-<p>​     如果每次写路径比较麻烦，这个时候需要设置环境变量。</p>
-<h3 id="4-设置-Tomcat-的环境变量"><a href="#4-设置-Tomcat-的环境变量" class="headerlink" title="4. 设置 Tomcat 的环境变量:"></a>4. 设置 Tomcat 的环境变量:</h3><p>ps：不要在root权限下设置</p>
-<p>　　①使用vim编辑bash_profile，输入命令打开：<code>vi .bash_profile</code>(<code>pico .bash_profile</code>亦可)</p>
-<p>　　②按 <code>i</code>进入编辑模式</p>
-<p>​      ③输入Tomcat存储路径    <code>export PATH=&quot;/Users/keso/Library/Tomcat8/bin:$PATH&quot;</code>（注意：此处路径是自己保存的 tomcat 存储路径）</p>
-<p>　　④esc退出编辑模式，输入 <code>:wq</code> 保存并退出vim</p>
-<p>​      ⑤更新配置的环境变量，输入命令：<code>source .bash_profile</code></p>
-<p>　　⑥终端中输入startup.sh， startup.sh后出现类似 “Permission denied” ，这个时候需要对目录进行权限设置：输入 sudo chmod 755 Library/Tomcat8/bin/*.sh 回车，设置文件的读写执行权限，参考第3步中的解决方案。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vi .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ source .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Password:</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ shutdown.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-<h3 id="5-设置完成"><a href="#5-设置完成" class="headerlink" title="5. 设置完成"></a>5. 设置完成</h3><p>之后，输入 <code>sudo startup.sh</code>会显示启动, 打开 localhost:8080 可测试，出现上述页面。</p>
-<p>  关闭使用 <code>shutdown.sh</code> 即可;</p>
-<p>   到此，Tomcat 配置完成。 </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/09/GuideBook/Tomcat配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -509,6 +350,8 @@
 
           
 
+          
+
         </div>
       </header>
     
@@ -602,7 +445,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/06/Guide_book/Ns3仿真基本流程/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/09/Guide_book/Tomcat配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -621,7 +464,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/06/Guide_book/Ns3仿真基本流程/" itemprop="url">Ns3网络仿真基本流程</a></h1>
+                <a class="post-title-link" href="/2018/12/09/Guide_book/Tomcat配置/" itemprop="url">Tomcat配置</a></h1>
         
 
         <div class="post-meta">
@@ -633,8 +476,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T14:31:39+08:00">
-                2018-12-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T10:01:27+08:00">
+                2018-12-09
               </time>
             
 
@@ -652,14 +495,16 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/06/Guide_book/Ns3仿真基本流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/06/Guide_book/Ns3仿真基本流程/" itemprop="commentCount"></span>
+                <a href="/2018/12/09/Guide_book/Tomcat配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/09/Guide_book/Tomcat配置/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
+
           
 
           
@@ -683,14 +528,37 @@
       
         
           
-            <h1 id="Ns3网络仿真基本流程："><a href="#Ns3网络仿真基本流程：" class="headerlink" title="Ns3网络仿真基本流程："></a>Ns3网络仿真基本流程：</h1><h2 id="1）-选择和开发相应模块；"><a href="#1）-选择和开发相应模块；" class="headerlink" title="1）  选择和开发相应模块；"></a>1）  选择和开发相应模块；</h2><p>根据实际仿真对象和仿真场景选择相应的仿真模块；如果搭建的网络比较新，读者就需要开发自己设计的协议。</p>
-<h2 id="2）-编写网络仿真脚本；"><a href="#2）-编写网络仿真脚本；" class="headerlink" title="2）  编写网络仿真脚本；"></a>2）  编写网络仿真脚本；</h2><p>生成节点node；</p>
-<p>安装信道Channel和相应的网络设备NetDevice，</p>
-<p>安装协议栈</p>
-<p>安装应用层协议</p>
-<p>其他配置等</p>
-<p>启动仿真</p>
-<h2 id="3）-仿真结果分析；"><a href="#3）-仿真结果分析；" class="headerlink" title="3）  仿真结果分析；"></a>3）  仿真结果分析；</h2><h2 id="4）-根据结果调试网络配置参数和修改源代码；"><a href="#4）-根据结果调试网络配置参数和修改源代码；" class="headerlink" title="4）  根据结果调试网络配置参数和修改源代码；"></a>4）  根据结果调试网络配置参数和修改源代码；</h2>
+            <p>服务器：阿里云</p>
+<h2 id="远程连接到服务器"><a href="#远程连接到服务器" class="headerlink" title="远程连接到服务器"></a>远程连接到服务器</h2><p><a href="https://help.aliyun.com/document_detail/59083.html?spm=5176.10173289.107.4.78de2e77rXaOJu#本地为%20Linux%20或支持%20SSH%20命令的环境" target="_blank" rel="noopener">远程连接到linux服务器</a></p>
+<h3 id="通过ssh连接"><a href="#通过ssh连接" class="headerlink" title="通过ssh连接"></a>通过ssh连接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:Guide book xxx$ ssh root@120.76.62.132 -i /Users/xxx/Desktop/i\ document/笔记/Guide\ book/xxx.pem</span><br></pre></td></tr></table></figure>
+<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><h3 id="1-给Mac安装jdk环境。"><a href="#1-给Mac安装jdk环境。" class="headerlink" title="1. 给Mac安装jdk环境。"></a>1. 给Mac安装jdk环境。</h3><p>　　　   直接百度”jdk for Mac“，找到其中一个版本进行安装就可以了，安装完成后，打开终端，输入“java”或“javac”，如果出现java命令的使用说明，那么说明你的Mac上的jdk环境已经配置好，这个比起windows系统来说，简单方便很多。</p>
+<h3 id="2-下载安装-Tomcat"><a href="#2-下载安装-Tomcat" class="headerlink" title="2. 下载安装 Tomcat"></a>2. 下载安装 Tomcat</h3><p>​    下载 Tomcat 地址（官方地址）：<a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-80.cgi</a></p>
+<p>​    下载文件：mac下载 zip 和 tar.gz 都行，我下载的是 tar.gz</p>
+<h3 id="3-安装："><a href="#3-安装：" class="headerlink" title="3. 安装："></a>3. 安装：</h3><ol>
+<li><p>压缩之后直接拷贝到资源库中，压缩后的文件夹名称为Tomcat8，记录此位置:<code>/Library/Tomcat8</code>（方便后续环境配置）</p>
+</li>
+<li><p>打开终端，输入以下命令<code>/Library/Tomcat8/bin/startup.sh</code>，浏览器中输入localhost:8080，就可以看到以下效果:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ Library/Tomcat8/bin/starup.sh</span><br><span class="line">-bash: Library/Tomcat8/bin/starup.sh: No such file or directory</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如果遇到提示No such file or directory错误提示，需要执行sudo chmod 755 Library/Tomcat/bin/*.sh，然后重新执行startup.sh，若出现permission denied 的情况，则在sudo模式下执行startup.sh，如果想停止Tomcat，直接执行shutdown.sh即可。在执行sudo时，必须使用带密码的用户。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// or sudo chmod 755 /Library/Tomcat8/bin/*.sh</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo chmod +x /Library/Tomcat8/bin/*.sh</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">touch: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">/Library/Tomcat8/bin/catalina.sh: line 464: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>​     如果每次写路径比较麻烦，这个时候需要设置环境变量。</p>
+<h3 id="4-设置-Tomcat-的环境变量"><a href="#4-设置-Tomcat-的环境变量" class="headerlink" title="4. 设置 Tomcat 的环境变量:"></a>4. 设置 Tomcat 的环境变量:</h3><p>ps：不要在root权限下设置</p>
+<p>　　①使用vim编辑bash_profile，输入命令打开：<code>vi .bash_profile</code>(<code>pico .bash_profile</code>亦可)</p>
+<p>　　②按 <code>i</code>进入编辑模式</p>
+<p>​      ③输入Tomcat存储路径    <code>export PATH=&quot;/Users/keso/Library/Tomcat8/bin:$PATH&quot;</code>（注意：此处路径是自己保存的 tomcat 存储路径）</p>
+<p>　　④esc退出编辑模式，输入 <code>:wq</code> 保存并退出vim</p>
+<p>​      ⑤更新配置的环境变量，输入命令：<code>source .bash_profile</code></p>
+<p>　　⑥终端中输入startup.sh， startup.sh后出现类似 “Permission denied” ，这个时候需要对目录进行权限设置：输入 sudo chmod 755 Library/Tomcat8/bin/*.sh 回车，设置文件的读写执行权限，参考第3步中的解决方案。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vi .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ source .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Password:</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ shutdown.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
+<h3 id="5-设置完成"><a href="#5-设置完成" class="headerlink" title="5. 设置完成"></a>5. 设置完成</h3><p>之后，输入 <code>sudo startup.sh</code>会显示启动, 打开 localhost:8080 可测试，出现上述页面。</p>
+<p>  关闭使用 <code>shutdown.sh</code> 即可;</p>
+<p>   到此，Tomcat 配置完成。 </p>
+
           
         
       
@@ -804,6 +672,8 @@
 
           
 
+          
+
         </div>
       </header>
     
@@ -827,6 +697,280 @@
 <p>其他配置等</p>
 <p>启动仿真</p>
 <h2 id="3）-仿真结果分析；"><a href="#3）-仿真结果分析；" class="headerlink" title="3）  仿真结果分析；"></a>3）  仿真结果分析；</h2><h2 id="4）-根据结果调试网络配置参数和修改源代码；"><a href="#4）-根据结果调试网络配置参数和修改源代码；" class="headerlink" title="4）  根据结果调试网络配置参数和修改源代码；"></a>4）  根据结果调试网络配置参数和修改源代码；</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/06/Guide_book/Ns3仿真基本流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/06/Guide_book/Ns3仿真基本流程/" itemprop="url">Ns3网络仿真基本流程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T14:31:39+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/06/Guide_book/Ns3仿真基本流程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/06/Guide_book/Ns3仿真基本流程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Ns3网络仿真基本流程："><a href="#Ns3网络仿真基本流程：" class="headerlink" title="Ns3网络仿真基本流程："></a>Ns3网络仿真基本流程：</h1><h2 id="1）-选择和开发相应模块；"><a href="#1）-选择和开发相应模块；" class="headerlink" title="1）  选择和开发相应模块；"></a>1）  选择和开发相应模块；</h2><p>根据实际仿真对象和仿真场景选择相应的仿真模块；如果搭建的网络比较新，读者就需要开发自己设计的协议。</p>
+<h2 id="2）-编写网络仿真脚本；"><a href="#2）-编写网络仿真脚本；" class="headerlink" title="2）  编写网络仿真脚本；"></a>2）  编写网络仿真脚本；</h2><p>生成节点node；</p>
+<p>安装信道Channel和相应的网络设备NetDevice，</p>
+<p>安装协议栈</p>
+<p>安装应用层协议</p>
+<p>其他配置等</p>
+<p>启动仿真</p>
+<h2 id="3）-仿真结果分析；"><a href="#3）-仿真结果分析；" class="headerlink" title="3）  仿真结果分析；"></a>3）  仿真结果分析；</h2><h2 id="4）-根据结果调试网络配置参数和修改源代码；"><a href="#4）-根据结果调试网络配置参数和修改源代码；" class="headerlink" title="4）  根据结果调试网络配置参数和修改源代码；"></a>4）  根据结果调试网络配置参数和修改源代码；</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/Android/Android_APP后台搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/05/GuideBook/Android/Android_APP后台搭建/" itemprop="url">AndroidAPP后台搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:53:58+08:00">
+                2018-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/05/GuideBook/Android/Android_APP后台搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/Android/Android_APP后台搭建/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="AndroidAPP后台搭建"><a href="#AndroidAPP后台搭建" class="headerlink" title="AndroidAPP后台搭建"></a>AndroidAPP后台搭建</h1><p>选取 jdk、tomcat、MySQL、FileZilla</p>
+<p><a href="https://blog.csdn.net/Mr_Megamind/article/details/71404618" target="_blank" rel="noopener">参考教程</a></p>
+<ol>
+<li>内网穿透，使用ngrok</li>
+</ol>
+
           
         
       
@@ -962,6 +1106,8 @@
 
           
 
+          
+
         </div>
       </header>
     
@@ -1030,7 +1176,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/Android/Android_APP后台搭建/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/MySQL报错解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1049,7 +1195,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/05/GuideBook/Android/Android_APP后台搭建/" itemprop="url">AndroidAPP后台搭建</a></h1>
+                <a class="post-title-link" href="/2018/12/05/GuideBook/MySQL报错解决/" itemprop="url">MySQL_errors</a></h1>
         
 
         <div class="post-meta">
@@ -1061,7 +1207,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:53:58+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:46:52+08:00">
                 2018-12-05
               </time>
             
@@ -1080,14 +1226,16 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/05/GuideBook/Android/Android_APP后台搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/Android/Android_APP后台搭建/" itemprop="commentCount"></span>
+                <a href="/2018/12/05/GuideBook/MySQL报错解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/MySQL报错解决/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
+
           
 
           
@@ -1111,11 +1259,12 @@
       
         
           
-            <h1 id="AndroidAPP后台搭建"><a href="#AndroidAPP后台搭建" class="headerlink" title="AndroidAPP后台搭建"></a>AndroidAPP后台搭建</h1><p>选取 jdk、tomcat、MySQL、FileZilla</p>
-<p><a href="https://blog.csdn.net/Mr_Megamind/article/details/71404618" target="_blank" rel="noopener">参考教程</a></p>
-<ol>
-<li>内网穿透，使用ngrok</li>
-</ol>
+            <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>版本：MySQL8.0.11</p>
+<p>系统：MacOS 10.14.1</p>
+<h2 id="Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’"><a href="#Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’" class="headerlink" title="Q1：Unable to load authentication plugin ‘caching_sha2_password’."></a>Q1：Unable to load authentication plugin ‘caching_sha2_password’.</h2><p>​    datagrip连接的时候连接不到，原因是mysql8.0之前的版本用的是mysql_native_password, 但mysql8.0之后的版本连接使用的密码是caching_sha2_password。</p>
+<p>————————————————————2018.12.5—————————————————————————</p>
+<p>解决：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'1234'</span> PASSWORD EXPIRE NEVER; </span></span><br><span class="line">Query OK, 0 rows affected (0.08 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> FLUSH PRIVILEGES;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> alter user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1252,6 +1401,8 @@
 
           
 
+          
+
         </div>
       </header>
     
@@ -1321,7 +1472,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/MySQL报错解决/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/MySQL使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1340,7 +1491,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/05/GuideBook/MySQL报错解决/" itemprop="url">MySQL_errors</a></h1>
+                <a class="post-title-link" href="/2018/12/05/GuideBook/MySQL使用/" itemprop="url">MySQL_使用</a></h1>
         
 
         <div class="post-meta">
@@ -1352,7 +1503,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:46:52+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T21:26:34+08:00">
                 2018-12-05
               </time>
             
@@ -1371,14 +1522,16 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/05/GuideBook/MySQL报错解决/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/MySQL报错解决/" itemprop="commentCount"></span>
+                <a href="/2018/12/05/GuideBook/MySQL使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/MySQL使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
+
           
 
           
@@ -1402,12 +1555,40 @@
       
         
           
-            <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>版本：MySQL8.0.11</p>
-<p>系统：MacOS 10.14.1</p>
-<h2 id="Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’"><a href="#Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’" class="headerlink" title="Q1：Unable to load authentication plugin ‘caching_sha2_password’."></a>Q1：Unable to load authentication plugin ‘caching_sha2_password’.</h2><p>​    datagrip连接的时候连接不到，原因是mysql8.0之前的版本用的是mysql_native_password, 但mysql8.0之后的版本连接使用的密码是caching_sha2_password。</p>
-<p>————————————————————2018.12.5—————————————————————————</p>
-<p>解决：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'1234'</span> PASSWORD EXPIRE NEVER; </span></span><br><span class="line">Query OK, 0 rows affected (0.08 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> FLUSH PRIVILEGES;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> alter user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
+            <h1 id="MySQL使用"><a href="#MySQL使用" class="headerlink" title="MySQL使用"></a>MySQL使用</h1><p>安装环境：mac</p>
+<h2 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h2><ol>
+<li><p>下载安装，我已经不太记得了，有点久远的事情</p>
+<p>从  <a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">官网</a>下载dmg，直接安装就好，有一步需要注意的就是弹出<strong>初始密码</strong>的时候记得记下来！！！</p>
+</li>
+<li><p>配置环境变量</p>
+<ol>
+<li><p>进入  <code>bash_profile</code> 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按 i 进入编辑模式，在文件末尾加上mysql的文件路径：　</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=<span class="variable">$&#123;</span>PATH&#125;<span class="symbol">:/usr/local/mysql/bin</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入 <code>:wq</code>  退出vim编辑，冒号不要忘记了！不然会进入 <code>recording@</code> 状态。</p>
+</li>
+<li><p>使得该文件生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>进入mysql</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p>随后输入密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 8</span><br><span class="line">Server version: 8.0.11 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><p>忘记密码了咋整，发现了一个很神奇的东西</p>
+<p>输入新的密码，再在终端上尝试一下你的新密码，你就会惊喜的发现it works！</p>
+</li>
+</ul>
+<p><img src="assets/mysql修改初始密码.png" alt="mysql修改初始密码"></p>
+<h2 id="MySQL使用-1"><a href="#MySQL使用-1" class="headerlink" title="MySQL使用"></a>MySQL使用</h2><p>ubuntu</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">service mysql restart</span><br><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1538,167 +1719,6 @@
           
           
 
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL使用"><a href="#MySQL使用" class="headerlink" title="MySQL使用"></a>MySQL使用</h1><p>安装环境：mac</p>
-<h2 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h2><ol>
-<li><p>下载安装，我已经不太记得了，有点久远的事情</p>
-<p>从  <a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">官网</a>下载dmg，直接安装就好，有一步需要注意的就是弹出<strong>初始密码</strong>的时候记得记下来！！！</p>
-</li>
-<li><p>配置环境变量</p>
-<ol>
-<li><p>进入  <code>bash_profile</code> 文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按 i 进入编辑模式，在文件末尾加上mysql的文件路径：　</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=<span class="variable">$&#123;</span>PATH&#125;<span class="symbol">:/usr/local/mysql/bin</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输入 <code>:wq</code>  退出vim编辑，冒号不要忘记了！不然会进入 <code>recording@</code> 状态。</p>
-</li>
-<li><p>使得该文件生效</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>进入mysql</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br></pre></td></tr></table></figure>
-<p>随后输入密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 8</span><br><span class="line">Server version: 8.0.11 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li><p>忘记密码了咋整，发现了一个很神奇的东西</p>
-<p>输入新的密码，再在终端上尝试一下你的新密码，你就会惊喜的发现it works！</p>
-</li>
-</ul>
-<p><img src="assets/mysql修改初始密码.png" alt="mysql修改初始密码"></p>
-<h2 id="MySQL使用-1"><a href="#MySQL使用-1" class="headerlink" title="MySQL使用"></a>MySQL使用</h2><p>ubuntu</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">service mysql restart</span><br><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/MySQL使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/GuideBook/MySQL使用/" itemprop="url">MySQL_使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T21:26:34+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/GuideBook/MySQL使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/MySQL使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
           
 
           
@@ -1932,6 +1952,17 @@
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
 
 
 

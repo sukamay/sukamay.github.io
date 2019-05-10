@@ -355,6 +355,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
+
+          
 
           
 
@@ -696,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Faster-R-CNN-Down-the-rabbit-hole-of-modern-object-detection"><span class="nav-number">1.</span> <span class="nav-text">Faster R-CNN: Down the rabbit hole of modern object detection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">2.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-number">3.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Base-network"><span class="nav-number">4.</span> <span class="nav-text">Base network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG"><span class="nav-number">4.1.</span> <span class="nav-text">VGG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG-vs-ResNet"><span class="nav-number">4.2.</span> <span class="nav-text">VGG vs ResNet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anchors"><span class="nav-number">5.</span> <span class="nav-text">Anchors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Region-Proposal-Network"><span class="nav-number">6.</span> <span class="nav-text">Region Proposal Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-target-and-loss-functions"><span class="nav-number">6.1.</span> <span class="nav-text">Training, target and loss functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Post-processing"><span class="nav-number">6.2.</span> <span class="nav-text">Post processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Standalone-application"><span class="nav-number">6.3.</span> <span class="nav-text">Standalone application</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Region-of-Interest-Pooling"><span class="nav-number">7.</span> <span class="nav-text">Region of Interest Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Region-based-Convolutional-Neural-Network"><span class="nav-number">8.</span> <span class="nav-text">Region-based Convolutional Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-and-targets"><span class="nav-number">8.1.</span> <span class="nav-text">Training and targets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Post-processing-1"><span class="nav-number">8.2.</span> <span class="nav-text">Post processing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Training"><span class="nav-number">9.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Evaluation"><span class="nav-number">10.</span> <span class="nav-text">Evaluation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">11.</span> <span class="nav-text">Conclusion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">11.1.</span> <span class="nav-text">Reference:</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Faster-R-CNN-Down-the-rabbit-hole-of-modern-object-detection"><span class="nav-text">Faster R-CNN: Down the rabbit hole of modern object detection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Architecture"><span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Base-network"><span class="nav-text">Base network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG"><span class="nav-text">VGG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG-vs-ResNet"><span class="nav-text">VGG vs ResNet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anchors"><span class="nav-text">Anchors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Region-Proposal-Network"><span class="nav-text">Region Proposal Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-target-and-loss-functions"><span class="nav-text">Training, target and loss functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Post-processing"><span class="nav-text">Post processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Standalone-application"><span class="nav-text">Standalone application</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Region-of-Interest-Pooling"><span class="nav-text">Region of Interest Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Region-based-Convolutional-Neural-Network"><span class="nav-text">Region-based Convolutional Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-and-targets"><span class="nav-text">Training and targets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Post-processing-1"><span class="nav-text">Post processing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Training"><span class="nav-text">Training</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Evaluation"><span class="nav-text">Evaluation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-text">Reference:</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -736,6 +741,17 @@
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
 
 
 
