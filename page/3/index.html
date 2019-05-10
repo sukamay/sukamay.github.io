@@ -380,7 +380,7 @@
 <p>最先实现Web XR Device API的是Chrome 67 （需要设置flag 为#webxr），初始化的支持AR的相关特性在Chrome 70+（需要设置flag为#webxr-hit-test）实现，不久后，所有支持WebVR的浏览器都将支持WebXR Device API。</p>
 <p>现在WebXR Device API支持的AR特性很少，light estimation，surfaces，meshes等特性未来可能会支持。</p>
 <p>回顾一下之前的方块demo：</p>
-<p><img src="/images/image-20190426170811990.png" alt="image-20190426170811990"></p>
+<p><img src="../../images/image-20190426170811990.png" alt="image-20190426170811990"></p>
 <p>我们将在此基础上进一步改进</p>
 <h2 id="3-Add-a-cube-to-a-surface"><a href="#3-Add-a-cube-to-a-surface" class="headerlink" title="3. Add a cube to a surface"></a>3. Add a cube to a surface</h2><p>现在我们已经确认我们有实时视频输入，我们的设备姿势设置我们的相机的位置和方向，以及3D立方体渲染在顶部，是时候开始使用命中测试与现实世界交互。我们希望能够在现实世界中找到一个表面（例如在地面上），并在那里放置一个立方体。</p>
 <h3 id="Hit-Test？"><a href="#Hit-Test？" class="headerlink" title="Hit Test？"></a><strong>Hit Test？</strong></h3><p>命中测试通常是从某个方向上的空间点投出直线并确定它是否与我们感兴趣的任何物体相交的方法。在我们的例子中，我们将点击我们AR的屏幕设备，所以想象一条光线从你的手指穿过你的设备，并直接进入你设备的相机所看到的物理世界。</p>

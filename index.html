@@ -367,7 +367,7 @@
       
         
           
-            <p><img src="/images/IMG_7409-7496273.JPG" alt="IMG_7409"></p>
+            <p><img src="../../images/IMG_7409-7496273.JPG" alt="IMG_7409"></p>
 
           
         
@@ -822,16 +822,16 @@
 <p>3.如果某个进程起不来，可能是某个端口被占用</p>
 <p>查看使用某端口的进程</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -<span class="selector-tag">i</span>:<span class="number">8090</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/798214-20170320154514377-1985478430.png" alt="img"></p>
+<p><img src="../../images/798214-20170320154514377-1985478430.png" alt="img"></p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ap<span class="string">|grep 8090</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/798214-20170320154600658-246972161.png" alt="img"></p>
+<p><img src="../../images/798214-20170320154600658-246972161.png" alt="img"></p>
 <p>查看到进程id之后，使用netstat命令查看其占用的端口</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nap<span class="string">|grep 7779</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/798214-20170320155041815-1272481492.png" alt="img"></p>
+<p><img src="../../images/798214-20170320155041815-1272481492.png" alt="img"></p>
 <p>使用kill杀掉进城后再启动</p>
 <p>4.终止后台运行的进程</p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`kill -<span class="number">9</span>  进程号`</span><br></pre></td></tr></table></figure>
-<p><img src="/images/798214-20170320153728049-88100874.png" alt="img"></p>
+<p><img src="../../images/798214-20170320153728049-88100874.png" alt="img"></p>
 
           
         
@@ -1466,14 +1466,14 @@
 <li>Determine the probability distribution of random variables</li>
 </ol>
 <p>According to historical data, pessimistic estimates, general estimates and optimistic estimates of each variable are obtained. It is assumed that the random variables obey the Gaussian distribution and the parameters of the Gaussian distribution are determined from the historical data.</p>
-<p><img src="/images/1407D354-1C94-4BCA-A8A7-AF53D851801E.png" alt="1407D354-1C94-4BCA-A8A7-AF53D851801E"></p>
+<p><img src="../../images/1407D354-1C94-4BCA-A8A7-AF53D851801E.png" alt="1407D354-1C94-4BCA-A8A7-AF53D851801E"></p>
 <p>All variable are distributed as Gaussian distribution.</p>
-<p><img src="/images/VariableDistribution.png" alt="VariableDistribution"></p>
+<p><img src="../../images/VariableDistribution.png" alt="VariableDistribution"></p>
 <ol start="3">
 <li><p>Extract random numbers for each random variable</p>
 </li>
 <li><p>Convert the extracted random number into the sampled value of each input variable</p>
-<p><img src="/images/randomInput.png" alt="randomInput"></p>
+<p><img src="../../images/randomInput.png" alt="randomInput"></p>
 </li>
 <li><p>The sampled values constitute a set of project evaluation basic data</p>
 </li>
@@ -1484,8 +1484,8 @@
 <li><p>Organize the expected value, variance, standard deviation, probability distribution and cumulative probability distribution of the evaluation indicators obtained from the simulation results, draw the cumulative probability map, and at the same time, check whether the simulation times meet the predetermined accuracy requirements.</p>
 </li>
 </ol>
-<p><img src="/images/ProbabilityDistributionHist.png" alt="ProbabilityDistributionHist"></p>
-<p><img src="/images/MonteCarlo.png" alt="MonteCarlo"></p>
+<p><img src="../../images/ProbabilityDistributionHist.png" alt="ProbabilityDistributionHist"></p>
+<p><img src="../../images/MonteCarlo.png" alt="MonteCarlo"></p>
 <table>
 <thead>
 <tr>
@@ -1717,7 +1717,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">./darknet detector train ./cfg/voc.data .cfg/tiny-yolo-voc.cfg darknet.conv.weights</span></span><br></pre></td></tr></table></figure>
 <p> 不过我没试成功，加上这个模型直接就除了final，不知道啥情况。当然也可以用自己训练的模型做参数初始化，万一训练的时候被人终端了，可以再用训练好的模型接上去接着训练。</p>
 <p>​       训练过程中会根据迭代次数保存训练的权重模型，然后就可以拿来测试了，测试的命令同理：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg results/tiny-yolo-voc_6000.weights data/images.jpg</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg results/tiny-yolo-voc_6000.weights data../../images.jpg</span><br></pre></td></tr></table></figure>
 <p>​      这样就完成了整个流程。</p>
 
           
@@ -1934,11 +1934,11 @@
 <h2 id="Quality-Metric"><a href="#Quality-Metric" class="headerlink" title="Quality Metric"></a>Quality Metric</h2><p>The following metrics are majorly used for generating the daily/weekly status report with accurate data during test case development/execution phase and this is also useful for tracking the project status and Quality of the software.</p>
 <h3 id="1-percentage-Test-cases-Executed"><a href="#1-percentage-Test-cases-Executed" class="headerlink" title="1. percentage Test cases Executed:"></a>1. percentage Test cases Executed:</h3><p>This metric is used to obtain the execution status of the test cases in terms of percentage.<br>$$<br>TestCaseExecuted\% = \frac{No_{TestCaseExecuted}}{Total \space No_{TestCasesWritten}}* 100.<br>$$</p>
 <h3 id="2-percentage-Test-cases-not-executed"><a href="#2-percentage-Test-cases-not-executed" class="headerlink" title="2. percentage Test cases not executed:"></a>2. percentage Test cases not executed:</h3><p>This metric is used to obtain the pending execution status of the test cases in terms of percentage.<br>$$<br>TestCasesNotExecuted\% = \frac{No_{TestCasesNotExecuted}}{Total \space No_{TestCasesWritten}} * 100.<br>$$</p>
-<p><img src="/images/20161202085815466.png" alt="这里写图片描述"><br><img src="/images/20161202085848369.png" alt="这里写图片描述"></p>
+<p><img src="../../images/20161202085815466.png" alt="这里写图片描述"><br><img src="../../images/20161202085848369.png" alt="这里写图片描述"></p>
 <h3 id="3-percentage-Test-cases-Passed"><a href="#3-percentage-Test-cases-Passed" class="headerlink" title="3. percentage Test cases Passed:"></a>3. percentage Test cases Passed:</h3><p>This metric is used to obtain the Pass percentage of the executed test cases.<br>$$<br>Test Cases Passed\% = \frac{No_{ Test Cases Passed} }{Total \space No_{Test Cases Executed}} * 100.<br>$$</p>
 <h3 id="4-percentage-Test-cases-Failed"><a href="#4-percentage-Test-cases-Failed" class="headerlink" title="4. percentage Test cases Failed:"></a>4. percentage Test cases Failed:</h3><p> This metric is used to obtain the Fail percentage of the executed test cases.<br>$$<br> Test Cases Failed \%= \frac{No_{ Test Cases Failed }}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$</p>
-<h3 id="5-percentage-Test-cases-Blocked"><a href="#5-percentage-Test-cases-Blocked" class="headerlink" title="5. percentage Test cases Blocked:"></a>5. percentage Test cases Blocked:</h3><p> This metric is used to obtain the blocked percentage of the executed test cases. A detailed report can be submitted by specifying the actual reason of blocking the test cases.<br>$$<br>Test Cases Blocked \% = \frac{No_{ Test Cases Blocked}}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$<br><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="Test Execution Status这里写图片描述"></p>
-<p><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="这里写图片描述"></p>
+<h3 id="5-percentage-Test-cases-Blocked"><a href="#5-percentage-Test-cases-Blocked" class="headerlink" title="5. percentage Test cases Blocked:"></a>5. percentage Test cases Blocked:</h3><p> This metric is used to obtain the blocked percentage of the executed test cases. A detailed report can be submitted by specifying the actual reason of blocking the test cases.<br>$$<br>Test Cases Blocked \% = \frac{No_{ Test Cases Blocked}}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$<br><img src="../../images/20161202085945171.png" alt="这里写图片描述"><br><img src="../../images/20161202090009453.png" alt="Test Execution Status这里写图片描述"></p>
+<p><img src="../../images/20161202085945171.png" alt="这里写图片描述"><br><img src="../../images/20161202090009453.png" alt="这里写图片描述"></p>
 <h3 id="6-Defect-Density"><a href="#6-Defect-Density" class="headerlink" title="6. Defect Density"></a>6. Defect Density</h3><p>$$<br>Defect Density =  No_{ Defects identified }/ size<br>$$</p>
 <p>(Here “Size” is considered as requirement. Hence here the Defect Density is calculated as number of defects identified per requirement. Similarly, Defect Density can be calculated as number of Defects identified per 100 lines of code [OR] No. of defects identified per module etc.) </p>
 <h3 id="7-Defect-Removal-Efficiency-DRE"><a href="#7-Defect-Removal-Efficiency-DRE" class="headerlink" title="7. Defect Removal Efficiency (DRE)"></a>7. Defect Removal Efficiency (DRE)</h3><p>$$<br>Defect Removal Efficiency(DRE) = (\frac{No_{ Defects Found During QA Testing}}{ No_{ Defects Found During QA Testing}} +No_{ Defects Found By End user}) * 100<br>$$</p>
@@ -1948,7 +1948,7 @@
 <p> High Defects\% &amp;= \frac{No_{ High Defects Identified}}{Total \space No_{ Defects Identified}} * 100  \</p>
 <p> Medium Defects\% &amp;=\frac{ No_{ Medium Defects Identified }}{ Total \space No_{ Defects Identified}} * 100 \</p>
 <p> Low Defects\% &amp;= \frac{No_{ Low Defects Identified}}{Total \space No_{ Defects Identified}} * 100<br>\end{align}<br>$$</p>
-<p><img src="/images/20161202090431083.png" alt="Defect Status by Priority这里写图片描述"></p>
+<p><img src="../../images/20161202090431083.png" alt="Defect Status by Priority这里写图片描述"></p>
 
           
         
