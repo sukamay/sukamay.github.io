@@ -398,7 +398,20 @@
 
 运转资金不足
 技术中心及相关设计人员慎重研究设计变更，减少设计变更造成的各种损失
-加
+加强设备管理，及时利用，减少浪费
+
+
+仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；
+进行技术决策时与技术人员进行有效的沟通
+
+
+低效的项目组结构降低生产率；
+选取一个有强领导力的管理者
+设置一定的奖惩机制，激励员工提高生产率
+对项目组结构进行一定的重构或微调
+
+
+管理层审查 决策
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -566,7 +579,42 @@
 
 ProcessPeopleMaterialsEnvironment
 新的开发工具学习期比预期长
-开发工具不如期望的那样有效，开发人员需要时间创
+开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；
+
+Management
+
+
+Type
+Possible risk
+
+
+
+
+Technology
+
+
+
+People
+
+
+
+Organizational
+
+
+
+Tools
+
+
+
+Requirements
+
+
+
+Estimation
+
+
+
+1.2 type-basedTec
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -729,7 +777,8 @@ ProcessPeopleMaterialsEnvironment
         
           
           MgtPro_8_QualityMgtQuality Baseline/Goals1. Functionality:a. Suitability:
-The function of the sub-functions in the system should meet the principle of
+The function of the sub-functions in the system should meet the principle of high cohesion and low coupling.
+The number of database table rows does not exceed 1 million rows, the maximum capacity of the database does not excee
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -896,7 +945,13 @@ The function of the sub-functions in the system should meet the principle of
 被动指针（href
 Web Browser ArchitectureA controller 
 A set of clients
-A set of interpreter
+A set of interpreters
+Web typeStatic web documentActive web document
+Textual representation: js，可以改变网页内控件
+Binary representation: 相对独立，与网页的控件没有交互
+
+==typescript==
+Dynamic w
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1227,8 +1282,18 @@ Exercise：简历（html+css
 项目初期寻找一个合适的项目管理平台，包括项目需求跟踪、任务完成进度等等
 找文档的模版！
 工作量的合理预估！给一个弹性的时间！（哭了，忽略的前后端的整合让人头秃
-阶段性的
-          ...
+阶段性的项目检查！（比如，前端的孩子写的是纯静态的，使用的位置都是绝对位置，后期调起来相当不方便
+找相关的工具：
+项目进度：ones.ai
+讨论：在线腾讯文档
+uml绘制：staruml
+开发工具，求问有没有代码直接导出图的
+数据库图：powerDesign
+
+
+
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/11/Mess/软工经验汇总：/#more" rel="contents">
@@ -1367,7 +1432,7 @@ Exercise：简历（html+css
       
         
           
-          MgtPro_9_MonteCarloMonte Carlo method​    Monte Carlo simulation is a method in the risk analysis and evaluation of engineering projects. It is a quan
+          MgtPro_9_MonteCarloMonte Carlo method​    Monte Carlo simulation is a method in the risk analysis and evaluation of engineering projects. It is a quantitative analysis method. When the number of random variables input in the project evaluation is more than three, there may be three or more states in
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1517,7 +1582,26 @@ assumptions
 scope management（using appendix）
 quality management  doc structure
 planning
-a
+assurance
+Control
+
+
+risk management
+identification 
+思维导图类似物（包含总体的风险，根据我们分的大点
+
+
+analysis（加引言）
+impact 表
+展示矩阵图
+蒙特卡洛
+
+
+response
+
+
+
+3. Work Breakdown Struct
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1658,7 +1742,10 @@ a
         
           
           MgtPro_0标准－IEEE/ANSI 830-1998
-1、引言1.1 需求文档的目的1.2 产品范围1.3 定义、首字母缩写词和缩略词1.4 参考文献1.5 文档的其余部分概览2、一般描述2.1 产品透视2.2  产品功能2.3 用户特征2.4 一般约束2.5 假设和依赖性3、专门需求覆盖功能
+1、引言1.1 需求文档的目的1.2 产品范围1.3 定义、首字母缩写词和缩略词1.4 参考文献1.5 文档的其余部分概览2、一般描述2.1 产品透视2.2  产品功能2.3 用户特征2.4 一般约束2.5 假设和依赖性3、专门需求覆盖功能，非功能和接口需求——显然，这是文档中最实质性的部分，但是因为在组织的实践中存在极大的变数，对这一节定义标准的结构是不适当的。需求可能记录外部接口，描述系统功能和特征、定义逻辑的数据库需求、设计约束、系统总体特征和质量特征。4、附录
+英文版
+introduction
+互联网书店的要求清单从下一章开始
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1804,7 +1891,10 @@ a
 安装的工具我使用的是npm和brew
 
 2. 安装git与Node.js12brew install gitbrew install node
-3. 安装Hexo1np
+3. 安装Hexo1npm install -g hexo-cli
+为了便于发布到GitHub上，建议同时安装hexo-deployer-git
+1npm install hexo-deployer-git --save
+4. 初始化，建立博客项目选定博客网站项目程序文件的存放位置，如~/develop/hexo/gith
           ...
           <!--noindex-->
           <div class="post-button text-center">

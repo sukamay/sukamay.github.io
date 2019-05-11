@@ -404,7 +404,15 @@
           #Android图片中的三级缓存##为什么要使用三级缓存
 
 如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了
-假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定
+假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响
+特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而知
+所以提出三级缓存策略，通过网络、本地、内存三级缓存图片，来减少不必要的网络交互，避免浪费流量
+
+##什么是三级缓存
+
+网络加载，不优先加载，速度慢，浪费流量
+本地缓存，次优先加载，速度快
+内存缓存
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -580,7 +588,10 @@
           #Android：五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。
 
 FrameLayout(框架布局)
-  此布局是五种布局中最简
+  此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出现在视图的左上角，我们可以使用android:layout_margin，android:layout_gravity等属性去控制子控件相对布局的位置。
+
+LinearLayout(线性布局)
+  一
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -757,7 +768,9 @@ FrameLayout(框架布局)
 BootLoder引导,然后加载Linux内核.
 0号进程init启动.加载init.rc配置文件,配置文件有个命令启动了zygote进程
 zygote开始fork出SystemServer进程
-SystemServer加载各种JNI库,然后init1,init2方法,ini
+SystemServer加载各种JNI库,然后init1,init2方法,init2方法中开启了新线程ServerThread.
+在SystemServer中会创建一个socket客户端，后续AMS（ActivityManagerService）会通过此客户端和zygote通信
+ServerThread的run方法中开启了AMS,还孵化新进程ServiceManager,加载注
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -933,7 +946,11 @@ SystemServer加载各种JNI库,然后init1,init2方法,ini
           #Android系统机制###APP启动过程
 
 Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。
-Activity和Act
+Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Instrumentation，调用Instrumentation.execStartActivity
+
+
+###Android内核解读-应用的安装过程
+http://blog.csdn.net/singw
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1108,7 +1125,7 @@ Activity和Act
           
           #ART和Dalvik区别Art上应用启动快，运行快，但是耗费更多存储空间，安装时间长，总的来说ART的功效就是”空间换时间”。
 ART: Ahead of Time Dalvik: Just in Time
-什么是Dalvik：Dalvik是Google公司自己设计用于Android平台的Java
+什么是Dalvik：Dalvik是Google公司自己设计用于Android平台的Java虚拟机。Dalvik虚拟机是Google等厂商合作开发的Android移动设备平台的核心组成部分之一，它可以支持已转换为.dex(即Dalvik Executable)格式的Java应用程序的运行，.dex格式是专为Dalvik应用设计的一种压缩格式，适合内存和处理器速度有限的系统。Dalvik经过
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1281,7 +1298,7 @@ ART: Ahead of Time Dalvik: Just in Time
       
         
           
-          #AsyncTask首先从Android3.0开始，系统要求网络访问必须在子线程中进行，否则网络访问将会失败并抛出NetworkOnMainThreadException这个异常，这样做是为了避免主线程由于耗时操作所阻塞从而出现ANR现象。AsyncTask封装了线程池和Handler。AsyncT
+          #AsyncTask首先从Android3.0开始，系统要求网络访问必须在子线程中进行，否则网络访问将会失败并抛出NetworkOnMainThreadException这个异常，这样做是为了避免主线程由于耗时操作所阻塞从而出现ANR现象。AsyncTask封装了线程池和Handler。AsyncTask有两个线程池：SerialExecutor和THREAD_POOL_EXECUTOR。前者是用于任务的排队，默认是串行的线程池：后者用于真正的执行任务。AsyncTask还有一个Handler，叫InternalHandler，用于将执行环境从线程池切换到主线程。AsyncTask内部就是通过
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1455,7 +1472,8 @@ ART: Ahead of Time Dalvik: Just in Time
         
           
           #Binder机制首先Binder是Android系统进程间通信(IPC)方式之一。
-Binder使用Client－Server通信方式。Binder框架定义了四个角色：Server,Client,ServiceManager以及Binder驱动。其中Server,Client,ServiceMan
+Binder使用Client－Server通信方式。Binder框架定义了四个角色：Server,Client,ServiceManager以及Binder驱动。其中Server,Client,ServiceManager运行于用户空间，驱动运行于内核空间。Binder驱动程序提供设备文件/dev/binder与用户空间交互，Client、Server和Service Manager通过open和ioctl文件操作函数与Binder驱动程序进行通信。
+Server创建了Binder实体，为其取一个字符形式，可
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1628,7 +1646,8 @@ Binder使用Client－Server通信方式。Binder框架定义了四个角色：Se
       
         
           
-          #Android性能优化##合理管理内存###节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进
+          #Android性能优化##合理管理内存###节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执行结束后会自动停止，避免了Service的内存泄漏。
+###当界面不可见时释放内存当用户打开了另外一个程序，我们的程序界面已经不可见的时候，我们应当将所有和界面相关的资源进行释放。重写Activity
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1818,7 +1837,15 @@ Fragment拥有自己的生命周期和接受、处理用户的事件
 
 
 
-Fragmen
+Fragment依附于Activity的生命状态
+
+
+生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命周期方法的含义吧。
+##Fragment生命周期方法含义：
+
+public void onAttach(Context context)
+
+onAttach方法会在Fragment于窗口关联后立刻调用
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -2002,7 +2029,7 @@ Fragmen
 
 创建远程仓库
 
-12345678910111213141516// 添加一个新的 remo
+12345678910111213141516// 添加一个新的 remote 远程仓库git remote add [remote-name] [url]例：git remote add origin https://github.com/you/yourpro.gitorigin：相当于该远程仓库的别名// 列出所有 remote 的别名git remote// 列出
           ...
           <!--noindex-->
           <div class="post-button text-center">

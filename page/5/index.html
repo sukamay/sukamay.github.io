@@ -403,7 +403,8 @@
           
           #Handler内存泄漏分析及解决###一、介绍
 首先，请浏览下面这段handler代码：
-12345678public class SampleActivity extends Activity &#123;  private final Handler mLeakyHandler = new H
+12345678public class SampleActivity extends Activity &#123;  private final Handler mLeakyHandler = new Handler() &#123;    @Override    public void handleMessage(Message msg) &#123;      // ...     &#125;  &#125;&#125;
+在使用handler时，这是一段很常见的代码。但是，它却会造成严重的内
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -586,7 +587,13 @@
 
 View传送指令到Controller
 Controller完成业务逻辑后，要求Model改变状态
-Mod
+Model将新的数据发送到View，用户得到反馈
+
+Tips：所有的通信都是单向的。
+#互动模式接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。
+另一种是直接通过Controller接受指令
+#MVP
+MVP模式将Controller改名为Presenter
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -762,7 +769,10 @@ Mod
           #ListView详解直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。
 Adpater在ListView和数据源之间起到了一个桥梁的作用
 ###RecycleBin机制
-RecycleBin机制是ListView
+RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类。
+
+RecycleBin当中使用mActiveViews这个数组来存储View，调用这个方法后就会根据传入的参数来将ListView中的指定元素存储到mActiveViews中。
+mActi
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -937,7 +947,8 @@ RecycleBin机制是ListView
           
           #MVP###为什么需要MVP
 
-尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bu
+尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需要回调函数。View逻辑变成十分直接。
+后台任务 当你编写一个Actviity、Fragment、自定义View的时候，你会把所有的和后台任务相关的方法写在一个静态类或者外部类中。这样，你的T
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1111,7 +1122,7 @@ RecycleBin机制是ListView
         
           
           #RecyclerView和ListView的异同
-ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHol
+ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将导致ListView性能展示迟缓。而在RecyclerView中使用RecyclerView.ViewHolder则变成了必须，尽管实现起来稍显复杂，但它却解决了ListView面临的上述不使用自定义
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1293,7 +1304,12 @@ View缺乏双缓冲机制
 
 ##SurfaceView的绘图机制
 
-一般会与SurfaceView结合使
+一般会与SurfaceView结合使用
+调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder
+
+##SurfaceHolder提供了如下方法来获取Canvas对象
+
+Canvas lockCanvas():锁定整个SurfaceView对象，获取该Surface上的Can
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1467,7 +1483,9 @@ View缺乏双缓冲机制
         
           
           #EventBus###概述
-EventBus是一款针对Android优化的发布/订阅（publish/subscribe）事件总线。主要功能是替代Intent,Handler,BroadCast在Fragment，Activity，Service，线程之间传递消息。简化了应用程序内各组件间、组件与
+EventBus是一款针对Android优化的发布/订阅（publish/subscribe）事件总线。主要功能是替代Intent,Handler,BroadCast在Fragment，Activity，Service，线程之间传递消息。简化了应用程序内各组件间、组件与后台线程间的通信。优点是开销小，代码更优雅。以及将发送者和接收者解耦。比如请求网络，等网络返回时通过Handler或Broadcast通知UI，两个Fragment之间需要通过Listener通信，这些需求都可以通过EventBus实现。
+###EventBus作为一个消息总线，有三个主要的元素：
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1813,7 +1831,9 @@ EventBus是一款针对Android优化的发布/订阅（publish/subscribe）事�
       
         
           
-          #Zygote和System进程的启动过程##init脚本的启动12345+------------+    +-------+   +-----------+|Linux Kernel+--&gt; |init.rc+-&gt; |app_process|+------------+    +--
+          #Zygote和System进程的启动过程##init脚本的启动12345+------------+    +-------+   +-----------+|Linux Kernel+--&gt; |init.rc+-&gt; |app_process|+------------+    +-------+   +-----------+               create and public                           server socket
+linux内核加载完成后，运行init.rc脚本
+1service zygote /system/bin/ap
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1989,7 +2009,9 @@ EventBus是一款针对Android优化的发布/订阅（publish/subscribe）事�
           ###Android动态加载dex技术初探
 http://blog.csdn.net/u013478336/article/details/50734108
 Android使用Dalvik虚拟机加载可执行程序，所以不能直接加载基于class的jar，而是需要将class转化为dex字节码。
-Andr
+Android支持动态加载的两种方式是：DexClassLoader和PathClassLoader，DexClassLoader可加载jar/apk/dex，且支持从SD卡加载；PathClassLoader据说只能加载已经安装在Android系统内APK文件。
+###Android插件化基础
+Andro
           ...
           <!--noindex-->
           <div class="post-button text-center">

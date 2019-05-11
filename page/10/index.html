@@ -372,7 +372,14 @@
 基于qt的tablewidget 实现文件系统的模拟，treewidget实现树形目录
 配置：mac 10.13。 Qt 5.9
 参考博文：https://www.cnblogs.com/zhoug2020/p/3789076.html
-//前面一部分
+//前面一部分基本都是按照这个博主写的来的，后面基本都是随便找的🌚🙈，这里当总结一下，因为不这样下次依旧不记得咋整。。。
+文件系统提供的操作：
+
+格式化   报错了。。。吐血。。🙃，调了半天了，太难过了，我还是洗洗睡了吧
+创建子目录。  ok😃
+删除子目录。  Ok
+显示目录。    ok
+更改当前目录。
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -519,7 +526,9 @@ library
 画个三角形
 
 error：ld: symbol(s) not found for architecture x86_64
-clang: error: linker command failed with 
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+solve：缺少某个库，在build phases-&gt;link binary with libraries处添加“libgltools.dylib”文件，之后就报了另一个错。。。
+error：ld: library 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -663,7 +672,12 @@ clang: error: linker command failed with
 % 希望哪天可以自己做个app上架，不求发家致富只求流量钱能够我交个年费
 测试设备：mac 10.13.4； xcode9.4； iphone ios 11.3
 
-将自己的手
+将自己的手机用数据线连到电脑上，开启信任
+
+xcode打开需要模拟的工程，此处为ARPra1，将测试设备调整为自己的设备 
+
+
+添加开发者账户，xcode-&gt;prefrence-&gt;account ,点击“+” -&gt; apple ID,输入自己的apple ID，点击manage，添加开发者证
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -811,8 +825,14 @@ clang: error: linker command failed with
  类型识别：CNN网络， tf
  颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku
  一些小函数：
- RGB（Tuple、十六进制互
-          ...
+ RGB（Tuple、十六进制互转
+ string、url互转
+ 向数据库中批量添加数据
+
+
+
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/04/GuideBook/Django/Django实现衣型识别/#more" rel="contents">
@@ -953,7 +973,7 @@ clang: error: linker command failed with
           
           Django图片上传和访问配置：
 nginx+Django
-1. 图片上传1.1 settings.py12345678910111213# closetUsers/settings.py# Static files (CSS, JavaScript, Images)# https://docs.d
+1. 图片上传1.1 settings.py12345678910111213# closetUsers/settings.py# Static files (CSS, JavaScript, Images)# https://docs.djangoproject.com/en/2.1/howto/static-files/# 收集Django的静态文件到同一个static中STATIC_ROOT = os.path.join(BASE_DIR, "static/")STATIC_URL = '/static/'MEDIA_ROOT 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1096,7 +1116,9 @@ nginx+Django
           Django+nginx+uwsgi配置Django+nginx+uwsgi配置
 在线项目部署
 1. uwsgi安装测试1.1 uwsgi安装1root@iZwz969jm0y04abuhgx4byZ:~# python3 -m pip install uwsgi
-1.2 uwsgi测试测试 uws
+1.2 uwsgi测试测试 uwsgi 是否正常：
+新建 test.py 文件，内容如下：
+123def application(env, start_response):    start_response('200 OK', [('Content-Type','text/html')])    return "Hello Wor
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1238,7 +1260,15 @@ nginx+Django
           
           Android 打包keystore.jks Password:  closet123
 Error:error: failed to read PNG signature: file does not start with PNG signature.
-android studio 打包apk时报错
+android studio 打包apk时报错.
+错误：无法读取PNG签名：文件没有从PNG签名开始。
+一般都是图片格式有问题 可能是后缀更改了，可能是图片压缩时产生的问题。 重新处理图片再加载 
+Solve:
+找到对应的图片,右键编辑下,重新另存为png类型的图片即可
+
+生成keystore.jks
+
+12345678910111213141
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1384,7 +1414,7 @@ android studio 打包apk时报错
 新建一个project：closetUsers
 
 修改 settings.py
-123456789101112131415161718192021
+12345678910111213141516171819202122232425#closetUsers/settings.pyINSTALLED_APPS = [    'django.contrib.admin',    'django.contrib.auth',    'django.contrib.contenttypes',    'django.c
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1525,7 +1555,10 @@ android studio 打包apk时报错
         
           
           Django on Mac part01. Django连接MySQL1.1 未安装驱动Error:  django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module.
-Did you install mysqlcl
+Did you install mysqlclient?
+Solve:修改 __init__.py文件：
+12import pymysqlpymysql.install_as_MySQLdb()
+1.2 连接超时Error:   django.db.utils.OperationalError: (2003, “Can’t connect to
           ...
           <!--noindex-->
           <div class="post-button text-center">

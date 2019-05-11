@@ -394,7 +394,9 @@
 2. Algorithm
 首先，输入一幅你想处理的图片，然后进行对应的预处理操作，或者预处理后的图片；
 然后，将其输入到一个预训练好的神经网络中（ResNeXt等）获得对应的feature map；
-接着，对这个feature map中的每一点设定预定个
+接着，对这个feature map中的每一点设定预定个的ROI，从而获得多个候选ROI；
+接着，将这些候选的ROI送入RPN网络进行二值分类（前景或背景）和BB回归，过滤掉一部分候选的ROI；
+接着，对这些剩下的ROI进行ROIAlign操作（即先将原图和feature map的pixel对应起来，然后将feature map和固定的feature对应
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -725,7 +727,16 @@ SLAM技术在国内的发展现状
 SLAM介绍（算法基本流程）
 详细分析SLAM的实现和应用
 特征点的匹配
-列举几个目前比较有名的SLAM算法：PTAM,MonoSLAM, ORB-SLAM,RGBD-SLAM,RTAB-SLAM,LSD-SLAM
+列举几个目前比较有名的SLAM算法：PTAM,MonoSLAM, ORB-SLAM,RGBD-SLAM,RTAB-SLAM,LSD-SLAM。
+SLAM的两大类别：
+根据传感器类别（激光雷达和摄像头）分为激光SLAM和视觉SLAM
+传感器：
+激光雷达：单线多线
+摄像头：单目、双目、单目结构光、双目结构光、ToF
+不同相机的区别？ 基于单目、双目、全景相机的算法？
+IMU
+名词介绍：1、视觉SLAM方法：（1）图像信息使用
+视觉SLAM方
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -888,8 +899,17 @@ SLAM介绍（算法基本流程）
         
           
           SLAM_0 SLAM for dummiesConcept:
-SLAM is concerned with the problem of building a map of an unknown environmentby a mobile robot while at the same time
-          ...
+SLAM is concerned with the problem of building a map of an unknown environmentby a mobile robot while at the same time navigating the environment using the map.
+SLAM consists of:
+
+Landmark extraction
+Data association
+State estimation
+state update
+landmark update
+
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/11/SLAM/SLAM_0_forDummies/#more" rel="contents">
@@ -1057,7 +1077,22 @@ SLAM is concerned with the problem of building a map of an unknown environmentby
 2.1.2 各类相机主要区别：有没有深度信息
 
 单目：没有深度，必须通过移动相机产生深度 Moving View Stereo
-双目：通过视差
+双目：通过视差计算深度Stereo
+RGBD：通过物理方法测量深度
+深度相机：
+物理手段测量深度
+结构光ToF
+主动测量，功耗大
+深度值较准确
+量程较小，易受干扰
+
+
+
+
+
+单目相机计算量比较大，需要初始化。单张图像不具备尺度信息。
+2.1.3 相机公共点：
+利用图像和场景的几何关系，计算相机运动和场景结构Mot
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1220,7 +1255,7 @@ SLAM is concerned with the problem of building a map of an unknown environmentby
         
           
           SLAM_3_进度汇报ppt汇报内容：
-符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_
+符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M$$去除噪声的理想情况下：$$\begin{matrix}x_k = f(x_{k-1},u_k) \  z_{
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1557,7 +1592,10 @@ SVD分解
           
           Concepts1. Image ClassificationIt consists of classifying an image into one of many different categories.
 Known Dateset:     ImageNet
-2. LocalizationS
+2. LocalizationSimilar to classification, localization finds the location of a single object inside the image.
+Known Dateset:
+Application:    smart scropping 
+3. Inst
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1899,7 +1937,17 @@ Success criteria
 
 Schedule 
 Budget
-Sc
+Scope
+
+General issues affecting most software
+
+Heterogeneity
+Business and social change
+Security
+
+wage
+microservers
+Project management knowledge areaSco
           ...
           <!--noindex-->
           <div class="post-button text-center">

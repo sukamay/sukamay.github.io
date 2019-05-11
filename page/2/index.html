@@ -390,7 +390,8 @@
       
         
           
-          OpenCV安装1234luomeideMacBook-Pro:opencv-3.4.5 luomei$ mkdir build &amp;&amp; cd buildluomeideMacBook-Pro:opencv-3.4.5 luomei$ cmake -G "Unix Makefiles"
+          OpenCV安装1234luomeideMacBook-Pro:opencv-3.4.5 luomei$ mkdir build &amp;&amp; cd buildluomeideMacBook-Pro:opencv-3.4.5 luomei$ cmake -G "Unix Makefiles" ..luomeideMacBook-Pro:opencv-3.4.5 luomei$ make -j8luomeideMacBook-Pro:opencv-3.4.5 luomei$ sudo make install
+哭了，用这个方法装opencv3.4.0失败了，但是装3.4.5就好了/🤦‍
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -552,7 +553,7 @@
       
         
           
-          修复dyld： Library not loaded1234567891011121314151617# 查看python所在的位置&gt; which python输出：/usr/local/bin/python# 查看 /usr/local/bin/python 的依赖&gt; otool -L
+          修复dyld： Library not loaded1234567891011121314151617# 查看python所在的位置&gt; which python输出：/usr/local/bin/python# 查看 /usr/local/bin/python 的依赖&gt; otool -L /usr/local/bin/python输出：/usr/local/bin/python:    /usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/Python (compatibility vers
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -717,7 +718,11 @@
           Ubuntu_程序后台运行参考了nohup, linux 2&gt;&amp;1。
 1.nohup用途：不挂断地运行命令。no hang up
 语法：nohup Command [ Arg … ] [　&amp; ]
-　　无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 no
+　　无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。
+　　如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。
+　　如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用。
+退出状态：该命令返回下列出口值： 　　
+　　126 可以查找但不能调用 Com
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -879,7 +884,7 @@
       
         
           
-          Yolo训练自己的数据集1234567891011config:      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver 
+          Yolo训练自己的数据集1234567891011config:      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     ||-------------------------------+----------------------+----------------------+| GPU  Name        Persis
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1056,7 +1061,9 @@ Cuda：10.1
 Cudnn：7.5.1
 
 
-安装并没有太多问题，准备跑自己的
+安装并没有太多问题，准备跑自己的模型的时候还是遇到了蛮多问题
+推一下官方教程：https://pjreddie.com/darknet/yolo/
+1. cuda error: out of memory darknet: ./src/cuda.c:36: check_error: Assertion `0’ failed.改一下
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1223,8 +1230,9 @@ Cudnn：7.5.1
 [python]UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe5 in position 0: ordinal not in range(128)
 
 Solve:
-1234# myfile.pyimport 
-          ...
+1234# myfile.pyimport sysreload(sys)sys.setdefaultencoding('utf8')
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/11/GuideBook/后台运行文件/#more" rel="contents">
@@ -1363,7 +1371,7 @@ Solve:
       
         
           
-          Yolo training my dataset12345678910111213config:# run my model in windows      +----------------------------------------------------------------------
+          Yolo training my dataset12345678910111213config:# run my model in windows      +-----------------------------------------------------------------------------+| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     ||-------------------------------+----------------------+-------
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1700,8 +1708,9 @@ web 表示特殊字符？
 ——&amp;amp; amp;
 12&amp;amp;&amp;lt;
 W3c Nu html checker
-w3c html validat
-          ...
+w3c html validator 
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/11/JavaScript/js_1/#more" rel="contents">
@@ -1868,7 +1877,11 @@ Testing Terms• Test object
 • Test planning 
 • Test design 
 • Test implementation :
-• Test analysis : strat
+• Test analysis : strategy
+• Test run/test suite :  may be unordered test case
+• Test case – Test conditions (preconditions, inputs, expected 
+outputs/behavior) 
+• Test scen
           ...
           <!--noindex-->
           <div class="post-button text-center">

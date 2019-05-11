@@ -560,7 +560,8 @@ PMD
 checkstyle
 原理
 introduction
-The explorative study should cover the background, objectives, functionalities and features, usage,and exper
+The explorative study should cover the background, objectives, functionalities and features, usage,and experimentations with the tool.
+checkstylebackgroundCheckstyle[1] is a static code analysis tool used in software development for checking if Java)source c
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -911,7 +912,9 @@ SLAM学习进度汇报
           WebARonARCore开发记录之前是直接跑现成的demo，现在尝试自己一步步复现
 由于WebXR Device API可能会经常变更，因此只有一小部分的开发版本的Chrome支持，可支持的版本为Chrome Canary/Dev versions 70-72.
 先前已经设置好了浏览器的Flag
-
+1. Install Web Server for Chrome，配置，具体如下：a) 设置Web Server URL，类似默认的文件路径
+b) 设置Automatically show index.html （浏览器就会直接展示所在文件夹的index.html的网页）
+c) 通过STOP和RES
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1088,7 +1091,18 @@ SLAM学习进度汇报
 
 KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应
 BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成
-ServiceTimeout(20
+ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成
+
+2、哪些操作会导致ANR在主线程执行以下操作：
+
+高耗时的操作，如图像变换
+磁盘读写，数据库读写操作
+大量的创建新对象
+
+3、如何避免
+
+UI线程尽量只做跟UI相关的工作
+耗时的操作(比如数据库操作，I/O，连接网络或者别
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1264,7 +1278,8 @@ ServiceTimeout(20
           #APP启动过程
 
 上图就可以很好的说明App启动的过程
-ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHist
+ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶
+Zygote进程孵化出新的应用进程后，会执行ActivityThread类的main方法.在该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到ActivityManagerService，然后进入loop循环，不断地读取消息
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1440,7 +1455,8 @@ ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所�
           #Activity启动过程###一些基本的概念
 
 ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期
-ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或
+ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作
+ApplicationThread，用来实现ActivityManagerService与ActivityThread之间的交互。在ActivityManagerService需要管理相关Appli
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1627,8 +1643,13 @@ ActivityThread，App的真正入口。当开启App之后，会调用main()开始
 ##如何解决
 
 在内存引用上做些处理，常用的有软引用、强化引用、弱引用
-在内存中加载图片时直接在内
-          ...
+在内存中加载图片时直接在内存中作处理，如边界压缩
+动态回收内存
+优化Dalvik虚拟机的堆内存分配
+自定义堆内存大小
+
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/11/GuideBook/Android/Android关于oom的解决方案/#more" rel="contents">
@@ -1803,7 +1824,8 @@ ActivityThread，App的真正入口。当开启App之后，会调用main()开始
           #Android几种进程
 前台进程：即与用户正在交互的Activity或者Activity用到的Service等，如果系统内存不足时前台进程是最后被杀死的
 可见进程：可以是处于暂停状态(onPause)的Activity或者绑定在其上的Service，即被用户可见，但由于失去了焦点而不能与用户交互
-
+服务进程：其中运行着使用startService方法启动的Service，虽然不被用户可见，但是却是用户关心的，例如用户正在非音乐界面听的音乐或者正在非下载页面自己下载的文件等；当系统要空间运行前两者进程时才会被终止
+后台进程：其中运行着执行onStop方法而停止的程序，但是却不是用户当前关心的，例
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1977,7 +1999,10 @@ ActivityThread，App的真正入口。当开启App之后，会调用main()开始
         
           
           #Android 内存泄漏总结
-内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一
+内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从 java 内存泄漏的基础知识开始，并通过具体例子来说明 Android 引起内存泄漏的各种原因，以及如何利用工具来分析应用内存泄漏，最后再做总结。
+##Java 内存分配策略
+Java 程序运行时
           ...
           <!--noindex-->
           <div class="post-button text-center">
