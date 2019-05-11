@@ -284,6 +284,232 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="url">Handler内存泄漏分析及解决</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Handler内存泄漏分析及解决"><a href="#Handler内存泄漏分析及解决" class="headerlink" title="#Handler内存泄漏分析及解决"></a>#Handler内存泄漏分析及解决</h2><p>###一、介绍</p>
+<p>首先，请浏览下面这段handler代码：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Handler</span> mLeakyHandler = <span class="keyword">new</span> <span class="type">Handler</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="comment">// ... </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在使用handler时，这是一段很常见的代码。但是，它却会造成严重的内存泄漏问题。在实际编写中，我们往往会得到如下警告：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">⚠ In <span class="keyword">Android, </span>Handler classes <span class="keyword">should </span><span class="keyword">be </span>static <span class="keyword">or </span>leaks might occur.</span><br></pre></td></tr></table></figure>
+<p>###二、分析</p>
+<p>1、 Android角度</p>
+<p>当Android应用程序启动时，framework会为该应用程序的主线程创建一个Looper对象。这个Looper对象包含一个简单的消息队列Message Queue，并且能够循环的处理队列中的消息。这些消息包括大多数应用程序framework事件，例如Activity生命周期方法调用、button点击等，这些消息都会被添加到消息队列中并被逐个处理。</p>
+<p>另外，主线程的Looper对象会伴随该应用程序的整个生命周期。</p>
+<p>然后，当主线程里，实例化一个Handler对象后，它就会自动与主线程Looper的消息队列关联起来。所有发送到消息队列的消息Message都会拥有一个对Handler的引用，所以当Looper来处理消息时，会据此回调[Handler#handleMessage(Message)]方法来处理消息。</p>
+<p>2、 Java角度</p>
+<p>在java里，非静态内部类 和 匿名类 都会潜在的引用它们所属的外部类。但是，静态内部类却不会。</p>
+<p>###三、泄漏来源</p>
+<p>请浏览下面一段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Handler mLeakyHandler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mLeakyHandler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">    &#125;, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当activity结束(finish)时，里面的延时消息在得到处理前，会一直保存在主线程的消息队列里持续10分钟。而且，由上文可知，这条消息持有对handler的引用，而handler又持有对其外部类（在这里，即SampleActivity）的潜在引用。这条引用关系会一直保持直到消息得到处理，从而，这阻止了SampleActivity被垃圾回收器回收，同时造成应用程序的泄漏。</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
+<p>=======<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>c67abfcfd66909095068cb5f0c8632dc5547131b</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>###四、泄漏解决方案</p>
+<p>首先，上面已经明确了内存泄漏来源：</p>
+<p>只要有未处理的消息，那么消息会引用handler，非静态的handler又会引用外部类，即Activity，导致Activity无法被回收，造成泄漏；</p>
+<p>Runnable类属于非静态匿名类，同样会引用外部类。</p>
+<p>为了解决遇到的问题，我们要明确一点：静态内部类不会持有对外部类的引用。所以，我们可以把handler类放在单独的类文件中，或者使用静态内部类便可以避免泄漏。</p>
+<p>另外，如果想要在handler内部去调用所在的外部类Activity，那么可以在handler内部使用弱引用的方式指向所在Activity，这样统一不会导致内存泄漏。</p>
+<p>对于匿名类Runnable，同样可以将其设置为静态类。因为静态的匿名类不会持有对外部类的引用。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of static inner classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt; mActivity;</span><br><span class="line"></span><br><span class="line">    public <span class="type">MyHandler</span>(<span class="type">SampleActivity</span> activity) &#123;</span><br><span class="line">      mActivity = <span class="keyword">new</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt;(activity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="type">SampleActivity</span> activity = mActivity.get();</span><br><span class="line">      <span class="keyword">if</span> (activity != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">MyHandler</span> mHandler = <span class="keyword">new</span> <span class="type">MyHandler</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of anonymous classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class when they are "static".</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="keyword">final</span> <span class="type">Runnable</span> sRunnable = <span class="keyword">new</span> <span class="type">Runnable</span>() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      public void run() &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mHandler.postDelayed(sRunnable, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###五、小结</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
+<p>原文链接：</p>
+<h1 id="http-www-jianshu-com-p-cb9b4b71a820"><a href="#http-www-jianshu-com-p-cb9b4b71a820" class="headerlink" title="http://www.jianshu.com/p/cb9b4b71a820"></a><a href="http://www.jianshu.com/p/cb9b4b71a820" target="_blank" rel="noopener">http://www.jianshu.com/p/cb9b4b71a820</a></h1><p>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
+<p>原文链接：</p>
+<p><a href="http://www.jianshu.com/p/cb9b4b71a820" target="_blank" rel="noopener">http://www.jianshu.com/p/cb9b4b71a820</a></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>c67abfcfd66909095068cb5f0c8632dc5547131b</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -619,6 +845,195 @@
 <li>Model :负责存储、检索、操纵数据(有时也实现一个Model interface用来降低耦合);</li>
 <li>Presenter :作为View与Model交互的中间纽带，处理与用户交互的负责逻辑。</li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/SurfaceView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/SurfaceView/" itemprop="url">为什么要使用SurfaceView来实现动画？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/SurfaceView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/SurfaceView/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##为什么要使用SurfaceView来实现动画？</p>
+<p>###因为View的绘图存在以下缺陷：</p>
+<ol>
+<li>View缺乏双缓冲机制</li>
+<li>当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片</li>
+<li>新线程无法直接更新View组件</li>
+</ol>
+<p>##SurfaceView的绘图机制</p>
+<ul>
+<li>一般会与SurfaceView结合使用</li>
+<li>调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder</li>
+</ul>
+<p>##SurfaceHolder提供了如下方法来获取Canvas对象</p>
+<ol>
+<li>Canvas lockCanvas():锁定整个SurfaceView对象，获取该Surface上的Canvas</li>
+<li>Canvas lockCanvas(Rect dirty):锁定SurfaceView上Rect划分的区域，获取该Surface上的Canvas</li>
+<li>unlockCanvasAndPost(canvas):释放绘图、提交所绘制的图形，需要注意，当调用SurfaceHolder上的unlockCanvasAndPost方法之后，该方法之前所绘制的图形还处于缓冲之中，下一次lockCanvas()方法锁定的区域可能会“遮挡”它</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SurfaceViewTest</span> <span class="keyword">extends</span> <span class="title">Activity</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment">// SurfaceHolder负责维护SurfaceView上绘制的内容</span></span><br><span class="line">	<span class="keyword">private</span> SurfaceHolder holder;</span><br><span class="line">	<span class="keyword">private</span> Paint paint;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		setContentView(R.layout.main);</span><br><span class="line">		paint = <span class="keyword">new</span> Paint();</span><br><span class="line">		SurfaceView surface = (SurfaceView) findViewById(R.id.show);</span><br><span class="line">		<span class="comment">// 初始化SurfaceHolder对象</span></span><br><span class="line">		holder = surface.getHolder();</span><br><span class="line">		holder.addCallback(<span class="keyword">new</span> Callback()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceChanged</span><span class="params">(SurfaceHolder arg0, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2,</span></span></span><br><span class="line"><span class="function"><span class="params">					<span class="keyword">int</span> arg3)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceCreated</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 锁定整个SurfaceView</span></span><br><span class="line">				Canvas canvas = holder.lockCanvas();</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				Bitmap back = BitmapFactory.decodeResource(</span><br><span class="line">					SurfaceViewTest.<span class="keyword">this</span>.getResources()</span><br><span class="line">					, R.drawable.sun);</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				canvas.drawBitmap(back, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line">				<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				<span class="comment">// 重新锁一次，"持久化"上次所绘制的内容</span></span><br><span class="line">				holder.lockCanvas(<span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceDestroyed</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">// 为surface的触摸事件绑定监听器</span></span><br><span class="line">		surface.setOnTouchListener(<span class="keyword">new</span> OnTouchListener()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View source, MotionEvent event)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 只处理按下事件</span></span><br><span class="line">				<span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_DOWN)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> cx = (<span class="keyword">int</span>) event.getX();</span><br><span class="line">					<span class="keyword">int</span> cy = (<span class="keyword">int</span>) event.getY();</span><br><span class="line">					<span class="comment">// 锁定SurfaceView的局部区域，只更新局部内容</span></span><br><span class="line">					Canvas canvas = holder.lockCanvas(<span class="keyword">new</span> Rect(cx - <span class="number">50</span>,</span><br><span class="line">							cy - <span class="number">50</span>, cx + <span class="number">50</span>, cy + <span class="number">50</span>));</span><br><span class="line">					<span class="comment">// 保存canvas的当前状态</span></span><br><span class="line">					canvas.save();</span><br><span class="line">					<span class="comment">// 旋转画布</span></span><br><span class="line">					canvas.rotate(<span class="number">30</span>, cx, cy);</span><br><span class="line">					paint.setColor(Color.RED);</span><br><span class="line">					<span class="comment">// 绘制红色方块</span></span><br><span class="line">					canvas.drawRect(cx - <span class="number">40</span>, cy - <span class="number">40</span>, cx, cy, paint);</span><br><span class="line">					<span class="comment">// 恢复Canvas之前的保存状态</span></span><br><span class="line">					canvas.restore();</span><br><span class="line">					paint.setColor(Color.GREEN);</span><br><span class="line">					<span class="comment">// 绘制绿色方块</span></span><br><span class="line">					canvas.drawRect(cx, cy, cx + <span class="number">40</span>, cy + <span class="number">40</span>, paint);</span><br><span class="line">					<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">					holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的程序为SurfaceHolder添加了一个CallBack实例，该Callback中定义了如下三个方法：</p>
+<ul>
+<li>void surfaceChanged(SurfaceHolder holder, int format, int width, int height):当一个surface的格式或大小发生改变时回调该方法。</li>
+<li>void surfaceCreated(SurfaceHolder holder):当surface被创建时回调该方法</li>
+<li>void surfaceDestroyed(SurfaceHolder holder):当surface将要被销毁时回调该方法</li>
+</ul>
 
           
         
@@ -1029,170 +1444,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/开源框架源码分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="url">框架源码分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="框架源码分析"><a href="#框架源码分析" class="headerlink" title="#框架源码分析"></a>#框架源码分析</h2><h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="###Retrofit"></a>###Retrofit</h2><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="###EventBus"></a>###EventBus</h2><h2 id="Glide"><a href="#Glide" class="headerlink" title="###Glide"></a>###Glide</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Zygote和System进程的启动过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1396,7 +1647,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/热修复技术/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/开源框架源码分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1415,7 +1666,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/热修复技术/" itemprop="url">热修复技术</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="url">框架源码分析</a></h1>
         
 
         <div class="post-meta">
@@ -1479,8 +1730,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/热修复技术/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/热修复技术/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1512,54 +1763,220 @@
       
         
           
-            <h2 id="热修复技术"><a href="#热修复技术" class="headerlink" title="#热修复技术"></a>#热修复技术</h2><p>APP提早发出去的包，如果出现客户端的问题，实在是干着急，覆水难收。因此线上修复方案迫在眉睫。</p>
-<p>###概述</p>
-<p>基于Xposed中的思想，通过修改c层的Method实例描述，来实现更改与之对应的java方法的行为，从而达到修复的目的。</p>
-<p>###Xposed</p>
-<p>诞生于XDA论坛，类似一个应用平台，不同的是其提供诸多系统级的应用。可实现许多神奇的功能。Xposed需要以越狱为前提，像是iOS中的cydia。</p>
-<p>Xposed可以修改任何程序的任何java方法（需root），github上提供了XposedInstaller，是一个android app。提供很多framework层，应用层级的程序。开发者可以为其开发一些系统或应用方面的插件，自定义android系统，它甚至可以做动态权限管理（XposedMods）。</p>
-<p>###Android系统启动与应用启动</p>
-<p>Zygote进程是Android手机系统启动后，常驻的一个名为‘受精卵’的进程。</p>
+            <h2 id="框架源码分析"><a href="#框架源码分析" class="headerlink" title="#框架源码分析"></a>#框架源码分析</h2><h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="###Retrofit"></a>###Retrofit</h2><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="###EventBus"></a>###EventBus</h2><h2 id="Glide"><a href="#Glide" class="headerlink" title="###Glide"></a>###Glide</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/插件化技术学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="url">Android动态加载dex技术初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/插件化技术学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###Android动态加载dex技术初探</p>
+<p><a href="http://blog.csdn.net/u013478336/article/details/50734108" target="_blank" rel="noopener">http://blog.csdn.net/u013478336/article/details/50734108</a></p>
+<p>Android使用Dalvik虚拟机加载可执行程序，所以不能直接加载基于class的jar，而是需要将class转化为dex字节码。</p>
+<p>Android支持动态加载的两种方式是：DexClassLoader和PathClassLoader，DexClassLoader可加载jar/apk/dex，且支持从SD卡加载；PathClassLoader据说只能加载已经安装在Android系统内APK文件。</p>
+<p>###Android插件化基础</p>
+<p>Android简单来说就是如下操作：</p>
 <ul>
-<li>zygote的启动实现脚本在/init.rc文件中</li>
-<li>启动过程中执行的二进制文件在/system/bin/app_process</li>
+<li>开发者将插件代码封装成Jar或者APK</li>
+<li>宿主下载或者从本地加载Jar或者APK到宿主中</li>
+<li>将宿主调用插件中的算法或者Android特定的Class（如Activity）</li>
 </ul>
-<p>任何应用程序启动时，会从zygote进程fork出一个新的进程。并装载一些必要的class，invoke一些初始化方法。这其中包括像：</p>
+<p>###插件化开发—动态加载技术加载已安装和未安装的apk</p>
+<p><a href="http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="noopener">http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a><br>为什么引入动态加载技术？</p>
 <ul>
-<li>ActivityThread</li>
-<li>ServiceThread</li>
-<li>ApplicationPackageManager</li>
+<li>一个应用程序dex文件的方法数最大不能超过65536个</li>
+<li>可以让应用程序实现插件化、插拔式结构，对后期维护有益</li>
 </ul>
-<p>等应用启动中必要的类，触发必要的方法，比如：handleBindApplication，将此进程与对应的应用绑定的初始化方法；同时，会将zygote进程中的dalvik虚拟机实例复制一份，因此每个应用程序进程都有自己的dalvik虚拟机实例；会将已有Java运行时加载到进程中；会注册一些android核心类的jni方法到虚拟机中，支撑从c到java的启动过程。</p>
-<p>###Xposed做了手脚</p>
-<p>Xposed在这个过程改写了app_process(源码在Xposed : a modified app_process binary)，替换/system/bin/app_process这个二进制文件。然后做了两个事：</p>
+<p>什么是动态加载技术</p>
+<p>动态加载技术就是使用类加载器加载相应的apk、dex、jar(必须含有dex文件)，再通过反射获得该apk、dex、jar内部的资源（class、图片、color等等）进而供宿主app使用。</p>
+<p>关于动态加载使用的类加载器</p>
+<ul>
+<li>PathClassLoader - 只能加载已经安装的apk，即/data/app目录下的apk。</li>
+<li>DexClassLoader  - 能加载手机中未安装的apk、jar、dex，只要能在找到对应的路径。</li>
+</ul>
+<h2 id="插件化技术学习"><a href="#插件化技术学习" class="headerlink" title="#插件化技术学习"></a>#插件化技术学习</h2><p>原因：</p>
+<p>各大厂商都碰到了AndroidNative平台的瓶颈：</p>
 <ol>
-<li>通过Xposed的hook技术，在上述过程中，对上面提到的那些加载的类的方法hook。</li>
-<li>加载XposedBridge.jar</li>
+<li>从技术上讲，业务逻辑的复杂代码急剧膨胀，各大厂商陆续触到65535方法数的天花板；同时，对模块热更新提出了更高的要求。</li>
+<li>在业务层面上，功能模块的解耦以及维护团队的分离也是大势所趋。</li>
 </ol>
-<p>这时hook必要的方法是为了方便开发者为它开发插件，加载XposedBridge.jar是为动态hook提供了基础。在这个时候加载它意味着，所有的程序在启动时，都可以加载这个jar（因为上面提到的fork过程）。结合hook技术，从而达到了控制所有程序的所有方法。</p>
-<p>为获得/system/bin/目录的读写权限，因而需要以root为前提。</p>
-<p>###Xposed的hook思想</p>
-<p>那么Xposed是怎么hook java方法的呢？要从XposedBridge看起，重点在<br>XposedBridge.hookmethod(原方法的Member对象，含有新方法的XC_MethodHook对象)；，这里会调到</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> native synchronized <span class="keyword">static</span> void hookMethodNative(Member <span class="function"><span class="keyword">method</span>, <span class="title">Class</span>&lt;?&gt; <span class="title">declaringClass</span>, <span class="title">int</span> <span class="title">slot</span>, <span class="title">Object</span> <span class="title">additionalInfo</span>);</span></span><br></pre></td></tr></table></figure>
-<p>这个native的方法，通过这个方法，可以让所hook的方法，转向native层的一个c方法。如何做到？</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">When a transmit <span class="keyword">from</span> java <span class="keyword">to</span> native occurs, dvm sets up a native stack.</span><br><span class="line"><span class="keyword">In</span> dvmCallJNIMethod(), dvmPlatformInvoke <span class="keyword">is</span> used <span class="keyword">to</span> call the native <span class="function"><span class="keyword">method</span><span class="params">(signature <span class="keyword">in</span> <span class="keyword">Method</span>.insns)</span>.</span></span><br></pre></td></tr></table></figure>
-<p>在jni这个中间世界里，类型数据由jni表来沟通java和c的世界；方法由c++指针结合DVM*系(如dvmSlotToMethod,dvmDecodeIndirectRef等方法)的api方法，操作虚拟机，从而实现java方法与c方法的世界。</p>
-<p>那么hook的过程是这样：首先通过dexclassload来load所要hook的方法，分析类后，进c层，见代码XposedBridge_hookMethodNative方法，拿到要hook的Method类，然后通过dvmslotTomethod方法获取Method*指针，</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">Method</span>* <span class="title">method</span> = <span class="title">dvmSlotToMethod</span><span class="params">(declaredClass, slot)</span>;</span></span><br></pre></td></tr></table></figure>
-<p>declaredClass就是所hook方法所在的类，对应的jobject。slot是Method类中，描述此java对象在vm中的索引；那么通过这个方法，我们就获取了c层的Method指针,通过</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET_METHOD_FLAG(<span class="function"><span class="keyword">method</span>, <span class="title">ACC_NATIVE</span>);</span></span><br></pre></td></tr></table></figure>
-<p>将该方法标记为一个native方法，然后通过</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">nativeFunc</span> = &amp;<span class="title">hookedMethodCallback</span>;</span></span><br></pre></td></tr></table></figure>
-<p>定向c层方法到hookedMethodCallback，这样当被hook的java方法执行时，就会调到c层的hookedMethodCallback方法。</p>
-<p>通过meth-&gt;nativeFunc重定向MethodCallBridge到hookedMethodCallback这个方法上，控制这个c++指针是无视java的private的。</p>
-<p>另外，在method结构体中有</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">insns</span> = <span class="params">(<span class="keyword">const</span> u2*)</span> <span class="title">hookInfo</span>;</span></span><br></pre></td></tr></table></figure>
-<p>用insns指向替换成为的方法，以便hookedMethodCallback可以获取真正期望执行的java方法。</p>
-<p>现在所有被hook的方法，都指向了hookedMethodCallbackc方法中，然后在此方法中实现调用替换成为的java方法。</p>
-<p>###从Xposed提炼精髓</p>
-<p>回顾Xposed，以root为必要条件，在app_process加载XposedBidge.jar，从而实现有hook所有应用的所有方法的能力；而后续动态hook应用内的方法，其实只是load了从zypote进程复制出来的运行时的这个XposedBidge.jar，然后hook而已。因此，若在一个应用范围内的hook，root不是必须的，只是单纯的加载hook的实现方法，即可修改本应用的方法。</p>
-<p>业界内也不乏通过「修改BaseDexClassLoader中的pathList，来动态加载dex」方式实现热修复。后者纯java实现，但需要hack类的优化流程，将打CLASS_ISPREVERIFIED标签的类，去除此标签，以解决类与类引用不在一个dex中的异常问题。这会放弃dex optimize对启动运行速度的优化。原则上，这对于方法数没有大到需要multidex的应用，损失更明显。而前者不触犯原有的优化流程，只点杀需要hook的方法，更为纯粹、有效。</p>
+<p>插件化技术主要解决两个问题：</p>
+<ol>
+<li>代码加载</li>
+<li>资源加载</li>
+</ol>
+<p>###代码加载<br>类的加载可以使用Java的ClassLoader机制，还需要组件生命周期管理。</p>
+<p>###资源加载<br>用AssetManager的隐藏方法addAssetPath。</p>
+<p>##Android插件化原理解析——Hook机制之动态代理 </p>
+<p>使用代理机制进行API Hook进而达到方法增强。</p>
+<p>静态代理</p>
+<p>动态代理：可以简单理解为JVM可以在运行时帮我们动态生成一系列的代理类。</p>
+<p>###代理Hook</p>
+<p>如果我们自己创建代理对象，然后把原始对象替换为我们的代理对象，就可以在这个代理对象中为所欲为了；修改参数，替换返回值，称之为Hook。</p>
+<p>整个Hook过程简要总结如下：</p>
+<ol>
+<li>寻找Hook点，原则是静态变量或者单例对象，尽量Hook public的对象和方法，非public不保证每个版本都一样，需要适配。</li>
+<li>选择合适的代理方式，如果是接口可以用动态代理；如果是类可以手动写代理也可以使用cglib。</li>
+<li>偷梁换柱－用代理对象替换原始对象</li>
+</ol>
+<p>##Android插件化原理解析——Hook机制之Binder Hook </p>
 
           
         
@@ -1761,371 +2178,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/自定义控件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/自定义控件/" itemprop="url">自定义控件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/自定义控件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/自定义控件/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="自定义控件"><a href="#自定义控件" class="headerlink" title="#自定义控件"></a>#自定义控件</h2><p>自定义View的步骤：</p>
-<ul>
-<li>自定义View的属性</li>
-<li>在View的构造方法中获得我们自定义View的步骤</li>
-<li>［3.重写onMeasure］(不必须)</li>
-<li>重写onDraw</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/SurfaceView/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/SurfaceView/" itemprop="url">为什么要使用SurfaceView来实现动画？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/SurfaceView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/SurfaceView/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##为什么要使用SurfaceView来实现动画？</p>
-<p>###因为View的绘图存在以下缺陷：</p>
-<ol>
-<li>View缺乏双缓冲机制</li>
-<li>当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片</li>
-<li>新线程无法直接更新View组件</li>
-</ol>
-<p>##SurfaceView的绘图机制</p>
-<ul>
-<li>一般会与SurfaceView结合使用</li>
-<li>调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder</li>
-</ul>
-<p>##SurfaceHolder提供了如下方法来获取Canvas对象</p>
-<ol>
-<li>Canvas lockCanvas():锁定整个SurfaceView对象，获取该Surface上的Canvas</li>
-<li>Canvas lockCanvas(Rect dirty):锁定SurfaceView上Rect划分的区域，获取该Surface上的Canvas</li>
-<li>unlockCanvasAndPost(canvas):释放绘图、提交所绘制的图形，需要注意，当调用SurfaceHolder上的unlockCanvasAndPost方法之后，该方法之前所绘制的图形还处于缓冲之中，下一次lockCanvas()方法锁定的区域可能会“遮挡”它</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SurfaceViewTest</span> <span class="keyword">extends</span> <span class="title">Activity</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment">// SurfaceHolder负责维护SurfaceView上绘制的内容</span></span><br><span class="line">	<span class="keyword">private</span> SurfaceHolder holder;</span><br><span class="line">	<span class="keyword">private</span> Paint paint;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		setContentView(R.layout.main);</span><br><span class="line">		paint = <span class="keyword">new</span> Paint();</span><br><span class="line">		SurfaceView surface = (SurfaceView) findViewById(R.id.show);</span><br><span class="line">		<span class="comment">// 初始化SurfaceHolder对象</span></span><br><span class="line">		holder = surface.getHolder();</span><br><span class="line">		holder.addCallback(<span class="keyword">new</span> Callback()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceChanged</span><span class="params">(SurfaceHolder arg0, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2,</span></span></span><br><span class="line"><span class="function"><span class="params">					<span class="keyword">int</span> arg3)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceCreated</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 锁定整个SurfaceView</span></span><br><span class="line">				Canvas canvas = holder.lockCanvas();</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				Bitmap back = BitmapFactory.decodeResource(</span><br><span class="line">					SurfaceViewTest.<span class="keyword">this</span>.getResources()</span><br><span class="line">					, R.drawable.sun);</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				canvas.drawBitmap(back, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line">				<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				<span class="comment">// 重新锁一次，"持久化"上次所绘制的内容</span></span><br><span class="line">				holder.lockCanvas(<span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceDestroyed</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">// 为surface的触摸事件绑定监听器</span></span><br><span class="line">		surface.setOnTouchListener(<span class="keyword">new</span> OnTouchListener()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View source, MotionEvent event)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 只处理按下事件</span></span><br><span class="line">				<span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_DOWN)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> cx = (<span class="keyword">int</span>) event.getX();</span><br><span class="line">					<span class="keyword">int</span> cy = (<span class="keyword">int</span>) event.getY();</span><br><span class="line">					<span class="comment">// 锁定SurfaceView的局部区域，只更新局部内容</span></span><br><span class="line">					Canvas canvas = holder.lockCanvas(<span class="keyword">new</span> Rect(cx - <span class="number">50</span>,</span><br><span class="line">							cy - <span class="number">50</span>, cx + <span class="number">50</span>, cy + <span class="number">50</span>));</span><br><span class="line">					<span class="comment">// 保存canvas的当前状态</span></span><br><span class="line">					canvas.save();</span><br><span class="line">					<span class="comment">// 旋转画布</span></span><br><span class="line">					canvas.rotate(<span class="number">30</span>, cx, cy);</span><br><span class="line">					paint.setColor(Color.RED);</span><br><span class="line">					<span class="comment">// 绘制红色方块</span></span><br><span class="line">					canvas.drawRect(cx - <span class="number">40</span>, cy - <span class="number">40</span>, cx, cy, paint);</span><br><span class="line">					<span class="comment">// 恢复Canvas之前的保存状态</span></span><br><span class="line">					canvas.restore();</span><br><span class="line">					paint.setColor(Color.GREEN);</span><br><span class="line">					<span class="comment">// 绘制绿色方块</span></span><br><span class="line">					canvas.drawRect(cx, cy, cx + <span class="number">40</span>, cy + <span class="number">40</span>, paint);</span><br><span class="line">					<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">					holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的程序为SurfaceHolder添加了一个CallBack实例，该Callback中定义了如下三个方法：</p>
-<ul>
-<li>void surfaceChanged(SurfaceHolder holder, int format, int width, int height):当一个surface的格式或大小发生改变时回调该方法。</li>
-<li>void surfaceCreated(SurfaceHolder holder):当surface被创建时回调该方法</li>
-<li>void surfaceDestroyed(SurfaceHolder holder):当surface将要被销毁时回调该方法</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2173,7 +2230,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">162</span>
+                  <span class="site-state-item-count">154</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2184,7 +2241,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2195,7 +2252,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

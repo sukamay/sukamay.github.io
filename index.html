@@ -655,7 +655,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Caffe in Ubuntu/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/FishMem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -674,7 +674,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/Caffe in Ubuntu/" itemprop="url">Caffe in Ubuntu</a></h1>
+                <a class="post-title-link" href="/2019/05/11/FishMem/" itemprop="url">FishMem</a></h1>
         
 
         <div class="post-meta">
@@ -697,39 +697,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ubuntu/Caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">Caffe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -738,8 +705,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/Caffe in Ubuntu/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Caffe in Ubuntu/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/FishMem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/FishMem/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -771,224 +738,14 @@
       
         
           
-            <h1 id="Caffe-in-Ubuntu"><a href="#Caffe-in-Ubuntu" class="headerlink" title="Caffe in Ubuntu"></a>Caffe in Ubuntu</h1><blockquote>
-<p>config:</p>
-<p>System: Ubuntu 16.04</p>
-<p>Nvidia Driver Version: 418.56</p>
-<p>GPU：GeForce GTX 960M</p>
-</blockquote>
-<p>安装显卡驱动（已经安装好了）</p>
-<p>安装cuda</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mei@mei-luo:~$ sudo nvidia-smi</span><br><span class="line">[sudo] password for mei: </span><br><span class="line">Tue May  7 10:08:47 2019       </span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 418.56       Driver Version: 418.56       CUDA Version: 10.1     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce GTX 960M    Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| N/A   49C    P8    N/A /  N/A |    428MiB /  2004MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line">                                                                               </span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|    0       970      G   /usr/lib/xorg/Xorg                           145MiB |</span><br><span class="line">|    0      1455      G   compiz                                       231MiB |</span><br><span class="line">|    0      1802      G   /opt/teamviewer/tv_bin/TeamViewer             24MiB |</span><br><span class="line">|    0      1912      G   fcitx-qimpanel                                23MiB |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">mei@mei-luo:~$</span><br></pre></td></tr></table></figure>
-<p>Error:</p>
-<p>ubuntu. cuda ERROR: You appear to be running an X server;</p>
-<p><a href="https://www.jianshu.com/p/f00b657ccaae" target="_blank" rel="noopener">cuda安装</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">Last login: Thu May  9 10:43:24 2019 from 10.20.150.177</span><br><span class="line">mei@mei-luo:~$ cd /home/mei/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release/</span><br><span class="line">mei@mei-luo:~/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release$ ./deviceQuery</span><br><span class="line">./deviceQuery Starting...</span><br><span class="line"></span><br><span class="line"> CUDA Device Query (Runtime API) version (CUDART static linking)</span><br><span class="line"></span><br><span class="line">Detected 1 CUDA Capable device(s)</span><br><span class="line"></span><br><span class="line">Device 0: "GeForce GTX 960M"</span><br><span class="line">  CUDA Driver Version / Runtime Version          10.1 / 10.1</span><br><span class="line">  CUDA Capability Major/Minor version number:    5.0</span><br><span class="line">  Total amount of global memory:                 2004 MBytes (2101870592 bytes)</span><br><span class="line">  ( 5) Multiprocessors, (128) CUDA Cores/MP:     640 CUDA Cores</span><br><span class="line">  GPU Max Clock rate:                            1176 MHz (1.18 GHz)</span><br><span class="line">  Memory Clock rate:                             2505 Mhz</span><br><span class="line">  Memory Bus Width:                              128-bit</span><br><span class="line">  L2 Cache Size:                                 2097152 bytes</span><br><span class="line">  Maximum Texture Dimension Size (x,y,z)         1D=(65536), 2D=(65536, 65536), 3D=(4096, 4096, 4096)</span><br><span class="line">  Maximum Layered 1D Texture Size, (num) layers  1D=(16384), 2048 layers</span><br><span class="line">  Maximum Layered 2D Texture Size, (num) layers  2D=(16384, 16384), 2048 layers</span><br><span class="line">  Total amount of constant memory:               65536 bytes</span><br><span class="line">  Total amount of shared memory per block:       49152 bytes</span><br><span class="line">  Total number of registers available per block: 65536</span><br><span class="line">  Warp size:                                     32</span><br><span class="line">  Maximum number of threads per multiprocessor:  2048</span><br><span class="line">  Maximum number of threads per block:           1024</span><br><span class="line">  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)</span><br><span class="line">  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)</span><br><span class="line">  Maximum memory pitch:                          2147483647 bytes</span><br><span class="line">  Texture alignment:                             512 bytes</span><br><span class="line">  Concurrent copy and kernel execution:          Yes with 1 copy engine(s)</span><br><span class="line">  Run time limit on kernels:                     No</span><br><span class="line">  Integrated GPU sharing Host Memory:            No</span><br><span class="line">  Support host page-locked memory mapping:       Yes</span><br><span class="line">  Alignment requirement for Surfaces:            Yes</span><br><span class="line">  Device has ECC support:                        Disabled</span><br><span class="line">  Device supports Unified Addressing (UVA):      Yes</span><br><span class="line">  Device supports Compute Preemption:            No</span><br><span class="line">  Supports Cooperative Kernel Launch:            No</span><br><span class="line">  Supports MultiDevice Co-op Kernel Launch:      No</span><br><span class="line">  Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0</span><br><span class="line">  Compute Mode:</span><br><span class="line">     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;</span><br><span class="line"></span><br><span class="line">deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 10.1, CUDA Runtime Version = 10.1, NumDevs = 1</span><br><span class="line">Result = PASS</span><br><span class="line">mei@mei-luo:~/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release$ ./bandwidthTest </span><br><span class="line">[CUDA Bandwidth Test] - Starting...</span><br><span class="line">Running on...</span><br><span class="line"></span><br><span class="line"> Device 0: GeForce GTX 960M</span><br><span class="line"> Quick Mode</span><br><span class="line"></span><br><span class="line"> Host to Device Bandwidth, 1 Device(s)</span><br><span class="line"> PINNED Memory Transfers</span><br><span class="line">   Transfer Size (Bytes)	Bandwidth(GB/s)</span><br><span class="line">   32000000			11.7</span><br><span class="line"></span><br><span class="line"> Device to Host Bandwidth, 1 Device(s)</span><br><span class="line"> PINNED Memory Transfers</span><br><span class="line">   Transfer Size (Bytes)	Bandwidth(GB/s)</span><br><span class="line">   32000000			11.6</span><br><span class="line"></span><br><span class="line"> Device to Device Bandwidth, 1 Device(s)</span><br><span class="line"> PINNED Memory Transfers</span><br><span class="line">   Transfer Size (Bytes)	Bandwidth(GB/s)</span><br><span class="line">   32000000			68.3</span><br><span class="line"></span><br><span class="line">Result = PASS</span><br><span class="line"></span><br><span class="line">NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.</span><br><span class="line">mei@mei-luo:~/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release$</span><br></pre></td></tr></table></figure>
+            <h1 id="FishMem"><a href="#FishMem" class="headerlink" title="FishMem"></a>FishMem</h1><p>阿里云服务器IP地址：120.76.62.132</p>
+<p>电脑IP地址：pc.washingpatrick.cn</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh mei/root@pc.washingpatrick.cn -p 5000</span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://img1.<span class="number">360</span>buyimg.com/n6/jfs/t<span class="number">1/26161/40</span>/<span class="number">7321/159453</span>/<span class="number">5</span>c6a5fc6Ecc0df3bf/a03e44d30d60352f.jpg</span><br><span class="line">https://img1.<span class="number">360</span>buyimg.com/n6/jfs/t<span class="number">22405/273</span>/<span class="number">1704311852</span>/<span class="number">168416</span>/<span class="number">6</span>cc2bf5d/<span class="number">5</span>b34b4fdNe12e22fe.jpg</span><br></pre></td></tr></table></figure>
+<p>73，80,105,121</p>
+<p>,134，137，145，165，173，178，179，184，185，188，191，192，193，221，223，226，227，228，229-231，249，251-252，256，260-264</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/mei/Desktop/cv/darknet</span><br><span class="line">nohup ./darknet detector train cfg/noodles.data cfg/yolov2-noodles.cfg backup/yolov2-noodles_200.weights &gt;&gt; running.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Django本地项目部署到云服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/Django本地项目部署到云服务器/" itemprop="url">Django本地项目部署到云服务器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/Django本地项目部署到云服务器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Django本地项目部署到云服务器/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Django本地项目部署到云服务器"><a href="#Django本地项目部署到云服务器" class="headerlink" title="Django本地项目部署到云服务器"></a>Django本地项目部署到云服务器</h1><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>开发语言： Python<br>后台框架：Django<br>web服务器：nginx<br>wsgi服务器：uwsgi</p>
-<p>云服务器系统：Ubuntu</p>
-<p>查看本地项目Django和Python版本：</p>
-<p>（可以直接安装Django最新版本就可以了，Python版本不能低于3.4） </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# python3</span><br><span class="line">Python 3.5.2 (default, Nov 12 2018, 13:43:14) </span><br><span class="line">[GCC 5.4.0 20160609] on linux</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import django</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; django.VERSION</span><br><span class="line">(2, 1, 4, 'final', 0)</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt;</span><br></pre></td></tr></table></figure>
-<p><a href="https://blog.csdn.net/qq_30501975/article/details/80423547" target="_blank" rel="noopener">参考了别家的教程</a></p>
-<h2 id="1-预备安装"><a href="#1-预备安装" class="headerlink" title="1. 预备安装"></a>1. 预备安装</h2><h3 id="1-1-安装数据库"><a href="#1-1-安装数据库" class="headerlink" title="1.1 安装数据库"></a>1.1 安装数据库</h3><p>安装mysql</p>
-<p><a href="./Ubuntu上的MySQL搭建.md">Ubuntu上的MySQL搭建</a></p>
-<h3 id="1-2-安装Django"><a href="#1-2-安装Django" class="headerlink" title="1.2 安装Django"></a>1.2 安装Django</h3><p><a href="./DjangoInUbuntu_0.md">安装Django</a></p>
-<p>Django初步使用移步Django系列教程：</p>
-<p><a href="./DjangoInUbuntu_1.md">Django数据库配置</a></p>
-<h3 id="1-3-安装uwsgi"><a href="#1-3-安装uwsgi" class="headerlink" title="1.3 安装uwsgi"></a>1.3 安装uwsgi</h3><h4 id="1-3-1-uwsgi安装"><a href="#1-3-1-uwsgi安装" class="headerlink" title="1.3.1 uwsgi安装"></a>1.3.1 uwsgi安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python3 -m pip install uwsgi</span><br></pre></td></tr></table></figure>
-<p><code>Successfully installed uwsgi-2.0.17</code></p>
-<h4 id="1-3-2-uwsgi测试"><a href="#1-3-2-uwsgi测试" class="headerlink" title="1.3.2 uwsgi测试"></a>1.3.2 uwsgi测试</h4><p>测试 uwsgi 是否正常：</p>
-<p>新建 test.py 文件，内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>,<span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"cloestUsers World"</span></span><br></pre></td></tr></table></figure>
-<p>然后在终端运行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http :8001 --wsgi-file test.py</span><br></pre></td></tr></table></figure>
-<p>在浏览器内输入：<a href="http://127.0.0.1:8001，查看是否有&quot;cloestUsers" target="_blank" rel="noopener">http://127.0.0.1:8001，查看是否有&quot;cloestUsers</a> World”输出，若没有输出，请检查你的安装过程。</p>
-<h4 id="1-3-3-uwsgi关闭"><a href="#1-3-3-uwsgi关闭" class="headerlink" title="1.3.3 uwsgi关闭"></a>1.3.3 uwsgi关闭</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">killall -9 uwsgi # 	强行关闭</span><br><span class="line"><span class="meta">#</span> 关闭某一个进程</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# netstat -ntpl</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 127.0.0.1:8005          0.0.0.0:*               LISTEN      22256/java      </span><br><span class="line">tcp        0      0 0.0.0.0:8009            0.0.0.0:*               LISTEN      22256/java      </span><br><span class="line">tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      18840/mysqld    </span><br><span class="line">tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      3044/nginx.conf </span><br><span class="line">tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      22256/java      </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      11022/sshd </span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# kill -9 22256</span><br><span class="line"><span class="meta">#</span> 查看哪个要关闭的进程的pid，使用kill -9 &lt;pid&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="1-4-安装nginx"><a href="#1-4-安装nginx" class="headerlink" title="1.4 安装nginx"></a>1.4 安装nginx</h3><h4 id="1-4-1-安装-Nginx"><a href="#1-4-1-安装-Nginx" class="headerlink" title="1.4.1 安装 Nginx"></a>1.4.1 安装 Nginx</h4><p>安装命令如下：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">wget http:<span class="string">//nginx.org/download/nginx-1.11.0.tar.gz</span></span><br><span class="line">tar xf nginx-1.11.0.tar.gz</span><br><span class="line"><span class="keyword">cd</span> nginx-1.11.0</span><br><span class="line"><span class="string">./configure</span> <span class="params">--prefix=/usr/local/nginx-1</span>.11.0 \</span><br><span class="line"><span class="params">--with-http_stub_status_module</span> \</span><br><span class="line"><span class="params">--with-http_gzip_static_module</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>你可以阅读 <a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="noopener">Nginx 安装配置</a> 了解更多内容。</p>
-<h4 id="1-4-2-测试nginx"><a href="#1-4-2-测试nginx" class="headerlink" title="1.4.2 测试nginx"></a>1.4.2 测试nginx</h4><p>查看nginx是否安装成功，查看nginx的版本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# nginx -v</span><br><span class="line">nginx version: nginx/1.10.3 (Ubuntu)</span><br></pre></td></tr></table></figure>
-<p>在/home/projects目录下新建一个test目录，在里面添加一个简单的html文件。然后在nginx.conf中简单配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">events&#123;&#125;</span><br><span class="line">http&#123;</span><br><span class="line">    server&#123;</span><br><span class="line">        server_name www.sukamay.xyz;  # 域名或者ip地址</span><br><span class="line">        root /home/projects/test;</span><br><span class="line">        index index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>启动该nginx：（启动之前，要将/usr/local/nginx/mime.types文件复制到该nginx.conf所在目录，并且必须使用绝对路径）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -c /home/projects/test/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>如果端口被占用，则先释放该端口,则使用<code>lsof -i :8082</code>查看占用端口进程的pid，并使用<code>kill -9 [pid]</code>关闭相应的进程。</p>
-<p>若想要关闭所有nginx打开的进程，可使用：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall <span class="number">-9</span> nginx</span><br></pre></td></tr></table></figure>
-<p>在浏览器中访问自己的域名<a href="http://www.sukamay.xyz，访问成功。（域名要先做好dns解析）" target="_blank" rel="noopener">http://www.sukamay.xyz，访问成功。（域名要先做好dns解析）</a></p>
-<h4 id="1-4-3-关闭nginx"><a href="#1-4-3-关闭nginx" class="headerlink" title="1.4.3 关闭nginx"></a>1.4.3 关闭nginx</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop</span><br><span class="line"><span class="meta">#</span><span class="bash"> or /etc/init.d/nginx stop</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-在线项目部署"><a href="#2-在线项目部署" class="headerlink" title="2. 在线项目部署"></a>2. 在线项目部署</h2><p>部署本地Django项目到服务器，结合uwsgi+Django+nginx。</p>
-<h3 id="2-1-项目代码上传到服务器"><a href="#2-1-项目代码上传到服务器" class="headerlink" title="2.1 项目代码上传到服务器"></a>2.1 项目代码上传到服务器</h3><p>clone本地项目代码到服务器/通过ftp复制项目到服务器</p>
-<p>我使用的是scp</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ scp -r /Users/xxx/Desktop/closet/closetUsers root@120.76.62.132:/home/projects/closetTest1.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> pattern: scp &lt;option&gt; &lt;local_file_path&gt; root@&lt;server_ip_address&gt;:&lt;goal_file_path&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在我的项目目录/home/projects里创建一个closet目录，并在里面创建一个conf目录，用来存放配置文件,这样分离开来，方便更新维护项目代码。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects# tree -L 3</span><br><span class="line">.</span><br><span class="line">├── closet</span><br><span class="line">│   ├── closetUsers</span><br><span class="line">│   │   ├── closetUsers</span><br><span class="line">│   │   ├── jsonTest</span><br><span class="line">│   │   ├── manage.py</span><br><span class="line">│   │   ├── __pycache__</span><br><span class="line">│   │   ├── static</span><br><span class="line">│   │   ├── users</span><br><span class="line">│   └── conf</span><br><span class="line">│       ├── mime.types	#copy from /usr/local/nginx/conf</span><br><span class="line">│       ├── nginx.conf	#configure file of nginx </span><br><span class="line">│       ├── uwsgi.ini	#configure file of uwsgi</span><br><span class="line">│       └── uwsgi.log</span><br><span class="line">└── closetTest1.0</span><br><span class="line">    └── closetUsers</span><br><span class="line">        ├── closetUsers</span><br><span class="line">        ├── manage.py</span><br><span class="line">        └── users</span><br><span class="line"></span><br><span class="line">13 directories, 10 files</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-修改项目代码"><a href="#2-2-修改项目代码" class="headerlink" title="2.2 修改项目代码"></a>2.2 修改项目代码</h3><h4 id="2-2-1-修改settings-py："><a href="#2-2-1-修改settings-py：" class="headerlink" title="2.2.1 修改settings.py："></a>2.2.1 修改settings.py：</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DEBUG</span> = <span class="literal">False</span>   # Django是否加载静态资源</span><br><span class="line"><span class="attr">ALLOWED_HOSTS</span> = [<span class="string">'localhost'</span>,<span class="string">'127.0.0.1'</span>,<span class="string">'120.76.62.132'</span>] # 允许访问的主机地址</span><br><span class="line"></span><br><span class="line"><span class="attr">STATIC_ROOT</span> = os.path.join(BASE_DIR, <span class="string">"static/"</span>) # 收集Django的静态文件到同一个static中</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-2-创建uwsgi-ini和uwsgi-log"><a href="#2-2-2-创建uwsgi-ini和uwsgi-log" class="headerlink" title="2.2.2 创建uwsgi.ini和uwsgi.log"></a>2.2.2 创建uwsgi.ini和uwsgi.log</h4><p>uwsgi.ini不变，依旧为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/conf# vim uwsgi.ini </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> closet uwsgi.ini file</span></span><br><span class="line">[uwsgi]</span><br><span class="line"></span><br><span class="line">socket = 127.0.0.1:8002</span><br><span class="line"><span class="meta">#</span><span class="bash"> http = :8002 如果不通过nginx可以直接用http，但要通过web服务器就必须要用socket</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http = 127.0.0.1:8002</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> the base directory (full path)</span></span><br><span class="line">chdir           = /home/projects/closet/closetUsers</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Django<span class="string">'s wsgi file</span></span></span><br><span class="line">module          = closetUsers.wsgi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> process-related settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> master</span></span><br><span class="line">master          = true</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maximum number of worker processes</span></span><br><span class="line">processes       = 4</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> clear environment on <span class="built_in">exit</span></span></span><br><span class="line">vacuum          = true</span><br><span class="line"></span><br><span class="line">processes = 4</span><br><span class="line">"uwsgi.ini" 29L, 549C                                                 1,0-1         Top</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-3-创建nginx-conf"><a href="#2-2-3-创建nginx-conf" class="headerlink" title="2.2.3 创建nginx.conf"></a>2.2.3 创建nginx.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/conf# vim nginx.conf </span><br><span class="line"></span><br><span class="line">http&#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    server&#123;       </span><br><span class="line">    </span><br><span class="line">        listen 80;</span><br><span class="line">       # server_name www.sukamay.xyz;</span><br><span class="line">        server_name 120.76.62.132;</span><br><span class="line">        index index.html ;</span><br><span class="line">        root  /home/projects/closet/closetUsers;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        </span><br><span class="line">            location /static &#123;</span><br><span class="line">                alias /home/projects/closet/closetUsers/static; # your Django project's static files - amend as required</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            # Finally, send all non-media requests to the Django server.</span><br><span class="line">            location / &#123;</span><br><span class="line">                include     /etc/nginx/uwsgi_params; # the uwsgi_params file you installed              </span><br><span class="line">                uwsgi_pass 127.0.0.1:8002;</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将 <code>/usr/local/nginx/conf/mime.types</code>文件copy到conf下</p>
-<h3 id="2-3-创建数据库、收集静态文件"><a href="#2-3-创建数据库、收集静态文件" class="headerlink" title="2.3 创建数据库、收集静态文件"></a>2.3 创建数据库、收集静态文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate </span><br><span class="line">python manage.py collectstatic</span><br></pre></td></tr></table></figure>
-<h3 id="2-4-启动服务"><a href="#2-4-启动服务" class="headerlink" title="2.4 启动服务"></a>2.4 启动服务</h3><p>启动nginx</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -c /home/projects/closet/conf/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>后台启动uwsgi</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi /home/projects/closet/conf/uwsgi.ini -d /home/projects/closet/conf/uwsgi.log</span><br></pre></td></tr></table></figure>
-<p>访问 <a href="http://120.76.62.132/" target="_blank" rel="noopener">http://120.76.62.132/</a> （我没写默认index.html，访问的是<a href="http://120.76.62.132/users/）可以看到接口写好的返回内容，" target="_blank" rel="noopener">http://120.76.62.132/users/）可以看到接口写好的返回内容，</a> 则创建成功</p>
-<h2 id="3-error-summary"><a href="#3-error-summary" class="headerlink" title="3. error summary"></a>3. error summary</h2>
           
         
       
@@ -1552,210 +1309,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/yolo_traingMyDataset/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/yolo_traingMyDataset/" itemprop="url">Yolo training my dataset</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/yolo_traingMyDataset/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/yolo_traingMyDataset/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Yolo-training-my-dataset"><a href="#Yolo-training-my-dataset" class="headerlink" title="Yolo training my dataset"></a>Yolo training my dataset</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">config:</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> run my model in windows</span><br><span class="line">      </span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce GTX 960M    Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| N/A   52C    P0    N/A /  N/A |      0MiB /  2004MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br></pre></td></tr></table></figure>
-<p>Pre:</p>
-<p>Yolo running time test:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// cpu yolov3</span><br><span class="line">xxxdeMacBook-Pro:darknet xxx$ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">    ...</span><br><span class="line">  106 yolo</span><br><span class="line">Loading weights from yolov3.weights...Done!</span><br><span class="line">data/dog.jpg: Predicted in 18.616094 seconds.</span><br><span class="line">bicycle: 99%</span><br><span class="line">truck: 92%</span><br><span class="line">dog: 100%</span><br><span class="line">// cpu yolov2</span><br><span class="line">xxxdeMacBook-Pro:darknet xxx$ ./darknet detect cfg/yolov2.cfg yolov2.weights data/dog.jpg </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">   ...</span><br><span class="line">   31 detection</span><br><span class="line">mask_scale: Using default '1.000000'</span><br><span class="line">Loading weights from yolov2.weights...Done!</span><br><span class="line">data/dog.jpg: Predicted in 8.660725 seconds.</span><br><span class="line">dog: 82%</span><br><span class="line">truck: 64%</span><br><span class="line">bicycle: 85%</span><br><span class="line">// gpu yolov2, in another computer, but I didn't try cpu version</span><br><span class="line">// at least 100x faster than cpu version</span><br><span class="line">mei@mei-luo:~/Desktop/cv/darknet$ ./darknet detect cfg/yolov2.cfg yolov2.weights </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">    ...</span><br><span class="line">   31 detection</span><br><span class="line">mask_scale: Using default '1.000000'</span><br><span class="line">Loading weights from yolov2.weights...Done!</span><br><span class="line">Enter Image Path: data/person.jpg</span><br><span class="line">data/person.jpg: Predicted in 0.122470 seconds.</span><br><span class="line">horse: 82%</span><br><span class="line">dog: 86%</span><br><span class="line">person: 86%</span><br></pre></td></tr></table></figure>
-<h2 id="1、Dataset"><a href="#1、Dataset" class="headerlink" title="1、Dataset"></a>1、Dataset</h2><p>The VOC dataset directory structure is as follows：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├──VOC2019</span><br><span class="line">  ├── Annotations</span><br><span class="line">  ├── ImageSets</span><br><span class="line">    ├── Layout</span><br><span class="line">    ├── Main</span><br><span class="line">    └── Segmentation</span><br><span class="line">  └──  JPEGImages</span><br></pre></td></tr></table></figure>
-<h3 id="1-1-Annotations"><a href="#1-1-Annotations" class="headerlink" title="1.1 Annotations"></a>1.1 Annotations</h3><p>Store the xml file in VOC format, each xml corresponds to an image, and each xml stores the location and category information of each target of the tag, and the naming is usually the same as the corresponding original image.</p>
-<h3 id="1-2-ImageSets"><a href="#1-2-ImageSets" class="headerlink" title="1.2 ImageSets"></a>1.2 ImageSets</h3><p>ImageSets we only need to use the Main folder, which is stored in some text files, usually train.txt, test.txt, etc. The content of the text file is the name of the image that needs to be trained or tested (no suffix) No path)</p>
-<h3 id="1-3-JPEGImages"><a href="#1-3-JPEGImages" class="headerlink" title="1.3 JPEGImages"></a>1.3 JPEGImages</h3><p>In the JPEGImages folder, put the original image we have named according to the uniform rules.</p>
-<p>Take the data set about the instant noodles that I collected this time as an example.</p>
-<p>Source: Baidu, Jingdong, personal shooting</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── JPEGImages</span><br><span class="line">  ├── class_LR</span><br><span class="line">  	├── LR00001.jpg</span><br><span class="line">  	├── ...</span><br><span class="line">  ├── class_XL</span><br><span class="line">  	├── XL00001.jpg</span><br><span class="line">  	├── ...</span><br><span class="line">  ├── rename_voc.py</span><br><span class="line">  ├── resize_pic.py</span><br><span class="line">  └── voc_spider.py</span><br></pre></td></tr></table></figure>
-<p>The image naming format is <code>&lt;label_name&gt;&lt;num(len=5)&gt;.jpg</code>，eg：<code>LR00001.jpg</code></p>
-<h4 id="1-3-1-voc-spider-py"><a href="#1-3-1-voc-spider-py" class="headerlink" title="1.3.1 voc_spider.py"></a>1.3.1 voc_spider.py</h4><p>It can be compiled directly, the captured image is stored in the current directory. The picture naming format is <code>&lt;label_name&gt;&lt;num(len=5)&gt;.jpg</code>, for example: <code>LR00001.jpg</code>.</p>
-<h4 id="1-3-2-resize-pic-py"><a href="#1-3-2-resize-pic-py" class="headerlink" title="1.3.2 resize_pic.py"></a>1.3.2 resize_pic.py</h4><p>Use to reduce the size of the image, because the network needs to normalize the image, the default is to process the size of the square so you only need to enter a number to process all the images in the directory (recursive). The required image size should match the size in <code>yolo.cfg</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># yolov2.cfg</span><br><span class="line">[net]</span><br><span class="line"># Testing</span><br><span class="line">batch=1</span><br><span class="line">subdivisions=1</span><br><span class="line">...</span><br><span class="line">width=608   !!!</span><br><span class="line">height=608  !!!</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h4 id="1-3-3-rename-voc-py"><a href="#1-3-3-rename-voc-py" class="headerlink" title="1.3.3 rename_voc.py"></a>1.3.3 rename_voc.py</h4><p>Look for the file named <code>class_&lt;label_name&gt;</code> under the folder and rename it according to the serial number. This is mainly for the uniform processing of the photos taken by myself.</p>
-<h3 id="1-4-Conclusion"><a href="#1-4-Conclusion" class="headerlink" title="1.4 Conclusion"></a>1.4 Conclusion</h3><p>Recommended steps for VOC dataset construction:</p>
-<ol>
-<li>Create a folder with the directory structure as above. It is recommended to name it VOC+year, so you can use the provided <code>voc_label.py</code> directly.</li>
-<li>Create a folder for each class under <code>JPEGImages</code>. I mainly want to distinguish it, and it doesn’t matter.</li>
-<li>Use the py file above to get the image</li>
-<li>Finally all the pictures are in the <code>JPEGImages</code> folder and no longer distinguish them. It is recommended to do this step first! The xml folder that is not in the future needs to change the path, no trouble, but still a few more steps.</li>
-</ol>
-<h2 id="2、Marking-the-image-target-area"><a href="#2、Marking-the-image-target-area" class="headerlink" title="2、Marking the image target area"></a>2、Marking the image target area</h2><p>Use the tool <code>labelImg</code> from <a href="https://github.com/tzutalin/labelImg" target="_blank" rel="noopener">https://github.com/tzutalin/labelImg</a>.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> install lableImg in Mac OS X 10.14</span><br><span class="line">pip3 install pyqt5 lxml # Install qt and lxml by pip</span><br><span class="line"></span><br><span class="line">make qt5py3</span><br><span class="line">python3 labelImg.py</span><br><span class="line">python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]</span><br></pre></td></tr></table></figure>
-<p>Standard format of <code>*.xml</code> file in <code>VOC2019/Annotations/</code>:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">annotation</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">folder</span>&gt;</span>JPEGImages<span class="tag">&lt;/<span class="name">folder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filename</span>&gt;</span>LR00001.jpg<span class="tag">&lt;/<span class="name">filename</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">path</span>&gt;</span>/home/mei/Desktop/cv/darknet/scripts/VOCdevkit/NOODLE2019/JPEGImages/LR00001.jpg<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">database</span>&gt;</span>Unknown<span class="tag">&lt;/<span class="name">database</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">size</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">width</span>&gt;</span>608<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">height</span>&gt;</span>608<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">depth</span>&gt;</span>3<span class="tag">&lt;/<span class="name">depth</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">size</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">segmented</span>&gt;</span>0<span class="tag">&lt;/<span class="name">segmented</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>luxiang<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>393<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>304<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>583<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>465<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">annotation</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Some parts you may need to modify:</p>
-<ol>
-<li><p>folder</p>
-<p>The folder is the placement position of the image when the model is finally run. The command runs under ubuntu.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;folder&gt;class_LR|&lt;folder&gt;JPEGImages|g'</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>filename</p>
-<p>The filename that may be exported is without a file suffix.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;/filename&gt;|.jpg&lt;/filename&gt;|g'</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Path</p>
-<p>Path is the absolute path of the image on the running model (because I need to port to another computer)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;path&gt;$(your_original_pic_path)|&lt;path&gt;$(your_final_pic_path)|g'</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>width, height</p>
-<p>Sometimes using the tool <code>labelImg</code> under Windows, there may be a size where the width and height are 0. If the image size has been normalized before the label, then the following two lines can be used to modify the value of 0.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|0&lt;/width&gt;|608&lt;/width&gt;|g'</span><br><span class="line">find -name '*.xml' |xargs perl -pi -e 's|0&lt;/height&gt;|608&lt;/height&gt;|g'</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="3、Training-YOLO-on-VOC"><a href="#3、Training-YOLO-on-VOC" class="headerlink" title="3、Training YOLO on VOC"></a>3、Training YOLO on VOC</h2><h3 id="3-1-Generate-Labels-for-VOC"><a href="#3-1-Generate-Labels-for-VOC" class="headerlink" title="3.1 Generate Labels for VOC"></a>3.1 Generate Labels for VOC</h3><p>  You should install and make sure it can run successfully in you computer. Make a directory named <code>VOCdevkit</code> after <code>darknet/scripts</code>, copy your <code>VOC2019</code> file in it.</p>
-<p>  Now we need to generate the label files that Darknet uses. Darknet wants a <code>.txt</code> file for each image with a line for each ground truth object in the image that looks like:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">object-class</span>&gt;</span> <span class="tag">&lt;<span class="name">x</span>&gt;</span> <span class="tag">&lt;<span class="name">y</span>&gt;</span> <span class="tag">&lt;<span class="name">width</span>&gt;</span> <span class="tag">&lt;<span class="name">height</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Where <code>x</code>, <code>y</code>, <code>width</code>, and <code>height</code> are relative to the image’s width and height. To generate these file we will run the <code>voc_label.py</code> script in Darknet’s <code>scripts/</code> directory. </p>
-<p>First we should modify the <code>voc_label.py</code> cause we don’t use the original VOC dataset.</p>
-<p>Here mainly modify the data set name, and category information, mine is <code>VOC2019</code>, and all samples are used for training, there are two types of targets, so set as follows:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span>sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span>classes = ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]</span><br><span class="line"> </span><br><span class="line">sets=[('2019', 'train')]</span><br><span class="line">classes = [ "luxiang", "xiangla"]</span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line"> </span><br><span class="line">def convert_annotation(year, image_id):</span><br><span class="line">    in_file = open('VOCdevkit/VOC%s/Annotations/%s.xml'%(year, image_id)) </span><br><span class="line">    #（if you don't use the name 'VOC', modify this）</span><br><span class="line">    out_file = open('VOCdevkit/VOC%s/labels/%s.txt'%(year, image_id), 'w')  </span><br><span class="line">    #（as above）</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">for year, image_set in sets:</span><br><span class="line">    if not os.path.exists('VOCdevkit/VOC%s/labels/'%(year)):</span><br><span class="line">        os.makedirs('VOCdevkit/VOC%s/labels/'%(year))</span><br><span class="line">    image_ids = open('VOCdevkit/VOC%s/ImageSets/Main/%s.txt'%(year, image_set)).read().strip().split()</span><br><span class="line">    list_file = open('%s_%s.txt'%(year, image_set), 'w')</span><br><span class="line">    for image_id in image_ids:</span><br><span class="line">        list_file.write('%s/VOCdevkit/VOC%s/JPEGImages/%s.jpg\n'%(wd, year, image_id))</span><br><span class="line">        convert_annotation(year, image_id)</span><br><span class="line">    list_file.close()</span><br></pre></td></tr></table></figure>
-<p>After modifying it, run the command in this directory: <code>python voc_label.py</code>, then generate the folder <code>labels</code> in the folder <code>script/VOCdevki/VOC2019</code>:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├──VOC2019</span><br><span class="line">   ├── labels</span><br><span class="line">   ├── LR00000.txt</span><br><span class="line">   ├── LR00091.txt</span><br><span class="line">     ├── ...</span><br></pre></td></tr></table></figure>
-<p>At the same time, the <code>2019_train.txt</code> file should be generated under <code>scripts/</code>, which contains the absolute path of all training samples.</p>
-<p>❗️❗️❗️ Note that the <code>train.txt</code> file is also generated under the <code>darknet/</code> folder at this time. If there is, check if it is empty. If it is empty, move the contents of <code>2019_train.txt</code>. Go to <code>train.txt</code>.</p>
-<h3 id="3-2-Modify-Cfg-for-Pascal-Data"><a href="#3-2-Modify-Cfg-for-Pascal-Data" class="headerlink" title="3.2 Modify Cfg for Pascal Data"></a>3.2 Modify Cfg for Pascal Data</h3><p>Now go to your Darknet directory. We have to change the <code>cfg/voc.data</code> config file to point to your data:</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">classes= 2</span><br><span class="line">train  = &lt;path-to-voc&gt;/train.txt</span><br><span class="line">// valid  = &lt;path-to-voc&gt;2007_test.txt</span><br><span class="line">names = data/voc.names</span><br><span class="line">backup = backup</span><br></pre></td></tr></table></figure>
-<p>You should replace <code>&lt;path-to-voc&gt;</code> with the directory where you put the VOC data.</p>
-<h3 id="3-3-Download-Pretrained-Convolutional-Weights"><a href="#3-3-Download-Pretrained-Convolutional-Weights" class="headerlink" title="3.3 Download Pretrained Convolutional Weights"></a>3.3 Download Pretrained Convolutional Weights</h3><p>For training we use convolutional weights that are pre-trained on Imagenet. We use weights from the <a href="https://pjreddie.com/darknet/imagenet/#darknet53" target="_blank" rel="noopener">darknet53</a> model. You can just download the weights for the convolutional layers <a href="https://pjreddie.com/media/files/darknet53.conv.74" target="_blank" rel="noopener">here (76 MB)</a>.</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//pjreddie.<span class="keyword">com</span>/media/<span class="keyword">files</span>/darknet53.conv.<span class="number">74</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-4-Train-The-Model"><a href="#3-4-Train-The-Model" class="headerlink" title="3.4 Train The Model"></a>3.4 Train The Model</h3><p>Now we can train! Run the command:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74</span><br></pre></td></tr></table></figure>
-<p>If you want to use multiple gpus run:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector train cfg/coco<span class="selector-class">.data</span> cfg/yolov3<span class="selector-class">.cfg</span> darknet53<span class="selector-class">.conv</span>.<span class="number">74</span> -gpus <span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
-<p>If you want to stop and restart training from a checkpoint:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector train cfg/coco.data cfg/yolov3.cfg backup/yolov3.backup -gpus 0,1,2,3</span><br></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
-<li><a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">yolo</a></li>
-<li><a href="https://blog.csdn.net/ch_liu23/article/details/53558549#" target="_blank" rel="noopener">tutorial from csdn</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/课程建议/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1911,7 +1464,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/FishMem/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/By-talk/Daydream/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1930,7 +1483,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/FishMem/" itemprop="url">FishMem</a></h1>
+                <a class="post-title-link" href="/2019/05/11/By-talk/Daydream/" itemprop="url">Daydream</a></h1>
         
 
         <div class="post-meta">
@@ -1953,6 +1506,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/By-talk/" itemprop="url" rel="index">
+                    <span itemprop="name">By-talk</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1961,8 +1536,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/FishMem/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/FishMem/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/By-talk/Daydream/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/By-talk/Daydream/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1994,13 +1569,72 @@
       
         
           
-            <h1 id="FishMem"><a href="#FishMem" class="headerlink" title="FishMem"></a>FishMem</h1><p>阿里云服务器IP地址：120.76.62.132</p>
-<p>电脑IP地址：pc.washingpatrick.cn</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh mei/root@pc.washingpatrick.cn -p 5000</span><br></pre></td></tr></table></figure>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://img1.<span class="number">360</span>buyimg.com/n6/jfs/t<span class="number">1/26161/40</span>/<span class="number">7321/159453</span>/<span class="number">5</span>c6a5fc6Ecc0df3bf/a03e44d30d60352f.jpg</span><br><span class="line">https://img1.<span class="number">360</span>buyimg.com/n6/jfs/t<span class="number">22405/273</span>/<span class="number">1704311852</span>/<span class="number">168416</span>/<span class="number">6</span>cc2bf5d/<span class="number">5</span>b34b4fdNe12e22fe.jpg</span><br></pre></td></tr></table></figure>
-<p>73，80,105,121</p>
-<p>,134，137，145，165，173，178，179，184，185，188，191，192，193，221，223，226，227，228，229-231，249，251-252，256，260-264</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/mei/Desktop/cv/darknet</span><br><span class="line">nohup ./darknet detector train cfg/noodles.data cfg/yolov2-noodles.cfg backup/yolov2-noodles_200.weights &gt;&gt; running.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+            <h1 id="Daydream"><a href="#Daydream" class="headerlink" title="Daydream"></a>Daydream</h1><ul>
+<li style="list-style: none"><input type="checkbox"> 停车场寻找停车位辅助程序</li>
+<li style="list-style: none"><input type="checkbox"> 虚拟试衣间</li>
+<li style="list-style: none"><input type="checkbox"> 铝材开料</li>
+<li style="list-style: none"><input type="checkbox"> 写个脚本，网页更新通知一下</li>
+<li style="list-style: none"><input type="checkbox"> 思维导图和笔记的互转，解析器</li>
+<li style="list-style: none"><input type="checkbox"> 记录日常，基于定位</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><a href="http://eecs.pku.edu.cn/personnel/YJS/RecruitStudents/6805.shtml" target="_blank" rel="noopener">信科</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.sz.tsinghua.edu.cn/publish/sz/293/2018/20180427105015415645904/20180427105015415645904_.html" target="_blank" rel="noopener">清华深圳</a></td>
+</tr>
+<tr>
+<td><a href="https://mp.weixin.qq.com/s/uC2V2imvEFy3mL3au0GPpA" target="_blank" rel="noopener">北大深圳</a></td>
+</tr>
+<tr>
+<td><a href="http://www.cs.tsinghua.edu.cn/publish/cs/4723/2018/20180523112520325519314/20180523112520325519314_.html" target="_blank" rel="noopener">清华</a></td>
+</tr>
+<tr>
+<td><a href="http://www.thss.tsinghua.edu.cn/publish/soft/3649/2018/20180425140246849832299/20180425140246849832299_.html" target="_blank" rel="noopener">清软</a></td>
+</tr>
+<tr>
+<td><a href="http://www.tbsi.edu.cn/index.php?s=/cms/index/detail/id/804.html" target="_blank" rel="noopener">清华伯克利</a></td>
+</tr>
+<tr>
+<td><a href="http://www.aais.pku.edu.cn/tongzhi/shownews.php?lang=cn&amp;id=595" target="_blank" rel="noopener">北大交叉</a></td>
+</tr>
+<tr>
+<td><a href="http://admission.iiis.tsinghua.edu.cn/2018/" target="_blank" rel="noopener">清华交叉</a></td>
+</tr>
+<tr>
+<td><a href="https://cs.nju.edu.cn/zhouzh/zhouzh.files/recruit.htm" target="_blank" rel="noopener">lamda</a></td>
+</tr>
+<tr>
+<td><a href="http://csopenday.nju.edu.cn/" target="_blank" rel="noopener">南大</a></td>
+</tr>
+<tr>
+<td><a href="#rd">哈工NLP</a></td>
+</tr>
+<tr>
+<td><a href="http://www.ict.ac.cn/shye/tzgg/201805/t20180508_5008632.html" target="_blank" rel="noopener">计算所</a></td>
+</tr>
+<tr>
+<td><a href="http://www.ia.cas.cn/yjsjy/zs/sszs/201805/t20180503_5006085.html" target="_blank" rel="noopener">自动化</a></td>
+</tr>
+<tr>
+<td><a href="http://www.ia.cas.cn/yjsjy/zs/sszs/201805/t20180503_5006085.html" target="_blank" rel="noopener">自动化</a></td>
+</tr>
+<tr>
+<td><a href="http://yjwb.seiee.sjtu.edu.cn/yjwb/info/13836.htm" target="_blank" rel="noopener">上交</a></td>
+</tr>
+<tr>
+<td><a href="http://www.cs.fudan.edu.cn/?p=23278" target="_blank" rel="noopener">复旦</a></td>
+</tr>
+<tr>
+<td><a href="http://xly.ustc.edu.cn/news.php?newsid=580" target="_blank" rel="noopener">中科大</a></td>
+</tr>
+</tbody>
+</table>
+<p>qq SMTP 服务授权码： <strong>ojqn**</strong>tywm<strong><strong>xoxk</strong></strong>bhde**</p>
 
           
         
@@ -2208,11 +1842,324 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/By-talk/卫填宝模版_0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/By-talk/卫填宝模版_0/" itemprop="url">卫填宝模版</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/By-talk/" itemprop="url" rel="index">
+                    <span itemprop="name">By-talk</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/By-talk/卫填宝模版_0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/By-talk/卫填宝模版_0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="卫填宝模版"><a href="#卫填宝模版" class="headerlink" title="卫填宝模版"></a>卫填宝模版</h1><h2 id="模版一"><a href="#模版一" class="headerlink" title="模版一"></a>模版一</h2><p>【雨停防水】西牛“卫填宝”卫生间回填，轻质，流动，整体，二次防水、防异味。彻底解决卫生间沉箱积水，底板开裂，管根收缩渗水的难题。咨询电话:0775-6330967。地址:北流市城南一路0295号，回T退订。（超过70字）</p>
+<h2 id="模版二"><a href="#模版二" class="headerlink" title="模版二"></a>模版二</h2><p>【雨停防水】西牛卫填宝轻质，环保，卫生间回填首选卫填宝。咨询电话:0775-6330967。地址:北流市城南一路0295号，回T退订。</p>
+<h2 id="模版三"><a href="#模版三" class="headerlink" title="模版三"></a>模版三</h2><p>【雨停防水】西牛卫填宝，环保，效率高，抗压力强，您的不二之选。咨询电话:0775-6330967。地址:北流市城南一路0295号，回T退订。</p>
+<h2 id="模版四"><a href="#模版四" class="headerlink" title="模版四"></a>模版四</h2><p>【雨停防水】西牛卫填宝，专业回填永不漏水，厕所革命一生无忧。咨询电话:0775-6330967。地址:北流市城南一路0295号，回T退订。</p>
+<h2 id="模版五"><a href="#模版五" class="headerlink" title="模版五"></a>模版五</h2><p>【雨停防水】西牛卫填宝卫生间回填，轻质，流动，防水、防异味。咨询电话:0775-6330967。地址:北流市城南一路0295号，回T退订。</p>
+<h2 id="模版六"><a href="#模版六" class="headerlink" title="模版六"></a>模版六</h2><p>【雨停防水】西牛卫填宝，彻底解决卫生间沉箱积水，底板开裂，管根收缩渗水的难题。咨询电话:0775-6330967。回T退订。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/By-talk/护肤_0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/By-talk/护肤_0/" itemprop="url">护肤 part0</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/By-talk/" itemprop="url" rel="index">
+                    <span itemprop="name">By-talk</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/By-talk/护肤_0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/By-talk/护肤_0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="护肤-part0"><a href="#护肤-part0" class="headerlink" title="护肤 part0"></a>护肤 part0</h1><p>干性皮肤，t区比较油，特别是鼻子，上妆的时候总是会出油，碰碰就会变红，应该是角质层受损了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2260,7 +2207,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">162</span>
+                  <span class="site-state-item-count">154</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2271,7 +2218,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2282,7 +2229,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

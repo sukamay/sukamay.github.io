@@ -284,920 +284,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/09/GuideBook/Tomcat配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/GuideBook/Tomcat配置/" itemprop="url">Tomcat配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T10:01:27+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/09/GuideBook/Tomcat配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/09/GuideBook/Tomcat配置/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>服务器：阿里云</p>
-<h2 id="远程连接到服务器"><a href="#远程连接到服务器" class="headerlink" title="远程连接到服务器"></a>远程连接到服务器</h2><p><a href="https://help.aliyun.com/document_detail/59083.html?spm=5176.10173289.107.4.78de2e77rXaOJu#本地为%20Linux%20或支持%20SSH%20命令的环境" target="_blank" rel="noopener">远程连接到linux服务器</a></p>
-<h3 id="通过ssh连接"><a href="#通过ssh连接" class="headerlink" title="通过ssh连接"></a>通过ssh连接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:Guide book xxx$ ssh root@120.76.62.132 -i /Users/xxx/Desktop/i\ document/笔记/Guide\ book/xxx.pem</span><br></pre></td></tr></table></figure>
-<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><h3 id="1-给Mac安装jdk环境。"><a href="#1-给Mac安装jdk环境。" class="headerlink" title="1. 给Mac安装jdk环境。"></a>1. 给Mac安装jdk环境。</h3><p>　　　   直接百度”jdk for Mac“，找到其中一个版本进行安装就可以了，安装完成后，打开终端，输入“java”或“javac”，如果出现java命令的使用说明，那么说明你的Mac上的jdk环境已经配置好，这个比起windows系统来说，简单方便很多。</p>
-<h3 id="2-下载安装-Tomcat"><a href="#2-下载安装-Tomcat" class="headerlink" title="2. 下载安装 Tomcat"></a>2. 下载安装 Tomcat</h3><p>​    下载 Tomcat 地址（官方地址）：<a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-80.cgi</a></p>
-<p>​    下载文件：mac下载 zip 和 tar.gz 都行，我下载的是 tar.gz</p>
-<h3 id="3-安装："><a href="#3-安装：" class="headerlink" title="3. 安装："></a>3. 安装：</h3><ol>
-<li><p>压缩之后直接拷贝到资源库中，压缩后的文件夹名称为Tomcat8，记录此位置:<code>/Library/Tomcat8</code>（方便后续环境配置）</p>
-</li>
-<li><p>打开终端，输入以下命令<code>/Library/Tomcat8/bin/startup.sh</code>，浏览器中输入localhost:8080，就可以看到以下效果:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ Library/Tomcat8/bin/starup.sh</span><br><span class="line">-bash: Library/Tomcat8/bin/starup.sh: No such file or directory</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>如果遇到提示No such file or directory错误提示，需要执行sudo chmod 755 Library/Tomcat/bin/*.sh，然后重新执行startup.sh，若出现permission denied 的情况，则在sudo模式下执行startup.sh，如果想停止Tomcat，直接执行shutdown.sh即可。在执行sudo时，必须使用带密码的用户。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// or sudo chmod 755 /Library/Tomcat8/bin/*.sh</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo chmod +x /Library/Tomcat8/bin/*.sh</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">touch: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">/Library/Tomcat8/bin/catalina.sh: line 464: /Library/Tomcat8/logs/catalina.out: Permission denied</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-<p>​     如果每次写路径比较麻烦，这个时候需要设置环境变量。</p>
-<h3 id="4-设置-Tomcat-的环境变量"><a href="#4-设置-Tomcat-的环境变量" class="headerlink" title="4. 设置 Tomcat 的环境变量:"></a>4. 设置 Tomcat 的环境变量:</h3><p>ps：不要在root权限下设置</p>
-<p>　　①使用vim编辑bash_profile，输入命令打开：<code>vi .bash_profile</code>(<code>pico .bash_profile</code>亦可)</p>
-<p>　　②按 <code>i</code>进入编辑模式</p>
-<p>​      ③输入Tomcat存储路径    <code>export PATH=&quot;/Users/keso/Library/Tomcat8/bin:$PATH&quot;</code>（注意：此处路径是自己保存的 tomcat 存储路径）</p>
-<p>　　④esc退出编辑模式，输入 <code>:wq</code> 保存并退出vim</p>
-<p>​      ⑤更新配置的环境变量，输入命令：<code>source .bash_profile</code></p>
-<p>　　⑥终端中输入startup.sh， startup.sh后出现类似 “Permission denied” ，这个时候需要对目录进行权限设置：输入 sudo chmod 755 Library/Tomcat8/bin/*.sh 回车，设置文件的读写执行权限，参考第3步中的解决方案。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vi .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ source .bash_profile</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo startup.sh</span><br><span class="line">Password:</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ shutdown.sh</span><br><span class="line">Using CATALINA_BASE:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_HOME:   /Library/Tomcat8</span><br><span class="line">Using CATALINA_TMPDIR: /Library/Tomcat8/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Library/Tomcat8/bin/bootstrap.jar:/Library/Tomcat8/bin/tomcat-juli.jar</span><br><span class="line">NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-<h3 id="5-设置完成"><a href="#5-设置完成" class="headerlink" title="5. 设置完成"></a>5. 设置完成</h3><p>之后，输入 <code>sudo startup.sh</code>会显示启动, 打开 localhost:8080 可测试，出现上述页面。</p>
-<p>  关闭使用 <code>shutdown.sh</code> 即可;</p>
-<p>   到此，Tomcat 配置完成。 </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/06/GuideBook/Ns3仿真基本流程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/06/GuideBook/Ns3仿真基本流程/" itemprop="url">Ns3网络仿真基本流程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T14:31:39+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/06/GuideBook/Ns3仿真基本流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/06/GuideBook/Ns3仿真基本流程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Ns3网络仿真基本流程："><a href="#Ns3网络仿真基本流程：" class="headerlink" title="Ns3网络仿真基本流程："></a>Ns3网络仿真基本流程：</h1><h2 id="1）-选择和开发相应模块；"><a href="#1）-选择和开发相应模块；" class="headerlink" title="1）  选择和开发相应模块；"></a>1）  选择和开发相应模块；</h2><p>根据实际仿真对象和仿真场景选择相应的仿真模块；如果搭建的网络比较新，读者就需要开发自己设计的协议。</p>
-<h2 id="2）-编写网络仿真脚本；"><a href="#2）-编写网络仿真脚本；" class="headerlink" title="2）  编写网络仿真脚本；"></a>2）  编写网络仿真脚本；</h2><p>生成节点node；</p>
-<p>安装信道Channel和相应的网络设备NetDevice，</p>
-<p>安装协议栈</p>
-<p>安装应用层协议</p>
-<p>其他配置等</p>
-<p>启动仿真</p>
-<h2 id="3）-仿真结果分析；"><a href="#3）-仿真结果分析；" class="headerlink" title="3）  仿真结果分析；"></a>3）  仿真结果分析；</h2><h2 id="4）-根据结果调试网络配置参数和修改源代码；"><a href="#4）-根据结果调试网络配置参数和修改源代码；" class="headerlink" title="4）  根据结果调试网络配置参数和修改源代码；"></a>4）  根据结果调试网络配置参数和修改源代码；</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/Android/Android_APP后台搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/GuideBook/Android/Android_APP后台搭建/" itemprop="url">AndroidAPP后台搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:53:58+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/GuideBook/Android/Android_APP后台搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/Android/Android_APP后台搭建/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="AndroidAPP后台搭建"><a href="#AndroidAPP后台搭建" class="headerlink" title="AndroidAPP后台搭建"></a>AndroidAPP后台搭建</h1><p>选取 jdk、tomcat、MySQL、FileZilla</p>
-<p><a href="https://blog.csdn.net/Mr_Megamind/article/details/71404618" target="_blank" rel="noopener">参考教程</a></p>
-<ol>
-<li>内网穿透，使用ngrok</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/MySQL报错解决/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/GuideBook/MySQL报错解决/" itemprop="url">MySQL_errors</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T22:46:52+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/GuideBook/MySQL报错解决/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/MySQL报错解决/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>版本：MySQL8.0.11</p>
-<p>系统：MacOS 10.14.1</p>
-<h2 id="Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’"><a href="#Q1：Unable-to-load-authentication-plugin-‘caching-sha2-password’" class="headerlink" title="Q1：Unable to load authentication plugin ‘caching_sha2_password’."></a>Q1：Unable to load authentication plugin ‘caching_sha2_password’.</h2><p>​    datagrip连接的时候连接不到，原因是mysql8.0之前的版本用的是mysql_native_password, 但mysql8.0之后的版本连接使用的密码是caching_sha2_password。</p>
-<p>————————————————————2018.12.5—————————————————————————</p>
-<p>解决：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'1234'</span> PASSWORD EXPIRE NEVER; </span></span><br><span class="line">Query OK, 0 rows affected (0.08 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">'test'</span>@<span class="string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> FLUSH PRIVILEGES;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> alter user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">'1234'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/MySQL使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/GuideBook/MySQL使用/" itemprop="url">MySQL_使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T21:26:34+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/GuideBook/MySQL使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/MySQL使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL使用"><a href="#MySQL使用" class="headerlink" title="MySQL使用"></a>MySQL使用</h1><p>安装环境：mac</p>
-<h2 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h2><ol>
-<li><p>下载安装，我已经不太记得了，有点久远的事情</p>
-<p>从  <a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">官网</a>下载dmg，直接安装就好，有一步需要注意的就是弹出<strong>初始密码</strong>的时候记得记下来！！！</p>
-</li>
-<li><p>配置环境变量</p>
-<ol>
-<li><p>进入  <code>bash_profile</code> 文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按 i 进入编辑模式，在文件末尾加上mysql的文件路径：　</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=<span class="variable">$&#123;</span>PATH&#125;<span class="symbol">:/usr/local/mysql/bin</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输入 <code>:wq</code>  退出vim编辑，冒号不要忘记了！不然会进入 <code>recording@</code> 状态。</p>
-</li>
-<li><p>使得该文件生效</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>进入mysql</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br></pre></td></tr></table></figure>
-<p>随后输入密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 8</span><br><span class="line">Server version: 8.0.11 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li><p>忘记密码了咋整，发现了一个很神奇的东西</p>
-<p>输入新的密码，再在终端上尝试一下你的新密码，你就会惊喜的发现it works！</p>
-</li>
-</ul>
-<p><img src="/images/mysql修改初始密码.png" alt="mysql修改初始密码"></p>
-<h2 id="MySQL使用-1"><a href="#MySQL使用-1" class="headerlink" title="MySQL使用"></a>MySQL使用</h2><p>ubuntu</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">service mysql restart</span><br><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/Ns3forUbuntu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/GuideBook/Ns3forUbuntu/" itemprop="url">Ns3ForUbuntu</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T17:01:02+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/05/GuideBook/Ns3forUbuntu/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/Ns3forUbuntu/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><h2 id="Q1-g-internal-compiler-error-Killed-program-cc1plus"><a href="#Q1-g-internal-compiler-error-Killed-program-cc1plus" class="headerlink" title="Q1:  g++: internal compiler error: Killed (program cc1plus)"></a>Q1:  g++: internal compiler error: Killed (program cc1plus)</h2><p><a href="https://www.jianshu.com/p/7aa7f3955233" target="_blank" rel="noopener">安装教程</a></p>
-<p>=====================================================================================</p>
-<p>环境：ubuntu 16.04</p>
-<p>安装： ns-3.28</p>
-<p>=======================================================================================</p>
-<p>Please submit a full bug report,</p>
-<p>查了很多资料，最后发现主要原因是内存不足, 临时使用交换分区来解决吧</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=/dev/zero of=/swapfile bs=64M count=16</span><br><span class="line"><span class="meta">#</span><span class="bash">count的大小就是增加的swap空间的大小，64M是块大小，所以空间大小是bs*count=1024MB</span></span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line"><span class="meta">#</span><span class="bash">把刚才空间格式化成swap格式</span></span><br><span class="line">sudo swapon /swapfile</span><br><span class="line"><span class="meta">#</span><span class="bash">使用刚才创建的swap空间</span></span><br></pre></td></tr></table></figure>
-<p>After compiling, you may wish to</p>
-<p>Code:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff /swapfile</span><br><span class="line">sudo rm /swapfile</span><br></pre></td></tr></table></figure>
-<p>开了个临时交换分区以后快了好多【引起舒适】</p>
-<h2 id="Q2-install-netanim"><a href="#Q2-install-netanim" class="headerlink" title="Q2: install netanim"></a>Q2: install netanim</h2><h3 id="Step1：安装必要的插件"><a href="#Step1：安装必要的插件" class="headerlink" title="Step1：安装必要的插件"></a>Step1：安装必要的插件</h3><p>先简单介绍下synaptic：</p>
-<p>新立得（Synaptic）是 debian 及其衍生版本如Ubuntu Linux操作系统的包管理工具apt的图形化前端。<br>它结合了图形界面的简单操作和 apt-get 命令行工具的强大功能。您可以使用新立得安装、删除、配置、升级软件包，对软件包列表进行浏览、排序、搜索以及管理软件仓库或者升级整个系统。<br>简单来说就是apt-get的图形化界面，也可以用apt-get代替，看个人爱好<br>安装很简单</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install synaptic</span></span><br></pre></td></tr></table></figure>
-<p>启动也很简单</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo synaptic</span></span><br></pre></td></tr></table></figure>
-<p>如果已经安装好了，请忽略上面讲述</p>
-<p>启动也很简单<br>sudo synaptic</p>
-<p>如果已经安装好了，请忽略上面讲述</p>
-<p>先用synaptic安装三个插件：</p>
-<p><code>qt4-qmake</code>：安装工具<br><code>libqt4-dev</code>：绘图所需<br><code>libxml2-dev</code>：netanim需要读取程序生成的xml文件，离线展示动画<br>搜索到对应的插件之后如果没有安装，就右键-&gt;mark for installation -&gt;Apply</p>
-<h3 id="Step2：安装"><a href="#Step2：安装" class="headerlink" title="Step2：安装"></a>Step2：安装</h3><p>进入ns3的文件夹，执行命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ns-allinone-3.xx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> netanim-3.xxx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make clean</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> qmake NetAnim.pro</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make</span></span><br></pre></td></tr></table></figure>
-<p>安装完毕</p>
-<h3 id="Step3：启动"><a href="#Step3：启动" class="headerlink" title="Step3：启动"></a>Step3：启动</h3><p>在当前文件夹下运行下面命令，启动软件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./NetAnim</span></span><br></pre></td></tr></table></figure>
-<p>出现界面 </p>
-<h3 id="Step4：运行"><a href="#Step4：运行" class="headerlink" title="Step4：运行"></a>Step4：运行</h3><p>在NS3提供的示例first.py中，并没有生成NetAnim所需要的xml文件，我们尝试用NetAnim来展示first.cc的仿真结果。</p>
-<p>首先在first.cc里面，加上头文件</p>
-<p><code>include &quot;ns3/netanim-module.h&quot;</code></p>
-<p>run前面加上三句代码</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">AnimationInterface <span class="title">anim</span><span class="params">(<span class="string">"first.xml"</span>)</span></span>;</span><br><span class="line">anim.SetConstantPosition(nodes.Get(<span class="number">0</span>), <span class="number">1.0</span>, <span class="number">2.0</span>);</span><br><span class="line">anim.SetConstantPosition(nodes.Get(<span class="number">1</span>), <span class="number">2.0</span>, <span class="number">3.0</span>);</span><br><span class="line"></span><br><span class="line">Simulator::Run();</span><br><span class="line">Simulator::Destroy();</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>保存后退出</p>
-<p>第二三行是描绘两个节点的坐标，也可以不要这两行</p>
-<p>在ns3文件夹下重新编译程序<code>./waf --run scracth/first</code><br>在netanim文件夹下重新启动<code>./NetAnim</code></p>
-<p>Open-&gt;first.xml-&gt;Play</p>
-<p>在2秒附近就可以看到动画演示。//生成的xml文件再ns3.xx文件夹下 </p>
-<h2 id="Q3-在NS3下如何用Python脚本，以及PyViz可视化"><a href="#Q3-在NS3下如何用Python脚本，以及PyViz可视化" class="headerlink" title="Q3: 在NS3下如何用Python脚本，以及PyViz可视化"></a>Q3: 在NS3下如何用Python脚本，以及PyViz可视化</h2><h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1:"></a>Method 1:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./waf shell</span><br><span class="line">python examples/tutorial/first.py</span><br></pre></td></tr></table></figure>
-<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method 2:"></a>Method 2:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --pyrun examples/tutorial/first.py</span><br></pre></td></tr></table></figure>
-<p>接下来是下载 <strong>PyViz</strong></p>
-<p>使用以下命令来安装：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev python-pygraphviz python-kiwi python-pygoocanvas \</span><br><span class="line">                     python-gnome2 python-gnomedesktop python-rsvg</span><br></pre></td></tr></table></figure>
-<p>安装完后运行一个简单的例子：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./waf --pyrun src/contrib/flow-monitor/examples/wifi-olsr-flowmon.py --vis</span><br></pre></td></tr></table></figure>
-<p>然后你就会看到一个由9个节点组成的网络拓扑：</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/Mac终端_vim的简单使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1496,7 +582,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/27/By-talk/末/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/12/GuideBook/opencv配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1515,7 +601,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/27/By-talk/末/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2018/10/12/GuideBook/opencv配置/" itemprop="url">OpenGL配置</a></h1>
         
 
         <div class="post-meta">
@@ -1527,8 +613,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T11:18:58+08:00">
-                2018-10-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T10:44:21+08:00">
+                2018-10-12
               </time>
             
 
@@ -1546,8 +632,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/27/By-talk/末/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/27/By-talk/末/" itemprop="commentCount"></span>
+                <a href="/2018/10/12/GuideBook/opencv配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/12/GuideBook/opencv配置/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1579,37 +665,20 @@
       
         
           
-            <blockquote>
-<p>末</p>
-<p>年岁不停增长，心智倒是一直下降</p>
-<p>这是今年答应给自己的520赞歌</p>
-<p>听说今天是小罗媚生日，那祝她森日快落，百岁无忧</p>
-</blockquote>
-<p>末</p>
-<p>年岁不停增长，心智倒是一直下降</p>
-<p>所以活了二十年的我对于处理生活的细节这一方面还是蠢得一塌糊涂呀，懊恼</p>
-<p>今年？过完生日就奔三了，今天还被17岁的いもと说好老= =，哼，我永远十八哼哼</p>
-<p>奔（大）三了，今年有什么不一样？</p>
-<p>无非学业上又忙了一些（刚答完辩的我），</p>
-<p>身边多了个可爱的傻子/无奈，学院楼上下课有人等接送【我想每天都陪你一起吃饭】</p>
-<p>十九岁这一年最幸福的时刻——见到达叔本人   没有之一</p>
-<p>觉得自己最可爱的时刻——被达叔夸可爱   没有之一</p>
-<p>最幸运的时刻——在达叔书友会前一天收到去书友会的通知  没有之一</p>
-<p>最dramatic的事情，找到了你</p>
-<p>大抵是  金风玉露一相逢，便胜却人间无数</p>
-<p>今天的阳光很温暖，你也是</p>
-<p>每天抄一句情话可以的/点赞</p>
-<p>在某人的监督和激励下坚持了好久的锻炼和不吃零食在生日这天被打破了嘤嘤嘤</p>
-<p>今早看到顺丰快递的消息，心想顺丰？怕不是生鲜吧？</p>
-<p>赶着去学院楼就没去取，中午接到电话快递员说是生鲜，心想怕不是蛋糕吧？</p>
-<p>一接到快递，哇，居然是一箱芝士（还真有蛋糕），太秀了/点赞</p>
-<p>但是芝士蛋糕太好吃了呜呜哭泣，太幸福了</p>
-<p>减肥明天再重新开始吧QAQ</p>
-<p>今晚散步要散得久一点了</p>
-<p>翠雪说，过了今天你就是一个成熟的宝宝啦，要学会自己照顾自己</p>
-<p>承此吉言，希望未来的自己点亮多一些生活技能</p>
-<p>这是今年答应给自己的520赞歌</p>
-<p>听说今天是小罗媚生日，那祝她森日快落，百岁无忧</p>
+            <h1 id="openGL配置"><a href="#openGL配置" class="headerlink" title="openGL配置"></a>openGL配置</h1><p>OpenGL的长路谁陪我走</p>
+<p><a href="https://blog.csdn.net/feixiaku/article/details/51754663" target="_blank" rel="noopener">opencv配置</a></p>
+<h2 id="在XCode中使用OpenCV"><a href="#在XCode中使用OpenCV" class="headerlink" title="在XCode中使用OpenCV"></a>在XCode中使用OpenCV</h2><ol>
+<li><p>创建一个空的command line工程。</p>
+</li>
+<li><p>在main.cpp中写代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/highgui.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="comment">// insert code here...</span></span><br><span class="line">    Mat image;</span><br><span class="line">    image = imread(<span class="string">"/Users/luomei/Desktop/peggy.jpeg"</span>);<span class="comment">// 测试图片路径</span></span><br><span class="line">    <span class="keyword">if</span> ( !image.data )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"No image data \n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    namedWindow(<span class="string">"Display Image"</span>, WINDOW_AUTOSIZE );</span><br><span class="line">    waitKey(<span class="number">100</span>);</span><br><span class="line">    cvDestroyWindow(<span class="string">"Display Image"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加lib文件：右键点击工程名，选择“Add files to..”，在文件选择对话框弹出来时输入“/”，在弹出的路径框中输入：<code>/usr/local/lib</code>，全选该文件夹下的全部dylib文件，添加至工程。</p>
+</li>
+<li>添加lib文件查找支持: 点击工程名文件，进入“Build Settings”选项卡，在“Library Search Paths”栏中输入“<code>/usr/local/lib</code>”</li>
+<li>添加头文件：点击工程名文件，进入“Build Settings”选项卡，在“Header Search Paths”栏中输入：“<code>/usr/local/include   /usr/local/include/opencv</code>”</li>
+<li>编译运行整个工程，运行成功~~</li>
+</ol>
 
           
         
@@ -1658,7 +727,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/22/By-talk/教案/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/07/GuideBook/Android/Android_ErrorSummary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1677,7 +746,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/22/By-talk/教案/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2018/10/07/GuideBook/Android/Android_ErrorSummary/" itemprop="url">Android_errosr</a></h1>
         
 
         <div class="post-meta">
@@ -1689,8 +758,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-22T15:31:03+08:00">
-                2018-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T10:10:27+08:00">
+                2018-10-07
               </time>
             
 
@@ -1708,8 +777,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/22/By-talk/教案/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/22/By-talk/教案/" itemprop="commentCount"></span>
+                <a href="/2018/10/07/GuideBook/Android/Android_ErrorSummary/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/07/GuideBook/Android/Android_ErrorSummary/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1741,19 +810,31 @@
       
         
           
-            <p>课前准备: </p>
-<p>一:根据参与媒体人数，对应学生在互动课开始之前到达指定教室，并到达指定位置坐下等 待课程开始。<br> 二:课程所需材料发放到课桌上摆放完毕<br> 材料(需购置): </p>
-<p>1.16k 素描纸:媒体及学生每人一张(我手中只有 8k 素描纸，需要裁剪成 16k，是否担心有 裁剪痕迹??)<br> 2.水彩笔:媒体每人一盒(尽量购买不可水洗的彩笔)<br> 3.2b 铅笔:媒体一人一只 </p>
-<p>4.橡皮:媒体一人一块 5.细两头黑色马克笔:媒体及学生一人一只(马克笔如图) </p>
-<p>6.黑色签字笔:媒体与学生一人一只 三:黑板上板书:“美术互动课堂——新合完小 2016.11.17”为标题 </p>
-<p>正式流程: </p>
-<p>1.开场(2min) 在座的朋友大家好，我是新合完小的项目老师，教授三年级和四年级的美术，非常高兴和大 家一起参与到这个美术的互动课程中来，希望在接下来的一个半小时，我们可以一起交流创 作出有趣的美术作品，同时，我会在大家的创作过程中随时给出指导，希望大家玩儿的开心。 2.媒体朋友与孩子的互动认识环节(2-3min) </p>
-<p>现在呢，先请在场的媒体朋友一一走到孩子的身边(孩子此时已经一人一桌坐好了)，一对 一选择一位学生，跟她们进行 2 分钟的简单交流，互相认识一下~包括姓名、年级、年龄等。 3.安排互动课创作内容(10min) 师:今天啊，我们的美术互动课程是主题创作，题目是《我知道的你不知道的事》。在创作 之前，我们先来聊聊吧。首先我们来请一位学生代表说说自己的家在哪里? 生:新合。。。 师:那我们在座的同学看看你们身边，是不是有一位大朋友啊，他们来自哪里呢?不知道你 们刚才悄悄交流过没有，现在找几位朋友问问看? </p>
-<p>媒体朋友:家乡地点和简介 师:那我们光知道地点，好像不够啊，我们来想想家乡有什么事情让我们印象深刻?比如说 一处风景、一种植物或者动物、一顿饭菜、一次与小朋友的玩耍等等、或者是一种色彩，让 你觉得可以代表家乡~我们请学生和我们的大朋友来分享一下，找找看待会儿你要画什么吧。 生:介绍家乡的特色<br> 媒体朋友:介绍家乡特色 师:好，我们刚才已经回忆过让我们印象深刻的家乡景物。现在我们看看今天要怎么创作呢? 是用什么材料。看看你的桌上都有什么?<br> 生:铅笔、橡皮、纸、彩笔。。 师:对，这就是我们今天要使用的材料，在纸上画出你知道的别人不知道的事，但注意要画 些你可以画出来的物品，或者是那个让你充满回忆，代表了家乡的东西。然后，我们看这张 纸是不是两面都是空白的，我们要在一面进行创作，另一面写上一些话，或者是你对家乡的 认识，或者是祝福的语言，然后，你和身边的大朋友就要进行作品的互赠啦~ 最后，在黑板上看一下创作步骤: 第一:确定创作内容(千万不要一想到画你自己知道的，新合的，家乡的样子就是一座山， 一棵树，一座房子，家乡可以是一种物品，如果画一种物品，一定注意构图饱满，小小一点 不好看啊，如果是一些色彩，可用回顾我们之前的马赛克，注意分割画面，填充代表家乡的 色彩等。)<br> 1.充满色彩的画面(家乡给你的感觉，色彩分割时学的那些) 2.一片树叶、一朵花儿、一种吃的等等(注意饱满与装饰，或者用它做元素充满整个画面) 3.其他代表家乡的你能画出来的物品。 第二:铅笔起稿(下笔不要太重，不好修改，轻轻下笔，确定后可以再描一遍的，可以给画 </p>
-<p>面加外框~) 第三:彩铅填充色彩(色彩使用与搭配，用笔的轻与重会影响彩铅的显色程度哦) 第四:丰富画面效果(看看有什么需要补充的，可以把“我的家乡——一个美丽的地方”写 在画面上)<br> 第五:在作品背面使用黑色签字笔，写上一些话。(祝福、介绍家乡) 4.创作环节(35min)<br> 创作环节，老师巡堂，随时给出指导<br> 5.评价环节(8min) 师:好，现在，所有的同学和我们参加活动的大朋友都已经完成了作品，大家好棒，给自己 鼓鼓掌吧!(全体鼓掌) 那，作品既然完成了，老师很好奇大家画了什么，想必许多学生也想知道其他同学的作品呢。 现在，我们先请几位同学上台展示自己的作品并说明为什么这么创作。<br> 生(2-3 人左右):描述作品 师:好，刚才看到了好多非常有想法的作品，老师也来评价评价吧(找两位学生进行评价， 在学生创作阶段的巡堂中应该已经找到评价对象) 评价时，专业化语言，例如对于作品构图、色彩、内容、特色的描述 在此之前进行四步赏析法的复习，板书黑板上。<br> 1.描述<br> 2.分析<br> 3.解释<br> 4.评价 师:好，老师的评价也做完了，现在想听听你们对于其他同学的作品有什么看法呢?可以走 下位置，到身边其他课桌旁进行观察，2 分钟后，回到位置上，我找同学来说你的感受。 生:观察其他学生作品 师:时间到，回到你的位置上。现在，请几位同学和大朋友谈谈你的看法，评价时想想之前 我们上课学的四步赏析法哦~<br> 生:表达自己对其他同学作品的认识。<br> 6.交换作品:(1min)<br> 师:好，现在，进入下一个环节，交换作品啦<br> (学生与媒体朋友进行作品互换) </p>
-<p>7.课程总结分享:(1min) 师:好，咱们的美术互动课堂已经到了尾声，咱们的大朋友们远道而来，跟我们一起体验创 作课程，我们来让他们分享分享自己参与这节课的感受吧。也希望能够通过短短 1 个半小时 的体验，给我们的课程提提意见~<br> 媒体朋友:分享课程感受，提供意见~ 师:那到这里，我们的课程就正式结束了，很高兴大家大参与配合，努力创作，我看到了你 们的想法与创意，也希望在座的各位大朋友，各位媒体朋友，能够多多关注农村美术教育， 我在这里也要说，我对于农村美术教育的实践会一直坚持，多多探索有趣的课堂，为我们孩 子带去更美好的童年回忆，谢谢大家!<br> (鼓掌结束) </p>
-<p>收尾工作: </p>
-<p>所有课程中使用的材料，用箱子收拾起来，转到办公室，黑板及场地进行打扫。 </p>
+            <p>android</p>
+<p>=======================================================================================</p>
+<p>版本信息：</p>
+<p>Android Studio 3.1.4<br>Build #AI-173.4907809, built on July 24, 2018<br>JRE: 1.8.0_152-release-1024-b01 x86_64<br>JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o<br>Mac OS X 10.13.6</p>
+<p>=======================================================================================</p>
+<hr>
+<p>推荐使用官方文档</p>
+<p><a href="https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn" target="_blank" rel="noopener">https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn</a></p>
+<p>请链接vpn后进入</p>
+<hr>
+<ul>
+<li>error：Failed to download samples index, please check your connection and try again<ul>
+<li>solve：<a href="https://blog.csdn.net/qq_36556893/article/details/79278063" target="_blank" rel="noopener">https://blog.csdn.net/qq_36556893/article/details/79278063</a></li>
+</ul>
+</li>
+<li>error:在android studio中新建android gradle project的时候connect refused：connect<ul>
+<li>solve:<a href="https://blog.csdn.net/clarketang/article/details/38420417" target="_blank" rel="noopener">https://blog.csdn.net/clarketang/article/details/38420417</a></li>
+<li>ps:本地端口设置可查看：shadow socks-&gt;http代理设置</li>
+</ul>
+</li>
+<li>Error: read timed out<ul>
+<li></li>
+</ul>
+</li>
+</ul>
 
           
         
@@ -1793,7 +874,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span>
   </nav>
 
 
@@ -1841,7 +922,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">162</span>
+                  <span class="site-state-item-count">154</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1852,7 +933,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1863,7 +944,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
