@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Android图片中的三级缓存 为什么要使用三级缓存 如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了 假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响 特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而知 所">
+<meta name="description" content="#Android图片中的三级缓存##为什么要使用三级缓存  如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了 假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响 特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android图片中的三级缓存">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android图片中的三级缓存/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Android图片中的三级缓存 为什么要使用三级缓存 如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了 假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响 特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而知 所">
+<meta property="og:description" content="#Android图片中的三级缓存##为什么要使用三级缓存  如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了 假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响 特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android图片中的三级缓存">
-<meta name="twitter:description" content="Android图片中的三级缓存 为什么要使用三级缓存 如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了 假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响 特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而知 所">
+<meta name="twitter:description" content="#Android图片中的三级缓存##为什么要使用三级缓存  如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了 假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响 特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而">
 
 
 
@@ -399,19 +399,21 @@
       
 
       
-        <h1 id="Android图片中的三级缓存"><a href="#Android图片中的三级缓存" class="headerlink" title="Android图片中的三级缓存"></a>Android图片中的三级缓存</h1><hr>
-<h2 id="为什么要使用三级缓存"><a href="#为什么要使用三级缓存" class="headerlink" title="为什么要使用三级缓存"></a>为什么要使用三级缓存</h2><ul>
+        <h2 id="Android图片中的三级缓存"><a href="#Android图片中的三级缓存" class="headerlink" title="#Android图片中的三级缓存"></a>#Android图片中的三级缓存</h2><p>##为什么要使用三级缓存</p>
+<ul>
 <li>如今的 Android App 经常会需要网络交互，通过网络获取图片是再正常不过的事了</li>
 <li>假如每次启动的时候都从网络拉取图片的话，势必会消耗很多流量。在当前的状况下，对于非wifi用户来说，流量还是很贵的，一个很耗流量的应用，其用户数量级肯定要受到影响</li>
 <li>特别是，当我们想要重复浏览一些图片时，如果每一次浏览都需要通过网络获取，流量的浪费可想而知</li>
 <li>所以提出三级缓存策略，通过网络、本地、内存三级缓存图片，来减少不必要的网络交互，避免浪费流量</li>
 </ul>
-<h2 id="什么是三级缓存"><a href="#什么是三级缓存" class="headerlink" title="什么是三级缓存"></a>什么是三级缓存</h2><ul>
+<p>##什么是三级缓存</p>
+<ul>
 <li>网络加载，不优先加载，速度慢，浪费流量</li>
 <li>本地缓存，次优先加载，速度快</li>
 <li>内存缓存，优先加载，速度最快</li>
 </ul>
-<h2 id="三级缓存原理"><a href="#三级缓存原理" class="headerlink" title="三级缓存原理"></a>三级缓存原理</h2><ul>
+<p>##三级缓存原理</p>
+<ul>
 <li>首次加载 Android App 时，肯定要通过网络交互来获取图片，之后我们可以将图片保存至本地SD卡和内存中</li>
 <li>之后运行 App 时，优先访问内存中的图片缓存，若内存中没有，则加载本地SD卡中的图片</li>
 <li>总之，只在初次访问新内容时，才通过网络获取图片资源</li>
@@ -471,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Art和Dalvik区别/" rel="next" title="ART和Dalvik区别">
-                <i class="fa fa-chevron-left"></i> ART和Dalvik区别
+              <a href="/2019/05/11/GuideBook/Android/Android内存泄漏总结/" rel="next" title="Android 内存泄漏总结">
+                <i class="fa fa-chevron-left"></i> Android 内存泄漏总结
               </a>
             
           </div>
@@ -481,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Android几种进程/" rel="prev" title="Android几种进程">
-                Android几种进程 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/Android关于oom的解决方案/" rel="prev" title="Android关于OOM的解决方案">
+                Android关于OOM的解决方案 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -637,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android图片中的三级缓存"><span class="nav-text">Android图片中的三级缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用三级缓存"><span class="nav-text">为什么要使用三级缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是三级缓存"><span class="nav-text">什么是三级缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三级缓存原理"><span class="nav-text">三级缓存原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android图片中的三级缓存"><span class="nav-text">#Android图片中的三级缓存</span></a></li></ol></div>
             
 
           </div>
@@ -733,6 +735,8 @@
   
 
 
+  
+
 
 
 
@@ -771,6 +775,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

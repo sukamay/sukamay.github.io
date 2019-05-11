@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Android系统机制 APP启动过程 Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。 Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Instrum">
+<meta name="description" content="#Android系统机制###APP启动过程  Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。 Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Ins">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android系统机制">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android系统机制/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Android系统机制 APP启动过程 Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。 Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Instrum">
+<meta property="og:description" content="#Android系统机制###APP启动过程  Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。 Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Ins">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android系统机制">
-<meta name="twitter:description" content="Android系统机制 APP启动过程 Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。 Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Instrum">
+<meta name="twitter:description" content="#Android系统机制###APP启动过程  Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。 Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Ins">
 
 
 
@@ -399,18 +399,21 @@
       
 
       
-        <h1 id="Android系统机制"><a href="#Android系统机制" class="headerlink" title="Android系统机制"></a>Android系统机制</h1><hr>
-<h3 id="APP启动过程"><a href="#APP启动过程" class="headerlink" title="APP启动过程"></a>APP启动过程</h3><ol>
+        <h2 id="Android系统机制"><a href="#Android系统机制" class="headerlink" title="#Android系统机制"></a>#Android系统机制</h2><p>###APP启动过程</p>
+<ol>
 <li>Launcher线程捕获onclick的点击事件，调用Launcher.startActivitySafely，进一步调用Launcher.startActivity，最后调用父类Activity的startActivity。</li>
 <li>Activity和ActivityManagerService交互，引入Instrumentation，将启动请求交给Instrumentation，调用Instrumentation.execStartActivity</li>
 <li></li>
 </ol>
-<h3 id="Android内核解读-应用的安装过程"><a href="#Android内核解读-应用的安装过程" class="headerlink" title="Android内核解读-应用的安装过程"></a>Android内核解读-应用的安装过程</h3><p><a href="http://blog.csdn.net/singwhatiwanna/article/details/19578947" target="_blank" rel="noopener">http://blog.csdn.net/singwhatiwanna/article/details/19578947</a><br>apk的安装过程分为两步：</p>
+<p>###Android内核解读-应用的安装过程</p>
+<p><a href="http://blog.csdn.net/singwhatiwanna/article/details/19578947" target="_blank" rel="noopener">http://blog.csdn.net/singwhatiwanna/article/details/19578947</a><br>apk的安装过程分为两步：</p>
 <ol>
 <li>将apk文件复制到程序目录下(/data/app/)</li>
 <li>为应用创建数据目录(/data/data/package name/)、提取dex文件到指定目录(/data/delvik-cache/)、修改系统包管理信息。</li>
 </ol>
-<h3 id="View的事件体系"><a href="#View的事件体系" class="headerlink" title="View的事件体系"></a>View的事件体系</h3><h3 id="Handler消息机制"><a href="#Handler消息机制" class="headerlink" title="Handler消息机制"></a>Handler消息机制</h3><h3 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h3><p>AyncTask是一个抽象类。</p>
+<p>###View的事件体系</p>
+<p>###Handler消息机制</p>
+<p>###AsyncTask<br>AyncTask是一个抽象类。</p>
 <p>需要重写的方法有四个：</p>
 <ol>
 <li>onPreExecute()<br> 这个方法会在后台任务开始之前调用，用于进行一些界面上的初始化操作，比如显示一个进度条对话框等</li>
@@ -421,7 +424,8 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DownloadTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask&lt;Void</span>, <span class="title">Integer</span>, <span class="title">Boolean&gt;</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onPreExecute() &#123;  </span><br><span class="line">        progressDialog.show();  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> <span class="type">Boolean</span> doInBackground(<span class="type">Void</span>... params) &#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;  </span><br><span class="line">                int downloadPercent = doDownload();  </span><br><span class="line">                publishProgress(downloadPercent);  </span><br><span class="line">                <span class="keyword">if</span> (downloadPercent &gt;= <span class="number">100</span>) &#123;  </span><br><span class="line">                    <span class="keyword">break</span>;  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="type">Exception</span> e) &#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onProgressUpdate(<span class="type">Integer</span>... values) &#123;  </span><br><span class="line">        progressDialog.setMessage(<span class="string">"当前下载进度："</span> + values[<span class="number">0</span>] + <span class="string">"%"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onPostExecute(<span class="type">Boolean</span> result) &#123;  </span><br><span class="line">        progressDialog.dismiss();  </span><br><span class="line">        <span class="keyword">if</span> (result) &#123;  </span><br><span class="line">            <span class="type">Toast</span>.makeText(context, <span class="string">"下载成功"</span>, <span class="type">Toast</span>.<span class="type">LENGTH_SHORT</span>).show();  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="type">Toast</span>.makeText(context, <span class="string">"下载失败"</span>, <span class="type">Toast</span>.<span class="type">LENGTH_SHORT</span>).show();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>启动这个任务：</p>
 <figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="type">DownloadTask</span>().execute();</span><br></pre></td></tr></table></figure>
-<h3 id="图片缓存机制"><a href="#图片缓存机制" class="headerlink" title="图片缓存机制"></a>图片缓存机制</h3>
+<p>###图片缓存机制</p>
+
       
     </div>
     
@@ -474,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Asynctask源码分析/" rel="next" title="AsyncTask">
-                <i class="fa fa-chevron-left"></i> AsyncTask
+              <a href="/2019/05/11/GuideBook/Android/Android性能优化/" rel="next" title="Android性能优化">
+                <i class="fa fa-chevron-left"></i> Android性能优化
               </a>
             
           </div>
@@ -484,8 +488,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Art和Dalvik区别/" rel="prev" title="ART和Dalvik区别">
-                ART和Dalvik区别 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/Android开机过程/" rel="prev" title="Android开机过程">
+                Android开机过程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -640,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android系统机制"><span class="nav-text">Android系统机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#APP启动过程"><span class="nav-text">APP启动过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android内核解读-应用的安装过程"><span class="nav-text">Android内核解读-应用的安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View的事件体系"><span class="nav-text">View的事件体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handler消息机制"><span class="nav-text">Handler消息机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AsyncTask"><span class="nav-text">AsyncTask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片缓存机制"><span class="nav-text">图片缓存机制</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android系统机制"><span class="nav-text">#Android系统机制</span></a></li></ol></div>
             
 
           </div>
@@ -736,6 +740,8 @@
   
 
 
+  
+
 
 
 
@@ -774,6 +780,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

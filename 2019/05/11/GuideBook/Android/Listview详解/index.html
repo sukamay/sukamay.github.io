@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="ListView详解 直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。 Adpater在ListView和数据源之间起到了一个桥梁的作用 RecycleBin机制RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类">
+<meta name="description" content="#ListView详解直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。 Adpater在ListView和数据源之间起到了一个桥梁的作用 ###RecycleBin机制 RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ListView详解">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Listview详解/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="ListView详解 直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。 Adpater在ListView和数据源之间起到了一个桥梁的作用 RecycleBin机制RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类">
+<meta property="og:description" content="#ListView详解直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。 Adpater在ListView和数据源之间起到了一个桥梁的作用 ###RecycleBin机制 RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ListView详解">
-<meta name="twitter:description" content="ListView详解 直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。 Adpater在ListView和数据源之间起到了一个桥梁的作用 RecycleBin机制RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类">
+<meta name="twitter:description" content="#ListView详解直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。 Adpater在ListView和数据源之间起到了一个桥梁的作用 ###RecycleBin机制 RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一">
 
 
 
@@ -399,10 +399,10 @@
       
 
       
-        <h1 id="ListView详解"><a href="#ListView详解" class="headerlink" title="ListView详解"></a>ListView详解</h1><hr>
-<p>直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。</p>
+        <h2 id="ListView详解"><a href="#ListView详解" class="headerlink" title="#ListView详解"></a>#ListView详解</h2><p>直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。</p>
 <p>Adpater在ListView和数据源之间起到了一个桥梁的作用</p>
-<h3 id="RecycleBin机制"><a href="#RecycleBin机制" class="headerlink" title="RecycleBin机制"></a>RecycleBin机制</h3><p>RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类。</p>
+<p>###RecycleBin机制</p>
+<p>RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类。</p>
 <ul>
 <li>RecycleBin当中使用mActiveViews这个数组来存储View，调用这个方法后就会根据传入的参数来将ListView中的指定元素存储到mActiveViews中。</li>
 <li>mActiveViews当中所存储的View，一旦被获取了之后就会从mActiveViews当中移除，下次获取同样位置的时候将会返回null，所以mActiveViews不能被重复利用。</li>
@@ -465,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" rel="next" title="MVC,MVP,MVVM的区别">
-                <i class="fa fa-chevron-left"></i> MVC,MVP,MVVM的区别
+              <a href="/2019/05/11/GuideBook/Android/MVP/" rel="next" title="MVP">
+                <i class="fa fa-chevron-left"></i> MVP
               </a>
             
           </div>
@@ -475,8 +475,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Django/Django本地项目部署到云服务器/" rel="prev" title="Django本地项目部署到云服务器">
-                Django本地项目部署到云服务器 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" rel="prev" title="RecyclerView和ListView的异同">
+                RecyclerView和ListView的异同 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -631,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ListView详解"><span class="nav-text">ListView详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RecycleBin机制"><span class="nav-text">RecycleBin机制</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView详解"><span class="nav-text">#ListView详解</span></a></li></ol></div>
             
 
           </div>
@@ -727,6 +727,8 @@
   
 
 
+  
+
 
 
 
@@ -765,6 +767,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

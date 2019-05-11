@@ -400,7 +400,7 @@
 <p>好的又报错了。。。</p>
 <blockquote>
 <p>./include/caffe/util/mkl_alternate.hpp:14:10: fatal error: ‘cblas.h’ file not found</p>
-<p>#include <cblas.h></cblas.h></p>
+<p>#include &lt;cblas.h&gt;</p>
 </blockquote>
 <p><code>Makefile.config</code> 里面原来这两句是被注释掉的，我是用homebrew安装的openblas，把注释解开就好了。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Homebrew puts openblas in a directory that is not on the standard search path</span></span><br><span class="line">BLAS_INCLUDE := <span class="variable">$(<span class="built_in">shell</span> brew --prefix openblas)</span>/<span class="keyword">include</span></span><br><span class="line">BLAS_LIB := <span class="variable">$(<span class="built_in">shell</span> brew --prefix openblas)</span>/lib</span><br></pre></td></tr></table></figure>
@@ -487,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/markdown语法/" rel="prev" title="Markdown语法">
-                Markdown语法 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Caffe in Ubuntu/" rel="prev" title="Caffe in Ubuntu">
+                Caffe in Ubuntu <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -739,6 +739,8 @@
   
 
 
+  
+
 
 
 
@@ -777,6 +779,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
