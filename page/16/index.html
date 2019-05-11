@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -124,7 +124,7 @@
 
 
 
-  <title>May</title>
+  <title>May</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -143,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -270,579 +270,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/14/GuideBook/Django/DjangoInUbuntu_0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/14/GuideBook/Django/DjangoInUbuntu_0/" itemprop="url">DjangoInUbutun_0</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T23:03:21+08:00">
-                2018-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/14/GuideBook/Django/DjangoInUbuntu_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/14/GuideBook/Django/DjangoInUbuntu_0/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Django-in-Ubuntu-part0"><a href="#Django-in-Ubuntu-part0" class="headerlink" title="Django in Ubuntu part0"></a>Django in Ubuntu part0</h1><h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# apt-get install python-setuptools</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python -m pip install "django&lt;2"</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python</span><br><span class="line">Python 2.7.12 (default, Nov 12 2018, 14:36:49) </span><br><span class="line">[GCC 5.4.0 20160609] on linux2</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import django</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; django.VERSION</span></span><br><span class="line">(1, 11, 17, u'final', 0)</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果python版本为3.5以上，可以使用 <code>easy_install django</code>安装。</p>
-<h2 id="2-创建新项目"><a href="#2-创建新项目" class="headerlink" title="2. 创建新项目"></a>2. 创建新项目</h2><p> 使用pip 安装的话，用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# django-admin.py</span><br><span class="line">Note that only Django core commands are listed as settings are not properly configured (error: Requested setting INSTALLED_APPS, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.).</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# django-admin startproject HelloWorld</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# cd HelloWorld/</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~/HelloWorld# tree</span><br><span class="line">.</span><br><span class="line">├── HelloWorld</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   ├── settings.py</span><br><span class="line">│   ├── urls.py</span><br><span class="line">│   └── wsgi.py</span><br><span class="line">└── manage.py</span><br><span class="line"></span><br><span class="line">1 directory, 5 files</span><br></pre></td></tr></table></figure>
-<p><strong>Error</strong>：Requested setting INSTALLED_APPS, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings</p>
-<p><strong>Solve:</strong> django-admin 不要py</p>
-<p><strong>Error:</strong>  DisallowedHost at / Invalid HTTP_HOST header</p>
-<p><strong>Solve:</strong>  将项目名称下的  <code>settings.py</code> 中的 <code>ALLOWED_HOSTS = []</code> 改成  <code>ALLOWED_HOSTS = [&#39;*&#39;]</code></p>
-<h2 id="3-视图和URL配置"><a href="#3-视图和URL配置" class="headerlink" title="3. 视图和URL配置"></a>3. 视图和URL配置</h2><h3 id="3-1-视图"><a href="#3-1-视图" class="headerlink" title="3.1 视图"></a>3.1 视图</h3><p>在先前创建的 HelloWorld 目录下的 HelloWorld 目录新建一个 view.py 文件，并输入代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"Hello world ! "</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="3-2-URL配置"><a href="#3-2-URL配置" class="headerlink" title="3.2 URL配置"></a>3.2 URL配置</h3><p>接着，绑定 URL 与视图函数。打开 urls.py 文件，删除原来代码，将以下代码复制粘贴到 urls.py 文件中：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> view</span><br><span class="line"> </span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^$'</span>, view.hello),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h3 id="3-3-编译"><a href="#3-3-编译" class="headerlink" title="#3.3 编译"></a>#3.3 编译</h3><p>不需要，服务器会自动在更改后编译</p>
-<p>随后编译 <code>view.py</code>  和  <code>urls.py</code>文件</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@iZwz969jm0y04abuhgx4byZ</span><span class="symbol">:~/HelloWorld/HelloWorld</span><span class="comment"># python -m py_compile urls.py</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-4-打开服务器"><a href="#3-4-打开服务器" class="headerlink" title="3.4 打开服务器"></a>3.4 打开服务器</h3><p>注：如果是 Django &gt;= 2.0 的版本，<code>urls.py</code> 的 <code>django.conf.urls</code> 已经被 <code>django.urls</code> 取代。</p>
-<p>django.urls 的用法参考如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> view</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">''</span>, view.hello),</span><br><span class="line">    path(<span class="string">'world/'</span>, view.world)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p>其中最大的几个改变如下：</p>
-<p><strong>import url</strong> 变成了 <strong>import path</strong></p>
-<p>如果是路径，则须在路径后加个/</p>
-<p>旧版 django 的用法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> view</span><br><span class="line"> </span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^hello$'</span>, view.hello),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p>新版的参考写法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> view</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'hello/'</span>, view.hello),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/14/GuideBook/Ubuntu上的MySQL搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/14/GuideBook/Ubuntu上的MySQL搭建/" itemprop="url">MySQL搭建_Ubuntu</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T22:36:15+08:00">
-                2018-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/14/GuideBook/Ubuntu上的MySQL搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/14/GuideBook/Ubuntu上的MySQL搭建/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Ubuntu上的MySQL搭建"><a href="#Ubuntu上的MySQL搭建" class="headerlink" title="Ubuntu上的MySQL搭建"></a>Ubuntu上的MySQL搭建</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# apt-get update</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# apt-get upgrade</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# apt-get install mysql-server</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# apt-get install mysql-client</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# apt-get install libmysqlclient-dev</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# netstat -tap | grep mysql</span><br><span class="line">tcp        0      0 localhost:mysql         *:*                     LISTEN      2109/mysqld     </span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 4</span><br><span class="line">Server version: 5.7.24-0ubuntu0.16.04.1 (Ubuntu)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line">exit' at line 1</span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show databases;</span></span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">exit</span></span></span><br><span class="line">Bye</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~#</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/12/GuideBook/服务器SSH连接失败/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/12/GuideBook/服务器SSH连接失败/" itemprop="url">SSH连接失败</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T20:00:21+08:00">
-                2018-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/12/GuideBook/服务器SSH连接失败/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/12/GuideBook/服务器SSH连接失败/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SSH连接失败"><a href="#SSH连接失败" class="headerlink" title="SSH连接失败"></a>SSH连接失败</h1><p>SSH 登录失败：Host key verification failed<br>由于公钥不一样了，所以无法登录，提示信息是 KEY 验证失败。<br>解决方法是：<br>在 /root/.ssh/known_hosts 文件里面将原来的公钥信息删除即可。 </p>
-<p>SSH 报 “Host key verification failed.”。一般来说，出现该错误有这么几种可能:</p>
-<ol>
-<li><p>ssh/known_hosts 裡面记录的目标主机 key 值不正确。这是最普遍的情况，只要删除对应的主机记录就能恢复正常。 </p>
-<p>运行命令： sudo rm /home/yourname/.ssh/known_hosts </p>
-</li>
-<li><p>ssh 目录或者 .ssh/known_hosts 对当前用户的权限设置不正确。这种情况比较少，一般正确设置读写权限以后也能恢复正常。</p>
-</li>
-<li><p>/dev/tty 对 other 用户没有放开读写权限。这种情况极为罕见。出现的现象是，只有 root 用户能够使用 ssh client，而所有其他的普通用户都会出现错误。<br>我今天遇到的就是第三种情况，修改 /dev/tty 的权限后，一切正常。为了避免以后忘记解决方法，记录在这里。 </p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/09/GuideBook/Mac终端_root权限/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/GuideBook/Mac终端_root权限/" itemprop="url">Mac_root</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T10:37:31+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/09/GuideBook/Mac终端_root权限/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/09/GuideBook/Mac终端_root权限/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Mac终端-root权限"><a href="#Mac终端-root权限" class="headerlink" title="Mac终端_root权限"></a>Mac终端_root权限</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ su root </span><br><span class="line">Password:</span><br><span class="line">su: Sorry</span><br><span class="line">//在平常打开的命令行下无法打开，我输入的是我的开机密码</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo -i</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ root# su root</span><br><span class="line">sh-3.2# su xxx</span><br><span class="line">shell-init: error retrieving current directory: getcwd: cannot access parent directories: Permission denied</span><br><span class="line">bash-3.2$ exit</span><br><span class="line">exit</span><br><span class="line">sh-3.2# logout</span><br><span class="line">sh: logout: not login shell: use `exit'</span><br><span class="line">sh-3.2# exit</span><br><span class="line">exit</span><br><span class="line">xxxdeMacBook-Pro:~ root# exit</span><br><span class="line">logout</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo -i</span><br><span class="line">xxxdeMacBook-Pro:~ root# logout</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-<h2 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1:"></a>Method 1:</h2><h3 id="login："><a href="#login：" class="headerlink" title="login："></a>login：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ su root </span><br><span class="line">Password:</span><br><span class="line">su: Sorry</span><br><span class="line">//在平常打开的命令行下无法打开，我输入的是我的开机密码</span><br></pre></td></tr></table></figure>
-<h3 id="logout："><a href="#logout：" class="headerlink" title="logout："></a>logout：</h3><ol>
-<li>输入<code>su 用户名</code>，回车。</li>
-<li>输入此用户密码，回车即可切换回此用户</li>
-</ol>
-<ol>
-<li>直接输入 <code>exit</code>也可以</li>
-</ol>
-<h2 id="Method-2"><a href="#Method-2" class="headerlink" title="Method 2:"></a>Method 2:</h2><h3 id="login：-1"><a href="#login：-1" class="headerlink" title="login："></a>login：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ sudo -i</span><br><span class="line">Password:</span><br><span class="line">xxxdeMacBook-Pro:~ root#</span><br></pre></td></tr></table></figure>
-<p>输入密码时，不会显示任何字符，只管输入就好了</p>
-<h3 id="logout：-1"><a href="#logout：-1" class="headerlink" title="logout："></a>logout：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//method 0</span><br><span class="line">xxxdeMacBook-Pro:~ root# logout</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$ </span><br><span class="line">//method 1</span><br><span class="line">xxxdeMacBook-Pro:~ root# exit</span><br><span class="line">xxxdeMacBook-Pro:~ xxx$</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -1758,6 +1185,610 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/Mac终端_vim的简单使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/05/GuideBook/Mac终端_vim的简单使用/" itemprop="url">Mac_vim</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T11:26:30+08:00">
+                2018-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/05/GuideBook/Mac终端_vim的简单使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/Mac终端_vim的简单使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mac终端-vim的简单使用"><a href="#Mac终端-vim的简单使用" class="headerlink" title="Mac终端 vim的简单使用"></a>Mac终端 vim的简单使用</h1><p><a href="https://www.cnblogs.com/fanxiaocong/p/7070130.html" target="_blank" rel="noopener">mac终端vim使用</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/05/GuideBook/StarUML 3.0.2破解方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/05/GuideBook/StarUML 3.0.2破解方法/" itemprop="url">StarUML破解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T11:05:19+08:00">
+                2018-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/05/GuideBook/StarUML 3.0.2破解方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/05/GuideBook/StarUML 3.0.2破解方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Staruml-3-0-2破解方法（for-Mac"><a href="#Staruml-3-0-2破解方法（for-Mac" class="headerlink" title="Staruml 3.0.2破解方法（for Mac"></a>Staruml 3.0.2破解方法（for Mac</h1><ol>
+<li><p>安装homebrew，请移步另一教程</p>
+</li>
+<li><p>安装npm</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ brew install node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装asar</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ npm install -g asar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入staruml的包目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ cd /Applications/StarUML.app/Contents/Resources/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压app.asar</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:~ luomei$ asar extract app.asar app</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入验证license的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ vim app/src/engine/license-manager.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改源代码</p>
+<ol>
+<li><p>写到这里的时候使用到了vim，先简单介绍一下</p>
+</li>
+<li><p>进入时先按 i 键</p>
+</li>
+<li><p>随后找到 <code>checkLicenseValidity()</code> 更改</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">xcheckLicenseValidity () &#123;    </span><br><span class="line">    <span class="keyword">this</span>.validate().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;     </span><br><span class="line">        setStatus(<span class="keyword">this</span>, <span class="literal">true</span>)   </span><br><span class="line">    &#125;, () =&gt; &#123;     </span><br><span class="line">        <span class="comment">// 原来的代码，如果失败就会将状态设置成false    </span></span><br><span class="line">        <span class="comment">// setStatus(this, false)      </span></span><br><span class="line">        <span class="comment">// UnregisteredDialog.showDialog()     </span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//修改后的代码    </span></span><br><span class="line">        setStatus(<span class="keyword">this</span>, <span class="literal">true</span>)  </span><br><span class="line">    &#125;) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入 <code>:wq</code> 退回到原先的终端界面</p>
+</li>
+</ol>
+</li>
+<li><p>重新打包替换原来的app.asar</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ asar pack app app.asar</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/27/By-talk/末/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/27/By-talk/末/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T11:18:58+08:00">
+                2018-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/27/By-talk/末/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/27/By-talk/末/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>末</p>
+<p>年岁不停增长，心智倒是一直下降</p>
+<p>这是今年答应给自己的520赞歌</p>
+<p>听说今天是小罗媚生日，那祝她森日快落，百岁无忧</p>
+</blockquote>
+<p>末</p>
+<p>年岁不停增长，心智倒是一直下降</p>
+<p>所以活了二十年的我对于处理生活的细节这一方面还是蠢得一塌糊涂呀，懊恼</p>
+<p>今年？过完生日就奔三了，今天还被17岁的いもと说好老= =，哼，我永远十八哼哼</p>
+<p>奔（大）三了，今年有什么不一样？</p>
+<p>无非学业上又忙了一些（刚答完辩的我），</p>
+<p>身边多了个可爱的傻子/无奈，学院楼上下课有人等接送【我想每天都陪你一起吃饭】</p>
+<p>十九岁这一年最幸福的时刻——见到达叔本人   没有之一</p>
+<p>觉得自己最可爱的时刻——被达叔夸可爱   没有之一</p>
+<p>最幸运的时刻——在达叔书友会前一天收到去书友会的通知  没有之一</p>
+<p>最dramatic的事情，找到了你</p>
+<p>大抵是  金风玉露一相逢，便胜却人间无数</p>
+<p>今天的阳光很温暖，你也是</p>
+<p>每天抄一句情话可以的/点赞</p>
+<p>在某人的监督和激励下坚持了好久的锻炼和不吃零食在生日这天被打破了嘤嘤嘤</p>
+<p>今早看到顺丰快递的消息，心想顺丰？怕不是生鲜吧？</p>
+<p>赶着去学院楼就没去取，中午接到电话快递员说是生鲜，心想怕不是蛋糕吧？</p>
+<p>一接到快递，哇，居然是一箱芝士（还真有蛋糕），太秀了/点赞</p>
+<p>但是芝士蛋糕太好吃了呜呜哭泣，太幸福了</p>
+<p>减肥明天再重新开始吧QAQ</p>
+<p>今晚散步要散得久一点了</p>
+<p>翠雪说，过了今天你就是一个成熟的宝宝啦，要学会自己照顾自己</p>
+<p>承此吉言，希望未来的自己点亮多一些生活技能</p>
+<p>这是今年答应给自己的520赞歌</p>
+<p>听说今天是小罗媚生日，那祝她森日快落，百岁无忧</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/10/22/By-talk/教案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/22/By-talk/教案/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-22T15:31:03+08:00">
+                2018-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/22/By-talk/教案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/22/By-talk/教案/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>课前准备: </p>
+<p>一:根据参与媒体人数，对应学生在互动课开始之前到达指定教室，并到达指定位置坐下等 待课程开始。<br> 二:课程所需材料发放到课桌上摆放完毕<br> 材料(需购置): </p>
+<p>1.16k 素描纸:媒体及学生每人一张(我手中只有 8k 素描纸，需要裁剪成 16k，是否担心有 裁剪痕迹??)<br> 2.水彩笔:媒体每人一盒(尽量购买不可水洗的彩笔)<br> 3.2b 铅笔:媒体一人一只 </p>
+<p>4.橡皮:媒体一人一块 5.细两头黑色马克笔:媒体及学生一人一只(马克笔如图) </p>
+<p>6.黑色签字笔:媒体与学生一人一只 三:黑板上板书:“美术互动课堂——新合完小 2016.11.17”为标题 </p>
+<p>正式流程: </p>
+<p>1.开场(2min) 在座的朋友大家好，我是新合完小的项目老师，教授三年级和四年级的美术，非常高兴和大 家一起参与到这个美术的互动课程中来，希望在接下来的一个半小时，我们可以一起交流创 作出有趣的美术作品，同时，我会在大家的创作过程中随时给出指导，希望大家玩儿的开心。 2.媒体朋友与孩子的互动认识环节(2-3min) </p>
+<p>现在呢，先请在场的媒体朋友一一走到孩子的身边(孩子此时已经一人一桌坐好了)，一对 一选择一位学生，跟她们进行 2 分钟的简单交流，互相认识一下~包括姓名、年级、年龄等。 3.安排互动课创作内容(10min) 师:今天啊，我们的美术互动课程是主题创作，题目是《我知道的你不知道的事》。在创作 之前，我们先来聊聊吧。首先我们来请一位学生代表说说自己的家在哪里? 生:新合。。。 师:那我们在座的同学看看你们身边，是不是有一位大朋友啊，他们来自哪里呢?不知道你 们刚才悄悄交流过没有，现在找几位朋友问问看? </p>
+<p>媒体朋友:家乡地点和简介 师:那我们光知道地点，好像不够啊，我们来想想家乡有什么事情让我们印象深刻?比如说 一处风景、一种植物或者动物、一顿饭菜、一次与小朋友的玩耍等等、或者是一种色彩，让 你觉得可以代表家乡~我们请学生和我们的大朋友来分享一下，找找看待会儿你要画什么吧。 生:介绍家乡的特色<br> 媒体朋友:介绍家乡特色 师:好，我们刚才已经回忆过让我们印象深刻的家乡景物。现在我们看看今天要怎么创作呢? 是用什么材料。看看你的桌上都有什么?<br> 生:铅笔、橡皮、纸、彩笔。。 师:对，这就是我们今天要使用的材料，在纸上画出你知道的别人不知道的事，但注意要画 些你可以画出来的物品，或者是那个让你充满回忆，代表了家乡的东西。然后，我们看这张 纸是不是两面都是空白的，我们要在一面进行创作，另一面写上一些话，或者是你对家乡的 认识，或者是祝福的语言，然后，你和身边的大朋友就要进行作品的互赠啦~ 最后，在黑板上看一下创作步骤: 第一:确定创作内容(千万不要一想到画你自己知道的，新合的，家乡的样子就是一座山， 一棵树，一座房子，家乡可以是一种物品，如果画一种物品，一定注意构图饱满，小小一点 不好看啊，如果是一些色彩，可用回顾我们之前的马赛克，注意分割画面，填充代表家乡的 色彩等。)<br> 1.充满色彩的画面(家乡给你的感觉，色彩分割时学的那些) 2.一片树叶、一朵花儿、一种吃的等等(注意饱满与装饰，或者用它做元素充满整个画面) 3.其他代表家乡的你能画出来的物品。 第二:铅笔起稿(下笔不要太重，不好修改，轻轻下笔，确定后可以再描一遍的，可以给画 </p>
+<p>面加外框~) 第三:彩铅填充色彩(色彩使用与搭配，用笔的轻与重会影响彩铅的显色程度哦) 第四:丰富画面效果(看看有什么需要补充的，可以把“我的家乡——一个美丽的地方”写 在画面上)<br> 第五:在作品背面使用黑色签字笔，写上一些话。(祝福、介绍家乡) 4.创作环节(35min)<br> 创作环节，老师巡堂，随时给出指导<br> 5.评价环节(8min) 师:好，现在，所有的同学和我们参加活动的大朋友都已经完成了作品，大家好棒，给自己 鼓鼓掌吧!(全体鼓掌) 那，作品既然完成了，老师很好奇大家画了什么，想必许多学生也想知道其他同学的作品呢。 现在，我们先请几位同学上台展示自己的作品并说明为什么这么创作。<br> 生(2-3 人左右):描述作品 师:好，刚才看到了好多非常有想法的作品，老师也来评价评价吧(找两位学生进行评价， 在学生创作阶段的巡堂中应该已经找到评价对象) 评价时，专业化语言，例如对于作品构图、色彩、内容、特色的描述 在此之前进行四步赏析法的复习，板书黑板上。<br> 1.描述<br> 2.分析<br> 3.解释<br> 4.评价 师:好，老师的评价也做完了，现在想听听你们对于其他同学的作品有什么看法呢?可以走 下位置，到身边其他课桌旁进行观察，2 分钟后，回到位置上，我找同学来说你的感受。 生:观察其他学生作品 师:时间到，回到你的位置上。现在，请几位同学和大朋友谈谈你的看法，评价时想想之前 我们上课学的四步赏析法哦~<br> 生:表达自己对其他同学作品的认识。<br> 6.交换作品:(1min)<br> 师:好，现在，进入下一个环节，交换作品啦<br> (学生与媒体朋友进行作品互换) </p>
+<p>7.课程总结分享:(1min) 师:好，咱们的美术互动课堂已经到了尾声，咱们的大朋友们远道而来，跟我们一起体验创 作课程，我们来让他们分享分享自己参与这节课的感受吧。也希望能够通过短短 1 个半小时 的体验，给我们的课程提提意见~<br> 媒体朋友:分享课程感受，提供意见~ 师:那到这里，我们的课程就正式结束了，很高兴大家大参与配合，努力创作，我看到了你 们的想法与创意，也希望在座的各位大朋友，各位媒体朋友，能够多多关注农村美术教育， 我在这里也要说，我对于农村美术教育的实践会一直坚持，多多探索有趣的课堂，为我们孩 子带去更美好的童年回忆，谢谢大家!<br> (鼓掌结束) </p>
+<p>收尾工作: </p>
+<p>所有课程中使用的材料，用箱子收拾起来，转到办公室，黑板及场地进行打扫。 </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1810,7 +1841,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-count">162</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1821,7 +1852,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1832,7 +1863,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -2370,7 +2401,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
