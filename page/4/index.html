@@ -437,6 +437,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Caffe in Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Caffe in Ubuntu/" itemprop="url">Caffe in Ubuntu</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">Ubuntu</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ubuntu/Caffe/" itemprop="url" rel="index">
+                    <span itemprop="name">Caffe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Caffe in Ubuntu/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Caffe in Ubuntu/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Caffe-in-Ubuntu"><a href="#Caffe-in-Ubuntu" class="headerlink" title="Caffe in Ubuntu"></a>Caffe in Ubuntu</h1><blockquote>
+<p>config:</p>
+<p>System: Ubuntu 16.04</p>
+<p>Nvidia Driver Version: 418.56</p>
+<p>GPU：GeForce GTX 960M</p>
+</blockquote>
+<p>安装显卡驱动（已经安装好了）</p>
+<p>安装cuda</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mei@mei-luo:~$ sudo nvidia-smi</span><br><span class="line">[sudo] password for mei: </span><br><span class="line">Tue May  7 10:08:47 2019       </span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 418.56       Driver Version: 418.56       CUDA Version: 10.1     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce GTX 960M    Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| N/A   49C    P8    N/A /  N/A |    428MiB /  2004MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line">                                                                               </span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|    0       970      G   /usr/lib/xorg/Xorg                           145MiB |</span><br><span class="line">|    0      1455      G   compiz                                       231MiB |</span><br><span class="line">|    0      1802      G   /opt/teamviewer/tv_bin/TeamViewer             24MiB |</span><br><span class="line">|    0      1912      G   fcitx-qimpanel                                23MiB |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">mei@mei-luo:~$</span><br></pre></td></tr></table></figure>
+<p>Error:</p>
+<p>ubuntu. cuda ERROR: You appear to be running an X server;</p>
+<p><a href="https://www.jianshu.com/p/f00b657ccaae" target="_blank" rel="noopener">cuda安装</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">Last login: Thu May  9 10:43:24 2019 from 10.20.150.177</span><br><span class="line">mei@mei-luo:~$ cd /home/mei/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release/</span><br><span class="line">mei@mei-luo:~/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release$ ./deviceQuery</span><br><span class="line">./deviceQuery Starting...</span><br><span class="line"></span><br><span class="line"> CUDA Device Query (Runtime API) version (CUDART static linking)</span><br><span class="line"></span><br><span class="line">Detected 1 CUDA Capable device(s)</span><br><span class="line"></span><br><span class="line">Device 0: "GeForce GTX 960M"</span><br><span class="line">  CUDA Driver Version / Runtime Version          10.1 / 10.1</span><br><span class="line">  CUDA Capability Major/Minor version number:    5.0</span><br><span class="line">  Total amount of global memory:                 2004 MBytes (2101870592 bytes)</span><br><span class="line">  ( 5) Multiprocessors, (128) CUDA Cores/MP:     640 CUDA Cores</span><br><span class="line">  GPU Max Clock rate:                            1176 MHz (1.18 GHz)</span><br><span class="line">  Memory Clock rate:                             2505 Mhz</span><br><span class="line">  Memory Bus Width:                              128-bit</span><br><span class="line">  L2 Cache Size:                                 2097152 bytes</span><br><span class="line">  Maximum Texture Dimension Size (x,y,z)         1D=(65536), 2D=(65536, 65536), 3D=(4096, 4096, 4096)</span><br><span class="line">  Maximum Layered 1D Texture Size, (num) layers  1D=(16384), 2048 layers</span><br><span class="line">  Maximum Layered 2D Texture Size, (num) layers  2D=(16384, 16384), 2048 layers</span><br><span class="line">  Total amount of constant memory:               65536 bytes</span><br><span class="line">  Total amount of shared memory per block:       49152 bytes</span><br><span class="line">  Total number of registers available per block: 65536</span><br><span class="line">  Warp size:                                     32</span><br><span class="line">  Maximum number of threads per multiprocessor:  2048</span><br><span class="line">  Maximum number of threads per block:           1024</span><br><span class="line">  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)</span><br><span class="line">  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)</span><br><span class="line">  Maximum memory pitch:                          2147483647 bytes</span><br><span class="line">  Texture alignment:                             512 bytes</span><br><span class="line">  Concurrent copy and kernel execution:          Yes with 1 copy engine(s)</span><br><span class="line">  Run time limit on kernels:                     No</span><br><span class="line">  Integrated GPU sharing Host Memory:            No</span><br><span class="line">  Support host page-locked memory mapping:       Yes</span><br><span class="line">  Alignment requirement for Surfaces:            Yes</span><br><span class="line">  Device has ECC support:                        Disabled</span><br><span class="line">  Device supports Unified Addressing (UVA):      Yes</span><br><span class="line">  Device supports Compute Preemption:            No</span><br><span class="line">  Supports Cooperative Kernel Launch:            No</span><br><span class="line">  Supports MultiDevice Co-op Kernel Launch:      No</span><br><span class="line">  Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0</span><br><span class="line">  Compute Mode:</span><br><span class="line">     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;</span><br><span class="line"></span><br><span class="line">deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 10.1, CUDA Runtime Version = 10.1, NumDevs = 1</span><br><span class="line">Result = PASS</span><br><span class="line">mei@mei-luo:~/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release$ ./bandwidthTest </span><br><span class="line">[CUDA Bandwidth Test] - Starting...</span><br><span class="line">Running on...</span><br><span class="line"></span><br><span class="line"> Device 0: GeForce GTX 960M</span><br><span class="line"> Quick Mode</span><br><span class="line"></span><br><span class="line"> Host to Device Bandwidth, 1 Device(s)</span><br><span class="line"> PINNED Memory Transfers</span><br><span class="line">   Transfer Size (Bytes)	Bandwidth(GB/s)</span><br><span class="line">   32000000			11.7</span><br><span class="line"></span><br><span class="line"> Device to Host Bandwidth, 1 Device(s)</span><br><span class="line"> PINNED Memory Transfers</span><br><span class="line">   Transfer Size (Bytes)	Bandwidth(GB/s)</span><br><span class="line">   32000000			11.6</span><br><span class="line"></span><br><span class="line"> Device to Device Bandwidth, 1 Device(s)</span><br><span class="line"> PINNED Memory Transfers</span><br><span class="line">   Transfer Size (Bytes)	Bandwidth(GB/s)</span><br><span class="line">   32000000			68.3</span><br><span class="line"></span><br><span class="line">Result = PASS</span><br><span class="line"></span><br><span class="line">NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.</span><br><span class="line">mei@mei-luo:~/NVIDIA_CUDA-10.1_Samples/bin/x86_64/linux/release$</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/OpenCV安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -951,173 +1128,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/By-talk/吃的！吃啥！/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/By-talk/吃的！吃啥！/" itemprop="url">吃的！吃啥！</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/By-talk/" itemprop="url" rel="index">
-                    <span itemprop="name">By-talk</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/By-talk/吃的！吃啥！/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/By-talk/吃的！吃啥！/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="吃的！吃啥！"><a href="#吃的！吃啥！" class="headerlink" title="吃的！吃啥！"></a>吃的！吃啥！</h1><h2 id="零食"><a href="#零食" class="headerlink" title="零食"></a>零食</h2><h3 id="——坚果"><a href="#——坚果" class="headerlink" title="——坚果"></a>——坚果</h3><p>巴旦木、夏威夷果、碧根果、腰果、栗子</p>
-<h2 id="糕点"><a href="#糕点" class="headerlink" title="糕点"></a>糕点</h2><p>条头糕、赤豆糕、金团、趣生园的绿豆糕、岩烧乳酪、麻薯、蛋黄酥、仙豆糕、泡芙、红糖糍粑、舒芙蕾松饼、松饼、越南春卷！</p>
-<h2 id="蛋糕🍰"><a href="#蛋糕🍰" class="headerlink" title="蛋糕🍰"></a>蛋糕🍰</h2><p>烤奶片！千层蛋糕！千层糕</p>
-<h2 id="甜品"><a href="#甜品" class="headerlink" title="甜品"></a>甜品</h2><p>千层（芒果、榴莲、抹茶）、提拉米苏、芝士蛋糕、千层酥、牛奶手撕面包、抹茶吐司、芋圆、</p>
-<h2 id="焖饭系列"><a href="#焖饭系列" class="headerlink" title="焖饭系列"></a>焖饭系列</h2><p>煲仔饭、排骨焖饭（加芋头）、番茄焖饭、糯米和鸡肉用荷叶包着焖（这个是叫糯米鸡吗）</p>
-<h2 id="粥系列"><a href="#粥系列" class="headerlink" title="粥系列"></a>粥系列</h2><h2 id="菜系列"><a href="#菜系列" class="headerlink" title="菜系列"></a>菜系列</h2><p>香芋焖排骨、糖醋小排、椒盐排条、酱鸭腿、水蒸蛋</p>
-<p>——粤菜</p>
-<p>​    早茶系列：（点都德的我都爱）</p>
-<p>——东北菜</p>
-<p>​    锅包肉、猪肉炖粉条、饺子、凉拌厥根粉</p>
-<p>——江浙菜</p>
-<p>​    （外婆家、新白鹿、南京大牌档了解一下）美龄粥、糖芋苗、酒酿小圆子、红烧肉、清炒虾仁、酱排骨、蒜香排骨</p>
-<p>——新疆菜（还没吃过</p>
-<p>​    大盘鸡</p>
-<h2 id="汤系列"><a href="#汤系列" class="headerlink" title="汤系列"></a>汤系列</h2><h2 id="人生一串"><a href="#人生一串" class="headerlink" title="人生一串"></a>人生一串</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Yolo_踩的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1241,247 +1251,6 @@
 <p>安装并没有太多问题，准备跑自己的模型的时候还是遇到了蛮多问题</p>
 <p>推一下官方教程：<a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">https://pjreddie.com/darknet/yolo/</a></p>
 <h2 id="1-cuda-error-out-of-memory-darknet-src-cuda-c-36-check-error-Assertion-0’-failed"><a href="#1-cuda-error-out-of-memory-darknet-src-cuda-c-36-check-error-Assertion-0’-failed" class="headerlink" title="1. cuda error: out of memory darknet: ./src/cuda.c:36: check_error: Assertion `0’ failed."></a>1. cuda error: out of memory darknet: ./src/cuda.c:36: check_error: Assertion `0’ failed.</h2><p>改一下cfg，减小batch，增大subdivisions</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Yolo_训练自己的数据集/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Yolo_训练自己的数据集/" itemprop="url">Yolo训练自己的数据集</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Yolo_训练自己的数据集/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Yolo_训练自己的数据集/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Yolo训练自己的数据集"><a href="#Yolo训练自己的数据集" class="headerlink" title="Yolo训练自己的数据集"></a>Yolo训练自己的数据集</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">config:</span><br><span class="line">      </span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 430.09       Driver Version: 430.09       CUDA Version: 10.1     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce GTX 960M    Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| N/A   52C    P0    N/A /  N/A |      0MiB /  2004MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br></pre></td></tr></table></figure>
-<p>错误递归逐渐忘记要干嘛。。。</p>
-<p>yolo训练时间</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// cpu yolov3</span><br><span class="line">xxxdeMacBook-Pro:darknet xxx$ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">    ...</span><br><span class="line">  106 yolo</span><br><span class="line">Loading weights from yolov3.weights...Done!</span><br><span class="line">data/dog.jpg: Predicted in 18.616094 seconds.</span><br><span class="line">bicycle: 99%</span><br><span class="line">truck: 92%</span><br><span class="line">dog: 100%</span><br><span class="line">// cpu yolov2</span><br><span class="line">xxxdeMacBook-Pro:darknet xxx$ ./darknet detect cfg/yolov2.cfg yolov2.weights data/dog.jpg </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">   ...</span><br><span class="line">   31 detection</span><br><span class="line">mask_scale: Using default '1.000000'</span><br><span class="line">Loading weights from yolov2.weights...Done!</span><br><span class="line">data/dog.jpg: Predicted in 8.660725 seconds.</span><br><span class="line">dog: 82%</span><br><span class="line">truck: 64%</span><br><span class="line">bicycle: 85%</span><br><span class="line">// gpu yolov2, in another computer, but I didn't try cpu version</span><br><span class="line">// at least 100x faster than cpu version</span><br><span class="line">mei@mei-luo:~/Desktop/cv/darknet$ ./darknet detect cfg/yolov2.cfg yolov2.weights </span><br><span class="line">layer     filters    size              input                output</span><br><span class="line">    0 conv     32  3 x 3 / 1   608 x 608 x   3   -&gt;   608 x 608 x  32  0.639 BFLOPs</span><br><span class="line">    ...</span><br><span class="line">   31 detection</span><br><span class="line">mask_scale: Using default '1.000000'</span><br><span class="line">Loading weights from yolov2.weights...Done!</span><br><span class="line">Enter Image Path: data/person.jpg</span><br><span class="line">data/person.jpg: Predicted in 0.122470 seconds.</span><br><span class="line">horse: 82%</span><br><span class="line">dog: 86%</span><br><span class="line">person: 86%</span><br></pre></td></tr></table></figure>
-<h2 id="一、数据集预准备"><a href="#一、数据集预准备" class="headerlink" title="一、数据集预准备"></a>一、数据集预准备</h2><p>VOC数据集目录结构如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├──VOC2019</span><br><span class="line">  ├── Annotations</span><br><span class="line">  ├── ImageSets</span><br><span class="line">    ├── Layout</span><br><span class="line">    ├── Main</span><br><span class="line">    └── Segmentation</span><br><span class="line">  └──  JPEGImages</span><br></pre></td></tr></table></figure>
-<h3 id="1-1-Annotations"><a href="#1-1-Annotations" class="headerlink" title="1.1 Annotations"></a>1.1 Annotations</h3><p>存放VOC格式的xml文件，每一个xml对应一张图像，并且每个xml中存放的是标记的各个目标的位置和类别信息，命名通常与对应的原始图像一样</p>
-<h3 id="1-2-ImageSets"><a href="#1-2-ImageSets" class="headerlink" title="1.2 ImageSets"></a>1.2 ImageSets</h3><p>ImageSets我们只需要用到Main文件夹，这里面存放的是一些文本文件，通常为train.txt、test.txt等，该文本文件里面的内容是需要用来训练或测试的图像的名字（无后缀无路径）</p>
-<h3 id="1-3-JPEGImages"><a href="#1-3-JPEGImages" class="headerlink" title="1.3 JPEGImages"></a>1.3 JPEGImages</h3><p>JPEGImages文件夹中放我们已按统一规则命名好的原始图像。</p>
-<p>以此次我收集的关于泡面的数据集为例</p>
-<p>数据来源：百度、京东、个人拍摄</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── JPEGImages</span><br><span class="line">  ├── class_LR</span><br><span class="line">  	├── LR00001.jpg</span><br><span class="line">  	├── ...</span><br><span class="line">  ├── class_XL</span><br><span class="line">  	├── XL00001.jpg</span><br><span class="line">  	├── ...</span><br><span class="line">  ├── rename_voc.py</span><br><span class="line">  ├── resize_pic.py</span><br><span class="line">  └── voc_spider.py</span><br></pre></td></tr></table></figure>
-<p>图片命名格式为<code>&lt;label_name&gt;&lt;num(len=5)&gt;.jpg</code>，例如：<code>LR00001.jpg</code></p>
-<h4 id="1-3-1-voc-spider-py"><a href="#1-3-1-voc-spider-py" class="headerlink" title="1.3.1 voc_spider.py"></a>1.3.1 voc_spider.py</h4><p>可以直接编译，爬取的图片存储在当前目录下。图片命名格式为<code>&lt;label_name&gt;&lt;num(len=5)&gt;.jpg</code>，例如：<code>LR00001.jpg</code>。</p>
-<h4 id="1-3-2-resize-pic-py"><a href="#1-3-2-resize-pic-py" class="headerlink" title="1.3.2 resize_pic.py"></a>1.3.2 resize_pic.py</h4><p>放缩图片大小，因为网络需要图片归一化，默认是处理成正方形的大小所以只需要输入一个数字，处理所在目录下的所有图片（递归式）。需要的图片尺寸大小应与<code>yolo.cfg</code> 中的大小一致。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># yolov2.cfg</span><br><span class="line">[net]</span><br><span class="line"># Testing</span><br><span class="line">batch=1</span><br><span class="line">subdivisions=1</span><br><span class="line">...</span><br><span class="line">width=608   !!!</span><br><span class="line">height=608  !!!</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h4 id="1-3-3-rename-voc-py"><a href="#1-3-3-rename-voc-py" class="headerlink" title="1.3.3 rename_voc.py"></a>1.3.3 rename_voc.py</h4><p>寻找文件夹下命名为<code>class_&lt;label_name&gt;</code>的文件并根据序号重命名。这个主要是针对自己拍摄的照片进行处理时需要统一命名。</p>
-<h3 id="1-4-Conclusion"><a href="#1-4-Conclusion" class="headerlink" title="1.4 Conclusion"></a>1.4 Conclusion</h3><p>VOC数据集构建推荐步骤：</p>
-<ol>
-<li>建立文件夹，目录结构如上述，建议命名为VOC+year，这样之后可以直接使用提供的<code>voc_label.py</code>。</li>
-<li><code>JPEGImages</code>下建立每个类的文件夹，我主要是为了方便区分，也不可以不分。</li>
-<li>使用上述的py文件获取图片</li>
-<li>最终所有图片都在<code>JPEGImages</code>文件夹下，不再另外区分。建议先做好这步！不然后期的xml文件夹还需要改动路径，不麻烦但是还是多了几步工作。</li>
-</ol>
-<h2 id="二、标记图像目标区域"><a href="#二、标记图像目标区域" class="headerlink" title="二、标记图像目标区域"></a>二、标记图像目标区域</h2><p>跑opencv，报错了。。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ python</span><br><span class="line">Python 2.7.10 (default, Feb 22 2019, 21:17:52) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.37.14)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import cv2</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/cv2/__init__.py", line 89, in &lt;module&gt;</span><br><span class="line">    bootstrap()</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/cv2/__init__.py", line 79, in bootstrap</span><br><span class="line">    import cv2</span><br><span class="line">ImportError: dlopen(/usr/local/lib/python2.7/site-packages/cv2/python-2.7/cv2.so, 2): Library not loaded: /usr/local/opt/ffmpeg/lib/libavcodec.58.dylib</span><br><span class="line">  Referenced from: /usr/local/lib/libopencv_videoio.3.4.dylib</span><br><span class="line">  Reason: image not found</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
-<p>看了一下自己并没有安装 <code>ffmpeg</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ brew install ffmpeg</span><br></pre></td></tr></table></figure>
-<p>我吹爆brew！原来尝试源码安装疯狂报错。。。</p>
-<p>opencv能import了，然后numpy又报错了😭😭😭</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ python</span><br><span class="line">Python 2.7.10 (default, Feb 22 2019, 21:17:52) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.37.14)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import numpy</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/numpy/__init__.py", line 142, in &lt;module&gt;</span><br><span class="line">    from . import core</span><br><span class="line">  File "/usr/local/lib/python2.7/site-packages/numpy/core/__init__.py", line 71, in &lt;module&gt;</span><br><span class="line">    raise ImportError(msg)</span><br><span class="line">ImportError: </span><br><span class="line"></span><br><span class="line">IMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!</span><br><span class="line"></span><br><span class="line">Importing the multiarray numpy extension module failed.  Most</span><br><span class="line">likely you are trying to import a failed build of numpy.</span><br><span class="line">Here is how to proceed:</span><br><span class="line">- If you're working with a numpy git repository, try `git clean -xdf`</span><br><span class="line">  (removes all files not under version control) and rebuild numpy.</span><br><span class="line">- If you are simply trying to use the numpy version that you have installed:</span><br><span class="line">  your installation is broken - please reinstall numpy.</span><br><span class="line">- If you have already reinstalled and that did not fix the problem, then:</span><br><span class="line">  1. Check that you are using the Python you expect (you're using /usr/bin/python),</span><br><span class="line">     and that you have no directories in your PATH or PYTHONPATH that can</span><br><span class="line">     interfere with the Python and numpy versions you're trying to use.</span><br><span class="line">  2. If (1) looks fine, you can open a new issue at</span><br><span class="line">     https://github.com/numpy/numpy/issues.  Please include details on:</span><br><span class="line">     - how you installed Python</span><br><span class="line">     - how you installed numpy</span><br><span class="line">     - your operating system</span><br><span class="line">     - whether or not you have multiple versions of Python installed</span><br><span class="line">     - if you built from source, your compiler versions and ideally a build log</span><br><span class="line"></span><br><span class="line">     Note: this error has many possible causes, so please don't comment on</span><br><span class="line">     an existing issue about this - open a new one instead.</span><br><span class="line"></span><br><span class="line">Original error was: No module named _multiarray_umath</span><br><span class="line">xxxdeMacBook-Pro:main xxx$ sudo find /usr/local/lib/python* | grep numpy</span><br></pre></td></tr></table></figure>
-<p>看了一下自己文件里的<code>numpy</code>，发现在<code>python3.7</code>下<code>import</code>是没有任何毛病的！干脆就把<code>/usr/local/lib/python2.7/site-pacages/</code> 下的<code>numpy</code>删了，再测试了一下，ojbk👌</p>
-<p>fine，我很ok的，我配环境配两天了，佛了，被环境工程劝退，又是头秃的一天啊！😃😃😃</p>
-<p>推测一下出现这么多错可能是因为我同时存在了多个python的版本，有的包可能同时存在几个版本，容易冲突，这个标记的demo是在<code>python2.7</code>的环境下跑的，所以这些包我都尽量装在<code>python2.7/site-pacages</code> 目录下，使用pip指定目录安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pip install --target=&lt;target_path&gt; &lt;pacakages&gt;</span></span><br><span class="line">xxxdeMacBook-Pro:main xxx$ pip install --target=/usr/local/lib/python2.7/site-pacages/ lxml</span><br></pre></td></tr></table></figure>
-<p>新的错，来自<code>lxml</code>，无法<code>import etree</code>，然鹅！<code>python3.6</code>下跑没有任何毛病= =</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:main xxx$ python</span><br><span class="line">Python 2.7.10 (default, Feb 22 2019, 21:17:52) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.37.14)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import lxml</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from lxml import etree</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">ImportError: cannot import name etree</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; 	</span></span><br><span class="line">xxxdeMacBook-Pro:main xxx$ python3</span><br><span class="line">Python 3.6.8 (v3.6.8:3c6b436a57, Dec 24 2018, 02:04:31) </span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; from lxml import etree</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; etree.__version__</span></span><br><span class="line">'4.3.3'</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：出错还有另外的可能是你的Python项目中有名称为lxml的文件（夹），就有可能导致这种错误。这种情况的话，把项目中对应的文件名称修改即可</strong></p>
-<p>曲线救国了</p>
-<p>找到了另一个<code>labelImg</code>，好了！完美！</p>
-<p>git：<a href="https://github.com/tzutalin/labelImg" target="_blank" rel="noopener">labelImg的git地址</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> install lableImg <span class="keyword">in</span> Mac OS X 10.14</span></span><br><span class="line">pip3 install pyqt5 lxml # Install qt and lxml by pip</span><br><span class="line"></span><br><span class="line">make qt5py3</span><br><span class="line">python3 labelImg.py</span><br><span class="line">python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]</span><br></pre></td></tr></table></figure>
-<p>以下是xml的标准格式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">annotation</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">folder</span>&gt;</span>JPEGImages<span class="tag">&lt;/<span class="name">folder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filename</span>&gt;</span>LR00001.jpg<span class="tag">&lt;/<span class="name">filename</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">path</span>&gt;</span>/home/mei/Desktop/cv/darknet/scripts/VOCdevkit/NOODLE2019/JPEGImages/LR00001.jpg<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">database</span>&gt;</span>Unknown<span class="tag">&lt;/<span class="name">database</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">size</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">width</span>&gt;</span>608<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">height</span>&gt;</span>608<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">depth</span>&gt;</span>3<span class="tag">&lt;/<span class="name">depth</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">size</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">segmented</span>&gt;</span>0<span class="tag">&lt;/<span class="name">segmented</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>luxiang<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>393<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>304<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>583<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>465<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">annotation</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>可能需要更改的地方：</p>
-<ol>
-<li><p>folder</p>
-<p>folder为最终跑模型的时候图片的放置位置。该命令运行在ubuntu 下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;folder&gt;class_LR|&lt;folder&gt;JPEGImages|g'</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>filename</p>
-<p>可能导出的filename是没有文件后缀的，统一加上</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;/filename&gt;|.jpg&lt;/filename&gt;|g'</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>path</p>
-<p>path为图片在跑的模型上的绝对路径（因为我需要移植到另外一台电脑上跑）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|&lt;path&gt;$(your_original_pic_path)|&lt;path&gt;$(your_final_pic_path)|g'</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>width, height</p>
-<p>有时候在Windows下用该工具label图像，可能会出现size那里的width和height都为0，如果在label之前已经归一化了图像大小那么就可以用下面两行命令来修改这个0值</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name '*.xml' |xargs perl -pi -e 's|0&lt;/width&gt;|608&lt;/width&gt;|g'</span><br><span class="line">find -name '*.xml' |xargs perl -pi -e 's|0&lt;/height&gt;|608&lt;/height&gt;|g'</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="三、用yolov2训练"><a href="#三、用yolov2训练" class="headerlink" title="三、用yolov2训练"></a>三、用yolov2训练</h2><h3 id="3-1-生成相关文件"><a href="#3-1-生成相关文件" class="headerlink" title="3.1 生成相关文件"></a>3.1 生成相关文件</h3><p>​    按darknet的说明编译好后，接下来在darknet-master/scripts文件夹中新建文件夹VOCdevkit，然后将整个VOC2007文件夹都拷到VOCdevkit文件夹下。</p>
-<p>​    然后，需要利用scripts文件夹中的voc_label.py文件生成一系列训练文件和label，具体操作如下：</p>
-<p>​    首先需要修改voc_label.py中的代码，这里主要修改数据集名，以及类别信息，我的是VOC2019，并且所有样本用来训练，有两类目标，因此按如下设置</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"> </span><br><span class="line"><span class="comment">#sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#classes = ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]</span></span><br><span class="line"> </span><br><span class="line">sets=[(<span class="string">'2019'</span>, <span class="string">'train'</span>)]</span><br><span class="line">classes = [ <span class="string">"luxiang"</span>, <span class="string">"xiangla"</span>]</span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_annotation</span><span class="params">(year, image_id)</span>:</span></span><br><span class="line">    in_file = open(<span class="string">'VOCdevkit/VOC%s/Annotations/%s.xml'</span>%(year, image_id)) </span><br><span class="line">    <span class="comment">#（如果使用的不是VOC而是自设置数据集名字，则这里需要修改）</span></span><br><span class="line">    out_file = open(<span class="string">'VOCdevkit/VOC%s/labels/%s.txt'</span>%(year, image_id), <span class="string">'w'</span>)  </span><br><span class="line">    <span class="comment">#（同上）</span></span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> year, image_set <span class="keyword">in</span> sets:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'VOCdevkit/VOC%s/labels/'</span>%(year)):</span><br><span class="line">        os.makedirs(<span class="string">'VOCdevkit/VOC%s/labels/'</span>%(year))</span><br><span class="line">    image_ids = open(<span class="string">'VOCdevkit/VOC%s/ImageSets/Main/%s.txt'</span>%(year, image_set)).read().strip().split()</span><br><span class="line">    list_file = open(<span class="string">'%s_%s.txt'</span>%(year, image_set), <span class="string">'w'</span>)</span><br><span class="line">    <span class="keyword">for</span> image_id <span class="keyword">in</span> image_ids:</span><br><span class="line">        list_file.write(<span class="string">'%s/VOCdevkit/VOC%s/JPEGImages/%s.jpg\n'</span>%(wd, year, image_id))</span><br><span class="line">        convert_annotation(year, image_id)</span><br><span class="line">    list_file.close()</span><br></pre></td></tr></table></figure>
-<p>修改好后在该目录下运行命令：<code>python voc_label.py</code>，之后则在文件夹<code>script/VOCdevki/VOC2019</code>下生成了文件夹<code>labels</code>：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├──VOC2019</span><br><span class="line">  ├── labels</span><br><span class="line">  	├── LR00000<span class="selector-class">.txt</span>  </span><br><span class="line">  	├── LR00091.txt</span><br><span class="line">    ├── ...</span><br></pre></td></tr></table></figure>
-<p>同时在<code>scripts/</code>下应该也生成了<code>2019_train.txt</code>这个文件，里面包含了所有训练样本的绝对路径。</p>
-<p>❗️❗️❗️注意一下此时<code>darknet/</code>文件夹下是否也生成了<code>train.txt</code> 文件，如果有，检查一下是否为空，若为空就把 <code>2019_train.txt</code> 的内容移到 <code>train.txt</code>。</p>
-<h3 id="3-2-配置文件修改"><a href="#3-2-配置文件修改" class="headerlink" title="3.2 配置文件修改"></a>3.2 配置文件修改</h3><p>​      做好了上述准备，就可以根据不同的网络设置（cfg文件）来训练了。在文件夹cfg中有很多cfg文件，应该跟caffe中的prototxt文件是一个意思。这里以<code>yolov2.cfg</code>‘为例，主要修改参数如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">[convolutional]</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">filters=35</span><br><span class="line">//修改最后一层卷积层核参数个数，计算公式是依旧自己数据的类别数filter=num×（classes + coords + 1）=5×（1+4+1）=30</span><br><span class="line">activation=linear</span><br><span class="line"></span><br><span class="line">[region]</span><br><span class="line">anchors = 1.08,1.19,  3.42,4.41,  6.63,11.38,  9.42,5.11,  16.62,10.52</span><br><span class="line">bias_match=1</span><br><span class="line">classes=2  //类别数，本例为1类</span><br><span class="line">coords=4</span><br><span class="line">num=5</span><br><span class="line">softmax=1</span><br><span class="line">jitter=.2</span><br><span class="line">rescore=1</span><br><span class="line"></span><br><span class="line">object_scale=5</span><br><span class="line">noobject_scale=1</span><br><span class="line">class_scale=1</span><br><span class="line">coord_scale=1</span><br><span class="line"></span><br><span class="line">absolute=1</span><br><span class="line">thresh = .6</span><br><span class="line">random=1</span><br></pre></td></tr></table></figure>
-<p>​    另外也可根据需要修改learning_rate、max_batches等参数。</p>
-<p>​      修改好了cfg文件之后，就需要修改两个文件，首先是data文件下的voc.names。打开voc.names文件可以看到有20类的名称，本例中只有一类，检测人，因此将原来所有内容清空，写上自己数据集对应的类名并保存。名字仍然用这个名字，如果喜欢用其他名字则请按一开始制作自己数据集的时候的名字来修改。</p>
-<p>​      接着需要修改cfg文件夹中的voc.data文件。也是按自己需求修改，我的修改之后是这样的画风：</p>
-<ol>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">classes= 1  //类别数  </span><br><span class="line">train  = /home/mei/Desktop/cv/darknet/scripts/2019_train.txt  //训练样本的绝对路径文件，也就是上文2.1中最后生成的  </span><br><span class="line">//valid  = /home/pjreddie/data/voc/2007_test.txt  //本例未用到  </span><br><span class="line">names = data/voc.names  //上一步修改的voc.names文件  </span><br><span class="line">backup = backup/  //指示训练后生成的权重放在哪</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>修改后按原名保存最好，接下来就可以训练了。</p>
-<h3 id="3-3-运行训练"><a href="#3-3-运行训练" class="headerlink" title="3.3 运行训练"></a>3.3 运行训练</h3><p>​      上面完成了就可以命令训练了，可以在官网上找到一些预训练的模型作为参数初始值，也可以直接训练，训练命令为</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">./darknet detector train ./cfg/voc.data cfg/tiny-yolo-voc.cfg</span></span><br></pre></td></tr></table></figure>
-<p>如果用官网的预训练模型<code>darknet.conv.weights</code>做初始化，则训练命令为 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">./darknet detector train ./cfg/voc.data .cfg/tiny-yolo-voc.cfg darknet.conv.weights</span></span><br></pre></td></tr></table></figure>
-<p> 不过我没试成功，加上这个模型直接就除了final，不知道啥情况。当然也可以用自己训练的模型做参数初始化，万一训练的时候被人终端了，可以再用训练好的模型接上去接着训练。</p>
-<p>​       训练过程中会根据迭代次数保存训练的权重模型，然后就可以拿来测试了，测试的命令同理：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector test cfg/voc.data cfg/tiny-yolo-voc.cfg results/tiny-yolo-voc_6000.weights data/images.jpg</span><br></pre></td></tr></table></figure>
-<p>​      这样就完成了整个流程。</p>
 
           
         
@@ -1686,6 +1455,165 @@
 <li><a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">yolo</a></li>
 <li><a href="https://blog.csdn.net/ch_liu23/article/details/53558549#" target="_blank" rel="noopener">tutorial from csdn</a></li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/后台运行文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/后台运行文件/" itemprop="url">后台运行文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/后台运行文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/后台运行文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="后台运行文件"><a href="#后台运行文件" class="headerlink" title="后台运行文件"></a>后台运行文件</h1><p>使用tmux</p>
+<blockquote>
+<p>[python]UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe5 in position 0: ordinal not in range(128)</p>
+</blockquote>
+<p>Solve:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># myfile.py</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">'utf8'</span>)</span><br></pre></td></tr></table></figure>
 
           
         

@@ -284,6 +284,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="url">MVC,MVP,MVVM的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MVC-MVP-MVVM的区别"><a href="#MVC-MVP-MVVM的区别" class="headerlink" title="#MVC,MVP,MVVM的区别"></a>#MVC,MVP,MVVM的区别</h2><p>#MVC<br>软件可以分为三部分</p>
+<ul>
+<li>视图（View）:用户界面</li>
+<li>控制器（Controller）:业务逻辑</li>
+<li>模型（Model）:数据保存</li>
+</ul>
+<p>各部分之间的通信方式如下：</p>
+<ol>
+<li>View传送指令到Controller</li>
+<li>Controller完成业务逻辑后，要求Model改变状态</li>
+<li>Model将新的数据发送到View，用户得到反馈</li>
+</ol>
+<p>Tips：所有的通信都是单向的。</p>
+<p>#互动模式<br>接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。</p>
+<p>另一种是直接通过Controller接受指令</p>
+<p>#MVP</p>
+<p>MVP模式将Controller改名为Presenter，同时改变了通信方向。</p>
+<ol>
+<li>各部分之间的通信，都是双向的</li>
+<li>View和Model不发生联系，都通过Presenter传递</li>
+<li>View非常薄，不部署任何业务逻辑，称为”被动视图”(Passive View)，即没有任何主动性，而Presenter非常厚，所有逻辑都部署在那里。</li>
+</ol>
+<p>#MVVM</p>
+<p>MVVM模式将Presenter改名为ViewModel，基本上与MVP模式完全一致。</p>
+<p>唯一的区别是，它采用双向绑定(data-binding)：View的变动，自动反映在ViewModel，反之亦然。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -510,7 +699,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -529,7 +718,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="url">MVC,MVP,MVVM的区别</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" itemprop="url">RecyclerView和ListView的异同</a></h1>
         
 
         <div class="post-meta">
@@ -593,8 +782,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -626,225 +815,30 @@
       
         
           
-            <h2 id="MVC-MVP-MVVM的区别"><a href="#MVC-MVP-MVVM的区别" class="headerlink" title="#MVC,MVP,MVVM的区别"></a>#MVC,MVP,MVVM的区别</h2><p>#MVC<br>软件可以分为三部分</p>
-<ul>
-<li>视图（View）:用户界面</li>
-<li>控制器（Controller）:业务逻辑</li>
-<li>模型（Model）:数据保存</li>
+            <h2 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="#RecyclerView和ListView的异同"></a>#RecyclerView和ListView的异同</h2><ul>
+<li>ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将导致ListView性能展示迟缓。而在RecyclerView中使用RecyclerView.ViewHolder则变成了必须，尽管实现起来稍显复杂，但它却解决了ListView面临的上述不使用自定义ViewHolder时所面临的问题。</li>
+<li><p>我们知道ListView只能在垂直方向上滚动，Android API没有提供ListView在水平方向上面滚动的支持。或许有多种方式实现水平滑动，但是请想念我，ListView并不是设计来做这件事情的。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：</p>
+<ol>
+<li>LinearLayoutManager，可以支持水平和竖直方向上滚动的列表。</li>
+<li>StaggeredGridLayoutManager，可以支持交叉网格风格的列表，类似于瀑布流或者Pinterest。</li>
+<li>GridLayoutManager，支持网格展示，可以水平或者竖直滚动，如展示图片的画廊。</li>
+</ol>
+</li>
+<li><p>列表动画是一个全新的、拥有无限可能的维度。起初的Android API中，删除或添加item时，item是无法产生动画效果的。后面随着Android的进化，Google的Chat Hasse推荐使用ViewPropertyAnimator属性动画来实现上述需求。<br>相比较于ListView，RecyclerView.ItemAnimator则被提供用于在RecyclerView添加、删除或移动item时处理动画效果。同时，如果你比较懒，不想自定义ItemAnimator，你还可以使用DefaultItemAnimator。</p>
+</li>
+<li><p>ListView的Adapter中，getView是最重要的方法，它将视图跟position绑定起来，是所有神奇的事情发生的地方。同时我们也能够通过registerDataObserver在Adapter中注册一个观察者。RecyclerView也有这个特性，RecyclerView.AdapterDataObserver就是这个观察者。ListView有三个Adapter的默认实现，分别是ArrayAdapter、CursorAdapter和SimpleCursorAdapter。然而，RecyclerView的Adapter则拥有除了内置的内DB游标和ArrayList的支持之外的所有功能。RecyclerView.Adapter的实现的，我们必须采取措施将数据提供给Adapter，正如BaseAdapter对ListView所做的那样。</p>
+</li>
+<li><p>在ListView中如果我们想要在item之间添加间隔符，我们只需要在布局文件中对ListView添加如下属性即可：</p>
+  <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">android:</span>divider=<span class="string">"@android:color/transparent"</span></span><br><span class="line"><span class="symbol">android:</span>dividerHeight=<span class="string">"5dp"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ListView通过AdapterView.OnItemClickListener接口来探测点击事件。而RecyclerView则通过RecyclerView.OnItemTouchListener接口来探测触摸事件。它虽然增加了实现的难度，但是却给予开发人员拦截触摸事件更多的控制权限。</p>
+</li>
+<li><p>ListView可以设置选择模式，并添加MultiChoiceModeListener，如下所示：</p>
+  <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);</span><br><span class="line">listView.setMultiChoiceModeListener(<span class="keyword">new</span> MultiChoiceModeListener() &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onCreateActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> onItemCheckedStateChanged(ActionMode mode, <span class="keyword">int</span> position,</span><br><span class="line"><span class="keyword">long</span> id, <span class="keyword">boolean</span> checked) &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onActionItemClicked</span><span class="params">(ActionMode mode, MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.menu_item_delete_crime:</span><br><span class="line">            CrimeAdapter adapter = (CrimeAdapter)getListAdapter();</span><br><span class="line">            CrimeLab crimeLab = CrimeLab.get(getActivity());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = adapter.getCount() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (getListView().isItemChecked(i)) &#123;</span><br><span class="line">                    crimeLab.deleteCrime(adapter.getItem(i));</span><br><span class="line">                &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        mode.finish();</span><br><span class="line">        adapter.notifyDataSetChanged();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onPrepareActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onDestroyActionMode</span><span class="params">(ActionMode mode)</span> </span>&#123; ... &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>  而RecyclerView则没有此功能。</p>
+</li>
 </ul>
-<p>各部分之间的通信方式如下：</p>
-<ol>
-<li>View传送指令到Controller</li>
-<li>Controller完成业务逻辑后，要求Model改变状态</li>
-<li>Model将新的数据发送到View，用户得到反馈</li>
-</ol>
-<p>Tips：所有的通信都是单向的。</p>
-<p>#互动模式<br>接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。</p>
-<p>另一种是直接通过Controller接受指令</p>
-<p>#MVP</p>
-<p>MVP模式将Controller改名为Presenter，同时改变了通信方向。</p>
-<ol>
-<li>各部分之间的通信，都是双向的</li>
-<li>View和Model不发生联系，都通过Presenter传递</li>
-<li>View非常薄，不部署任何业务逻辑，称为”被动视图”(Passive View)，即没有任何主动性，而Presenter非常厚，所有逻辑都部署在那里。</li>
-</ol>
-<p>#MVVM</p>
-<p>MVVM模式将Presenter改名为ViewModel，基本上与MVP模式完全一致。</p>
-<p>唯一的区别是，它采用双向绑定(data-binding)：View的变动，自动反映在ViewModel，反之亦然。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVP/" itemprop="url">MVP</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/MVP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVP/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="MVP"><a href="#MVP" class="headerlink" title="#MVP"></a>#MVP</h2><p>###为什么需要MVP</p>
-<ol>
-<li>尽量简单<br> 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需要回调函数。View逻辑变成十分直接。</li>
-<li>后台任务<br> 当你编写一个Actviity、Fragment、自定义View的时候，你会把所有的和后台任务相关的方法写在一个静态类或者外部类中。这样，你的Task不再和Activity联系在一起，这既不会导致内存泄露，也不依赖于Activity的重建。</li>
-</ol>
-<p>###优缺点</p>
-<p>优点：</p>
-<ol>
-<li>降低耦合度，实现了Model和View真正的完全分离，可以修改View而不影响Modle</li>
-<li>模块职责划分明显，层次清晰</li>
-<li>隐藏数据</li>
-<li>Presenter可以复用，一个Presenter可以用于多个View，而不需要更改Presenter的逻辑（当然是在View的改动不影响业务逻辑的前提下）</li>
-<li>利于测试驱动开发。以前的Android开发是难以进行单元测试的（虽然很多Android开发者都没有写过测试用例，但是随着项目变得越来越复杂，没有测试是很难保证软件质量的；而且近几年来Android上的测试框架已经有了长足的发展——开始写测试用例吧），在使用MVP的项目中Presenter对View是通过接口进行，在对Presenter进行不依赖UI环境的单元测试的时候。可以通过Mock一个View对象，这个对象只需要实现了View的接口即可。然后依赖注入到Presenter中，单元测试的时候就可以完整的测试Presenter应用逻辑的正确性。</li>
-<li>View可以进行组件化。在MVP当中，View不依赖Model。这样就可以让View从特定的业务场景中脱离出来，可以说View可以做到对业务完全无知。它只需要提供一系列接口提供给上层操作。这样就可以做到高度可复用的View组件。</li>
-<li>代码灵活性</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>Presenter中除了应用逻辑以外，还有大量的View-&gt;Model，Model-&gt;View的手动同步逻辑，造成Presenter比较笨重，维护起来会比较困难。</li>
-<li>由于对视图的渲染放在了Presenter中，所以视图和Presenter的交互会过于频繁。</li>
-<li>如果Presenter过多地渲染了视图，往往会使得它与特定的视图的联系过于紧密。一旦视图需要变更，那么Presenter也需要变更了。</li>
-<li>额外的代码复杂度及学习成本。</li>
-</ol>
-<p><strong>在MVP模式里通常包含4个要素：</strong></p>
-<ol>
-<li>View :负责绘制UI元素、与用户进行交互(在Android中体现为Activity);</li>
-<li>View interface :需要View实现的接口，View通过View interface与Presenter进行交互，降低耦合，方便进行单元测试;</li>
-<li>Model :负责存储、检索、操纵数据(有时也实现一个Model interface用来降低耦合);</li>
-<li>Presenter :作为View与Model交互的中间纽带，处理与用户交互的负责逻辑。</li>
-</ol>
+<p><a href="http://www.cnblogs.com/littlepanpc/p/4497290.html" target="_blank" rel="noopener">http://www.cnblogs.com/littlepanpc/p/4497290.html</a></p>
 
           
         
@@ -1082,7 +1076,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1101,7 +1095,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" itemprop="url">RecyclerView和ListView的异同</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVP/" itemprop="url">MVP</a></h1>
         
 
         <div class="post-meta">
@@ -1165,8 +1159,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/MVP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVP/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1198,204 +1192,36 @@
       
         
           
-            <h2 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="#RecyclerView和ListView的异同"></a>#RecyclerView和ListView的异同</h2><ul>
-<li>ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将导致ListView性能展示迟缓。而在RecyclerView中使用RecyclerView.ViewHolder则变成了必须，尽管实现起来稍显复杂，但它却解决了ListView面临的上述不使用自定义ViewHolder时所面临的问题。</li>
-<li><p>我们知道ListView只能在垂直方向上滚动，Android API没有提供ListView在水平方向上面滚动的支持。或许有多种方式实现水平滑动，但是请想念我，ListView并不是设计来做这件事情的。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：</p>
+            <h2 id="MVP"><a href="#MVP" class="headerlink" title="#MVP"></a>#MVP</h2><p>###为什么需要MVP</p>
 <ol>
-<li>LinearLayoutManager，可以支持水平和竖直方向上滚动的列表。</li>
-<li>StaggeredGridLayoutManager，可以支持交叉网格风格的列表，类似于瀑布流或者Pinterest。</li>
-<li>GridLayoutManager，支持网格展示，可以水平或者竖直滚动，如展示图片的画廊。</li>
+<li>尽量简单<br> 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需要回调函数。View逻辑变成十分直接。</li>
+<li>后台任务<br> 当你编写一个Actviity、Fragment、自定义View的时候，你会把所有的和后台任务相关的方法写在一个静态类或者外部类中。这样，你的Task不再和Activity联系在一起，这既不会导致内存泄露，也不依赖于Activity的重建。</li>
 </ol>
-</li>
-<li><p>列表动画是一个全新的、拥有无限可能的维度。起初的Android API中，删除或添加item时，item是无法产生动画效果的。后面随着Android的进化，Google的Chat Hasse推荐使用ViewPropertyAnimator属性动画来实现上述需求。<br>相比较于ListView，RecyclerView.ItemAnimator则被提供用于在RecyclerView添加、删除或移动item时处理动画效果。同时，如果你比较懒，不想自定义ItemAnimator，你还可以使用DefaultItemAnimator。</p>
-</li>
-<li><p>ListView的Adapter中，getView是最重要的方法，它将视图跟position绑定起来，是所有神奇的事情发生的地方。同时我们也能够通过registerDataObserver在Adapter中注册一个观察者。RecyclerView也有这个特性，RecyclerView.AdapterDataObserver就是这个观察者。ListView有三个Adapter的默认实现，分别是ArrayAdapter、CursorAdapter和SimpleCursorAdapter。然而，RecyclerView的Adapter则拥有除了内置的内DB游标和ArrayList的支持之外的所有功能。RecyclerView.Adapter的实现的，我们必须采取措施将数据提供给Adapter，正如BaseAdapter对ListView所做的那样。</p>
-</li>
-<li><p>在ListView中如果我们想要在item之间添加间隔符，我们只需要在布局文件中对ListView添加如下属性即可：</p>
-  <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">android:</span>divider=<span class="string">"@android:color/transparent"</span></span><br><span class="line"><span class="symbol">android:</span>dividerHeight=<span class="string">"5dp"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ListView通过AdapterView.OnItemClickListener接口来探测点击事件。而RecyclerView则通过RecyclerView.OnItemTouchListener接口来探测触摸事件。它虽然增加了实现的难度，但是却给予开发人员拦截触摸事件更多的控制权限。</p>
-</li>
-<li><p>ListView可以设置选择模式，并添加MultiChoiceModeListener，如下所示：</p>
-  <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);</span><br><span class="line">listView.setMultiChoiceModeListener(<span class="keyword">new</span> MultiChoiceModeListener() &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onCreateActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> onItemCheckedStateChanged(ActionMode mode, <span class="keyword">int</span> position,</span><br><span class="line"><span class="keyword">long</span> id, <span class="keyword">boolean</span> checked) &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onActionItemClicked</span><span class="params">(ActionMode mode, MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.menu_item_delete_crime:</span><br><span class="line">            CrimeAdapter adapter = (CrimeAdapter)getListAdapter();</span><br><span class="line">            CrimeLab crimeLab = CrimeLab.get(getActivity());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = adapter.getCount() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (getListView().isItemChecked(i)) &#123;</span><br><span class="line">                    crimeLab.deleteCrime(adapter.getItem(i));</span><br><span class="line">                &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        mode.finish();</span><br><span class="line">        adapter.notifyDataSetChanged();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onPrepareActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onDestroyActionMode</span><span class="params">(ActionMode mode)</span> </span>&#123; ... &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>  而RecyclerView则没有此功能。</p>
-</li>
-</ul>
-<p><a href="http://www.cnblogs.com/littlepanpc/p/4497290.html" target="_blank" rel="noopener">http://www.cnblogs.com/littlepanpc/p/4497290.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/事件分发机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/事件分发机制/" itemprop="url">事件分发机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/事件分发机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/事件分发机制/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="事件分发机制"><a href="#事件分发机制" class="headerlink" title="事件分发机制"></a>事件分发机制</h1><hr>
-<ul>
-<li>对于一个根ViewGroup来说,发生点击事件首先调用dispatchTouchEvent</li>
-<li>如果这个ViewGroup的onIterceptTouchEvent返回true就表示它要拦截当前事件,接着这个ViewGroup的onTouchEvent就会被调用.如果onIterceptTouchEvent返回false,那么就会继续向下调用子View的dispatchTouchEvent方法</li>
-<li>当一个View需要处理事件的时候,如果它没有设置onTouchListener,那么直接调用onTouchEvent.如果设置了Listenter 那么就要看Listener的onTouch方法返回值.为true就不调,为false就调onTouchEvent</li>
-<li>View的默认实现会在onTouchEvent里面把touch事件解析成Click之类的事件</li>
-<li>点击事件传递顺序 Activity -&gt; Window -&gt; View</li>
-<li>一旦一个元素拦截了某事件,那么一个事件序列里面后续的Move,Down事件都会交给它处理.并且它的onInterceptTouchEvent不会再调用</li>
-<li>View的onTouchEvent默认都会消耗事件,除非它的clickable和longClickable都是false(不可点击),但是enable属性不会影响</li>
-</ul>
+<p>###优缺点</p>
+<p>优点：</p>
+<ol>
+<li>降低耦合度，实现了Model和View真正的完全分离，可以修改View而不影响Modle</li>
+<li>模块职责划分明显，层次清晰</li>
+<li>隐藏数据</li>
+<li>Presenter可以复用，一个Presenter可以用于多个View，而不需要更改Presenter的逻辑（当然是在View的改动不影响业务逻辑的前提下）</li>
+<li>利于测试驱动开发。以前的Android开发是难以进行单元测试的（虽然很多Android开发者都没有写过测试用例，但是随着项目变得越来越复杂，没有测试是很难保证软件质量的；而且近几年来Android上的测试框架已经有了长足的发展——开始写测试用例吧），在使用MVP的项目中Presenter对View是通过接口进行，在对Presenter进行不依赖UI环境的单元测试的时候。可以通过Mock一个View对象，这个对象只需要实现了View的接口即可。然后依赖注入到Presenter中，单元测试的时候就可以完整的测试Presenter应用逻辑的正确性。</li>
+<li>View可以进行组件化。在MVP当中，View不依赖Model。这样就可以让View从特定的业务场景中脱离出来，可以说View可以做到对业务完全无知。它只需要提供一系列接口提供给上层操作。这样就可以做到高度可复用的View组件。</li>
+<li>代码灵活性</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>Presenter中除了应用逻辑以外，还有大量的View-&gt;Model，Model-&gt;View的手动同步逻辑，造成Presenter比较笨重，维护起来会比较困难。</li>
+<li>由于对视图的渲染放在了Presenter中，所以视图和Presenter的交互会过于频繁。</li>
+<li>如果Presenter过多地渲染了视图，往往会使得它与特定的视图的联系过于紧密。一旦视图需要变更，那么Presenter也需要变更了。</li>
+<li>额外的代码复杂度及学习成本。</li>
+</ol>
+<p><strong>在MVP模式里通常包含4个要素：</strong></p>
+<ol>
+<li>View :负责绘制UI元素、与用户进行交互(在Android中体现为Activity);</li>
+<li>View interface :需要View实现的接口，View通过View interface与Presenter进行交互，降低耦合，方便进行单元测试;</li>
+<li>Model :负责存储、检索、操纵数据(有时也实现一个Model interface用来降低耦合);</li>
+<li>Presenter :作为View与Model交互的中间纽带，处理与用户交互的负责逻辑。</li>
+</ol>
 
           
         
@@ -1647,7 +1473,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/开源框架源码分析/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android开机过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1666,7 +1492,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="url">框架源码分析</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android开机过程/" itemprop="url">Android开机过程</a></h1>
         
 
         <div class="post-meta">
@@ -1730,8 +1556,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Android开机过程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Android开机过程/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1763,7 +1589,16 @@
       
         
           
-            <h2 id="框架源码分析"><a href="#框架源码分析" class="headerlink" title="#框架源码分析"></a>#框架源码分析</h2><h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="###Retrofit"></a>###Retrofit</h2><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="###EventBus"></a>###EventBus</h2><h2 id="Glide"><a href="#Glide" class="headerlink" title="###Glide"></a>###Glide</h2>
+            <h1 id="Android开机过程"><a href="#Android开机过程" class="headerlink" title="Android开机过程"></a>Android开机过程</h1><ul>
+<li>BootLoder引导,然后加载Linux内核.</li>
+<li>0号进程init启动.加载init.rc配置文件,配置文件有个命令启动了zygote进程</li>
+<li>zygote开始fork出SystemServer进程</li>
+<li>SystemServer加载各种JNI库,然后init1,init2方法,init2方法中开启了新线程ServerThread.</li>
+<li>在SystemServer中会创建一个socket客户端，后续AMS（ActivityManagerService）会通过此客户端和zygote通信</li>
+<li>ServerThread的run方法中开启了AMS,还孵化新进程ServiceManager,加载注册了一溜的服务,最后一句话进入loop 死循环</li>
+<li>run方法的SystemReady调用resumeTopActivityLocked打开锁屏界面</li>
+</ul>
+
           
         
       
@@ -2025,7 +1860,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/查漏补缺/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/开源框架源码分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -2044,7 +1879,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/查漏补缺/" itemprop="url">查漏补缺</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="url">框架源码分析</a></h1>
         
 
         <div class="post-meta">
@@ -2108,8 +1943,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/查漏补缺/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/查漏补缺/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2141,8 +1976,218 @@
       
         
           
-            <h2 id="查漏补缺"><a href="#查漏补缺" class="headerlink" title="#查漏补缺"></a>#查漏补缺</h2><p>请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小</p>
-<p><a href="http://m.blog.csdn.net/article/details?id=7856519" target="_blank" rel="noopener">http://m.blog.csdn.net/article/details?id=7856519</a></p>
+            <h2 id="框架源码分析"><a href="#框架源码分析" class="headerlink" title="#框架源码分析"></a>#框架源码分析</h2><h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="###Retrofit"></a>###Retrofit</h2><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="###EventBus"></a>###EventBus</h2><h2 id="Glide"><a href="#Glide" class="headerlink" title="###Glide"></a>###Glide</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/热修复技术/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/热修复技术/" itemprop="url">热修复技术</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/热修复技术/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/热修复技术/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="热修复技术"><a href="#热修复技术" class="headerlink" title="#热修复技术"></a>#热修复技术</h2><p>APP提早发出去的包，如果出现客户端的问题，实在是干着急，覆水难收。因此线上修复方案迫在眉睫。</p>
+<p>###概述</p>
+<p>基于Xposed中的思想，通过修改c层的Method实例描述，来实现更改与之对应的java方法的行为，从而达到修复的目的。</p>
+<p>###Xposed</p>
+<p>诞生于XDA论坛，类似一个应用平台，不同的是其提供诸多系统级的应用。可实现许多神奇的功能。Xposed需要以越狱为前提，像是iOS中的cydia。</p>
+<p>Xposed可以修改任何程序的任何java方法（需root），github上提供了XposedInstaller，是一个android app。提供很多framework层，应用层级的程序。开发者可以为其开发一些系统或应用方面的插件，自定义android系统，它甚至可以做动态权限管理（XposedMods）。</p>
+<p>###Android系统启动与应用启动</p>
+<p>Zygote进程是Android手机系统启动后，常驻的一个名为‘受精卵’的进程。</p>
+<ul>
+<li>zygote的启动实现脚本在/init.rc文件中</li>
+<li>启动过程中执行的二进制文件在/system/bin/app_process</li>
+</ul>
+<p>任何应用程序启动时，会从zygote进程fork出一个新的进程。并装载一些必要的class，invoke一些初始化方法。这其中包括像：</p>
+<ul>
+<li>ActivityThread</li>
+<li>ServiceThread</li>
+<li>ApplicationPackageManager</li>
+</ul>
+<p>等应用启动中必要的类，触发必要的方法，比如：handleBindApplication，将此进程与对应的应用绑定的初始化方法；同时，会将zygote进程中的dalvik虚拟机实例复制一份，因此每个应用程序进程都有自己的dalvik虚拟机实例；会将已有Java运行时加载到进程中；会注册一些android核心类的jni方法到虚拟机中，支撑从c到java的启动过程。</p>
+<p>###Xposed做了手脚</p>
+<p>Xposed在这个过程改写了app_process(源码在Xposed : a modified app_process binary)，替换/system/bin/app_process这个二进制文件。然后做了两个事：</p>
+<ol>
+<li>通过Xposed的hook技术，在上述过程中，对上面提到的那些加载的类的方法hook。</li>
+<li>加载XposedBridge.jar</li>
+</ol>
+<p>这时hook必要的方法是为了方便开发者为它开发插件，加载XposedBridge.jar是为动态hook提供了基础。在这个时候加载它意味着，所有的程序在启动时，都可以加载这个jar（因为上面提到的fork过程）。结合hook技术，从而达到了控制所有程序的所有方法。</p>
+<p>为获得/system/bin/目录的读写权限，因而需要以root为前提。</p>
+<p>###Xposed的hook思想</p>
+<p>那么Xposed是怎么hook java方法的呢？要从XposedBridge看起，重点在<br>XposedBridge.hookmethod(原方法的Member对象，含有新方法的XC_MethodHook对象)；，这里会调到</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> native synchronized <span class="keyword">static</span> void hookMethodNative(Member <span class="function"><span class="keyword">method</span>, <span class="title">Class</span>&lt;?&gt; <span class="title">declaringClass</span>, <span class="title">int</span> <span class="title">slot</span>, <span class="title">Object</span> <span class="title">additionalInfo</span>);</span></span><br></pre></td></tr></table></figure>
+<p>这个native的方法，通过这个方法，可以让所hook的方法，转向native层的一个c方法。如何做到？</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">When a transmit <span class="keyword">from</span> java <span class="keyword">to</span> native occurs, dvm sets up a native stack.</span><br><span class="line"><span class="keyword">In</span> dvmCallJNIMethod(), dvmPlatformInvoke <span class="keyword">is</span> used <span class="keyword">to</span> call the native <span class="function"><span class="keyword">method</span><span class="params">(signature <span class="keyword">in</span> <span class="keyword">Method</span>.insns)</span>.</span></span><br></pre></td></tr></table></figure>
+<p>在jni这个中间世界里，类型数据由jni表来沟通java和c的世界；方法由c++指针结合DVM*系(如dvmSlotToMethod,dvmDecodeIndirectRef等方法)的api方法，操作虚拟机，从而实现java方法与c方法的世界。</p>
+<p>那么hook的过程是这样：首先通过dexclassload来load所要hook的方法，分析类后，进c层，见代码XposedBridge_hookMethodNative方法，拿到要hook的Method类，然后通过dvmslotTomethod方法获取Method*指针，</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">Method</span>* <span class="title">method</span> = <span class="title">dvmSlotToMethod</span><span class="params">(declaredClass, slot)</span>;</span></span><br></pre></td></tr></table></figure>
+<p>declaredClass就是所hook方法所在的类，对应的jobject。slot是Method类中，描述此java对象在vm中的索引；那么通过这个方法，我们就获取了c层的Method指针,通过</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET_METHOD_FLAG(<span class="function"><span class="keyword">method</span>, <span class="title">ACC_NATIVE</span>);</span></span><br></pre></td></tr></table></figure>
+<p>将该方法标记为一个native方法，然后通过</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">nativeFunc</span> = &amp;<span class="title">hookedMethodCallback</span>;</span></span><br></pre></td></tr></table></figure>
+<p>定向c层方法到hookedMethodCallback，这样当被hook的java方法执行时，就会调到c层的hookedMethodCallback方法。</p>
+<p>通过meth-&gt;nativeFunc重定向MethodCallBridge到hookedMethodCallback这个方法上，控制这个c++指针是无视java的private的。</p>
+<p>另外，在method结构体中有</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">insns</span> = <span class="params">(<span class="keyword">const</span> u2*)</span> <span class="title">hookInfo</span>;</span></span><br></pre></td></tr></table></figure>
+<p>用insns指向替换成为的方法，以便hookedMethodCallback可以获取真正期望执行的java方法。</p>
+<p>现在所有被hook的方法，都指向了hookedMethodCallbackc方法中，然后在此方法中实现调用替换成为的java方法。</p>
+<p>###从Xposed提炼精髓</p>
+<p>回顾Xposed，以root为必要条件，在app_process加载XposedBidge.jar，从而实现有hook所有应用的所有方法的能力；而后续动态hook应用内的方法，其实只是load了从zypote进程复制出来的运行时的这个XposedBidge.jar，然后hook而已。因此，若在一个应用范围内的hook，root不是必须的，只是单纯的加载hook的实现方法，即可修改本应用的方法。</p>
+<p>业界内也不乏通过「修改BaseDexClassLoader中的pathList，来动态加载dex」方式实现热修复。后者纯java实现，但需要hack类的优化流程，将打CLASS_ISPREVERIFIED标签的类，去除此标签，以解决类与类引用不在一个dex中的异常问题。这会放弃dex optimize对启动运行速度的优化。原则上，这对于方法数没有大到需要multidex的应用，损失更明显。而前者不触犯原有的优化流程，只点杀需要hook的方法，更为纯粹、有效。</p>
 
           
         
