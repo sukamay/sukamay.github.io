@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,22 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -395,7 +399,18 @@
 <p>在模板目录 templates 中添加 search_form.html 表单：</p>
 <p>/HelloWorld/templates/search_form.html 文件代码：</p>
 <p>&lt;!DOCTYPE html&gt;</p>
-<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta charset="utf-8"><br><title>菜鸟教程(runoob.com)</title><br></head><br><body><br>    <form action="/search" method="get"><br>        <input type="text" name="q"><br>        <input type="submit" value="搜索"><br>    </form><br></body><br></html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+    <form action="/search" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="搜索">
+    </form>
+</body>
+</html>
 
 <p>urls.py 规则修改为如下形式：</p>
 <p>/HelloWorld/HelloWorld/urls.py 文件代码：</p>
@@ -1166,6 +1181,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

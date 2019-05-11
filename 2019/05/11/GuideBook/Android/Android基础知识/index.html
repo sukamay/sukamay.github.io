@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="#Android：五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。  FrameLayout(框架布局)   此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出">
+<meta name="description" content="Android： 五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。  FrameLayout(框架布局)   此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android：">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android基础知识/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#Android：五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。  FrameLayout(框架布局)   此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出">
+<meta property="og:description" content="Android： 五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。  FrameLayout(框架布局)   此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20130828141902812">
 <meta property="og:image" content="https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/FlowchartDiagram.jpg?raw=true">
@@ -92,7 +92,7 @@
 <meta property="og:updated_time" content="2019-05-10T17:54:35.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android：">
-<meta name="twitter:description" content="#Android：五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。  FrameLayout(框架布局)   此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出">
+<meta name="twitter:description" content="Android： 五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。  FrameLayout(框架布局)   此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20130828141902812">
 
 
@@ -112,9 +112,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -252,20 +252,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -413,7 +419,8 @@
       
 
       
-        <h2 id="Android："><a href="#Android：" class="headerlink" title="#Android："></a>#Android：</h2><p><strong>五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。</strong></p>
+        <h1 id="Android："><a href="#Android：" class="headerlink" title="Android："></a>Android：</h1><hr>
+<p><strong>五种布局： FrameLayout 、 LinearLayout 、 AbsoluteLayout 、 RelativeLayout 、 TableLayout 全都继承自ViewGroup，各自特点及绘制效率对比。</strong></p>
 <ul>
 <li><p>FrameLayout(框架布局)</p>
 <p>  此布局是五种布局中最简单的布局，Android中并没有对child view的摆布进行控制，这个布局中所有的控件都会默认出现在视图的左上角，我们可以使用<code>android:layout_margin</code>，<code>android:layout_gravity</code>等属性去控制子控件相对布局的位置。</p>
@@ -729,8 +736,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Android开机过程/" rel="next" title="Android开机过程">
-                <i class="fa fa-chevron-left"></i> Android开机过程
+              <a href="/2019/05/11/GuideBook/Android/Android性能优化/" rel="next" title="Android性能优化">
+                <i class="fa fa-chevron-left"></i> Android性能优化
               </a>
             
           </div>
@@ -739,8 +746,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Android图片中的三级缓存/" rel="prev" title="Android图片中的三级缓存">
-                Android图片中的三级缓存 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/Art和Dalvik区别/" rel="prev" title="ART和Dalvik区别">
+                ART和Dalvik区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -895,7 +902,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android："><span class="nav-text">#Android：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android："><span class="nav-text">Android：</span></a></li></ol></div>
             
 
           </div>
@@ -1432,6 +1439,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

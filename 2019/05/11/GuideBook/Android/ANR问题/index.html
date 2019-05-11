@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="#ANR1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
+<meta name="description" content="ANR 1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ANR">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/ANR问题/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#ANR1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
+<meta property="og:description" content="ANR 1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ANR">
-<meta name="twitter:description" content="#ANR1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
+<meta name="twitter:description" content="ANR 1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
 
 
 
@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -409,11 +415,12 @@
       
 
       
-        <h2 id="ANR"><a href="#ANR" class="headerlink" title="#ANR"></a>#ANR</h2><p>1、ANR排错一般有三种类型</p>
+        <h1 id="ANR"><a href="#ANR" class="headerlink" title="ANR"></a>ANR</h1><hr>
+<p>1、ANR排错一般有三种类型</p>
 <ol>
-<li>KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应</li>
-<li>BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成</li>
-<li>ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成</li>
+<li>KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应</li>
+<li>BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成</li>
+<li>ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成</li>
 </ol>
 <p>2、哪些操作会导致ANR<br>在主线程执行以下操作：</p>
 <ol>
@@ -451,16 +458,13 @@
 </ol>
 <p>6、监测ANR的Watchdog</p>
 <p>最近出来一个叫LeakCanary</p>
-<p>#FC(Force Close)</p>
-<p>##什么时候会出现</p>
-<ol>
+<h1 id="FC-Force-Close"><a href="#FC-Force-Close" class="headerlink" title="FC(Force Close)"></a>FC(Force Close)</h1><h2 id="什么时候会出现"><a href="#什么时候会出现" class="headerlink" title="什么时候会出现"></a>什么时候会出现</h2><ol>
 <li>Error</li>
 <li>OOM，内存溢出</li>
 <li>StackOverFlowError</li>
 <li>Runtime,比如说空指针异常</li>
 </ol>
-<p>##解决的办法</p>
-<ol>
+<h2 id="解决的办法"><a href="#解决的办法" class="headerlink" title="解决的办法"></a>解决的办法</h2><ol>
 <li>注意内存的使用和管理</li>
 <li>使用Thread.UncaughtExceptionHandler接口</li>
 </ol>
@@ -517,8 +521,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/APP启动过程/" rel="next" title="APP启动过程">
-                <i class="fa fa-chevron-left"></i> APP启动过程
+              <a href="/2019/05/11/toDoList/" rel="next" title="toDoList">
+                <i class="fa fa-chevron-left"></i> toDoList
               </a>
             
           </div>
@@ -527,8 +531,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/AIDL/" rel="prev" title="AIDL">
-                AIDL <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/自定义控件/" rel="prev" title="自定义控件">
+                自定义控件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -683,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ANR"><span class="nav-text">#ANR</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ANR"><span class="nav-text">ANR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FC-Force-Close"><span class="nav-text">FC(Force Close)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候会出现"><span class="nav-text">什么时候会出现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决的办法"><span class="nav-text">解决的办法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1220,6 +1224,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Daydream  停车场寻找停车位辅助程序  虚拟试衣间  铝材开料  写个脚本，网页更新通知一下  思维导图和笔记的互转，解析器  记录日常，基于定位     信科     清华深圳   北大深圳   清华   清软   清华伯克利   北大交叉   清华交叉   lamda   南大   哈工NLP   计算所   自动化   自动化   上交   复旦   中科大    qq SMTP 服">
+<meta name="description" content="Daydream [ ] 停车场寻找停车位辅助程序 [ ] 虚拟试衣间 [ ] 铝材开料 [ ] 写个脚本，网页更新通知一下 [ ] 思维导图和笔记的互转，解析器 [ ] 记录日常，基于定位      信科     清华深圳   北大深圳   清华   清软   清华伯克利   北大交叉   清华交叉   lamda   南大   哈工NLP   计算所   自动化   自动化   上交   复旦">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Daydream">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/By-talk/Daydream/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Daydream  停车场寻找停车位辅助程序  虚拟试衣间  铝材开料  写个脚本，网页更新通知一下  思维导图和笔记的互转，解析器  记录日常，基于定位     信科     清华深圳   北大深圳   清华   清软   清华伯克利   北大交叉   清华交叉   lamda   南大   哈工NLP   计算所   自动化   自动化   上交   复旦   中科大    qq SMTP 服">
+<meta property="og:description" content="Daydream [ ] 停车场寻找停车位辅助程序 [ ] 虚拟试衣间 [ ] 铝材开料 [ ] 写个脚本，网页更新通知一下 [ ] 思维导图和笔记的互转，解析器 [ ] 记录日常，基于定位      信科     清华深圳   北大深圳   清华   清软   清华伯克利   北大交叉   清华交叉   lamda   南大   哈工NLP   计算所   自动化   自动化   上交   复旦">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-11T04:23:34.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Daydream">
-<meta name="twitter:description" content="Daydream  停车场寻找停车位辅助程序  虚拟试衣间  铝材开料  写个脚本，网页更新通知一下  思维导图和笔记的互转，解析器  记录日常，基于定位     信科     清华深圳   北大深圳   清华   清软   清华伯克利   北大交叉   清华交叉   lamda   南大   哈工NLP   计算所   自动化   自动化   上交   复旦   中科大    qq SMTP 服">
+<meta name="twitter:description" content="Daydream [ ] 停车场寻找停车位辅助程序 [ ] 虚拟试衣间 [ ] 铝材开料 [ ] 写个脚本，网页更新通知一下 [ ] 思维导图和笔记的互转，解析器 [ ] 记录日常，基于定位      信科     清华深圳   北大深圳   清华   清软   清华伯克利   北大交叉   清华交叉   lamda   南大   哈工NLP   计算所   自动化   自动化   上交   复旦">
 
 
 
@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -399,13 +405,14 @@
 
       
         <h1 id="Daydream"><a href="#Daydream" class="headerlink" title="Daydream"></a>Daydream</h1><ul>
-<li style="list-style: none"><input type="checkbox"> 停车场寻找停车位辅助程序</li>
-<li style="list-style: none"><input type="checkbox"> 虚拟试衣间</li>
-<li style="list-style: none"><input type="checkbox"> 铝材开料</li>
-<li style="list-style: none"><input type="checkbox"> 写个脚本，网页更新通知一下</li>
-<li style="list-style: none"><input type="checkbox"> 思维导图和笔记的互转，解析器</li>
-<li style="list-style: none"><input type="checkbox"> 记录日常，基于定位</li>
+<li>[ ] 停车场寻找停车位辅助程序</li>
+<li>[ ] 虚拟试衣间</li>
+<li>[ ] 铝材开料</li>
+<li>[ ] 写个脚本，网页更新通知一下</li>
+<li>[ ] 思维导图和笔记的互转，解析器</li>
+<li>[ ] 记录日常，基于定位</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -463,6 +470,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>qq SMTP 服务授权码： <strong>ojqn**</strong>tywm<strong><strong>xoxk</strong></strong>bhde**</p>
 
       
@@ -517,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/By-talk/吃的！吃啥！/" rel="next" title="吃的！吃啥！">
-                <i class="fa fa-chevron-left"></i> 吃的！吃啥！
+              <a href="/2019/05/11/By-talk/卫填宝模版_0/" rel="next" title="卫填宝模版">
+                <i class="fa fa-chevron-left"></i> 卫填宝模版
               </a>
             
           </div>
@@ -527,8 +535,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/By-talk/减肥大计/" rel="prev" title="减肥大计">
-                减肥大计 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/toDoList/" rel="prev" title="toDoList">
+                toDoList <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1220,6 +1228,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

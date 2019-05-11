@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Django实现衣型识别衣型识别出：类型、颜色、款式   主要物体提取（目标检测），imageAI  裁剪图片，cv2  生成透明背景的图片  类型识别：CNN网络， tf  颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku  一些小函数：  RGB（Tuple、十六进制互转  string、url互转  向数据库中批量添加数据">
+<meta name="description" content="Django实现衣型识别衣型识别出：类型、颜色、款式  [ ] 主要物体提取（目标检测），imageAI [ ] 裁剪图片，cv2 [ ] 生成透明背景的图片 [ ] 类型识别：CNN网络， tf [x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku [ ] 一些小函数： [x] RGB（Tuple、十六进制互转 [ ] string、url互转 [ ] 向数据库中批">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django实现衣型识别">
 <meta property="og:url" content="https://sukamay.github.io/2019/01/04/GuideBook/Django/Django实现衣型识别/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式   主要物体提取（目标检测），imageAI  裁剪图片，cv2  生成透明背景的图片  类型识别：CNN网络， tf  颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku  一些小函数：  RGB（Tuple、十六进制互转  string、url互转  向数据库中批量添加数据">
+<meta property="og:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式  [ ] 主要物体提取（目标检测），imageAI [ ] 裁剪图片，cv2 [ ] 生成透明背景的图片 [ ] 类型识别：CNN网络， tf [x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku [ ] 一些小函数： [x] RGB（Tuple、十六进制互转 [ ] string、url互转 [ ] 向数据库中批">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T16:24:37.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django实现衣型识别">
-<meta name="twitter:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式   主要物体提取（目标检测），imageAI  裁剪图片，cv2  生成透明背景的图片  类型识别：CNN网络， tf  颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku  一些小函数：  RGB（Tuple、十六进制互转  string、url互转  向数据库中批量添加数据">
+<meta name="twitter:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式  [ ] 主要物体提取（目标检测），imageAI [ ] 裁剪图片，cv2 [ ] 生成透明背景的图片 [ ] 类型识别：CNN网络， tf [x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku [ ] 一些小函数： [x] RGB（Tuple、十六进制互转 [ ] string、url互转 [ ] 向数据库中批">
 
 
 
@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -378,15 +384,15 @@
       
         <h1 id="Django实现衣型识别"><a href="#Django实现衣型识别" class="headerlink" title="Django实现衣型识别"></a>Django实现衣型识别</h1><p>衣型识别出：类型、颜色、款式</p>
 <ul>
-<li style="list-style: none"><input type="checkbox"> 主要物体提取（目标检测），<a href="https://imageai-cn.readthedocs.io/zh_CN/latest/ImageAI_Object_Detection.html#" target="_blank" rel="noopener">imageAI</a></li>
-<li style="list-style: none"><input type="checkbox"> 裁剪图片，cv2</li>
-<li style="list-style: none"><input type="checkbox"> 生成透明背景的图片</li>
-<li style="list-style: none"><input type="checkbox"> 类型识别：CNN网络， tf</li>
-<li style="list-style: none"><input type="checkbox" checked> 颜色和配色提取：haishoku 库，获取主要颜色和配色，<a href="https://github.com/LanceGin/haishoku" target="_blank" rel="noopener">haishoku</a></li>
-<li style="list-style: none"><input type="checkbox"> 一些小函数：<ul>
-<li style="list-style: none"><input type="checkbox" checked> RGB（Tuple、十六进制互转</li>
-<li style="list-style: none"><input type="checkbox"> string、url互转</li>
-<li style="list-style: none"><input type="checkbox"> 向数据库中批量添加数据</li>
+<li>[ ] 主要物体提取（目标检测），<a href="https://imageai-cn.readthedocs.io/zh_CN/latest/ImageAI_Object_Detection.html#" target="_blank" rel="noopener">imageAI</a></li>
+<li>[ ] 裁剪图片，cv2</li>
+<li>[ ] 生成透明背景的图片</li>
+<li>[ ] 类型识别：CNN网络， tf</li>
+<li>[x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，<a href="https://github.com/LanceGin/haishoku" target="_blank" rel="noopener">haishoku</a></li>
+<li>[ ] 一些小函数：<ul>
+<li>[x] RGB（Tuple、十六进制互转</li>
+<li>[ ] string、url互转</li>
+<li>[ ] 向数据库中批量添加数据</li>
 </ul>
 </li>
 </ul>
@@ -1146,6 +1152,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

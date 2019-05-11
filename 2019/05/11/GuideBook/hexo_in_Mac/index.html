@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Hexo in Mac hexo显示latex公式  hexo搭建  hexo和Typora的图片路径问题 这里说一下，可以修改Typora的偏好设置里复制图片到指定路径，另外hexo只认source旗下的图片  hexo连接样式设置  hexo隐藏指定文章  hexo打赏-参考官网   To do：   hexo设置阅读量统计  hexo设置评论  hexo显示字数统计  hexo关于页面  h">
+<meta name="description" content="Hexo in Mac hexo显示latex公式  hexo搭建  hexo和Typora的图片路径问题 这里说一下，可以修改Typora的偏好设置里复制图片到指定路径，另外hexo只认source旗下的图片  hexo连接样式设置  hexo隐藏指定文章  hexo打赏-参考官网   To do：  [ ] hexo设置阅读量统计 [ ] hexo设置评论 [ ] hexo显示字数统计 [ ]">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo_in_Mac">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/hexo_in_Mac/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Hexo in Mac hexo显示latex公式  hexo搭建  hexo和Typora的图片路径问题 这里说一下，可以修改Typora的偏好设置里复制图片到指定路径，另外hexo只认source旗下的图片  hexo连接样式设置  hexo隐藏指定文章  hexo打赏-参考官网   To do：   hexo设置阅读量统计  hexo设置评论  hexo显示字数统计  hexo关于页面  h">
+<meta property="og:description" content="Hexo in Mac hexo显示latex公式  hexo搭建  hexo和Typora的图片路径问题 这里说一下，可以修改Typora的偏好设置里复制图片到指定路径，另外hexo只认source旗下的图片  hexo连接样式设置  hexo隐藏指定文章  hexo打赏-参考官网   To do：  [ ] hexo设置阅读量统计 [ ] hexo设置评论 [ ] hexo显示字数统计 [ ]">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-11T05:08:25.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo_in_Mac">
-<meta name="twitter:description" content="Hexo in Mac hexo显示latex公式  hexo搭建  hexo和Typora的图片路径问题 这里说一下，可以修改Typora的偏好设置里复制图片到指定路径，另外hexo只认source旗下的图片  hexo连接样式设置  hexo隐藏指定文章  hexo打赏-参考官网   To do：   hexo设置阅读量统计  hexo设置评论  hexo显示字数统计  hexo关于页面  h">
+<meta name="twitter:description" content="Hexo in Mac hexo显示latex公式  hexo搭建  hexo和Typora的图片路径问题 这里说一下，可以修改Typora的偏好设置里复制图片到指定路径，另外hexo只认source旗下的图片  hexo连接样式设置  hexo隐藏指定文章  hexo打赏-参考官网   To do：  [ ] hexo设置阅读量统计 [ ] hexo设置评论 [ ] hexo显示字数统计 [ ]">
 
 
 
@@ -109,9 +109,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -249,20 +249,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -394,14 +400,14 @@
 </ol>
 <p>To do：</p>
 <ul>
-<li style="list-style: none"><input type="checkbox"> hexo设置阅读量统计</li>
-<li style="list-style: none"><input type="checkbox"> hexo设置评论</li>
-<li style="list-style: none"><input type="checkbox"> hexo显示字数统计</li>
-<li style="list-style: none"><input type="checkbox"> hexo关于页面</li>
-<li style="list-style: none"><input type="checkbox"> hexo搜索页面</li>
-<li style="list-style: none"><input type="checkbox"> hexo头像样式</li>
-<li style="list-style: none"><input type="checkbox"> hexo设置平常的样式</li>
-<li style="list-style: none"><input type="checkbox" checked> hexo打赏功能</li>
+<li>[ ] hexo设置阅读量统计</li>
+<li>[ ] hexo设置评论</li>
+<li>[ ] hexo显示字数统计</li>
+<li>[ ] hexo关于页面</li>
+<li>[ ] hexo搜索页面</li>
+<li>[ ] hexo头像样式</li>
+<li>[ ] hexo设置平常的样式</li>
+<li>[x] hexo打赏功能</li>
 </ul>
 
       
@@ -1161,6 +1167,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

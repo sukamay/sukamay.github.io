@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="#查漏补缺请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小 http://m.blog.csdn.net/article/details?id=7856519">
+<meta name="description" content="查漏补缺 请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小 http://m.blog.csdn.net/article/details?id=7856519">
 <meta property="og:type" content="article">
 <meta property="og:title" content="查漏补缺">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/查漏补缺/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#查漏补缺请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小 http://m.blog.csdn.net/article/details?id=7856519">
+<meta property="og:description" content="查漏补缺 请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小 http://m.blog.csdn.net/article/details?id=7856519">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查漏补缺">
-<meta name="twitter:description" content="#查漏补缺请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小 http://m.blog.csdn.net/article/details?id=7856519">
+<meta name="twitter:description" content="查漏补缺 请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小 http://m.blog.csdn.net/article/details?id=7856519">
 
 
 
@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -409,7 +415,8 @@
       
 
       
-        <h2 id="查漏补缺"><a href="#查漏补缺" class="headerlink" title="#查漏补缺"></a>#查漏补缺</h2><p>请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小</p>
+        <h1 id="查漏补缺"><a href="#查漏补缺" class="headerlink" title="查漏补缺"></a>查漏补缺</h1><hr>
+<p>请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小</p>
 <p><a href="http://m.blog.csdn.net/article/details?id=7856519" target="_blank" rel="noopener">http://m.blog.csdn.net/article/details?id=7856519</a></p>
 
       
@@ -630,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查漏补缺"><span class="nav-text">#查漏补缺</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查漏补缺"><span class="nav-text">查漏补缺</span></a></li></ol></div>
             
 
           </div>
@@ -1167,6 +1174,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

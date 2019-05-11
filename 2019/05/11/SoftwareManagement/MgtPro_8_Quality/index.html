@@ -116,9 +116,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -256,20 +256,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -488,23 +494,36 @@
 <li>The average time to replace the relational database system is no more than 2 hours, and no data loss is guaranteed.</li>
 </ol>
 <h2 id="Quality-Metric"><a href="#Quality-Metric" class="headerlink" title="Quality Metric"></a>Quality Metric</h2><p>The following metrics are majorly used for generating the daily/weekly status report with accurate data during test case development/execution phase and this is also useful for tracking the project status and Quality of the software.</p>
-<h3 id="1-percentage-Test-cases-Executed"><a href="#1-percentage-Test-cases-Executed" class="headerlink" title="1. percentage Test cases Executed:"></a>1. percentage Test cases Executed:</h3><p>This metric is used to obtain the execution status of the test cases in terms of percentage.<br>$$<br>TestCaseExecuted\% = \frac{No_{TestCaseExecuted}}{Total \space No_{TestCasesWritten}}* 100.<br>$$</p>
-<h3 id="2-percentage-Test-cases-not-executed"><a href="#2-percentage-Test-cases-not-executed" class="headerlink" title="2. percentage Test cases not executed:"></a>2. percentage Test cases not executed:</h3><p>This metric is used to obtain the pending execution status of the test cases in terms of percentage.<br>$$<br>TestCasesNotExecuted\% = \frac{No_{TestCasesNotExecuted}}{Total \space No_{TestCasesWritten}} * 100.<br>$$</p>
-<p><img src="/images/20161202085815466.png" alt="这里写图片描述"><br><img src="/images/20161202085848369.png" alt="这里写图片描述"></p>
-<h3 id="3-percentage-Test-cases-Passed"><a href="#3-percentage-Test-cases-Passed" class="headerlink" title="3. percentage Test cases Passed:"></a>3. percentage Test cases Passed:</h3><p>This metric is used to obtain the Pass percentage of the executed test cases.<br>$$<br>Test Cases Passed\% = \frac{No_{ Test Cases Passed} }{Total \space No_{Test Cases Executed}} * 100.<br>$$</p>
-<h3 id="4-percentage-Test-cases-Failed"><a href="#4-percentage-Test-cases-Failed" class="headerlink" title="4. percentage Test cases Failed:"></a>4. percentage Test cases Failed:</h3><p> This metric is used to obtain the Fail percentage of the executed test cases.<br>$$<br> Test Cases Failed \%= \frac{No_{ Test Cases Failed }}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$</p>
-<h3 id="5-percentage-Test-cases-Blocked"><a href="#5-percentage-Test-cases-Blocked" class="headerlink" title="5. percentage Test cases Blocked:"></a>5. percentage Test cases Blocked:</h3><p> This metric is used to obtain the blocked percentage of the executed test cases. A detailed report can be submitted by specifying the actual reason of blocking the test cases.<br>$$<br>Test Cases Blocked \% = \frac{No_{ Test Cases Blocked}}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$<br><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="Test Execution Status这里写图片描述"></p>
+<h3 id="1-percentage-Test-cases-Executed"><a href="#1-percentage-Test-cases-Executed" class="headerlink" title="1. percentage Test cases Executed:"></a>1. percentage Test cases Executed:</h3><p>This metric is used to obtain the execution status of the test cases in terms of percentage. </p>
+<script type="math/tex; mode=display">
+TestCaseExecuted\% = \frac{No_{TestCaseExecuted}}{Total \space No_{TestCasesWritten}}* 100.</script><h3 id="2-percentage-Test-cases-not-executed"><a href="#2-percentage-Test-cases-not-executed" class="headerlink" title="2. percentage Test cases not executed:"></a>2. percentage Test cases not executed:</h3><p>This metric is used to obtain the pending execution status of the test cases in terms of percentage. </p>
+<script type="math/tex; mode=display">
+TestCasesNotExecuted\% = \frac{No_{TestCasesNotExecuted}}{Total \space No_{TestCasesWritten}} * 100.</script><p><img src="/images/20161202085815466.png" alt="这里写图片描述"><br><img src="/images/20161202085848369.png" alt="这里写图片描述"></p>
+<h3 id="3-percentage-Test-cases-Passed"><a href="#3-percentage-Test-cases-Passed" class="headerlink" title="3. percentage Test cases Passed:"></a>3. percentage Test cases Passed:</h3><p>This metric is used to obtain the Pass percentage of the executed test cases. </p>
+<script type="math/tex; mode=display">
+Test Cases Passed\% = \frac{No_{ Test Cases Passed} }{Total \space No_{Test Cases Executed}} * 100.</script><h3 id="4-percentage-Test-cases-Failed"><a href="#4-percentage-Test-cases-Failed" class="headerlink" title="4. percentage Test cases Failed:"></a>4. percentage Test cases Failed:</h3><p> This metric is used to obtain the Fail percentage of the executed test cases. </p>
+<script type="math/tex; mode=display">
+ Test Cases Failed \%= \frac{No_{ Test Cases Failed }}{ Total \space No_{ Test Cases Executed}}* 100.</script><h3 id="5-percentage-Test-cases-Blocked"><a href="#5-percentage-Test-cases-Blocked" class="headerlink" title="5. percentage Test cases Blocked:"></a>5. percentage Test cases Blocked:</h3><p> This metric is used to obtain the blocked percentage of the executed test cases. A detailed report can be submitted by specifying the actual reason of blocking the test cases. </p>
+<script type="math/tex; mode=display">
+Test Cases Blocked \% = \frac{No_{ Test Cases Blocked}}{ Total \space No_{ Test Cases Executed}}* 100.</script><p><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="Test Execution Status这里写图片描述"></p>
 <p><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="这里写图片描述"></p>
-<h3 id="6-Defect-Density"><a href="#6-Defect-Density" class="headerlink" title="6. Defect Density"></a>6. Defect Density</h3><p>$$<br>Defect Density =  No_{ Defects identified }/ size<br>$$</p>
-<p>(Here “Size” is considered as requirement. Hence here the Defect Density is calculated as number of defects identified per requirement. Similarly, Defect Density can be calculated as number of Defects identified per 100 lines of code [OR] No. of defects identified per module etc.) </p>
-<h3 id="7-Defect-Removal-Efficiency-DRE"><a href="#7-Defect-Removal-Efficiency-DRE" class="headerlink" title="7. Defect Removal Efficiency (DRE)"></a>7. Defect Removal Efficiency (DRE)</h3><p>$$<br>Defect Removal Efficiency(DRE) = (\frac{No_{ Defects Found During QA Testing}}{ No_{ Defects Found During QA Testing}} +No_{ Defects Found By End user}) * 100<br>$$</p>
-<p>DRE is used to identify the test effectiveness of the system. </p>
-<h3 id="8-Defect-Leakage"><a href="#8-Defect-Leakage" class="headerlink" title="8. Defect Leakage:"></a>8. Defect Leakage:</h3><p>Defect Leakage is the Metric which is used to identify the efficiency of the QA testing i.e., how many defects are missed / slipped during the QA testing.<br>$$<br>Defect Leakage = \frac{No_{ Defects Found in UAT }}{No_{ Defects Found in QA Testing.}}* 100<br>$$</p>
-<h3 id="9-Defects-by-Priority"><a href="#9-Defects-by-Priority" class="headerlink" title="9. Defects by Priority:"></a>9. Defects by Priority:</h3><p>This metric is used to identify the no. of defects identified based on the Severity / Priority of the defect which is used to decide the quality of the software.<br>$$<br>\begin{align}<br> Critical Defects\% &amp;= \frac{No_{ Critical Defects Identified }}{ Total \space No_{ Defects Identified} }* 100  \</p>
-<p> High Defects\% &amp;= \frac{No_{ High Defects Identified}}{Total \space No_{ Defects Identified}} * 100  \</p>
-<p> Medium Defects\% &amp;=\frac{ No_{ Medium Defects Identified }}{ Total \space No_{ Defects Identified}} * 100 \</p>
-<p> Low Defects\% &amp;= \frac{No_{ Low Defects Identified}}{Total \space No_{ Defects Identified}} * 100<br>\end{align}<br>$$</p>
-<p><img src="/images/20161202090431083.png" alt="Defect Status by Priority这里写图片描述"></p>
+<h3 id="6-Defect-Density"><a href="#6-Defect-Density" class="headerlink" title="6. Defect Density"></a>6. Defect Density</h3><script type="math/tex; mode=display">
+Defect Density =  No_{ Defects identified }/ size</script><p>(Here “Size” is considered as requirement. Hence here the Defect Density is calculated as number of defects identified per requirement. Similarly, Defect Density can be calculated as number of Defects identified per 100 lines of code [OR] No. of defects identified per module etc.) </p>
+<h3 id="7-Defect-Removal-Efficiency-DRE"><a href="#7-Defect-Removal-Efficiency-DRE" class="headerlink" title="7. Defect Removal Efficiency (DRE)"></a>7. Defect Removal Efficiency (DRE)</h3><script type="math/tex; mode=display">
+Defect Removal Efficiency(DRE) = (\frac{No_{ Defects Found During QA Testing}}{ No_{ Defects Found During QA Testing}} +No_{ Defects Found By End user}) * 100</script><p>DRE is used to identify the test effectiveness of the system. </p>
+<h3 id="8-Defect-Leakage"><a href="#8-Defect-Leakage" class="headerlink" title="8. Defect Leakage:"></a>8. Defect Leakage:</h3><p>Defect Leakage is the Metric which is used to identify the efficiency of the QA testing i.e., how many defects are missed / slipped during the QA testing. </p>
+<script type="math/tex; mode=display">
+Defect Leakage = \frac{No_{ Defects Found in UAT }}{No_{ Defects Found in QA Testing.}}* 100</script><h3 id="9-Defects-by-Priority"><a href="#9-Defects-by-Priority" class="headerlink" title="9. Defects by Priority:"></a>9. Defects by Priority:</h3><p>This metric is used to identify the no. of defects identified based on the Severity / Priority of the defect which is used to decide the quality of the software. </p>
+<script type="math/tex; mode=display">
+\begin{align}
+ Critical Defects\% &= \frac{No_{ Critical Defects Identified }}{ Total \space No_{ Defects Identified} }* 100  \\
+
+ High Defects\% &= \frac{No_{ High Defects Identified}}{Total \space No_{ Defects Identified}} * 100  \\
+
+ Medium Defects\% &=\frac{ No_{ Medium Defects Identified }}{ Total \space No_{ Defects Identified}} * 100 \\
+
+ Low Defects\% &= \frac{No_{ Low Defects Identified}}{Total \space No_{ Defects Identified}} * 100
+\end{align}</script><p><img src="/images/20161202090431083.png" alt="Defect Status by Priority这里写图片描述"></p>
 
       
     </div>
@@ -568,8 +587,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/" rel="prev" title="2.3 Internal non-technical">
-                2.3 Internal non-technical <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/SoftwareManagement/MgtPro_5/" rel="prev" title="MgtPro_5">
+                MgtPro_5 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1261,6 +1280,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

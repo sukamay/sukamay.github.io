@@ -107,9 +107,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -295,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_5/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -314,7 +320,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_5/" itemprop="url">MgtPro_5</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/" itemprop="url">2.3 Internal non-technical</a></h1>
         
 
         <div class="post-meta">
@@ -367,8 +373,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/SoftwareManagement/MgtPro_5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_5/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,52 +406,32 @@
       
         
           
-          MgtPro_51. risk identification1.1 DiagrammingEquipment
-设备未到位（缺失、不足
-设备因不可坑因素损坏
-
-ProcessPeopleMaterialsEnvironment
-新的开发工具学习期比预期长
-开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；
-
-Management
+          2.3 Internal non-technical2.3.3 Organizational
+分工不合理（工作难度分配不合理、工作种类分工不合理）
+及时根据当前工作进度调整工作分工
+进行工作分工时跟技术人员沟通
 
 
-Type
-Possible risk
+运转资金不足
+技术中心及相关设计人员慎重研究设计变更，减少设计变更造成的各种损失
+加强设备管理，及时利用，减少浪费
 
 
+仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；
+进行技术决策时与技术人员进行有效的沟通
 
 
-Technology
+低效的项目组结构降低生产率；
+选取一个有强领导力的管理者
+设置一定的奖惩机制，激励员工提高生产率
+对项目组结构进行一定的重构或微调
 
 
-
-People
-
-
-
-Organizational
-
-
-
-Tools
-
-
-
-Requirements
-
-
-
-Estimation
-
-
-
-1.2 type-basedTec
+管理层审查 决策
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/SoftwareManagement/MgtPro_5/#more" rel="contents">
+            <a class="btn" href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -663,7 +649,7 @@ Estimation
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -682,7 +668,7 @@ Estimation
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/" itemprop="url">2.3 Internal non-technical</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_5/" itemprop="url">MgtPro_5</a></h1>
         
 
         <div class="post-meta">
@@ -735,8 +721,8 @@ Estimation
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/MgtPro_5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_5/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -768,32 +754,54 @@ Estimation
       
         
           
-          2.3 Internal non-technical2.3.3 Organizational
-分工不合理（工作难度分配不合理、工作种类分工不合理）
-及时根据当前工作进度调整工作分工
-进行工作分工时跟技术人员沟通
+          MgtPro_51. risk identification1.1 DiagrammingEquipment
+设备未到位（缺失、不足
+设备因不可坑因素损坏
+
+ProcessPeopleMaterialsEnvironment
+新的开发工具学习期比预期长
+开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；
+
+Management
 
 
-运转资金不足
-技术中心及相关设计人员慎重研究设计变更，减少设计变更造成的各种损失
-加强设备管理，及时利用，减少浪费
+
+Type
+Possible risk
 
 
-仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；
-进行技术决策时与技术人员进行有效的沟通
 
 
-低效的项目组结构降低生产率；
-选取一个有强领导力的管理者
-设置一定的奖惩机制，激励员工提高生产率
-对项目组结构进行一定的重构或微调
+Technology
 
 
-管理层审查 决策
+
+People
+
+
+
+Organizational
+
+
+
+Tools
+
+
+
+Requirements
+
+
+
+Estimation
+
+
+
+
+1.2 type-basedT
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/#more" rel="contents">
+            <a class="btn" href="/2019/05/11/SoftwareManagement/MgtPro_5/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2557,6 +2565,19 @@ introduction
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

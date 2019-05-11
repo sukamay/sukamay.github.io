@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -462,7 +468,7 @@
 <p>CheckStyle默认提供一下主要检查内容：<br>　　•Javadoc注释<br>　　•命名约定<br>　　•标题<br>　　•Import语句<br>　　•体积大小<br>　　•空白<br>　　•修饰符<br>　  •块<br>　　•代码问题<br>　　•类设计<br>　　•混合检查（包活一些有用的比如非必须的 System.out和printstackTrace） </p>
 <p>The Standard Checkstyle Checks are applicable to general Java coding style and require no external libraries. The standard checks are included in the base distribution.</p>
 <p>The site navigation menu lets you browse the individual checks by functionality.</p>
-<p>Checkstyle provides many checks that you can apply to your source code. Below is an alphabetical reference, the site navigation menu provides a reference organized by functionality. The whole list of what check style can check about is in the website “<a href="http://checkstyle.sourceforge.net/checks.html&quot;" target="_blank" rel="noopener">http://checkstyle.sourceforge.net/checks.html&quot;</a>. </p>
+<p>Checkstyle provides many checks that you can apply to your source code. Below is an alphabetical reference, the site navigation menu provides a reference organized by functionality. The whole list of what check style can check about is in the website “<a href="http://checkstyle.sourceforge.net/checks.html" target="_blank" rel="noopener">http://checkstyle.sourceforge.net/checks.html</a>“. </p>
 <h3 id="feartures"><a href="#feartures" class="headerlink" title="feartures"></a>feartures</h3><p>Checkstyle can check many aspects of your source code. </p>
 <p>It can find class design problems, method design problems. It also has the ability to check code layout and formatting issues.</p>
 <p>For a detailed list of available checks please refer to the <a href="http://checkstyle.sourceforge.net/checks.html" target="_blank" rel="noopener">Checks</a> page.</p>
@@ -497,12 +503,12 @@
 </li>
 <li><p><code>-J, --treeWithJavadoc</code> - print Abstract Syntax Tree(AST) with Javadoc nodes and comment nodes of the checked file. Attention that line number and columns will not be the same as it is a file due to the fact that each javadoc comment is parsed separately from java file. The option cannot be used with other options and requires exactly one file to run on to be specified.</p>
 </li>
-<li><p>-j, –javadocTree</p>
+<li><p>-j, —javadocTree</p>
 </li>
 </ul>
 <p>  - print Parse Tree of the Javadoc comment. The file have to contain</p>
 <p>  only Javadoc comment content</p>
-<p>  without including ‘/*<em>‘ and ‘</em>/‘ at the beginning and at the end respectively. For example: MyTestFile.javadoc</p>
+<p>  without including ‘/<em>*’ and ‘</em>/‘ at the beginning and at the end respectively. For example: MyTestFile.javadoc</p>
   <figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* Test <span class="function"><span class="keyword">method</span>.</span></span><br><span class="line"><span class="function">* @<span class="title">return</span> <span class="title">true</span></span></span><br></pre></td></tr></table></figure>
 <p>  The option cannot be used other options and requires exactly one file to run on to be specified.</p>
 <ul>
@@ -586,8 +592,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/WebAR/周工作汇报4.26/" rel="next" title="WebARonARCore开发记录">
-                <i class="fa fa-chevron-left"></i> WebARonARCore开发记录
+              <a href="/2019/05/11/WebAR/周工作汇报4.5/" rel="next" title="本周学习情况">
+                <i class="fa fa-chevron-left"></i> 本周学习情况
               </a>
             
           </div>
@@ -1289,6 +1295,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

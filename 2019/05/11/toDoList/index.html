@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -459,108 +465,108 @@
 </ul>
 <h2 id="——11-24——"><a href="#——11-24——" class="headerlink" title="——11.24——"></a>——11.24——</h2><p>啊啊啊事情一件接一件，烦</p>
 <ul>
-<li style="list-style: none"><input type="checkbox" checked> 百日<ul>
-<li style="list-style: none"><input type="checkbox" checked> 图片到位</li>
+<li>[x] 百日<ul>
+<li>[x] 图片到位</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox"> sp完成手提箱的渲染，坦克渲染完主体<ul>
-<li style="list-style: none"><input type="checkbox" checked> 手提箱</li>
-<li style="list-style: none"><input type="checkbox"> 坦克主体</li>
+<li>[ ] sp完成手提箱的渲染，坦克渲染完主体<ul>
+<li>[x] 手提箱</li>
+<li>[ ] 坦克主体</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox" checked> webAR的调研报告</li>
-<li style="list-style: none"><input type="checkbox" checked> 寒假支教的面试</li>
-<li style="list-style: none"><input type="checkbox"> 计算机网络的作业</li>
-<li style="list-style: none"><input type="checkbox"> 计算机网络的实验考虑一下写什么</li>
-<li style="list-style: none"><input type="checkbox"> 软工的需求分析文档</li>
-<li style="list-style: none"><input type="checkbox"> 短信群发平台弄好<ul>
-<li style="list-style: none"><input type="checkbox"> 等爹爹弄好企业账户的网银</li>
+<li>[x] webAR的调研报告</li>
+<li>[x] 寒假支教的面试</li>
+<li>[ ] 计算机网络的作业</li>
+<li>[ ] 计算机网络的实验考虑一下写什么</li>
+<li>[ ] 软工的需求分析文档</li>
+<li>[ ] 短信群发平台弄好<ul>
+<li>[ ] 等爹爹弄好企业账户的网银</li>
 </ul>
 </li>
 </ul>
 <h2 id="——11-26——"><a href="#——11-26——" class="headerlink" title="——11.26——"></a>——11.26——</h2><ul>
-<li style="list-style: none"><input type="checkbox"> 百日<ul>
-<li style="list-style: none"><input type="checkbox" checked> 画手准备一下</li>
-<li style="list-style: none"><input type="checkbox"> ps准备一下</li>
+<li>[ ] 百日<ul>
+<li>[x] 画手准备一下</li>
+<li>[ ] ps准备一下</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox" checked> 软工需求分析文档汇总一下，部署一下概要设计</li>
-<li style="list-style: none"><input type="checkbox"> sp完成坦克主体</li>
-<li style="list-style: none"><input type="checkbox" checked> 计算机网络的作业</li>
-<li style="list-style: none"><input type="checkbox" checked> webAR部署一下</li>
-<li style="list-style: none"><input type="checkbox" checked> webar真机测试？开个http-server？</li>
-<li style="list-style: none"><input type="checkbox" checked> 数字图像处理傅立叶实验</li>
-<li style="list-style: none"><input type="checkbox"> 数字图像处理：周期噪声</li>
-<li style="list-style: none"><input type="checkbox"> 数字图像处理：自适应中值滤波</li>
-<li style="list-style: none"><input type="checkbox"> 计算机图形学思考题</li>
+<li>[x] 软工需求分析文档汇总一下，部署一下概要设计</li>
+<li>[ ] sp完成坦克主体</li>
+<li>[x] 计算机网络的作业</li>
+<li>[x] webAR部署一下</li>
+<li>[x] webar真机测试？开个http-server？</li>
+<li>[x] 数字图像处理傅立叶实验</li>
+<li>[ ] 数字图像处理：周期噪声</li>
+<li>[ ] 数字图像处理：自适应中值滤波</li>
+<li>[ ] 计算机图形学思考题</li>
 </ul>
 <h2 id="——11-27——"><a href="#——11-27——" class="headerlink" title="——11.27——"></a>——11.27——</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 百日</li>
-<li style="list-style: none"><input type="checkbox" checked> sp完成坦克主体</li>
-<li style="list-style: none"><input type="checkbox" checked> webar真机测试</li>
+<li>[x] 百日</li>
+<li>[x] sp完成坦克主体</li>
+<li>[x] webar真机测试</li>
 </ul>
 <h2 id="——11-28——"><a href="#——11-28——" class="headerlink" title="——11.28——"></a>——11.28——</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> box贴图导入maya完成渲染（这个等明天上课之后问了老师要怎么操作再做吧</li>
-<li style="list-style: none"><input type="checkbox" checked> 软工课程设计的第三次讨论（周六）ps系统总体流程描述文字部分分配一下（昊玥写）</li>
-<li style="list-style: none"><input type="checkbox" checked> ar.js测试，如何在真机测试？three.js的应用？webxr了解一下？</li>
-<li style="list-style: none"><input type="checkbox" checked> 企业支付宝注册一下</li>
+<li>[x] box贴图导入maya完成渲染（这个等明天上课之后问了老师要怎么操作再做吧</li>
+<li>[x] 软工课程设计的第三次讨论（周六）ps系统总体流程描述文字部分分配一下（昊玥写）</li>
+<li>[x] ar.js测试，如何在真机测试？three.js的应用？webxr了解一下？</li>
+<li>[x] 企业支付宝注册一下</li>
 </ul>
 <h2 id="——11-29——"><a href="#——11-29——" class="headerlink" title="——11.29——"></a>——11.29——</h2><ul>
-<li style="list-style: none"><input type="checkbox"> 软工下一次讨论</li>
+<li>[ ] 软工下一次讨论</li>
 </ul>
 <h2 id="——11-30——"><a href="#——11-30——" class="headerlink" title="——11.30——"></a>——11.30——</h2><p>今天不想干活= =</p>
 <ul>
-<li style="list-style: none"><input type="checkbox" checked> 算了看一下软工的分析吧，算了，都没干，一回来就看番了</li>
-<li style="list-style: none"><input type="checkbox" checked> 计网的实验，哭了，什么都没弄好</li>
-<li style="list-style: none"><input type="checkbox" checked> maya重新导出一下tank，看一下sp的材质介绍，tank分开导出，整理一下outlier</li>
+<li>[x] 算了看一下软工的分析吧，算了，都没干，一回来就看番了</li>
+<li>[x] 计网的实验，哭了，什么都没弄好</li>
+<li>[x] maya重新导出一下tank，看一下sp的材质介绍，tank分开导出，整理一下outlier</li>
 </ul>
 <h2 id="——12-1——周末"><a href="#——12-1——周末" class="headerlink" title="——12.1——周末"></a>——12.1——周末</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> 软工的讨论<ul>
-<li style="list-style: none"><input type="checkbox" checked> 业务类的划分</li>
-<li style="list-style: none"><input type="checkbox" checked> 概要设计</li>
-<li style="list-style: none"><input type="checkbox" checked> modeling和coding如何并进</li>
+<li>[x] 软工的讨论<ul>
+<li>[x] 业务类的划分</li>
+<li>[x] 概要设计</li>
+<li>[x] modeling和coding如何并进</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox"> 计网<ul>
-<li style="list-style: none"><input type="checkbox"> 实验报告</li>
-<li style="list-style: none"><input type="checkbox"> 第二次作业</li>
+<li>[ ] 计网<ul>
+<li>[ ] 实验报告</li>
+<li>[ ] 第二次作业</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox" checked> maya<ul>
-<li style="list-style: none"><input type="checkbox" checked> 导出tank的文件</li>
-<li style="list-style: none"><input type="checkbox" checked> 看一下sp材质介绍</li>
-<li style="list-style: none"><input type="checkbox" checked> tank的贴图</li>
+<li>[x] maya<ul>
+<li>[x] 导出tank的文件</li>
+<li>[x] 看一下sp材质介绍</li>
+<li>[x] tank的贴图</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox" checked> 短信平台<ul>
-<li style="list-style: none"><input type="checkbox" checked> 等回信= =，阿里云不支持，用秒嘀吧，哭泣</li>
+<li>[x] 短信平台<ul>
+<li>[x] 等回信= =，阿里云不支持，用秒嘀吧，哭泣</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox"> webar<ul>
-<li style="list-style: none"><input type="checkbox"> ar hit test demo</li>
-<li style="list-style: none"><input type="checkbox"> ar.js demo</li>
-<li style="list-style: none"><input type="checkbox"> webxr调研报告</li>
+<li>[ ] webar<ul>
+<li>[ ] ar hit test demo</li>
+<li>[ ] ar.js demo</li>
+<li>[ ] webxr调研报告</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox"> 计算机图形学思考题</li>
-<li style="list-style: none"><input type="checkbox"> DIP，神tm= =matlab许可证到期了，天公不作美<ul>
-<li style="list-style: none"><input type="checkbox"> 周期噪声的产生</li>
-<li style="list-style: none"><input type="checkbox"> 自适应中值滤波</li>
+<li>[ ] 计算机图形学思考题</li>
+<li>[ ] DIP，神tm= =matlab许可证到期了，天公不作美<ul>
+<li>[ ] 周期噪声的产生</li>
+<li>[ ] 自适应中值滤波</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox"> 马原</li>
-<li style="list-style: none"><input type="checkbox" checked> 注册一下uml</li>
+<li>[ ] 马原</li>
+<li>[x] 注册一下uml</li>
 </ul>
 <h2 id="——12-8——周末"><a href="#——12-8——周末" class="headerlink" title="——12.8——周末"></a>——12.8——周末</h2><ul>
-<li style="list-style: none"><input type="checkbox" checked> web课程设计的框架了解一下：<ul>
-<li style="list-style: none"><input type="checkbox" checked> 完成进度：可加载模型</li>
+<li>[x] web课程设计的框架了解一下：<ul>
+<li>[x] 完成进度：可加载模型</li>
 </ul>
 </li>
-<li style="list-style: none"><input type="checkbox"> 软工的讨论和技术上的实现</li>
-<li style="list-style: none"><input type="checkbox"> 马原的论文</li>
-<li style="list-style: none"><input type="checkbox"> 计网的实验报告</li>
-<li style="list-style: none"><input type="checkbox"> 计网的作业</li>
-<li style="list-style: none"><input type="checkbox"> maya制作简单动画</li>
+<li>[ ] 软工的讨论和技术上的实现</li>
+<li>[ ] 马原的论文</li>
+<li>[ ] 计网的实验报告</li>
+<li>[ ] 计网的作业</li>
+<li>[ ] maya制作简单动画</li>
 </ul>
 <h2 id="——2-27——"><a href="#——2-27——" class="headerlink" title="——2.27——"></a>——2.27——</h2><p>计算机视觉</p>
 <p>web</p>
@@ -623,8 +629,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/By-talk/减肥大计/" rel="next" title="减肥大计">
-                <i class="fa fa-chevron-left"></i> 减肥大计
+              <a href="/2019/05/11/By-talk/Daydream/" rel="next" title="Daydream">
+                <i class="fa fa-chevron-left"></i> Daydream
               </a>
             
           </div>
@@ -633,8 +639,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Django/Django本地项目部署到云服务器/" rel="prev" title="Django本地项目部署到云服务器">
-                Django本地项目部署到云服务器 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/ANR问题/" rel="prev" title="ANR">
+                ANR <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1326,6 +1332,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

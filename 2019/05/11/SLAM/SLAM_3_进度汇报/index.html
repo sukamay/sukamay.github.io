@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
+<meta name="description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：  \begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SLAM_3_进度汇报">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/SLAM/SLAM_3_进度汇报/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
+<meta property="og:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：  \begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SLAM_3_进度汇报">
-<meta name="twitter:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
+<meta name="twitter:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：  \begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
 
 
 
@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -399,12 +405,19 @@
 
       
         <h1 id="SLAM-3-进度汇报"><a href="#SLAM-3-进度汇报" class="headerlink" title="SLAM_3_进度汇报"></a>SLAM_3_进度汇报</h1><p>ppt汇报内容：</p>
-<p>符号定义：<br>$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$<br>运动和观测方程记为：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$<br>去除噪声的理想情况下：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) \  z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
-<p>纯视觉SLAM（$z_{k,j}​$ 为像素坐标）：<br>$$<br>\begin{matrix} z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$<br>纯视觉SLAM（$y_{k,j}$为相机坐标）：<br>$$<br>\begin{matrix} y’_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
-<p>对于方程（4）已知任意两个量可求第三个量，$y_j，x_k​$ 待求</p>
+<p>符号定义：<br>$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$<br>运动和观测方程记为：</p>
+<script type="math/tex; mode=display">
+\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>去除噪声的理想情况下：</p>
+<script type="math/tex; mode=display">
+\begin{matrix}x_k = f(x_{k-1},u_k) \\  z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>纯视觉SLAM（$z_{k,j}​$ 为像素坐标）：</p>
+<script type="math/tex; mode=display">
+\begin{matrix} z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>纯视觉SLAM（$y_{k,j}$为相机坐标）：</p>
+<script type="math/tex; mode=display">
+\begin{matrix} y'_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>对于方程（4）已知任意两个量可求第三个量，$y_j，x_k​$ 待求</p>
 <p>初始化：零时刻相机坐标与世界坐标重合，即 $y_{0,j} = y’_{0,j}$</p>
-<p>后端优化（考虑噪声影响）：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
-<p>初始化已知3d信息——ICP——单目中，只得到像素坐标，二维和三维获取位姿——对级几何</p>
+<p>后端优化（考虑噪声影响）：</p>
+<script type="math/tex; mode=display">
+\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>初始化已知3d信息——ICP——单目中，只得到像素坐标，二维和三维获取位姿——对级几何</p>
 
       
     </div>
@@ -468,8 +481,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/SLAM/SLAM_2_矩阵相关知识/" rel="prev" title="SLAM_2_矩阵相关知识">
-                SLAM_2_矩阵相关知识 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/SLAM/SLAM_0_forDummies/" rel="prev" title="SLAM_0 SLAM for dummies">
+                SLAM_0 SLAM for dummies <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1161,6 +1174,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

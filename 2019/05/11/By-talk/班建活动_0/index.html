@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -468,7 +474,7 @@
 <h3 id="地点"><a href="#地点" class="headerlink" title="地点"></a>地点</h3><blockquote>
 <p>老班老家</p>
 </blockquote>
-<h3 id="具体活动-—-各项细节待讨论"><a href="#具体活动-—-各项细节待讨论" class="headerlink" title="具体活动 — 各项细节待讨论"></a>具体活动 — 各项细节待讨论</h3><h4 id="1-厨艺大比拼"><a href="#1-厨艺大比拼" class="headerlink" title="1.厨艺大比拼"></a>1.厨艺大比拼</h4><h5 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h5><blockquote>
+<h3 id="具体活动-—-各项细节待讨论"><a href="#具体活动-—-各项细节待讨论" class="headerlink" title="具体活动 —- 各项细节待讨论"></a>具体活动 —- 各项细节待讨论</h3><h4 id="1-厨艺大比拼"><a href="#1-厨艺大比拼" class="headerlink" title="1.厨艺大比拼"></a>1.厨艺大比拼</h4><h5 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h5><blockquote>
 <p>根据报名厨艺人数分组进行比赛，用所采购的食材做几道菜，由评委决定每道菜的胜负。</p>
 </blockquote>
 <h5 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h5><ul>
@@ -763,7 +769,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#班建活动"><span class="nav-text">班建活动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#班委工作基本安排"><span class="nav-text">班委工作基本安排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础信息"><span class="nav-text">基础信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间"><span class="nav-text">时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地点"><span class="nav-text">地点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体活动-—-各项细节待讨论"><span class="nav-text">具体活动 — 各项细节待讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-厨艺大比拼"><span class="nav-text">1.厨艺大比拼</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#规则"><span class="nav-text">规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求"><span class="nav-text">需求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-红红火火"><span class="nav-text">2.红红火火</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内容"><span class="nav-text">内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求-1"><span class="nav-text">需求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-游戏时间到"><span class="nav-text">3.游戏时间到</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内容-1"><span class="nav-text">内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求-2"><span class="nav-text">需求</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#活动之后"><span class="nav-text">活动之后</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#班建活动"><span class="nav-text">班建活动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#班委工作基本安排"><span class="nav-text">班委工作基本安排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础信息"><span class="nav-text">基础信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间"><span class="nav-text">时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地点"><span class="nav-text">地点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体活动-—-各项细节待讨论"><span class="nav-text">具体活动 —- 各项细节待讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-厨艺大比拼"><span class="nav-text">1.厨艺大比拼</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#规则"><span class="nav-text">规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求"><span class="nav-text">需求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-红红火火"><span class="nav-text">2.红红火火</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内容"><span class="nav-text">内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求-1"><span class="nav-text">需求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-游戏时间到"><span class="nav-text">3.游戏时间到</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内容-1"><span class="nav-text">内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求-2"><span class="nav-text">需求</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#活动之后"><span class="nav-text">活动之后</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1300,6 +1306,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

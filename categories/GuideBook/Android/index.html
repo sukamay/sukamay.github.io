@@ -107,9 +107,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -247,20 +247,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -301,32 +307,6 @@
             <a class="post-title-link" href="/2019/05/11/GuideBook/Android/AIDL/" itemprop="url">
               
                 <span itemprop="name">AIDL</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-11T00:24:37+08:00" content="2019-05-11">
-          05-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/11/GuideBook/Android/ANR问题/" itemprop="url">
-              
-                <span itemprop="name">ANR</span>
               
             </a>
         
@@ -506,9 +486,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android基础知识/" itemprop="url">
+            <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android开机过程/" itemprop="url">
               
-                <span itemprop="name">Android：</span>
+                <span itemprop="name">Android开机过程</span>
               
             </a>
         
@@ -532,9 +512,35 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android开机过程/" itemprop="url">
+            <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Art和Dalvik区别/" itemprop="url">
               
-                <span itemprop="name">Android开机过程</span>
+                <span itemprop="name">ART和Dalvik区别</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-11T00:24:37+08:00" content="2019-05-11">
+          05-11
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android基础知识/" itemprop="url">
+              
+                <span itemprop="name">Android：</span>
               
             </a>
         
@@ -1179,6 +1185,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

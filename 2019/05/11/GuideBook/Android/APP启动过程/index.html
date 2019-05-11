@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#APP启动过程  上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
+<meta name="description" content="APP启动过程   上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APP启动过程">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/APP启动过程/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#APP启动过程  上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
+<meta property="og:description" content="APP启动过程   上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP启动过程">
-<meta name="twitter:description" content="#APP启动过程  上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
+<meta name="twitter:description" content="APP启动过程   上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
 <meta name="twitter:image" content="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png">
 
 
@@ -110,9 +110,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -250,20 +250,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -411,7 +417,8 @@
       
 
       
-        <h2 id="APP启动过程"><a href="#APP启动过程" class="headerlink" title="#APP启动过程"></a>#APP启动过程</h2><p><img src="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png" alt></p>
+        <h1 id="APP启动过程"><a href="#APP启动过程" class="headerlink" title="APP启动过程"></a>APP启动过程</h1><hr>
+<p><img src="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png" alt></p>
 <ul>
 <li>上图就可以很好的说明App启动的过程</li>
 <li>ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶</li>
@@ -481,8 +488,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/ANR问题/" rel="prev" title="ANR">
-                ANR <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/AIDL/" rel="prev" title="AIDL">
+                AIDL <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -637,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#APP启动过程"><span class="nav-text">#APP启动过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#APP启动过程"><span class="nav-text">APP启动过程</span></a></li></ol></div>
             
 
           </div>
@@ -1174,6 +1181,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

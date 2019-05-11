@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="班建活动_1   活动大纲：陈润乾、罗媚   大纲整理 确定通知 发布公告 活动通知 通知到每个宿舍的同学 接受报名 统计人数      [ ] 活动内容细则 : 李璐、陈志、吴源鑫+陈润乾  确定每个环节的具体内容和具体形式  游戏环节可以多想一些游戏之类的      [ ] 活动流程安排 : 成佳杰、郑迪伟+陈润乾  根据大纲和细则制定流程  确定NPC分配 总管 安排 环节管理 …   确定">
+<meta name="description" content="班建活动_1  [x] 活动大纲：陈润乾、罗媚   大纲整理 确定通知 发布公告 活动通知 通知到每个宿舍的同学 接受报名 统计人数      [ ] 活动内容细则 : 李璐、陈志、吴源鑫+陈润乾  确定每个环节的具体内容和具体形式  游戏环节可以多想一些游戏之类的      [ ] 活动流程安排 : 成佳杰、郑迪伟+陈润乾  根据大纲和细则制定流程  确定NPC分配 总管 安排 环节管理 …">
 <meta property="og:type" content="article">
 <meta property="og:title" content="班建活动_1">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/By-talk/班建活动_1/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="班建活动_1   活动大纲：陈润乾、罗媚   大纲整理 确定通知 发布公告 活动通知 通知到每个宿舍的同学 接受报名 统计人数      [ ] 活动内容细则 : 李璐、陈志、吴源鑫+陈润乾  确定每个环节的具体内容和具体形式  游戏环节可以多想一些游戏之类的      [ ] 活动流程安排 : 成佳杰、郑迪伟+陈润乾  根据大纲和细则制定流程  确定NPC分配 总管 安排 环节管理 …   确定">
+<meta property="og:description" content="班建活动_1  [x] 活动大纲：陈润乾、罗媚   大纲整理 确定通知 发布公告 活动通知 通知到每个宿舍的同学 接受报名 统计人数      [ ] 活动内容细则 : 李璐、陈志、吴源鑫+陈润乾  确定每个环节的具体内容和具体形式  游戏环节可以多想一些游戏之类的      [ ] 活动流程安排 : 成佳杰、郑迪伟+陈润乾  根据大纲和细则制定流程  确定NPC分配 总管 安排 环节管理 …">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-11T04:23:34.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="班建活动_1">
-<meta name="twitter:description" content="班建活动_1   活动大纲：陈润乾、罗媚   大纲整理 确定通知 发布公告 活动通知 通知到每个宿舍的同学 接受报名 统计人数      [ ] 活动内容细则 : 李璐、陈志、吴源鑫+陈润乾  确定每个环节的具体内容和具体形式  游戏环节可以多想一些游戏之类的      [ ] 活动流程安排 : 成佳杰、郑迪伟+陈润乾  根据大纲和细则制定流程  确定NPC分配 总管 安排 环节管理 …   确定">
+<meta name="twitter:description" content="班建活动_1  [x] 活动大纲：陈润乾、罗媚   大纲整理 确定通知 发布公告 活动通知 通知到每个宿舍的同学 接受报名 统计人数      [ ] 活动内容细则 : 李璐、陈志、吴源鑫+陈润乾  确定每个环节的具体内容和具体形式  游戏环节可以多想一些游戏之类的      [ ] 活动流程安排 : 成佳杰、郑迪伟+陈润乾  根据大纲和细则制定流程  确定NPC分配 总管 安排 环节管理 …">
 
 
 
@@ -108,9 +108,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -248,20 +248,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -400,7 +406,7 @@
       
         <h1 id="班建活动-1"><a href="#班建活动-1" class="headerlink" title="班建活动_1"></a>班建活动_1</h1><ul>
 <li><ul>
-<li style="list-style: none"><input type="checkbox" checked> 活动大纲：陈润乾、罗媚</li>
+<li>[x] 活动大纲：陈润乾、罗媚</li>
 </ul>
 <ol>
 <li>大纲整理</li>
@@ -513,8 +519,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/By-talk/生活需要一些小目标/" rel="next" title="生活需要一些小目标">
-                <i class="fa fa-chevron-left"></i> 生活需要一些小目标
+              <a href="/2019/05/11/By-talk/短信群发平台/" rel="next" title="短信群发平台">
+                <i class="fa fa-chevron-left"></i> 短信群发平台
               </a>
             
           </div>
@@ -1216,6 +1222,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 
