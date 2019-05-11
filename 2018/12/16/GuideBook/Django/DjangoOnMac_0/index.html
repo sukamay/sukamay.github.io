@@ -379,7 +379,7 @@
 <p>监听得地址如果是:::3306或者是0.0.0.0:3306，表示监听所有IP地址，这监听状态是正常。若出现127.0.0.0:3306，说明监听的本地地址，需要在mysql配置文件中将bind-address选项设置为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">bind_address=<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br></pre></td></tr></table></figure>
 <p>重启mysql。</p>
-<h3 id="1-4-密码错误"><a href="#1-4-密码错误" class="headerlink" title="1.4 密码错误"></a>1.4 密码错误</h3><p>ERROR 1045 (28000): Access denied for user ‘root‘@’58.41.202.207’ (using password: YES)</p>
+<h3 id="1-4-密码错误"><a href="#1-4-密码错误" class="headerlink" title="1.4 密码错误"></a>1.4 密码错误</h3><p>ERROR 1045 (28000): Access denied for user ‘root’@’58.41.202.207’ (using password: YES)</p>
 
       
     </div>
@@ -389,6 +389,35 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     

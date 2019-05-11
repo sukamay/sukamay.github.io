@@ -400,7 +400,7 @@
 <p>好的又报错了。。。</p>
 <blockquote>
 <p>./include/caffe/util/mkl_alternate.hpp:14:10: fatal error: ‘cblas.h’ file not found</p>
-<p>#include &lt;cblas.h&gt;</p>
+<p>#include <cblas.h></cblas.h></p>
 </blockquote>
 <p><code>Makefile.config</code> 里面原来这两句是被注释掉的，我是用homebrew安装的openblas，把注释解开就好了。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Homebrew puts openblas in a directory that is not on the standard search path</span></span><br><span class="line">BLAS_INCLUDE := <span class="variable">$(<span class="built_in">shell</span> brew --prefix openblas)</span>/<span class="keyword">include</span></span><br><span class="line">BLAS_LIB := <span class="variable">$(<span class="built_in">shell</span> brew --prefix openblas)</span>/lib</span><br></pre></td></tr></table></figure>
@@ -434,6 +434,35 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -448,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/OpenCV安装/" rel="next" title="OpenCV安装">
-                <i class="fa fa-chevron-left"></i> OpenCV安装
+              <a href="/2019/05/11/GuideBook/Mac_设置环境变量/" rel="next" title="Mac_设置环境变量">
+                <i class="fa fa-chevron-left"></i> Mac_设置环境变量
               </a>
             
           </div>
@@ -458,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Mac_设置环境变量/" rel="prev" title="Mac_设置环境变量">
-                Mac_设置环境变量 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/markdown语法/" rel="prev" title="Markdown语法">
+                Markdown语法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

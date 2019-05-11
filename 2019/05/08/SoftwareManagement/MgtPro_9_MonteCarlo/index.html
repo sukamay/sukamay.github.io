@@ -398,14 +398,14 @@
 <li>According to the elements we divide in WBS, select random variables as four processes of software development: requirements engineering, design, development, testing</li>
 </ol>
 <p>The total duration is the sum of the four processes</p>
-<ol start="2">
+<ol>
 <li>Determine the probability distribution of random variables</li>
 </ol>
 <p>According to historical data, pessimistic estimates, general estimates and optimistic estimates of each variable are obtained. It is assumed that the random variables obey the Gaussian distribution and the parameters of the Gaussian distribution are determined from the historical data.</p>
 <p><img src="/images/1407D354-1C94-4BCA-A8A7-AF53D851801E.png" alt="1407D354-1C94-4BCA-A8A7-AF53D851801E"></p>
 <p>All variable are distributed as Gaussian distribution.</p>
 <p><img src="/images/VariableDistribution.png" alt="VariableDistribution"></p>
-<ol start="3">
+<ol>
 <li><p>Extract random numbers for each random variable</p>
 </li>
 <li><p>Convert the extracted random number into the sampled value of each input variable</p>
@@ -422,6 +422,7 @@
 </ol>
 <p><img src="/images/ProbabilityDistributionHist.png" alt="ProbabilityDistributionHist"></p>
 <p><img src="/images/MonteCarlo.png" alt="MonteCarlo"></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -436,6 +437,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 
       
     </div>
@@ -445,6 +447,35 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     

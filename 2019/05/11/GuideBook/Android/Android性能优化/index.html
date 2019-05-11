@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="#Android性能优化##合理管理内存###节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执">
+<meta name="description" content="Android性能优化 合理管理内存 节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执行结束后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android性能优化">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android性能优化/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#Android性能优化##合理管理内存###节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执">
+<meta property="og:description" content="Android性能优化 合理管理内存 节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执行结束后">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android性能优化">
-<meta name="twitter:description" content="#Android性能优化##合理管理内存###节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执">
+<meta name="twitter:description" content="Android性能优化 合理管理内存 节制的使用Service如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执行结束后">
 
 
 
@@ -399,28 +399,31 @@
       
 
       
-        <h2 id="Android性能优化"><a href="#Android性能优化" class="headerlink" title="#Android性能优化"></a>#Android性能优化</h2><h2 id="合理管理内存"><a href="#合理管理内存" class="headerlink" title="##合理管理内存"></a>##合理管理内存</h2><p>###节制的使用Service<br>如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执行结束后会自动停止，避免了Service的内存泄漏。</p>
-<p>###当界面不可见时释放内存<br>当用户打开了另外一个程序，我们的程序界面已经不可见的时候，我们应当将所有和界面相关的资源进行释放。重写Activity的onTrimMemory()方法，然后在这个方法中监听TRIM_MEMORY_UI_HIDDEN这个级别，一旦触发说明用户离开了程序，此时就可以进行资源释放操作了。</p>
-<p>###当内存紧张时释放内存<br>onTrimMemory()方法还有很多种其他类型的回调，可以在手机内存降低的时候及时通知我们，我们应该根据回调中传入的级别来去决定如何释放应用程序的资源。</p>
-<p>###避免在Bitmap上浪费内存<br>读取一个Bitmap图片的时候，千万不要去加载不需要的分辨率。可以压缩图片等操作。</p>
-<p>###是有优化过的数据集合<br>Android提供了一系列优化过后的数据集合工具类，如SparseArray、SparseBooleanArray、LongSparseArray，使用这些API可以让我们的程序更加高效。HashMap工具类会相对比较低效，因为它需要为每一个键值对都提供一个对象入口，而SparseArray就避免掉了基本数据类型转换成对象数据类型的时间。</p>
-<p>###知晓内存的开支情况</p>
-<ul>
+        <h1 id="Android性能优化"><a href="#Android性能优化" class="headerlink" title="Android性能优化"></a>Android性能优化</h1><hr>
+<h2 id="合理管理内存"><a href="#合理管理内存" class="headerlink" title="合理管理内存"></a>合理管理内存</h2><hr>
+<h3 id="节制的使用Service"><a href="#节制的使用Service" class="headerlink" title="节制的使用Service"></a>节制的使用Service</h3><p>如果应用程序需要使用Service来执行后台任务的话，只有当任务正在执行的时候才应该让Service运行起来。当启动一个Service时，系统会倾向于将这个Service所依赖的进程进行保留，系统可以在LRUcache当中缓存的进程数量也会减少，导致切换程序的时候耗费更多性能。我们可以使用IntentService，当后台任务执行结束后会自动停止，避免了Service的内存泄漏。</p>
+<h3 id="当界面不可见时释放内存"><a href="#当界面不可见时释放内存" class="headerlink" title="当界面不可见时释放内存"></a>当界面不可见时释放内存</h3><p>当用户打开了另外一个程序，我们的程序界面已经不可见的时候，我们应当将所有和界面相关的资源进行释放。重写Activity的onTrimMemory()方法，然后在这个方法中监听TRIM_MEMORY_UI_HIDDEN这个级别，一旦触发说明用户离开了程序，此时就可以进行资源释放操作了。</p>
+<h3 id="当内存紧张时释放内存"><a href="#当内存紧张时释放内存" class="headerlink" title="当内存紧张时释放内存"></a>当内存紧张时释放内存</h3><p>onTrimMemory()方法还有很多种其他类型的回调，可以在手机内存降低的时候及时通知我们，我们应该根据回调中传入的级别来去决定如何释放应用程序的资源。</p>
+<h3 id="避免在Bitmap上浪费内存"><a href="#避免在Bitmap上浪费内存" class="headerlink" title="避免在Bitmap上浪费内存"></a>避免在Bitmap上浪费内存</h3><p>读取一个Bitmap图片的时候，千万不要去加载不需要的分辨率。可以压缩图片等操作。</p>
+<h3 id="是有优化过的数据集合"><a href="#是有优化过的数据集合" class="headerlink" title="是有优化过的数据集合"></a>是有优化过的数据集合</h3><p>Android提供了一系列优化过后的数据集合工具类，如SparseArray、SparseBooleanArray、LongSparseArray，使用这些API可以让我们的程序更加高效。HashMap工具类会相对比较低效，因为它需要为每一个键值对都提供一个对象入口，而SparseArray就避免掉了基本数据类型转换成对象数据类型的时间。</p>
+<h3 id="知晓内存的开支情况"><a href="#知晓内存的开支情况" class="headerlink" title="知晓内存的开支情况"></a>知晓内存的开支情况</h3><ul>
 <li>使用枚举通常会比使用静态常量消耗两倍以上的内存，尽可能不使用枚举</li>
 <li>任何一个Java类，包括匿名类、内部类，都要占用大概500字节的内存空间</li>
 <li>任何一个类的实例要消耗12-16字节的内存开支，因此频繁创建实例也是会在一定程序上影响内存的</li>
 <li>使用HashMap时，即使你只设置了一个基本数据类型的键，比如说int，但是也会按照对象的大小来分配内存，大概是32字节，而不是4字节，因此最好使用优化后的数据集合</li>
 </ul>
-<p>###谨慎使用抽象编程<br>在Android使用抽象编程会带来额外的内存开支，因为抽象的编程方法需要编写额外的代码，虽然这些代码根本执行不到，但是也要映射到内存中，不仅占用了更多的内存，在执行效率上也会有所降低。所以需要合理的使用抽象编程。</p>
-<p>###尽量避免使用依赖注入框架<br>使用依赖注入框架貌似看上去把findViewById()这一类的繁琐操作去掉了，但是这些框架为了要搜寻代码中的注解，通常都需要经历较长的初始化过程，并且将一些你用不到的对象也一并加载到内存中。这些用不到的对象会一直站用着内存空间，可能很久之后才会得到释放，所以可能多敲几行代码是更好的选择。</p>
-<p>###使用多个进程<br>谨慎使用，多数应用程序不该在多个进程中运行的，一旦使用不当，它甚至会增加额外的内存而不是帮我们节省内存。这个技巧比较适用于哪些需要在后台去完成一项独立的任务，和前台是完全可以区分开的场景。比如音乐播放，关闭软件，已经完全由Service来控制音乐播放了，系统仍然会将许多UI方面的内存进行保留。在这种场景下就非常适合使用两个进程，一个用于UI展示，另一个用于在后台持续的播放音乐。关于实现多进程，只需要在Manifast文件的应用程序组件声明一个android:process属性就可以了。进程名可以自定义，但是之前要加个冒号，表示该进程是一个当前应用程序的私有进程。</p>
-<h2 id="分析内存的使用情况"><a href="#分析内存的使用情况" class="headerlink" title="##分析内存的使用情况"></a>##分析内存的使用情况</h2><p>系统不可能将所有的内存都分配给我们的应用程序，每个程序都会有可使用的内存上限，被称为堆大小。不同的手机堆大小不同，如下代码可以获得堆大小：</p>
+<h3 id="谨慎使用抽象编程"><a href="#谨慎使用抽象编程" class="headerlink" title="谨慎使用抽象编程"></a>谨慎使用抽象编程</h3><p>在Android使用抽象编程会带来额外的内存开支，因为抽象的编程方法需要编写额外的代码，虽然这些代码根本执行不到，但是也要映射到内存中，不仅占用了更多的内存，在执行效率上也会有所降低。所以需要合理的使用抽象编程。</p>
+<h3 id="尽量避免使用依赖注入框架"><a href="#尽量避免使用依赖注入框架" class="headerlink" title="尽量避免使用依赖注入框架"></a>尽量避免使用依赖注入框架</h3><p>使用依赖注入框架貌似看上去把findViewById()这一类的繁琐操作去掉了，但是这些框架为了要搜寻代码中的注解，通常都需要经历较长的初始化过程，并且将一些你用不到的对象也一并加载到内存中。这些用不到的对象会一直站用着内存空间，可能很久之后才会得到释放，所以可能多敲几行代码是更好的选择。</p>
+<h3 id="使用多个进程"><a href="#使用多个进程" class="headerlink" title="使用多个进程"></a>使用多个进程</h3><p>谨慎使用，多数应用程序不该在多个进程中运行的，一旦使用不当，它甚至会增加额外的内存而不是帮我们节省内存。这个技巧比较适用于哪些需要在后台去完成一项独立的任务，和前台是完全可以区分开的场景。比如音乐播放，关闭软件，已经完全由Service来控制音乐播放了，系统仍然会将许多UI方面的内存进行保留。在这种场景下就非常适合使用两个进程，一个用于UI展示，另一个用于在后台持续的播放音乐。关于实现多进程，只需要在Manifast文件的应用程序组件声明一个android:process属性就可以了。进程名可以自定义，但是之前要加个冒号，表示该进程是一个当前应用程序的私有进程。</p>
+<h2 id="分析内存的使用情况"><a href="#分析内存的使用情况" class="headerlink" title="分析内存的使用情况"></a>分析内存的使用情况</h2><hr>
+<p>系统不可能将所有的内存都分配给我们的应用程序，每个程序都会有可使用的内存上限，被称为堆大小。不同的手机堆大小不同，如下代码可以获得堆大小：</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ActivityManager manager</span> = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);</span><br><span class="line"><span class="attribute">int heapSize</span> = manager.getMemoryClass();</span><br></pre></td></tr></table></figure>
 <p>结果以MB为单位进行返回，我们开发时应用程序的内存不能超过这个限制，否则会出现OOM。</p>
-<p>###Android的GC操作<br>Android系统会在适当的时机触发GC操作，一旦进行GC操作，就会将一些不再使用的对象进行回收。GC操作会从一个叫做Roots的对象开始检查，所有它可以访问到的对象就说明还在使用当中，应该进行保留，而其他的对系那个就表示已经不再被使用了。</p>
-<p>###Android中内存泄漏<br>Android中的垃圾回收机制并不能防止内存泄漏的出现导致内存泄漏最主要的原因就是某些长存对象持有了一些其它应该被回收的对象的引用，导致垃圾回收器无法去回收掉这些对象，也就是出现内存泄漏了。比如说像Activity这样的系统组件，它又会包含很多的控件甚至是图片，如果它无法被垃圾回收器回收掉的话，那就算是比较严重的内存泄漏情况了。<br>举个例子，在MainActivity中定义一个内部类，实例化内部类对象，在内部类新建一个线程执行死循环，会导致内部类资源无法释放，MainActivity的控件和资源无法释放，导致OOM,可借助一系列工具，比如LeakCanary。</p>
-<h2 id="高性能编码优化"><a href="#高性能编码优化" class="headerlink" title="##高性能编码优化"></a>##高性能编码优化</h2><p>都是一些微优化，在性能方面看不出有什么显著的提升的。使用合适的算法和数据结构是优化程序性能的最主要手段。</p>
-<p>###避免创建不必要的对象<br>不必要的对象我们应该避免创建：</p>
+<h3 id="Android的GC操作"><a href="#Android的GC操作" class="headerlink" title="Android的GC操作"></a>Android的GC操作</h3><p>Android系统会在适当的时机触发GC操作，一旦进行GC操作，就会将一些不再使用的对象进行回收。GC操作会从一个叫做Roots的对象开始检查，所有它可以访问到的对象就说明还在使用当中，应该进行保留，而其他的对系那个就表示已经不再被使用了。</p>
+<h3 id="Android中内存泄漏"><a href="#Android中内存泄漏" class="headerlink" title="Android中内存泄漏"></a>Android中内存泄漏</h3><p>Android中的垃圾回收机制并不能防止内存泄漏的出现导致内存泄漏最主要的原因就是某些长存对象持有了一些其它应该被回收的对象的引用，导致垃圾回收器无法去回收掉这些对象，也就是出现内存泄漏了。比如说像Activity这样的系统组件，它又会包含很多的控件甚至是图片，如果它无法被垃圾回收器回收掉的话，那就算是比较严重的内存泄漏情况了。<br>举个例子，在MainActivity中定义一个内部类，实例化内部类对象，在内部类新建一个线程执行死循环，会导致内部类资源无法释放，MainActivity的控件和资源无法释放，导致OOM,可借助一系列工具，比如LeakCanary。</p>
+<h2 id="高性能编码优化"><a href="#高性能编码优化" class="headerlink" title="高性能编码优化"></a>高性能编码优化</h2><hr>
+<p>都是一些微优化，在性能方面看不出有什么显著的提升的。使用合适的算法和数据结构是优化程序性能的最主要手段。</p>
+<h3 id="避免创建不必要的对象"><a href="#避免创建不必要的对象" class="headerlink" title="避免创建不必要的对象"></a>避免创建不必要的对象</h3><p>不必要的对象我们应该避免创建：</p>
 <ul>
 <li>如果有需要拼接的字符串，那么可以优先考虑使用StringBuffer或者StringBuilder来进行拼接，而不是加号连接符，因为使用加号连接符会创建多余的对象，拼接的字符串越长，加号连接符的性能越低。</li>
 <li>在没有特殊原因的情况下，尽量使用基本数据类型来代替封装数据类型，int比Integer要更加有效，其它数据类型也是一样。</li>
@@ -428,29 +431,26 @@
 <li>基本数据类型的数组也要优于对象数据类型的数组。另外两个平行的数组要比一个封装好的对象数组更加高效，举个例子，Foo[]和Bar[]这样的数组，使用起来要比Custom(Foo,Bar)[]这样的一个数组高效的多。</li>
 </ul>
 <p>尽可能地少创建临时对象，越少的对象意味着越少的GC操作。</p>
-<p>###静态优于抽象<br>如果你并不需要访问一个对系那个中的某些字段，只是想调用它的某些方法来去完成一项通用的功能，那么可以将这个方法设置成静态方法，调用速度提升15%-20%，同时也不用为了调用这个方法去专门创建对象了，也不用担心调用这个方法后是否会改变对象的状态(静态方法无法访问非静态字段)。</p>
-<p>###对常量使用static final修饰符<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> intVal = <span class="number">42</span>;  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">String</span> strVal = <span class="string">"Hello, world!"</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="静态优于抽象"><a href="#静态优于抽象" class="headerlink" title="静态优于抽象"></a>静态优于抽象</h3><p>如果你并不需要访问一个对系那个中的某些字段，只是想调用它的某些方法来去完成一项通用的功能，那么可以将这个方法设置成静态方法，调用速度提升15%-20%，同时也不用为了调用这个方法去专门创建对象了，也不用担心调用这个方法后是否会改变对象的状态(静态方法无法访问非静态字段)。</p>
+<h3 id="对常量使用static-final修饰符"><a href="#对常量使用static-final修饰符" class="headerlink" title="对常量使用static final修饰符"></a>对常量使用static final修饰符</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> intVal = <span class="number">42</span>;  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">String</span> strVal = <span class="string">"Hello, world!"</span>;</span><br></pre></td></tr></table></figure>
 <p>编译器会为上面的代码生成一个初始方法，称为<clinit>方法，该方法会在定义类第一次被使用的时候调用。这个方法会将42的值赋值到intVal当中，从字符串常量表中提取一个引用赋值到strVal上。当赋值完成后，我们就可以通过字段搜寻的方式去访问具体的值了。</clinit></p>
 <p>final进行优化:</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> intVal = <span class="number">42</span>;  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">String</span> strVal = <span class="string">"Hello, world!"</span>;</span><br></pre></td></tr></table></figure>
 <p>这样，定义类就不需要<clinit>方法了，因为所有的常量都会在dex文件的初始化器当中进行初始化。当我们调用intVal时可以直接指向42的值，而调用strVal会用一种相对轻量级的字符串常量方式，而不是字段搜寻的方式。</clinit></p>
 <p>这种优化方式只对基本数据类型以及String类型的常量有效，对于其他数据类型的常量是无效的。</p>
-<p>###使用增强型for循环语法</p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> mCount;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">Counter[] mArray = ...  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> zero() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mArray.length; ++i) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += mArray[i].mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> one() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    Counter[] localArray = mArray;  </span><br><span class="line">    <span class="keyword">int</span> len = localArray.length;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += localArray[i].mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> two() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> (Counter a : mArray) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += a.mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用增强型for循环语法"><a href="#使用增强型for循环语法" class="headerlink" title="使用增强型for循环语法"></a>使用增强型for循环语法</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> mCount;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">Counter[] mArray = ...  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> zero() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mArray.length; ++i) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += mArray[i].mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> one() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    Counter[] localArray = mArray;  </span><br><span class="line">    <span class="keyword">int</span> len = localArray.length;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += localArray[i].mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> two() &#123;  </span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> (Counter a : mArray) &#123;  </span><br><span class="line">        <span class="keyword">sum</span> += a.mCount;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>zero()最慢，每次都要计算mArray的长度，one()相对快得多，two()fangfa在没有JIT(Just In Time Compiler)的设备上是运行最快的，而在有JIT的设备上运行效率和one()方法不相上下，需要注意这种写法需要JDK1.5之后才支持。</p>
 <p>Tips:ArrayList手写的循环比增强型for循环更快，其他的集合没有这种情况。因此默认情况下使用增强型for循环，而遍历ArrayList使用传统的循环方式。</p>
-<p>###多使用系统封装好的API</p>
-<p>系统提供不了的Api完成不了我们需要的功能才应该自己去写，因为使用系统的Api很多时候比我们自己写的代码要快得多，它们的很多功能都是通过底层的汇编模式执行的。<br>举个例子，实现数组拷贝的功能，使用循环的方式来对数组中的每一个元素一一进行赋值当然可行，但是直接使用系统中提供的System.arraycopy()方法会让执行效率快9倍以上。</p>
-<p>###避免在内部调用Getters/Setters方法</p>
-<p>面向对象中封装的思想是不要把类内部的字段暴露给外部，而是提供特定的方法来允许外部操作相应类的内部字段。但在Android中，字段搜寻比方法调用效率高得多，我们直接访问某个字段可能要比通过getters方法来去访问这个字段快3到7倍。但是编写代码还是要按照面向对象思维的，我们应该在能优化的地方进行优化，比如避免在内部调用getters/setters方法。</p>
-<h2 id="布局优化技巧"><a href="#布局优化技巧" class="headerlink" title="##布局优化技巧"></a>##布局优化技巧</h2><p>###重用布局文件<br><strong><include></include></strong></p>
+<h3 id="多使用系统封装好的API"><a href="#多使用系统封装好的API" class="headerlink" title="多使用系统封装好的API"></a>多使用系统封装好的API</h3><p>系统提供不了的Api完成不了我们需要的功能才应该自己去写，因为使用系统的Api很多时候比我们自己写的代码要快得多，它们的很多功能都是通过底层的汇编模式执行的。<br>举个例子，实现数组拷贝的功能，使用循环的方式来对数组中的每一个元素一一进行赋值当然可行，但是直接使用系统中提供的System.arraycopy()方法会让执行效率快9倍以上。</p>
+<h3 id="避免在内部调用Getters-Setters方法"><a href="#避免在内部调用Getters-Setters方法" class="headerlink" title="避免在内部调用Getters/Setters方法"></a>避免在内部调用Getters/Setters方法</h3><p>面向对象中封装的思想是不要把类内部的字段暴露给外部，而是提供特定的方法来允许外部操作相应类的内部字段。但在Android中，字段搜寻比方法调用效率高得多，我们直接访问某个字段可能要比通过getters方法来去访问这个字段快3到7倍。但是编写代码还是要按照面向对象思维的，我们应该在能优化的地方进行优化，比如避免在内部调用getters/setters方法。</p>
+<h2 id="布局优化技巧"><a href="#布局优化技巧" class="headerlink" title="布局优化技巧"></a>布局优化技巧</h2><hr>
+<h3 id="重用布局文件"><a href="#重用布局文件" class="headerlink" title="重用布局文件"></a>重用布局文件</h3><p><strong><include></include></strong></p>
 <p><include>标签可以允许在一个布局当中引入另一个布局，那么比如说我们程序的所有界面都有一个公共的部分，这个时候最好的做法就是将这个公共的部分提取到一个独立的布局中，然后每个界面的布局文件当中来引用这个公共的布局。</include></p>
 <p>Tips:如果我们要在<include>标签中覆写layout属性，必须要将layout_width和layout_height这两个属性也进行覆写，否则覆写xiaoguo将不会生效。</include></p>
 <p><strong><merge></merge></strong></p>
 <p><merge>标签是作为<include>标签的一种辅助扩展来使用的，它的主要作用是为了防止在引用布局文件时引用文件时产生多余的布局嵌套。布局嵌套越多，解析起来就越耗时，性能就越差。因此编写布局文件时应该让嵌套的层数越少越好。</include></merge></p>
 <p>举例：比如在LinearLayout里边使用一个<include>布局。<include>里边又有一个LinearLayout，那么其实就存在了多余的布局嵌套，使用merge可以解决这个问题。</include></include></p>
-<p>###仅在需要时才加载布局</p>
-<p>某个布局当中的元素不是一起显示出来的，普通情况下只显示部分常用的元素，而那些不常用的元素只有在用户进行特定操作时才会显示出来。</p>
+<h3 id="仅在需要时才加载布局"><a href="#仅在需要时才加载布局" class="headerlink" title="仅在需要时才加载布局"></a>仅在需要时才加载布局</h3><p>某个布局当中的元素不是一起显示出来的，普通情况下只显示部分常用的元素，而那些不常用的元素只有在用户进行特定操作时才会显示出来。</p>
 <p>举例：填信息时不是需要全部填的，有一个添加更多字段的选项，当用户需要添加其他信息的时候，才将另外的元素显示到界面上。用VISIBLE性能表现一般，可以用ViewStub。ViewStub也是View的一种，但是没有大小，没有绘制功能，也不参与布局，资源消耗非常低，可以认为完全不影响性能。</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ViewStub   </span><br><span class="line">        android:<span class="attribute">id</span>=<span class="string">"@+id/view_stub"</span>  </span><br><span class="line">        android:<span class="attribute">layout</span>=<span class="string">"@layout/profile_extra"</span>  </span><br><span class="line">        android:<span class="attribute">layout_width</span>=<span class="string">"match_parent"</span>  </span><br><span class="line">        android:<span class="attribute">layout_height</span>=<span class="string">"wrap_content"</span>  </span><br><span class="line">        /&gt;</span><br></pre></td></tr></table></figure>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">public</span> void <span class="literal">on</span>MoreClick() &#123;  </span><br><span class="line">    <span class="attribute">ViewStub</span> viewStub = (ViewStub) findViewById(R.id.view_stub);  </span><br><span class="line">    <span class="attribute">if</span> (viewStub != null) &#123;  </span><br><span class="line">        <span class="attribute">View</span> inflatedView = viewStub.inflate();  </span><br><span class="line">        <span class="attribute">editExtra1</span> = (EditText) inflatedView.findViewById(R.id.edit_extra1);  </span><br><span class="line">        <span class="attribute">editExtra2</span> = (EditText) inflatedView.findViewById(R.id.edit_extra2);  </span><br><span class="line">        <span class="attribute">editExtra3</span> = (EditText) inflatedView.findViewById(R.id.edit_extra3);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -464,6 +464,35 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -479,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Fragment/" rel="next" title="Fragment">
-                <i class="fa fa-chevron-left"></i> Fragment
+              <a href="/2019/05/11/GuideBook/Android/Android开机过程/" rel="next" title="Android开机过程">
+                <i class="fa fa-chevron-left"></i> Android开机过程
               </a>
             
           </div>
@@ -489,8 +518,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Binder机制/" rel="prev" title="Binder机制">
-                Binder机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/EventBus用法详解/" rel="prev" title="EventBus">
+                EventBus <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -645,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android性能优化"><span class="nav-text">#Android性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合理管理内存"><span class="nav-text">##合理管理内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析内存的使用情况"><span class="nav-text">##分析内存的使用情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能编码优化"><span class="nav-text">##高性能编码优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布局优化技巧"><span class="nav-text">##布局优化技巧</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android性能优化"><span class="nav-text">Android性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#合理管理内存"><span class="nav-text">合理管理内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节制的使用Service"><span class="nav-text">节制的使用Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当界面不可见时释放内存"><span class="nav-text">当界面不可见时释放内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当内存紧张时释放内存"><span class="nav-text">当内存紧张时释放内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免在Bitmap上浪费内存"><span class="nav-text">避免在Bitmap上浪费内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是有优化过的数据集合"><span class="nav-text">是有优化过的数据集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知晓内存的开支情况"><span class="nav-text">知晓内存的开支情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谨慎使用抽象编程"><span class="nav-text">谨慎使用抽象编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量避免使用依赖注入框架"><span class="nav-text">尽量避免使用依赖注入框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用多个进程"><span class="nav-text">使用多个进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析内存的使用情况"><span class="nav-text">分析内存的使用情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android的GC操作"><span class="nav-text">Android的GC操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android中内存泄漏"><span class="nav-text">Android中内存泄漏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能编码优化"><span class="nav-text">高性能编码优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#避免创建不必要的对象"><span class="nav-text">避免创建不必要的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态优于抽象"><span class="nav-text">静态优于抽象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对常量使用static-final修饰符"><span class="nav-text">对常量使用static final修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用增强型for循环语法"><span class="nav-text">使用增强型for循环语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多使用系统封装好的API"><span class="nav-text">多使用系统封装好的API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免在内部调用Getters-Setters方法"><span class="nav-text">避免在内部调用Getters/Setters方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布局优化技巧"><span class="nav-text">布局优化技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重用布局文件"><span class="nav-text">重用布局文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#仅在需要时才加载布局"><span class="nav-text">仅在需要时才加载布局</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

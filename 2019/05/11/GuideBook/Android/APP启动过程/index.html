@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#APP启动过程  上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
+<meta name="description" content="APP启动过程   上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APP启动过程">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/APP启动过程/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#APP启动过程  上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
+<meta property="og:description" content="APP启动过程   上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP启动过程">
-<meta name="twitter:description" content="#APP启动过程  上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
+<meta name="twitter:description" content="APP启动过程   上图就可以很好的说明App启动的过程 ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶 Zygote进程孵化出新的应用进程后，会执行Activi">
 <meta name="twitter:image" content="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png">
 
 
@@ -401,7 +401,8 @@
       
 
       
-        <h2 id="APP启动过程"><a href="#APP启动过程" class="headerlink" title="#APP启动过程"></a>#APP启动过程</h2><p><img src="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png" alt></p>
+        <h1 id="APP启动过程"><a href="#APP启动过程" class="headerlink" title="APP启动过程"></a>APP启动过程</h1><hr>
+<p><img src="http://7xntdm.com1.z0.glb.clouddn.com/activity_start_flow.png" alt></p>
 <ul>
 <li>上图就可以很好的说明App启动的过程</li>
 <li>ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶</li>
@@ -418,6 +419,35 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -432,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Activity启动过程全解析/" rel="next" title="Activity启动过程">
-                <i class="fa fa-chevron-left"></i> Activity启动过程
+              <a href="/2019/05/11/GuideBook/Android/ANR问题/" rel="next" title="ANR">
+                <i class="fa fa-chevron-left"></i> ANR
               </a>
             
           </div>
@@ -442,8 +472,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/ANR问题/" rel="prev" title="ANR">
-                ANR <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/WebAR/周工作汇报4.5/" rel="prev" title="本周学习情况">
+                本周学习情况 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -598,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#APP启动过程"><span class="nav-text">#APP启动过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#APP启动过程"><span class="nav-text">APP启动过程</span></a></li></ol></div>
             
 
           </div>

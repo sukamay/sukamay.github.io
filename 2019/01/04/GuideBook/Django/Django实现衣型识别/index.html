@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Django实现衣型识别衣型识别出：类型、颜色、款式   主要物体提取（目标检测），imageAI  裁剪图片，cv2  生成透明背景的图片  类型识别：CNN网络， tf  颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku  一些小函数：  RGB（Tuple、十六进制互转  string、url互转  向数据库中批量添加数据">
+<meta name="description" content="Django实现衣型识别衣型识别出：类型、颜色、款式  [ ] 主要物体提取（目标检测），imageAI [ ] 裁剪图片，cv2 [ ] 生成透明背景的图片 [ ] 类型识别：CNN网络， tf [x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku [ ] 一些小函数： [x] RGB（Tuple、十六进制互转 [ ] string、url互转 [ ] 向数据库中批">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django实现衣型识别">
 <meta property="og:url" content="https://sukamay.github.io/2019/01/04/GuideBook/Django/Django实现衣型识别/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式   主要物体提取（目标检测），imageAI  裁剪图片，cv2  生成透明背景的图片  类型识别：CNN网络， tf  颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku  一些小函数：  RGB（Tuple、十六进制互转  string、url互转  向数据库中批量添加数据">
+<meta property="og:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式  [ ] 主要物体提取（目标检测），imageAI [ ] 裁剪图片，cv2 [ ] 生成透明背景的图片 [ ] 类型识别：CNN网络， tf [x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku [ ] 一些小函数： [x] RGB（Tuple、十六进制互转 [ ] string、url互转 [ ] 向数据库中批">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T16:24:37.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django实现衣型识别">
-<meta name="twitter:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式   主要物体提取（目标检测），imageAI  裁剪图片，cv2  生成透明背景的图片  类型识别：CNN网络， tf  颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku  一些小函数：  RGB（Tuple、十六进制互转  string、url互转  向数据库中批量添加数据">
+<meta name="twitter:description" content="Django实现衣型识别衣型识别出：类型、颜色、款式  [ ] 主要物体提取（目标检测），imageAI [ ] 裁剪图片，cv2 [ ] 生成透明背景的图片 [ ] 类型识别：CNN网络， tf [x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku [ ] 一些小函数： [x] RGB（Tuple、十六进制互转 [ ] string、url互转 [ ] 向数据库中批">
 
 
 
@@ -368,15 +368,15 @@
       
         <h1 id="Django实现衣型识别"><a href="#Django实现衣型识别" class="headerlink" title="Django实现衣型识别"></a>Django实现衣型识别</h1><p>衣型识别出：类型、颜色、款式</p>
 <ul>
-<li style="list-style: none"><input type="checkbox"> 主要物体提取（目标检测），<a href="https://imageai-cn.readthedocs.io/zh_CN/latest/ImageAI_Object_Detection.html#" target="_blank" rel="noopener">imageAI</a></li>
-<li style="list-style: none"><input type="checkbox"> 裁剪图片，cv2</li>
-<li style="list-style: none"><input type="checkbox"> 生成透明背景的图片</li>
-<li style="list-style: none"><input type="checkbox"> 类型识别：CNN网络， tf</li>
-<li style="list-style: none"><input type="checkbox" checked> 颜色和配色提取：haishoku 库，获取主要颜色和配色，<a href="https://github.com/LanceGin/haishoku" target="_blank" rel="noopener">haishoku</a></li>
-<li style="list-style: none"><input type="checkbox"> 一些小函数：<ul>
-<li style="list-style: none"><input type="checkbox" checked> RGB（Tuple、十六进制互转</li>
-<li style="list-style: none"><input type="checkbox"> string、url互转</li>
-<li style="list-style: none"><input type="checkbox"> 向数据库中批量添加数据</li>
+<li>[ ] 主要物体提取（目标检测），<a href="https://imageai-cn.readthedocs.io/zh_CN/latest/ImageAI_Object_Detection.html#" target="_blank" rel="noopener">imageAI</a></li>
+<li>[ ] 裁剪图片，cv2</li>
+<li>[ ] 生成透明背景的图片</li>
+<li>[ ] 类型识别：CNN网络， tf</li>
+<li>[x] 颜色和配色提取：haishoku 库，获取主要颜色和配色，<a href="https://github.com/LanceGin/haishoku" target="_blank" rel="noopener">haishoku</a></li>
+<li>[ ] 一些小函数：<ul>
+<li>[x] RGB（Tuple、十六进制互转</li>
+<li>[ ] string、url互转</li>
+<li>[ ] 向数据库中批量添加数据</li>
 </ul>
 </li>
 </ul>
@@ -389,6 +389,35 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     

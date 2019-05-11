@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="#RecyclerView和ListView的异同 ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
+<meta name="description" content="RecyclerView和ListView的异同  ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RecyclerView和ListView的异同">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#RecyclerView和ListView的异同 ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
+<meta property="og:description" content="RecyclerView和ListView的异同  ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView和ListView的异同">
-<meta name="twitter:description" content="#RecyclerView和ListView的异同 ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
+<meta name="twitter:description" content="RecyclerView和ListView的异同  ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
 
 
 
@@ -399,7 +399,8 @@
       
 
       
-        <h2 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="#RecyclerView和ListView的异同"></a>#RecyclerView和ListView的异同</h2><ul>
+        <h1 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="RecyclerView和ListView的异同"></a>RecyclerView和ListView的异同</h1><hr>
+<ul>
 <li>ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将导致ListView性能展示迟缓。而在RecyclerView中使用RecyclerView.ViewHolder则变成了必须，尽管实现起来稍显复杂，但它却解决了ListView面临的上述不使用自定义ViewHolder时所面临的问题。</li>
 <li><p>我们知道ListView只能在垂直方向上滚动，Android API没有提供ListView在水平方向上面滚动的支持。或许有多种方式实现水平滑动，但是请想念我，ListView并不是设计来做这件事情的。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：</p>
 <ol>
@@ -433,6 +434,35 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -447,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/SurfaceView/" rel="next" title="为什么要使用SurfaceView来实现动画？">
-                <i class="fa fa-chevron-left"></i> 为什么要使用SurfaceView来实现动画？
+              <a href="/2019/05/11/GuideBook/Android/事件分发机制/" rel="next" title="事件分发机制">
+                <i class="fa fa-chevron-left"></i> 事件分发机制
               </a>
             
           </div>
@@ -457,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/MVP/" rel="prev" title="MVP">
-                MVP <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/SurfaceView/" rel="prev" title="为什么要使用SurfaceView来实现动画？">
+                为什么要使用SurfaceView来实现动画？ <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -613,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RecyclerView和ListView的异同"><span class="nav-text">#RecyclerView和ListView的异同</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RecyclerView和ListView的异同"><span class="nav-text">RecyclerView和ListView的异同</span></a></li></ol></div>
             
 
           </div>

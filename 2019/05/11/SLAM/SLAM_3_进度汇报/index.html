@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
+<meta name="description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：  \begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SLAM_3_进度汇报">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/SLAM/SLAM_3_进度汇报/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
+<meta property="og:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：  \begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SLAM_3_进度汇报">
-<meta name="twitter:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
+<meta name="twitter:description" content="SLAM_3_进度汇报ppt汇报内容： 符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：  \begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix}">
 
 
 
@@ -389,12 +389,19 @@
 
       
         <h1 id="SLAM-3-进度汇报"><a href="#SLAM-3-进度汇报" class="headerlink" title="SLAM_3_进度汇报"></a>SLAM_3_进度汇报</h1><p>ppt汇报内容：</p>
-<p>符号定义：<br>$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$<br>运动和观测方程记为：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$<br>去除噪声的理想情况下：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) \  z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
-<p>纯视觉SLAM（$z_{k,j}​$ 为像素坐标）：<br>$$<br>\begin{matrix} z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$<br>纯视觉SLAM（$y_{k,j}$为相机坐标）：<br>$$<br>\begin{matrix} y’_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
-<p>对于方程（4）已知任意两个量可求第三个量，$y_j，x_k​$ 待求</p>
+<p>符号定义：<br>$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$<br>运动和观测方程记为：</p>
+<script type="math/tex; mode=display">
+\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>去除噪声的理想情况下：</p>
+<script type="math/tex; mode=display">
+\begin{matrix}x_k = f(x_{k-1},u_k) \\  z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>纯视觉SLAM（$z_{k,j}​$ 为像素坐标）：</p>
+<script type="math/tex; mode=display">
+\begin{matrix} z_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>纯视觉SLAM（$y_{k,j}$为相机坐标）：</p>
+<script type="math/tex; mode=display">
+\begin{matrix} y'_{k,j} = h(y_j,x_k)  \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>对于方程（4）已知任意两个量可求第三个量，$y_j，x_k​$ 待求</p>
 <p>初始化：零时刻相机坐标与世界坐标重合，即 $y_{0,j} = y’_{0,j}$</p>
-<p>后端优化（考虑噪声影响）：<br>$$<br>\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M<br>$$</p>
-<p>初始化已知3d信息——ICP——单目中，只得到像素坐标，二维和三维获取位姿——对级几何</p>
+<p>后端优化（考虑噪声影响）：</p>
+<script type="math/tex; mode=display">
+\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M</script><p>初始化已知3d信息——ICP——单目中，只得到像素坐标，二维和三维获取位姿——对级几何</p>
 
       
     </div>
@@ -404,6 +411,35 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -419,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/SLAM/SLAM_2_矩阵相关知识/" rel="next" title="SLAM_2_矩阵相关知识">
-                <i class="fa fa-chevron-left"></i> SLAM_2_矩阵相关知识
+              <a href="/2019/05/11/Plan/newYearResolution/" rel="next" title="newYearResolution">
+                <i class="fa fa-chevron-left"></i> newYearResolution
               </a>
             
           </div>
@@ -429,8 +465,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/SLAM/SLAM_1_视觉SLAM十四讲/" rel="prev" title="SLAM_1 视觉SLAM十四讲">
-                SLAM_1 视觉SLAM十四讲 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/SLAM/R-CNN/" rel="prev" title="R-CNN">
+                R-CNN <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

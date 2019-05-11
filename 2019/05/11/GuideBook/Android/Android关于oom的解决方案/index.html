@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="#Android关于OOM的解决方案 ##OOM  内存溢出（Out Of Memory） 也就是说内存占有量超过了VM所分配的最大  ##出现OOM的原因  加载对象过大 相应资源过多，来不及释放  ##如何解决  在内存引用上做些处理，常用的有软引用、强化引用、弱引用 在内存中加载图片时直接在内存中作处理，如边界压缩 动态回收内存 优化Dalvik虚拟机的堆内存分配 自定义堆内存大小">
+<meta name="description" content="Android关于OOM的解决方案OOM 内存溢出（Out Of Memory） 也就是说内存占有量超过了VM所分配的最大  出现OOM的原因 加载对象过大 相应资源过多，来不及释放  如何解决 在内存引用上做些处理，常用的有软引用、强化引用、弱引用 在内存中加载图片时直接在内存中作处理，如边界压缩 动态回收内存 优化Dalvik虚拟机的堆内存分配 自定义堆内存大小">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android关于OOM的解决方案">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android关于oom的解决方案/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#Android关于OOM的解决方案 ##OOM  内存溢出（Out Of Memory） 也就是说内存占有量超过了VM所分配的最大  ##出现OOM的原因  加载对象过大 相应资源过多，来不及释放  ##如何解决  在内存引用上做些处理，常用的有软引用、强化引用、弱引用 在内存中加载图片时直接在内存中作处理，如边界压缩 动态回收内存 优化Dalvik虚拟机的堆内存分配 自定义堆内存大小">
+<meta property="og:description" content="Android关于OOM的解决方案OOM 内存溢出（Out Of Memory） 也就是说内存占有量超过了VM所分配的最大  出现OOM的原因 加载对象过大 相应资源过多，来不及释放  如何解决 在内存引用上做些处理，常用的有软引用、强化引用、弱引用 在内存中加载图片时直接在内存中作处理，如边界压缩 动态回收内存 优化Dalvik虚拟机的堆内存分配 自定义堆内存大小">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android关于OOM的解决方案">
-<meta name="twitter:description" content="#Android关于OOM的解决方案 ##OOM  内存溢出（Out Of Memory） 也就是说内存占有量超过了VM所分配的最大  ##出现OOM的原因  加载对象过大 相应资源过多，来不及释放  ##如何解决  在内存引用上做些处理，常用的有软引用、强化引用、弱引用 在内存中加载图片时直接在内存中作处理，如边界压缩 动态回收内存 优化Dalvik虚拟机的堆内存分配 自定义堆内存大小">
+<meta name="twitter:description" content="Android关于OOM的解决方案OOM 内存溢出（Out Of Memory） 也就是说内存占有量超过了VM所分配的最大  出现OOM的原因 加载对象过大 相应资源过多，来不及释放  如何解决 在内存引用上做些处理，常用的有软引用、强化引用、弱引用 在内存中加载图片时直接在内存中作处理，如边界压缩 动态回收内存 优化Dalvik虚拟机的堆内存分配 自定义堆内存大小">
 
 
 
@@ -399,19 +399,15 @@
       
 
       
-        <p>#Android关于OOM的解决方案</p>
-<p>##OOM</p>
-<ul>
+        <h1 id="Android关于OOM的解决方案"><a href="#Android关于OOM的解决方案" class="headerlink" title="Android关于OOM的解决方案"></a>Android关于OOM的解决方案</h1><h2 id="OOM"><a href="#OOM" class="headerlink" title="OOM"></a>OOM</h2><ul>
 <li>内存溢出（Out Of Memory）</li>
 <li>也就是说内存占有量超过了VM所分配的最大</li>
 </ul>
-<p>##出现OOM的原因</p>
-<ol>
+<h2 id="出现OOM的原因"><a href="#出现OOM的原因" class="headerlink" title="出现OOM的原因"></a>出现OOM的原因</h2><ol>
 <li>加载对象过大</li>
 <li>相应资源过多，来不及释放</li>
 </ol>
-<p>##如何解决</p>
-<ol>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><ol>
 <li>在内存引用上做些处理，常用的有软引用、强化引用、弱引用</li>
 <li>在内存中加载图片时直接在内存中作处理，如边界压缩</li>
 <li>动态回收内存</li>
@@ -428,6 +424,35 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -442,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Android几种进程/" rel="next" title="Android几种进程">
-                <i class="fa fa-chevron-left"></i> Android几种进程
+              <a href="/2019/05/11/GuideBook/Android/Activity启动过程全解析/" rel="next" title="Activity启动过程">
+                <i class="fa fa-chevron-left"></i> Activity启动过程
               </a>
             
           </div>
@@ -452,8 +477,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Activity启动过程全解析/" rel="prev" title="Activity启动过程">
-                Activity启动过程 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/ANR问题/" rel="prev" title="ANR">
+                ANR <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -516,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -589,6 +623,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android关于OOM的解决方案"><span class="nav-text">Android关于OOM的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OOM"><span class="nav-text">OOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出现OOM的原因"><span class="nav-text">出现OOM的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决"><span class="nav-text">如何解决</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
