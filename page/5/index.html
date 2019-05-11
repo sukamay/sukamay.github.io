@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Asynctask源码分析/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -304,7 +304,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Asynctask源码分析/" itemprop="url">AsyncTask</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="url">Handler内存泄漏分析及解决</a></h1>
         
 
         <div class="post-meta">
@@ -368,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/Asynctask源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Asynctask源码分析/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,12 +401,17 @@
       
         
           
-            <h2 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="#AsyncTask"></a>#AsyncTask</h2><p>首先从Android3.0开始，系统要求网络访问必须在子线程中进行，否则网络访问将会失败并抛出NetworkOnMainThreadException这个异常，这样做是为了避免主线程由于耗时操作所阻塞从而出现ANR现象。AsyncTask封装了线程池和Handler。AsyncTask有两个线程池：SerialExecutor和THREAD_POOL_EXECUTOR。前者是用于任务的排队，默认是串行的线程池：后者用于真正的执行任务。AsyncTask还有一个Handler，叫InternalHandler，用于将执行环境从线程池切换到主线程。AsyncTask内部就是通过InternalHandler来发送任务执行的进度以及执行结束等消息。</p>
-<p>AsyncTask排队执行过程：系统先把参数Params封装为FutureTask对象，它相当于Runnable，接着FutureTask交给SerialExcutor的execute方法，它先把FutureTask插入到任务队列tasks中，如果这个时候没有正在活动的AsyncTask任务，那么就会执行下一个AsyncTask任务，同时当一个AsyncTask任务执行完毕之后，AsyncTask会继续执行其他任务直到所有任务都被执行为止。</p>
-<hr>
-<p>关于线程池，AsyncTask对应的线程池ThreadPoolExecutor都是进程范围内共享的，都是static的，所以是AsyncTask控制着进程范围内所有的子类实例。由于这个限制的存在，当使用默认线程池时，如果线程数超过线程池的最大容量，线程池就会爆掉(3.0默认串行执行，不会出现这个问题)。针对这种情况。可以尝试自定义线程池，配合AsyncTask使用。</p>
-
-          
+          #Handler内存泄漏分析及解决###一、介绍
+首先，请浏览下面这段handler代码：
+12345678public class SampleActivity extends Activity &#123;  private final Handler mLeakyHandler = new H
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -455,7 +460,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Git操作/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -474,7 +479,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Git操作/" itemprop="url">Git 操作</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="url">MVC,MVP,MVVM的区别</a></h1>
         
 
         <div class="post-meta">
@@ -538,8 +543,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/Git操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Git操作/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -571,399 +576,25 @@
       
         
           
-            <h1 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h1><h2 id="git-命令"><a href="#git-命令" class="headerlink" title="git 命令"></a>git 命令</h2><ul>
-<li>创建本地仓库</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git init</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>获取远程仓库</li>
-</ul>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">[url</span>]</span><br><span class="line">例：git <span class="keyword">clone</span> <span class="title">https</span>://github.com/you/yourpro.git</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建远程仓库</li>
-</ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加一个新的 remote 远程仓库</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">add</span> <span class="selector-attr">[remote-name]</span> <span class="selector-attr">[url]</span></span><br><span class="line">例：<span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">add</span> <span class="selector-tag">origin</span> <span class="selector-tag">https</span>:<span class="comment">//github.com/you/yourpro.git</span></span><br><span class="line"><span class="selector-tag">origin</span>：相当于该远程仓库的别名</span><br><span class="line"></span><br><span class="line"><span class="comment">// 列出所有 remote 的别名</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 列出所有 remote 的 url</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">-v</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除一个 renote</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">rm</span> <span class="selector-attr">[name]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 重命名 remote</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">rename</span> <span class="selector-attr">[old-name]</span> <span class="selector-attr">[new-name]</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从本地仓库中删除</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">rm</span> <span class="keyword">file</span>.txt         <span class="comment">// 从版本库中移除，删除文件</span></span><br><span class="line">git <span class="keyword">rm</span> <span class="keyword">file</span>.txt -cached <span class="comment">// 从版本库中移除，不删除原始文件</span></span><br><span class="line">git <span class="keyword">rm</span> -r xxx           <span class="comment">// 从版本库中删除指定文件夹</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从本地仓库中添加新的文件</li>
-</ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">add</span> .              <span class="comment"> // 添加所有文件</span></span><br><span class="line">git <span class="built_in">add</span> <span class="built_in">file</span>.txt       <span class="comment"> // 添加指定文件</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>提交，把缓存内容提交到 HEAD 里</li>
-</ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"注释"</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>撤销</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 撤销最近的一个提交.</span><br><span class="line">git revert HEAD</span><br><span class="line"></span><br><span class="line">// 取消 <span class="keyword">commit</span> + <span class="keyword">add</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--mixed</span></span><br><span class="line"></span><br><span class="line">// 取消 <span class="keyword">commit</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--soft</span></span><br><span class="line"></span><br><span class="line">// 取消 <span class="keyword">commit</span> + <span class="keyword">add</span> + <span class="keyword">local</span> working</span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--hard</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>把本地提交 push 到远程服务器</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">push</span> <span class="selector-attr">[remote-name]</span> <span class="selector-attr">[loca-branch]</span>:<span class="selector-attr">[remote-branch]</span></span><br><span class="line">例：<span class="selector-tag">git</span> <span class="selector-tag">push</span> <span class="selector-tag">origin</span> <span class="selector-tag">master</span><span class="selector-pseudo">:master</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看状态</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git status</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从远程库中下载新的改动</li>
-</ul>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch <span class="string">[remote-name]</span>/<span class="string">[branch]</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>合并下载的改动到分支</li>
-</ul>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge <span class="string">[remote-name]</span>/<span class="string">[branch]</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从远程库中下载新的改动</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pull = fetch + <span class="keyword">merge</span></span><br><span class="line"></span><br><span class="line">git pull [remote-<span class="keyword">name</span>] [branch]</span><br><span class="line">例：git pull origin <span class="keyword">master</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>分支</li>
-</ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 列出分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">branch</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个新的分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">branch</span> (branch-name)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除一个分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">branch</span> <span class="selector-tag">-d</span> (branch-nam)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除 remote 的分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">push</span> (remote-name) <span class="selector-pseudo">:(remote-branch)</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>切换分支</li>
-</ul>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 切换到一个分支</span></span><br><span class="line">git checkout [branch-<span class="keyword">name</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建并切换到该分支</span></span><br><span class="line">git checkout -b [branch-<span class="keyword">name</span>]</span><br></pre></td></tr></table></figure>
-<p>##与github建立ssh通信，让Git操作免去输入密码的繁琐。</p>
-<ul>
-<li><p>首先呢，我们先建立ssh密匙。</p>
-<blockquote>
-<p>ssh key must begin with ‘ssh-ed25519’, ‘ssh-rsa’, ‘ssh-dss’, ‘ecdsa-sha2-nistp256’, ‘ecdsa-sha2-nistp384’, or ‘ecdsa-sha2-nistp521’.  – from github</p>
-</blockquote>
-<p>根据以上文段我们可以知道github所支持的ssh密匙类型，这里我们创建ssh-rsa密匙。<br>在command line 中输入以下指令:<code>ssh-keygen -t rsa</code>去创建一个ssh-rsa密匙。如果你并不需要为你的密匙创建密码和修改名字，那么就一路回车就OK，如果你需要，请您自行Google翻译，因为只是英文问题。</p>
-<blockquote>
-<p>$ ssh-keygen -t rsa<br>Generating public/private rsa key pair.<br>//您可以根据括号中的路径来判断你的.ssh文件放在了什么地方<br>Enter file in which to save the key (/c/Users/Liang Guan Quan/.ssh/id_rsa):</p>
-</blockquote>
-</li>
-<li><p>到 <a href="https://github.com/settings/keys" target="_blank" rel="noopener">https://github.com/settings/keys</a> 这个地址中去添加一个新的SSH key，然后把你的xx.pub文件下的内容文本都复制到Key文本域中，然后就可以提交了。</p>
-</li>
-<li>添加完成之后 我们用<code>ssh git@github.com</code> 命令来连通一下github，如果你在response里面看到了你github账号名，那么就说明配置成功了。  <em>let’s enjoy github ;)</em></li>
-</ul>
-<h2 id="gitignore"><a href="#gitignore" class="headerlink" title="gitignore"></a>gitignore</h2><hr>
-<p>在本地仓库根目录创建 .gitignore 文件。Win7 下不能直接创建，可以创建 “.gitignore.” 文件，后面的标点自动被忽略；</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/.idea</span>          <span class="string">//</span> 过滤指定文件夹</span><br><span class="line"><span class="string">/fd/</span>*           <span class="string">//</span> 忽略根目录下的 <span class="string">/fd/</span> 目录的全部内容；</span><br><span class="line">*<span class="string">.iml</span>           <span class="string">//</span> 过滤指定的所有文件</span><br><span class="line">!<span class="string">.gitignore</span>     <span class="string">//</span> 不忽略该文件</span><br></pre></td></tr></table></figure>
+          #MVC,MVP,MVVM的区别#MVC软件可以分为三部分
 
-          
-        
-      
-    </div>
-    
-    
-    
+视图（View）:用户界面
+控制器（Controller）:业务逻辑
+模型（Model）:数据保存
 
-    
+各部分之间的通信方式如下：
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Fragment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Fragment/" itemprop="url">Fragment</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/Fragment/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Fragment/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#Fragment</p>
-<p>##为何产生</p>
-<ul>
-<li>同时适配手机和平板、UI和逻辑的共享。</li>
-</ul>
-<p>##介绍</p>
-<ul>
-<li>Fragment也会被加入回退栈中。</li>
-<li>Fragment拥有自己的生命周期和接受、处理用户的事件</li>
-<li>可以动态的添加、替换和移除某个Fragment</li>
-</ul>
-<p>##生命周期</p>
-<ul>
-<li>必须依存于Activity</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20140719225005356?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Mou icon"></p>
-<ul>
-<li>Fragment依附于Activity的生命状态</li>
-<li><img src="https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/FlowchartDiagram.jpg?raw=true" alt="Mou icon"></li>
-</ul>
-<p>生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命周期方法的含义吧。</p>
-<p>##Fragment生命周期方法含义：</p>
-<ul>
-<li><p><code>public void onAttach(Context context)</code></p>
-<ul>
-<li>onAttach方法会在Fragment于窗口关联后立刻调用。从该方法开始，就可以通过Fragment.getActivity方法获取与Fragment关联的窗口对象，但因为Fragment的控件未初始化，所以不能够操作控件。</li>
-</ul>
-</li>
-<li><p><code>public void onCreate(Bundle savedInstanceState)</code></p>
-<ul>
-<li>在调用完onAttach执行完之后立刻调用onCreate方法，可以在Bundle对象中获取一些在Activity中传过来的数据。通常会在该方法中读取保存的状态，获取或初始化一些数据。在该方法中不要进行耗时操作，不然窗口不会显示。</li>
-</ul>
-</li>
-<li><p><code>public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)</code></p>
-<ul>
-<li>该方法是Fragment很重要的一个生命周期方法，因为会在该方法中创建在Fragment显示的View，其中inflater是用来装载布局文件的，container是<code>&lt;fragment&gt;</code>标签的父标签对应对象，savedInstanceState参数可以获取Fragment保存的状态，如果未保存那么就为null。</li>
-</ul>
-</li>
-<li><p><code>public void onViewCreated(View view,Bundle savedInstanceState)</code></p>
-<ul>
-<li>Android在创建完Fragment中的View对象之后，会立刻回调该方法。其种view参数就是onCreateView中返回的view，而bundle对象用于一般用途。</li>
-</ul>
-</li>
-<li><p><code>public void onActivityCreated(Bundle savedInstanceState)</code></p>
-<ul>
-<li>在Activity的onCreate方法执行完之后，Android系统会立刻调用该方法，表示窗口已经初始化完成，从这一个时候开始，就可以在Fragment中使用getActivity().findViewById(Id);来操控Activity中的view了。</li>
-</ul>
-</li>
-<li><p><code>public void onStart()</code></p>
-<ul>
-<li>这个没啥可讲的，但有一个细节需要知道，当系统调用该方法的时候，fragment已经显示在ui上，但还不能进行互动，因为onResume方法还没执行完。</li>
-</ul>
-</li>
-<li><p><code>public void onResume()</code></p>
-<ul>
-<li>该方法为fragment从创建到显示Android系统调用的最后一个生命周期方法，调用完该方法时候，fragment就可以与用户互动了。</li>
-</ul>
-</li>
-<li><p><code>public void onPause()</code></p>
-<ul>
-<li>fragment由活跃状态变成非活跃状态执行的第一个回调方法，通常可以在这个方法中保存一些需要临时暂停的工作。如保存音乐播放进度，然后在onResume中恢复音乐播放进度。</li>
-</ul>
-</li>
-<li><p><code>public void onStop()</code></p>
-<ul>
-<li>当onStop返回的时候，fragment将从屏幕上消失。</li>
-</ul>
-</li>
-<li><p><code>public void onDestoryView()</code></p>
-<ul>
-<li>该方法的调用意味着在 <code>onCreateView</code> 中创建的视图都将被移除。</li>
-</ul>
-</li>
-<li><p><code>public void onDestroy()</code></p>
-<ul>
-<li>Android在Fragment不再使用时会调用该方法，要注意的是~这时Fragment还和Activity藕断丝连！并且可以获得Fragment对象，但无法对获得的Fragment进行任何操作（呵~呵呵~我已经不听你的了）。</li>
-</ul>
-</li>
-<li><p><code>public void onDetach()</code></p>
-<ul>
-<li>为Fragment生命周期中的最后一个方法，当该方法执行完后，Fragment与Activity不再有关联(分手！我们分手！！(╯‵□′)╯︵┻━┻)。</li>
-</ul>
-</li>
-</ul>
-<p>##Fragment比Activity多了几个额外的生命周期回调方法：</p>
-<ul>
-<li>onAttach(Activity):当Fragment和Activity发生关联时使用</li>
-<li>onCreateView(LayoutInflater, ViewGroup, Bundle):创建该Fragment的视图</li>
-<li>onActivityCreate(Bundle):当Activity的onCreate方法返回时调用</li>
-<li>onDestoryView():与onCreateView相对应，当该Fragment的视图被移除时调用</li>
-<li>onDetach():与onAttach相对应，当Fragment与Activity关联被取消时调用</li>
-</ul>
-<p>###注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现</p>
-<p>##Fragment与Activity之间的交互</p>
-<ul>
-<li>Fragment与Activity之间的交互可以通过<code>Fragment.setArguments(Bundle args)</code>以及<code>Fragment.getArguments()</code>来实现。</li>
-</ul>
-<p>##Fragment状态的持久化。<br>由于Activity会经常性的发生配置变化，所以依附它的Fragment就有需要将其状态保存起来问题。下面有两个常用的方法去将Fragment的状态持久化。</p>
-<ul>
-<li>方法一：<ul>
-<li>可以通过<code>protected void onSaveInstanceState(Bundle outState)</code>,<code>protected void onRestoreInstanceState(Bundle savedInstanceState)</code> 状态保存和恢复的方法将状态持久化。</li>
-</ul>
-</li>
-<li>方法二(更方便,让Android自动帮我们保存Fragment状态)：<ul>
-<li>我们只需要将Fragment在Activity中作为一个变量整个保存，只要保存了Fragment，那么Fragment的状态就得到保存了，所以呢…..<ul>
-<li><code>FragmentManager.putFragment(Bundle bundle, String key, Fragment fragment)</code> 是在Activity中保存Fragment的方法。</li>
-<li><code>FragmentManager.getFragment(Bundle bundle, String key)</code> 是在Activity中获取所保存的Frament的方法。</li>
-</ul>
-</li>
-<li>很显然，key就传入Fragment的id，fragment就是你要保存状态的fragment，但，我们注意到上面的两个方法，第一个参数都是Bundle，这就意味着<em>FragmentManager</em>是通过Bundle去保存Fragment的。但是，这个方法仅仅能够保存Fragment中的控件状态，比如说EditText中用户已经输入的文字（<em>注意！在这里，控件需要设置一个id，否则Android将不会为我们保存控件的状态</em>），而Fragment中需要持久化的变量依然会丢失，但依然有解决办法，就是利用方法一！</li>
-<li>下面给出状态持久化的事例代码：  <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/** Activity中的代码 **/</span></span><br><span class="line"> FragmentB fragmentB;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="built_in">void</span> onCreate(<span class="meta">@Nullable</span> Bundle savedInstanceState) &#123;</span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">       setContentView(R.layout.fragment_activity);</span><br><span class="line">       <span class="keyword">if</span>( savedInstanceState != <span class="literal">null</span> )&#123;</span><br><span class="line">           fragmentB = (FragmentB) getSupportFragmentManager().getFragment(savedInstanceState,<span class="string">"fragmentB"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       init();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="built_in">void</span> onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">       <span class="keyword">if</span>( fragmentB != <span class="literal">null</span> )&#123;</span><br><span class="line">           getSupportFragmentManager().putFragment(outState,<span class="string">"fragmentB"</span>,fragmentB);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">super</span>.onSaveInstanceState(outState);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** Fragment中保存变量的代码 **/</span></span><br><span class="line"></span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> View onCreateView(LayoutInflater inflater, <span class="meta">@Nullable</span> ViewGroup container, <span class="meta">@Nullable</span> Bundle savedInstanceState) &#123;</span><br><span class="line">       AppLog.e(<span class="string">"onCreateView"</span>);</span><br><span class="line">       <span class="keyword">if</span> ( <span class="literal">null</span> != savedInstanceState )&#123;</span><br><span class="line">           <span class="built_in">String</span> savedString = savedInstanceState.getString(<span class="string">"string"</span>);</span><br><span class="line">           <span class="comment">//得到保存下来的string</span></span><br><span class="line">       &#125;</span><br><span class="line">       View root = inflater.inflate(R.layout.fragment_a,<span class="literal">null</span>);</span><br><span class="line">       <span class="keyword">return</span> root;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="built_in">void</span> onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">       outState.putString(<span class="string">"string"</span>,<span class="string">"anAngryAnt"</span>);</span><br><span class="line">       <span class="keyword">super</span>.onSaveInstanceState(outState);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>##静态的使用Fragment</p>
-<ol>
-<li>继承Fragment，重写onCreateView决定Fragment的布局</li>
-<li>在Activity中声明此Fragment,就和普通的View一样</li>
-</ol>
-<p>##Fragment常用的API</p>
-<ul>
-<li>android.support.v4.app.Fragment 主要用于定义Fragment</li>
-<li>android.support.v4.app.FragmentManager 主要用于在Activity中操作Fragment，可以使用FragmentManager.findFragmenById，FragmentManager.findFragmentByTag等方法去找到一个Fragment</li>
-<li>android.support.v4.app.FragmentTransaction 保证一些列Fragment操作的原子性，熟悉事务这个词</li>
-<li><p>主要的操作都是FragmentTransaction的方法<br>(一般我们为了向下兼容，都使用support.v4包里面的Fragment)<br><code></code></p>
-<p>  getFragmentManager() // Fragment若使用的是support.v4包中的，那就使用getSupportFragmentManager代替</p>
-</li>
-</ul>
-<p></p>
-<ul>
-<li>主要的操作都是FragmentTransaction的方法</li>
-</ul>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">FragmentTransaction transaction = fm.benginTransatcion();<span class="comment">//开启一个事务</span></span><br><span class="line">transaction.add() </span><br><span class="line"><span class="comment">//往Activity中添加一个Fragment</span></span><br><span class="line"></span><br><span class="line">transaction.<span class="built_in">remove</span>() </span><br><span class="line"><span class="comment">//从Activity中移除一个Fragment，如果被移除的Fragment没有添加到回退栈（回退栈后面会详细说），这个Fragment实例将会被销毁。</span></span><br><span class="line"></span><br><span class="line">transaction.replace()</span><br><span class="line"><span class="comment">//使用另一个Fragment替换当前的，实际上就是remove()然后add()的合体~</span></span><br><span class="line"></span><br><span class="line">transaction.hide()</span><br><span class="line"><span class="comment">//隐藏当前的Fragment，仅仅是设为不可见，并不会销毁</span></span><br><span class="line"></span><br><span class="line">transaction.show()</span><br><span class="line"><span class="comment">//显示之前隐藏的Fragment</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">detach</span>()</span><br><span class="line"><span class="comment">//当fragment被加入到回退栈的时候，该方法与*remove()*的作用是相同的，</span></span><br><span class="line"><span class="comment">//反之，该方法只是将fragment从视图中移除，</span></span><br><span class="line"><span class="comment">//之后仍然可以通过*attach()*方法重新使用fragment，</span></span><br><span class="line"><span class="comment">//而调用了*remove()*方法之后，</span></span><br><span class="line"><span class="comment">//不仅将Fragment从视图中移除，fragment还将不再可用。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">attach</span>()</span><br><span class="line"><span class="comment">//重建view视图，附加到UI上并显示。</span></span><br><span class="line"></span><br><span class="line">transatcion.commit()</span><br><span class="line"><span class="comment">//提交一个事务</span></span><br></pre></td></tr></table></figure>
-<p>##管理Fragment回退栈</p>
-<ul>
-<li>跟踪回退栈状态<ul>
-<li>我们通过实现<em><code>OnBackStackChangedListener</code></em>接口来实现回退栈状态跟踪，具体如下<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> XXX <span class="keyword">implements</span> FragmentManager.OnBackStackChangedListener </span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 实现接口所要实现的方法 **/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="built_in">void</span> onBackStackChanged() &#123;</span><br><span class="line">       <span class="comment">//do whatevery you want</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** 设置回退栈监听接口 **／</span></span><br><span class="line"><span class="comment">   getSupportFragmentManager().addOnBackStackChangedListener(this);</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>管理回退栈<ul>
-<li><code>FragmentTransaction.addToBackStack(String)</code> <em>–将一个刚刚添加的Fragment加入到回退栈中</em></li>
-<li><code>getSupportFragmentManager().getBackStackEntryCount()</code> <em>－获取回退栈中实体数量</em></li>
-<li><code>getSupportFragmentManager().popBackStack(String name, int flags)</code> <em>－根据name立刻弹出栈顶的fragment</em></li>
-<li><code>getSupportFragmentManager().popBackStack(int id, int flags)</code> <em>－根据id立刻弹出栈顶的fragment</em></li>
-</ul>
-</li>
-</ul>
-
-          
+View传送指令到Controller
+Controller完成业务逻辑后，要求Model改变状态
+Mod
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1128,21 +759,18 @@
       
         
           
-            <h2 id="ListView详解"><a href="#ListView详解" class="headerlink" title="#ListView详解"></a>#ListView详解</h2><p>直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。</p>
-<p>Adpater在ListView和数据源之间起到了一个桥梁的作用</p>
-<p>###RecycleBin机制</p>
-<p>RecycleBin机制是ListView能够实现成百上千条数据都不会OOM最重要的一个原因。RecycleBin是AbsListView的一个内部类。</p>
-<ul>
-<li>RecycleBin当中使用mActiveViews这个数组来存储View，调用这个方法后就会根据传入的参数来将ListView中的指定元素存储到mActiveViews中。</li>
-<li>mActiveViews当中所存储的View，一旦被获取了之后就会从mActiveViews当中移除，下次获取同样位置的时候将会返回null，所以mActiveViews不能被重复利用。</li>
-<li>addScrapView()用于将一个废弃的View进行缓存，该方法接收一个View参数，当有某个View确定要废弃掉的时候（比如滚动出了屏幕）就应该调用这个方法来对View进行缓存，RecycleBin当中使用mScrapV</li>
-<li>iews和mCurrentScrap这两个List来存储废弃View。</li>
-<li>getScrapView 用于从废弃缓存中取出一个View，这些废弃缓存中的View是没有顺序可言的，因此getScrapView()方法中的算法也非常简单，就是直接从mCurrentScrap当中获取尾部的一个scrap view进行返回。</li>
-<li>我们都知道Adapter当中可以重写一个getViewTypeCount()来表示ListView中有几种类型的数据项，而setViewTypeCount()方法的作用就是为每种类型的数据项都单独启用一个RecycleBin缓存机制。</li>
-</ul>
-<p>View的流程分三步，onMeasure()用于测量View的大小，onLayout()用于确定View的布局，onDraw()用于将View绘制到界面上。</p>
-
-          
+          #ListView详解直接继承自AbsListView，AbsListView继承自AdapterView，AdapterView又继承自ViewGroup。
+Adpater在ListView和数据源之间起到了一个桥梁的作用
+###RecycleBin机制
+RecycleBin机制是ListView
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/Listview详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1191,7 +819,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1210,7 +838,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="url">Handler内存泄漏分析及解决</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVP/" itemprop="url">MVP</a></h1>
         
 
         <div class="post-meta">
@@ -1274,8 +902,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/MVP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVP/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1307,261 +935,17 @@
       
         
           
-            <h2 id="Handler内存泄漏分析及解决"><a href="#Handler内存泄漏分析及解决" class="headerlink" title="#Handler内存泄漏分析及解决"></a>#Handler内存泄漏分析及解决</h2><p>###一、介绍</p>
-<p>首先，请浏览下面这段handler代码：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Handler</span> mLeakyHandler = <span class="keyword">new</span> <span class="type">Handler</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="comment">// ... </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在使用handler时，这是一段很常见的代码。但是，它却会造成严重的内存泄漏问题。在实际编写中，我们往往会得到如下警告：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">⚠ In <span class="keyword">Android, </span>Handler classes <span class="keyword">should </span><span class="keyword">be </span>static <span class="keyword">or </span>leaks might occur.</span><br></pre></td></tr></table></figure>
-<p>###二、分析</p>
-<p>1、 Android角度</p>
-<p>当Android应用程序启动时，framework会为该应用程序的主线程创建一个Looper对象。这个Looper对象包含一个简单的消息队列Message Queue，并且能够循环的处理队列中的消息。这些消息包括大多数应用程序framework事件，例如Activity生命周期方法调用、button点击等，这些消息都会被添加到消息队列中并被逐个处理。</p>
-<p>另外，主线程的Looper对象会伴随该应用程序的整个生命周期。</p>
-<p>然后，当主线程里，实例化一个Handler对象后，它就会自动与主线程Looper的消息队列关联起来。所有发送到消息队列的消息Message都会拥有一个对Handler的引用，所以当Looper来处理消息时，会据此回调[Handler#handleMessage(Message)]方法来处理消息。</p>
-<p>2、 Java角度</p>
-<p>在java里，非静态内部类 和 匿名类 都会潜在的引用它们所属的外部类。但是，静态内部类却不会。</p>
-<p>###三、泄漏来源</p>
-<p>请浏览下面一段代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Handler mLeakyHandler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mLeakyHandler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">    &#125;, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当activity结束(finish)时，里面的延时消息在得到处理前，会一直保存在主线程的消息队列里持续10分钟。而且，由上文可知，这条消息持有对handler的引用，而handler又持有对其外部类（在这里，即SampleActivity）的潜在引用。这条引用关系会一直保持直到消息得到处理，从而，这阻止了SampleActivity被垃圾回收器回收，同时造成应用程序的泄漏。</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
-<p>=======<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>c67abfcfd66909095068cb5f0c8632dc5547131b</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>###四、泄漏解决方案</p>
-<p>首先，上面已经明确了内存泄漏来源：</p>
-<p>只要有未处理的消息，那么消息会引用handler，非静态的handler又会引用外部类，即Activity，导致Activity无法被回收，造成泄漏；</p>
-<p>Runnable类属于非静态匿名类，同样会引用外部类。</p>
-<p>为了解决遇到的问题，我们要明确一点：静态内部类不会持有对外部类的引用。所以，我们可以把handler类放在单独的类文件中，或者使用静态内部类便可以避免泄漏。</p>
-<p>另外，如果想要在handler内部去调用所在的外部类Activity，那么可以在handler内部使用弱引用的方式指向所在Activity，这样统一不会导致内存泄漏。</p>
-<p>对于匿名类Runnable，同样可以将其设置为静态类。因为静态的匿名类不会持有对外部类的引用。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of static inner classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt; mActivity;</span><br><span class="line"></span><br><span class="line">    public <span class="type">MyHandler</span>(<span class="type">SampleActivity</span> activity) &#123;</span><br><span class="line">      mActivity = <span class="keyword">new</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt;(activity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="type">SampleActivity</span> activity = mActivity.get();</span><br><span class="line">      <span class="keyword">if</span> (activity != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">MyHandler</span> mHandler = <span class="keyword">new</span> <span class="type">MyHandler</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of anonymous classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class when they are "static".</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="keyword">final</span> <span class="type">Runnable</span> sRunnable = <span class="keyword">new</span> <span class="type">Runnable</span>() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      public void run() &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mHandler.postDelayed(sRunnable, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>###五、小结</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
-<p>原文链接：</p>
-<h1 id="http-www-jianshu-com-p-cb9b4b71a820"><a href="#http-www-jianshu-com-p-cb9b4b71a820" class="headerlink" title="http://www.jianshu.com/p/cb9b4b71a820"></a><a href="http://www.jianshu.com/p/cb9b4b71a820" target="_blank" rel="noopener">http://www.jianshu.com/p/cb9b4b71a820</a></h1><p>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
-<p>原文链接：</p>
-<p><a href="http://www.jianshu.com/p/cb9b4b71a820" target="_blank" rel="noopener">http://www.jianshu.com/p/cb9b4b71a820</a></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>c67abfcfd66909095068cb5f0c8632dc5547131b</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+          #MVP###为什么需要MVP
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/SurfaceView/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/SurfaceView/" itemprop="url">为什么要使用SurfaceView来实现动画？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/SurfaceView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/SurfaceView/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##为什么要使用SurfaceView来实现动画？</p>
-<p>###因为View的绘图存在以下缺陷：</p>
-<ol>
-<li>View缺乏双缓冲机制</li>
-<li>当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片</li>
-<li>新线程无法直接更新View组件</li>
-</ol>
-<p>##SurfaceView的绘图机制</p>
-<ul>
-<li>一般会与SurfaceView结合使用</li>
-<li>调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder</li>
-</ul>
-<p>##SurfaceHolder提供了如下方法来获取Canvas对象</p>
-<ol>
-<li>Canvas lockCanvas():锁定整个SurfaceView对象，获取该Surface上的Canvas</li>
-<li>Canvas lockCanvas(Rect dirty):锁定SurfaceView上Rect划分的区域，获取该Surface上的Canvas</li>
-<li>unlockCanvasAndPost(canvas):释放绘图、提交所绘制的图形，需要注意，当调用SurfaceHolder上的unlockCanvasAndPost方法之后，该方法之前所绘制的图形还处于缓冲之中，下一次lockCanvas()方法锁定的区域可能会“遮挡”它</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SurfaceViewTest</span> <span class="keyword">extends</span> <span class="title">Activity</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment">// SurfaceHolder负责维护SurfaceView上绘制的内容</span></span><br><span class="line">	<span class="keyword">private</span> SurfaceHolder holder;</span><br><span class="line">	<span class="keyword">private</span> Paint paint;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		setContentView(R.layout.main);</span><br><span class="line">		paint = <span class="keyword">new</span> Paint();</span><br><span class="line">		SurfaceView surface = (SurfaceView) findViewById(R.id.show);</span><br><span class="line">		<span class="comment">// 初始化SurfaceHolder对象</span></span><br><span class="line">		holder = surface.getHolder();</span><br><span class="line">		holder.addCallback(<span class="keyword">new</span> Callback()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceChanged</span><span class="params">(SurfaceHolder arg0, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2,</span></span></span><br><span class="line"><span class="function"><span class="params">					<span class="keyword">int</span> arg3)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceCreated</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 锁定整个SurfaceView</span></span><br><span class="line">				Canvas canvas = holder.lockCanvas();</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				Bitmap back = BitmapFactory.decodeResource(</span><br><span class="line">					SurfaceViewTest.<span class="keyword">this</span>.getResources()</span><br><span class="line">					, R.drawable.sun);</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				canvas.drawBitmap(back, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line">				<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				<span class="comment">// 重新锁一次，"持久化"上次所绘制的内容</span></span><br><span class="line">				holder.lockCanvas(<span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceDestroyed</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">// 为surface的触摸事件绑定监听器</span></span><br><span class="line">		surface.setOnTouchListener(<span class="keyword">new</span> OnTouchListener()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View source, MotionEvent event)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 只处理按下事件</span></span><br><span class="line">				<span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_DOWN)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> cx = (<span class="keyword">int</span>) event.getX();</span><br><span class="line">					<span class="keyword">int</span> cy = (<span class="keyword">int</span>) event.getY();</span><br><span class="line">					<span class="comment">// 锁定SurfaceView的局部区域，只更新局部内容</span></span><br><span class="line">					Canvas canvas = holder.lockCanvas(<span class="keyword">new</span> Rect(cx - <span class="number">50</span>,</span><br><span class="line">							cy - <span class="number">50</span>, cx + <span class="number">50</span>, cy + <span class="number">50</span>));</span><br><span class="line">					<span class="comment">// 保存canvas的当前状态</span></span><br><span class="line">					canvas.save();</span><br><span class="line">					<span class="comment">// 旋转画布</span></span><br><span class="line">					canvas.rotate(<span class="number">30</span>, cx, cy);</span><br><span class="line">					paint.setColor(Color.RED);</span><br><span class="line">					<span class="comment">// 绘制红色方块</span></span><br><span class="line">					canvas.drawRect(cx - <span class="number">40</span>, cy - <span class="number">40</span>, cx, cy, paint);</span><br><span class="line">					<span class="comment">// 恢复Canvas之前的保存状态</span></span><br><span class="line">					canvas.restore();</span><br><span class="line">					paint.setColor(Color.GREEN);</span><br><span class="line">					<span class="comment">// 绘制绿色方块</span></span><br><span class="line">					canvas.drawRect(cx, cy, cx + <span class="number">40</span>, cy + <span class="number">40</span>, paint);</span><br><span class="line">					<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">					holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的程序为SurfaceHolder添加了一个CallBack实例，该Callback中定义了如下三个方法：</p>
-<ul>
-<li>void surfaceChanged(SurfaceHolder holder, int format, int width, int height):当一个surface的格式或大小发生改变时回调该方法。</li>
-<li>void surfaceCreated(SurfaceHolder holder):当surface被创建时回调该方法</li>
-<li>void surfaceDestroyed(SurfaceHolder holder):当surface将要被销毁时回调该方法</li>
-</ul>
-
-          
+尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bu
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/MVP/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1726,32 +1110,16 @@
       
         
           
-            <h2 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="#RecyclerView和ListView的异同"></a>#RecyclerView和ListView的异同</h2><ul>
-<li>ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将导致ListView性能展示迟缓。而在RecyclerView中使用RecyclerView.ViewHolder则变成了必须，尽管实现起来稍显复杂，但它却解决了ListView面临的上述不使用自定义ViewHolder时所面临的问题。</li>
-<li><p>我们知道ListView只能在垂直方向上滚动，Android API没有提供ListView在水平方向上面滚动的支持。或许有多种方式实现水平滑动，但是请想念我，ListView并不是设计来做这件事情的。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：</p>
-<ol>
-<li>LinearLayoutManager，可以支持水平和竖直方向上滚动的列表。</li>
-<li>StaggeredGridLayoutManager，可以支持交叉网格风格的列表，类似于瀑布流或者Pinterest。</li>
-<li>GridLayoutManager，支持网格展示，可以水平或者竖直滚动，如展示图片的画廊。</li>
-</ol>
-</li>
-<li><p>列表动画是一个全新的、拥有无限可能的维度。起初的Android API中，删除或添加item时，item是无法产生动画效果的。后面随着Android的进化，Google的Chat Hasse推荐使用ViewPropertyAnimator属性动画来实现上述需求。<br>相比较于ListView，RecyclerView.ItemAnimator则被提供用于在RecyclerView添加、删除或移动item时处理动画效果。同时，如果你比较懒，不想自定义ItemAnimator，你还可以使用DefaultItemAnimator。</p>
-</li>
-<li><p>ListView的Adapter中，getView是最重要的方法，它将视图跟position绑定起来，是所有神奇的事情发生的地方。同时我们也能够通过registerDataObserver在Adapter中注册一个观察者。RecyclerView也有这个特性，RecyclerView.AdapterDataObserver就是这个观察者。ListView有三个Adapter的默认实现，分别是ArrayAdapter、CursorAdapter和SimpleCursorAdapter。然而，RecyclerView的Adapter则拥有除了内置的内DB游标和ArrayList的支持之外的所有功能。RecyclerView.Adapter的实现的，我们必须采取措施将数据提供给Adapter，正如BaseAdapter对ListView所做的那样。</p>
-</li>
-<li><p>在ListView中如果我们想要在item之间添加间隔符，我们只需要在布局文件中对ListView添加如下属性即可：</p>
-  <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">android:</span>divider=<span class="string">"@android:color/transparent"</span></span><br><span class="line"><span class="symbol">android:</span>dividerHeight=<span class="string">"5dp"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ListView通过AdapterView.OnItemClickListener接口来探测点击事件。而RecyclerView则通过RecyclerView.OnItemTouchListener接口来探测触摸事件。它虽然增加了实现的难度，但是却给予开发人员拦截触摸事件更多的控制权限。</p>
-</li>
-<li><p>ListView可以设置选择模式，并添加MultiChoiceModeListener，如下所示：</p>
-  <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);</span><br><span class="line">listView.setMultiChoiceModeListener(<span class="keyword">new</span> MultiChoiceModeListener() &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onCreateActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> onItemCheckedStateChanged(ActionMode mode, <span class="keyword">int</span> position,</span><br><span class="line"><span class="keyword">long</span> id, <span class="keyword">boolean</span> checked) &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onActionItemClicked</span><span class="params">(ActionMode mode, MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.menu_item_delete_crime:</span><br><span class="line">            CrimeAdapter adapter = (CrimeAdapter)getListAdapter();</span><br><span class="line">            CrimeLab crimeLab = CrimeLab.get(getActivity());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = adapter.getCount() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (getListView().isItemChecked(i)) &#123;</span><br><span class="line">                    crimeLab.deleteCrime(adapter.getItem(i));</span><br><span class="line">                &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        mode.finish();</span><br><span class="line">        adapter.notifyDataSetChanged();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onPrepareActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onDestroyActionMode</span><span class="params">(ActionMode mode)</span> </span>&#123; ... &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>  而RecyclerView则没有此功能。</p>
-</li>
-</ul>
-<p><a href="http://www.cnblogs.com/littlepanpc/p/4497290.html" target="_blank" rel="noopener">http://www.cnblogs.com/littlepanpc/p/4497290.html</a></p>
-
-          
+          #RecyclerView和ListView的异同
+ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHol
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1800,7 +1168,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/事件分发机制/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/SurfaceView/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1819,7 +1187,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/事件分发机制/" itemprop="url">事件分发机制</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/SurfaceView/" itemprop="url">为什么要使用SurfaceView来实现动画？</a></h1>
         
 
         <div class="post-meta">
@@ -1883,8 +1251,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/事件分发机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/事件分发机制/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/SurfaceView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/SurfaceView/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1916,18 +1284,24 @@
       
         
           
-            <h1 id="事件分发机制"><a href="#事件分发机制" class="headerlink" title="事件分发机制"></a>事件分发机制</h1><hr>
-<ul>
-<li>对于一个根ViewGroup来说,发生点击事件首先调用dispatchTouchEvent</li>
-<li>如果这个ViewGroup的onIterceptTouchEvent返回true就表示它要拦截当前事件,接着这个ViewGroup的onTouchEvent就会被调用.如果onIterceptTouchEvent返回false,那么就会继续向下调用子View的dispatchTouchEvent方法</li>
-<li>当一个View需要处理事件的时候,如果它没有设置onTouchListener,那么直接调用onTouchEvent.如果设置了Listenter 那么就要看Listener的onTouch方法返回值.为true就不调,为false就调onTouchEvent</li>
-<li>View的默认实现会在onTouchEvent里面把touch事件解析成Click之类的事件</li>
-<li>点击事件传递顺序 Activity -&gt; Window -&gt; View</li>
-<li>一旦一个元素拦截了某事件,那么一个事件序列里面后续的Move,Down事件都会交给它处理.并且它的onInterceptTouchEvent不会再调用</li>
-<li>View的onTouchEvent默认都会消耗事件,除非它的clickable和longClickable都是false(不可点击),但是enable属性不会影响</li>
-</ul>
+          ##为什么要使用SurfaceView来实现动画？
+###因为View的绘图存在以下缺陷：
 
-          
+View缺乏双缓冲机制
+当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片
+新线程无法直接更新View组件
+
+##SurfaceView的绘图机制
+
+一般会与SurfaceView结合使
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/SurfaceView/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1976,7 +1350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/插件化技术学习/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/EventBus用法详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1995,7 +1369,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="url">Android动态加载dex技术初探</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/EventBus用法详解/" itemprop="url">EventBus</a></h1>
         
 
         <div class="post-meta">
@@ -2059,8 +1433,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/插件化技术学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/EventBus用法详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/EventBus用法详解/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2092,58 +1466,189 @@
       
         
           
-            <p>###Android动态加载dex技术初探</p>
-<p><a href="http://blog.csdn.net/u013478336/article/details/50734108" target="_blank" rel="noopener">http://blog.csdn.net/u013478336/article/details/50734108</a></p>
-<p>Android使用Dalvik虚拟机加载可执行程序，所以不能直接加载基于class的jar，而是需要将class转化为dex字节码。</p>
-<p>Android支持动态加载的两种方式是：DexClassLoader和PathClassLoader，DexClassLoader可加载jar/apk/dex，且支持从SD卡加载；PathClassLoader据说只能加载已经安装在Android系统内APK文件。</p>
-<p>###Android插件化基础</p>
-<p>Android简单来说就是如下操作：</p>
-<ul>
-<li>开发者将插件代码封装成Jar或者APK</li>
-<li>宿主下载或者从本地加载Jar或者APK到宿主中</li>
-<li>将宿主调用插件中的算法或者Android特定的Class（如Activity）</li>
-</ul>
-<p>###插件化开发—动态加载技术加载已安装和未安装的apk</p>
-<p><a href="http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="noopener">http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a><br>为什么引入动态加载技术？</p>
-<ul>
-<li>一个应用程序dex文件的方法数最大不能超过65536个</li>
-<li>可以让应用程序实现插件化、插拔式结构，对后期维护有益</li>
-</ul>
-<p>什么是动态加载技术</p>
-<p>动态加载技术就是使用类加载器加载相应的apk、dex、jar(必须含有dex文件)，再通过反射获得该apk、dex、jar内部的资源（class、图片、color等等）进而供宿主app使用。</p>
-<p>关于动态加载使用的类加载器</p>
-<ul>
-<li>PathClassLoader - 只能加载已经安装的apk，即/data/app目录下的apk。</li>
-<li>DexClassLoader  - 能加载手机中未安装的apk、jar、dex，只要能在找到对应的路径。</li>
-</ul>
-<h2 id="插件化技术学习"><a href="#插件化技术学习" class="headerlink" title="#插件化技术学习"></a>#插件化技术学习</h2><p>原因：</p>
-<p>各大厂商都碰到了AndroidNative平台的瓶颈：</p>
-<ol>
-<li>从技术上讲，业务逻辑的复杂代码急剧膨胀，各大厂商陆续触到65535方法数的天花板；同时，对模块热更新提出了更高的要求。</li>
-<li>在业务层面上，功能模块的解耦以及维护团队的分离也是大势所趋。</li>
-</ol>
-<p>插件化技术主要解决两个问题：</p>
-<ol>
-<li>代码加载</li>
-<li>资源加载</li>
-</ol>
-<p>###代码加载<br>类的加载可以使用Java的ClassLoader机制，还需要组件生命周期管理。</p>
-<p>###资源加载<br>用AssetManager的隐藏方法addAssetPath。</p>
-<p>##Android插件化原理解析——Hook机制之动态代理 </p>
-<p>使用代理机制进行API Hook进而达到方法增强。</p>
-<p>静态代理</p>
-<p>动态代理：可以简单理解为JVM可以在运行时帮我们动态生成一系列的代理类。</p>
-<p>###代理Hook</p>
-<p>如果我们自己创建代理对象，然后把原始对象替换为我们的代理对象，就可以在这个代理对象中为所欲为了；修改参数，替换返回值，称之为Hook。</p>
-<p>整个Hook过程简要总结如下：</p>
-<ol>
-<li>寻找Hook点，原则是静态变量或者单例对象，尽量Hook public的对象和方法，非public不保证每个版本都一样，需要适配。</li>
-<li>选择合适的代理方式，如果是接口可以用动态代理；如果是类可以手动写代理也可以使用cglib。</li>
-<li>偷梁换柱－用代理对象替换原始对象</li>
-</ol>
-<p>##Android插件化原理解析——Hook机制之Binder Hook </p>
+          #EventBus###概述
+EventBus是一款针对Android优化的发布/订阅（publish/subscribe）事件总线。主要功能是替代Intent,Handler,BroadCast在Fragment，Activity，Service，线程之间传递消息。简化了应用程序内各组件间、组件与
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/EventBus用法详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/开源框架源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="url">框架源码分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          #框架源码分析###Retrofit###EventBus###Glide
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/开源框架源码分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2308,47 +1813,191 @@
       
         
           
-            <h2 id="Zygote和System进程的启动过程"><a href="#Zygote和System进程的启动过程" class="headerlink" title="#Zygote和System进程的启动过程"></a>#Zygote和System进程的启动过程</h2><h2 id="init脚本的启动"><a href="#init脚本的启动" class="headerlink" title="##init脚本的启动"></a>##init脚本的启动</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+------------+    +-------+   +-----------+</span><br><span class="line">|Linux Kernel+--&gt; |init.rc+-&gt; |app_process|</span><br><span class="line">+------------+    +-------+   +-----------+</span><br><span class="line">               create <span class="keyword">and</span> public          </span><br><span class="line">                <span class="built_in"> server </span>socket</span><br></pre></td></tr></table></figure>
-<p>linux内核加载完成后，运行init.rc脚本</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service zygote <span class="string">/system/bin/app_process</span> -Xzygote <span class="string">/system/bin</span> <span class="params">--zygote</span> <span class="params">--start-system-server</span> socket zygote stream 666</span><br></pre></td></tr></table></figure>
-<ul>
-<li>/system/bin/app_process Zygote服务启动的进程名</li>
-<li>–start-system-server 表明Zygote启动完成之后，要启动System进程。</li>
-<li>socket zygote stream 666 在Zygote启动时，创建一个权限为666的socket。此socket用来请求Zygote创建新进程。socket的fd保存在名称为“ANDROID_SOCKET_zygote”的环境变量中。</li>
-</ul>
-<h2 id="Zygote进程的启动过程"><a href="#Zygote进程的启动过程" class="headerlink" title="##Zygote进程的启动过程"></a>##Zygote进程的启动过程</h2><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">             create rumtime                            </span><br><span class="line">+-----------+            +----------+                  </span><br><span class="line">|<span class="string">app_process+----------&gt; </span>|<span class="string">ZygoteInit</span>|<span class="string">                  </span></span><br><span class="line"><span class="string">+-----------+            +-----+----+                  </span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string">                               </span>|<span class="string"> registerZygoteSocket()</span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string"> +------+  startSystemServer() </span>|<span class="string">                       </span></span><br><span class="line"><span class="string"> </span>|<span class="string">System</span>|<span class="string"> &lt;-------+            </span>|<span class="string">                       </span></span><br><span class="line"><span class="string"> +------+   fork               </span>|<span class="string"> runSelectLoopMode()   </span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string">                               v</span></span><br></pre></td></tr></table></figure>
-<p><strong>app_process进程</strong></p>
-<hr>
-<p>/system/bin/app_process 启动时创建了一个AppRuntime对象。通过AppRuntime对象的start方法，通过JNI调用创建了一个虚拟机实例，然后运行com.android.internal.os.ZygoteInit类的静态main方法，传递true(boolean startSystemServer)参数。</p>
-<p><strong>ZygoteInit类</strong></p>
-<hr>
-<p>ZygoteInit类的main方法运行时，会通过registerZygoteSocket方法创建一个供ActivityManagerService使用的server socket。然后通过调用startSystemServer方法来启动System进程。最后通过runSelectLoopMode来等待AMS的新建进程请求。</p>
-<ol>
-<li>在registerZygoteSocket方法中，通过名为ANDROID_SOCKET_zygote的环境获取到zygote启动时创建的socket的fd，然后以此来创建server socket。</li>
-<li>在startSystemServer方法中，通过Zygote.forkSystemServer方法创建了一个子进程，并将其用户和用户组的ID设置为1000。</li>
-<li>在runSelectLoopMode方法中，会将之前建立的server socket保存起来。然后进入一个无限循环，在其中通过selectReadable方法，监听socket是否有数据可读。有数据则说明接收到了一个请求。<br>selectReadable方法会返回一个整数值index。如果index为0，则说明这个是AMS发过来的连接请求。这时会与AMS建立一个新的socket连接，并包装成ZygoteConnection对象保存起来。如果index大于0，则说明这是AMS发过来的一个创建新进程的请求。此时会取出之前保存的ZygoteConnection对象，调用其中的runOnce方法创建新进程。调用完成后将connection删除。<br>这就是Zygote处理一次AMS请求的过程。</li>
-</ol>
-<h2 id="System进程的启动"><a href="#System进程的启动" class="headerlink" title="##System进程的启动"></a>##System进程的启动</h2><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">+                                                     </span><br><span class="line">|<span class="string">                                                     </span></span><br><span class="line">|<span class="string">                                                     </span></span><br><span class="line"><span class="string">v fork()                                              </span></span><br><span class="line"><span class="string">+--------------+                                      </span></span><br><span class="line">|<span class="string">System Process</span>|<span class="string">                                      </span></span><br><span class="line"><span class="string">+------+-------+                                      </span></span><br><span class="line"><span class="string">       </span>|<span class="string">                                              </span></span><br><span class="line"><span class="string">       </span>|<span class="string"> RuntimeInit.zygoteInit() commonInit, zygoteInitNative                                             </span></span><br><span class="line"><span class="string">       </span>|<span class="string"> init1()  SurfaceFlinger, SensorServic...     </span></span><br><span class="line"><span class="string">       </span>|<span class="string">                                              </span></span><br><span class="line"><span class="string">       </span>|<span class="string">                                              </span></span><br><span class="line"><span class="string">       </span>|<span class="string"> init2() +------------+                       </span></span><br><span class="line"><span class="string">       +-------&gt; </span>|<span class="string">ServerThread</span>|<span class="string">                       </span></span><br><span class="line"><span class="string">       </span>|<span class="string">         +----+-------+                       </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string"> AMS, PMS, WMS...              </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       v              v</span></span><br></pre></td></tr></table></figure>
-<p>System进程是在ZygoteInit的handleSystemServerProcess中开始启动的。</p>
-<ol>
-<li>首先，因为System进程是直接fork Zygote进程的，所以要先通过closeServerSocket方法关掉server socket。</li>
-<li>调用RuntimeInit.zygoteInit方法进一步启动System进程。在zygoteInit中，通过commonInit方法设置时区和键盘布局等通用信息，然后通过zygoteInitNative方法启动了一个Binder线程池。最后通过invokeStaticMain方法调用SystemServer类的静态Main方法。</li>
-<li>SystemServer类的main通过JNI调用cpp实现的init1方法。在init1方法中，会启动各种以C++开发的系统服务（例如SurfaceFlinger和SensorService）。然后回调ServerServer类的init2方法来启动以Java开发的系统服务。</li>
-<li>在init2方法中，首先会新建名为”android.server.ServerThread”的ServerThread线程，并调用其start方法。然后在该线程中启动各种Service（例如AMS，PMS，WMS等）。启动的方式是调用对应Service类的静态main方法。</li>
-<li>首先，AMS会被创建，但未注册到ServerManager中。然后PMS被创建，AMS这时候才注册到ServerManager中。然后到ContentService、WMS等。<br>注册到ServerManager中时会制定Service的名字，其后其他进程可以通过这个名字来获取到Binder Proxy对象，以访问Service提供的服务。</li>
-<li>执行到这里，System就将系统的关键服务启动起来了，这时候其他进程便可利用这些Service提供的基础服务了。</li>
-<li>最后会调用ActivityManagerService的systemReady方法，在该方法里会启动系统界面以及Home程序。</li>
-</ol>
-<p>##Android进程启动</p>
-<hr>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">   +----------------------+       +-------+      +----------+   +----------------+   +-----------+                         </span><br><span class="line">   |<span class="string">ActivityManagerService</span>|<span class="string">       </span>|<span class="string">Process</span>|<span class="string">      </span>|<span class="string">ZygoteInit</span>|<span class="string">   </span>|<span class="string">ZygoteConnection</span>|<span class="string">   </span>|<span class="string">RuntimeInit</span>|<span class="string">                         </span></span><br><span class="line"><span class="string">   +--------------+-------+       +---+---+      +-----+----+   +-----------+----+   +------+----+                         </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string"> startProcessLocked()                 </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">+---------------&gt; </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">  start()          </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">  "android.app.ActivityThread"      </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  +-----------------&gt; </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">openZygoteSocketIfNeeded()           </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   +------+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">      </span>|<span class="string">         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string"> &lt;----+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">sZygoteWriter.write(arg)             </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   +------+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">      </span>|<span class="string">         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">      </span>|<span class="string">         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string"> &lt;----+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   +--------------&gt; </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">runSelectLoopMode() </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                +-----------------+  </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                 </span>|<span class="string">  </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string"> &lt;---------------+  </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">   acceptCommandPeer()              </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">  runOnce()         </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                +------------------&gt; </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">forkAndSpecialize()                           </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    +-------------+ </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">             </span>|<span class="string"> </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string"> &lt;-----------+ </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">  handleChildProc()                           </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string"> zygoteInit()  </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    +-------------&gt; </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">in^okeStaticMain()            </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               +----------------&gt;             </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">("android.app.ActivityThread")</span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  +                   +                +                    +               +</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>AMS向Zygote发起请求（通过之前保存的socket），携带各种参数，包括“android.app.ActivityThread”。</li>
-<li>Zygote进程fork自己，然后在新Zygote进程中调用RuntimeInit.zygoteInit方法进行一系列的初始化（commonInit、Binder线程池初始化等）。</li>
-<li>新Zygote进程中调用ActivityThread的main函数，并启动消息循环。</li>
-</ul>
+          #Zygote和System进程的启动过程##init脚本的启动12345+------------+    +-------+   +-----------+|Linux Kernel+--&gt; |init.rc+-&gt; |app_process|+------------+    +--
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/Zygote和System进程的启动过程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/插件化技术学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="url">Android动态加载dex技术初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/插件化技术学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          ###Android动态加载dex技术初探
+http://blog.csdn.net/u013478336/article/details/50734108
+Android使用Dalvik虚拟机加载可执行程序，所以不能直接加载基于class的jar，而是需要将class转化为dex字节码。
+Andr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/插件化技术学习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2435,7 +2084,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

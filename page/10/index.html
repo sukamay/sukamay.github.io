@@ -285,190 +285,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/GuideBook/hexo搭建github博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/17/GuideBook/hexo搭建github博客/" itemprop="url">Djangohexo搭建github博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T17:48:03+08:00">
-                2019-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/17/GuideBook/hexo搭建github博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/17/GuideBook/hexo搭建github博客/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="hexo搭建github博客"><a href="#hexo搭建github博客" class="headerlink" title="hexo搭建github博客"></a>hexo搭建github博客</h1><h2 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a>1. 前提条件</h2><ul>
-<li>已有GitHub账号</li>
-<li>（Mac）已安装Xcode command line tools</li>
-<li>安装的工具我使用的是npm和brew</li>
-</ul>
-<h2 id="2-安装git与Node-js"><a href="#2-安装git与Node-js" class="headerlink" title="2. 安装git与Node.js"></a>2. 安装git与Node.js</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line">brew install node</span><br></pre></td></tr></table></figure>
-<h2 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3. 安装Hexo"></a>3. 安装Hexo</h2><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
-<p>为了便于发布到GitHub上，建议同时安装<code>hexo-deployer-git</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-初始化，建立博客项目"><a href="#4-初始化，建立博客项目" class="headerlink" title="4. 初始化，建立博客项目"></a>4. 初始化，建立博客项目</h2><p>选定博客网站项目程序文件的存放位置，如<code>~/develop/hexo/github/</code>，Bash中cd进入该目录下，执行命令：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo init</span></span><br></pre></td></tr></table></figure>
-<p>执行完毕后，该命令将在当前目录下生成一套标准的Hexo博客项目模板</p>
-<h2 id="5-生成网站"><a href="#5-生成网站" class="headerlink" title="5. 生成网站"></a>5. 生成网站</h2><p>上面的操作只是生成了一套网站构成所需的“源代码”，实际发布时需要根据这套“源代码”当中的配置文件、博客文档（.md文件）、主题模板等，进行组合构建，生成服务器可识别的标准HTML网站目录，此时可使用该命令：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo g</span></span><br></pre></td></tr></table></figure>
-<p>执行完毕后，在<code>public</code>目录下可看到我们自己书写的博客文档（.md文件）与所选的博客主题模板链接组合，生成的最终静态网站文件，该目录也差不多就是之后发布到GitHub上的实际文件（实际发布到GitHub的是.deploy_git目录），外部的网站“源代码”不会上传到<code>github.io</code>库</p>
-<h2 id="6-启动本地服务器"><a href="#6-启动本地服务器" class="headerlink" title="6. 启动本地服务器"></a>6. 启动本地服务器</h2><p>启动本地服务器可即时查看网站运行效果：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo s</span></span><br></pre></td></tr></table></figure>
-<p>默认地址是 <a href="http://localhost:4000/" target="_blank" rel="noopener">localhost:4000</a></p>
-<h2 id="7-选择主题"><a href="#7-选择主题" class="headerlink" title="7. 选择主题"></a>7. 选择主题</h2><p>Hexo可随时使用、更换博客主题</p>
-<p>主题文件可在<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo官方主题网页</a>中下载，以Material为例，点击主题预览图下方的主题名称链接即可进入该主题的源码发布页面 <a href="https://github.com/viosey/hexo-theme-material" target="_blank" rel="noopener">GitHub - viosey/hexo-theme-material: Material Design theme for hexo.</a></p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-15f0804b1a0593e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/875" alt="img"></p>
-<p>根据主题安装指导，下载项目至博客项目下的<code>themes</code>目录中，文件夹命名为<code>material</code>，并在博客配置文件<code>_config.yml</code>中指定使用该主题：</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">theme:</span> material</span><br></pre></td></tr></table></figure>
-<p>将material主题目录下的<code>_config.template.yaml</code>重命名为<code>_config.yaml</code></p>
-<p>参考<a href="https://material.viosey.com/docs/#/" target="_blank" rel="noopener">Material主题文档</a>进行必要配置</p>
-<p>再次执行 <code>hexo g</code>将会根据新主题重新构建整个博客</p>
-<p><strong>注意：</strong><br>1.5.6版本在执行<code>hexo g</code>时会报出TypeError错误，可参考<a href="https://github.com/viosey/hexo-theme-material/issues/686" target="_blank" rel="noopener">Issue686</a>修改dnsprefetch.ejs文件解决</p>
-<h2 id="8-发布博客"><a href="#8-发布博客" class="headerlink" title="8. 发布博客"></a>8. 发布博客</h2><h3 id="8-1-创建github-io仓库"><a href="#8-1-创建github-io仓库" class="headerlink" title="8.1 创建github.io仓库"></a>8.1 创建github.io仓库</h3><p>在自己的GitHub中，创建新仓库，标准命名为<code>GitHub用户名.github.io</code>，例如我的：wavky.github.io</p>
-<p>仓库Readme、License之类的留空即可，之后在发布上传时会被强制覆盖抹掉</p>
-<h3 id="8-2-配置SSH密钥"><a href="#8-2-配置SSH密钥" class="headerlink" title="8.2 配置SSH密钥"></a>8.2 配置SSH密钥</h3><p>参考 <a href="https://my.oschina.net/ryaneLee/blog/638440" target="_blank" rel="noopener">https://my.oschina.net/ryaneLee/blog/638440</a>配置SSH密钥一节</p>
-<h3 id="8-3-修改博客配置文件-config-yml"><a href="#8-3-修改博客配置文件-config-yml" class="headerlink" title="8.3 修改博客配置文件_config.yml"></a>8.3 修改博客配置文件<code>_config.yml</code></h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: GitHub上传仓库的完整路径，如 <span class="attribute">https</span>:<span class="comment">//github.com/wavky/wavky.github.io.git</span></span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
-<h3 id="8-4-发布到GitHub"><a href="#8-4-发布到GitHub" class="headerlink" title="8.4 发布到GitHub"></a>8.4 发布到GitHub</h3><p>在<code>hexo g</code>生成完毕后，可执行该命令发布博客到GitHub上：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo d</span></span><br></pre></td></tr></table></figure>
-<p>或在生成网站的同时进行发布：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo g -d</span></span><br></pre></td></tr></table></figure>
-<h3 id="8-5-查看效果"><a href="#8-5-查看效果" class="headerlink" title="8.5 查看效果"></a>8.5 查看效果</h3><p>点击仓库页面中的GH Pages按钮，应该可以看到真正发布在互联网上的效果</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-62b64349e01800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000" alt="img"></p>
-<h2 id="9-绑定域名"><a href="#9-绑定域名" class="headerlink" title="9. 绑定域名"></a>9. 绑定域名</h2><p>GitHub Pages 默认提供的是 <code>GitHub用户名.github.io</code>（例如我的：wavky.github.io）作为博客访问地址，可设置绑定自定义域名</p>
-<p>在博客项目目录的source文件夹中，创建一个CNAME文件，存储预备使用的个人域名，如：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在<span class="keyword">source</span>目录下</span><br><span class="line"><span class="keyword">echo</span> story.wavky.<span class="keyword">com</span> &gt; CNAME</span><br></pre></td></tr></table></figure>
-<p>清理Hexo缓存并重新生成发布</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br><span class="line"><span class="attribute">hexo g -d</span></span><br></pre></td></tr></table></figure>
-<p>GitHub项目页面中Setting设置界面，滚到GitHub Pages部分确认域名无误</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-470936f5e8311d8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/961" alt="img"></p>
-<p>在个人域名提供商（如阿里云万网）中，进入DNS设置界面，追加一条CNAME记录，这里我指定以story前缀的个人域名跳转到原来的默认的博客域名<code>wavky.github.io</code>，记录如下：</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2930720-b1c03461cd7dcc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/842" alt="img"></p>
-<p><strong>注：其他类型的域名绑定方式（例如IP指向等），在最后一步DNS设置中操作会不一样</strong></p>
-<p>作者：Wavky</p>
-<p>链接：<a href="https://www.jianshu.com/p/cb0750324e26" target="_blank" rel="noopener">https://www.jianshu.com/p/cb0750324e26</a></p>
-<p>來源：简书</p>
-<p>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/GuideBook/QT_tablewidget/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -552,65 +368,19 @@
       
         
           
-            <h1 id="qt-tablewidget"><a href="#qt-tablewidget" class="headerlink" title="qt tablewidget"></a>qt tablewidget</h1><p>2018-6-11</p>
-<p>基于qt的tablewidget 实现文件系统的模拟，treewidget实现树形目录</p>
-<p>配置：mac 10.13。 Qt 5.9</p>
-<p>参考博文：<a href="https://www.cnblogs.com/zhoug2020/p/3789076.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhoug2020/p/3789076.html</a></p>
-<p>//前面一部分基本都是按照这个博主写的来的，后面基本都是随便找的🌚🙈，这里当总结一下，因为不这样下次依旧不记得咋整。。。</p>
-<h2 id="文件系统提供的操作："><a href="#文件系统提供的操作：" class="headerlink" title="文件系统提供的操作："></a>文件系统提供的操作：</h2><ul>
-<li><ul>
-<li>格式化   报错了。。。吐血。。🙃，调了半天了，太难过了，我还是洗洗睡了吧</li>
-<li>创建子目录。  ok😃</li>
-<li>删除子目录。  Ok</li>
-<li>显示目录。    ok</li>
-<li>更改当前目录。 Ok，一点树形目录就可以啦</li>
-<li>创建文件。ok</li>
-<li>打开文件。ok</li>
-<li>关闭文件。还没写，ok？直接关就好了啊。。。</li>
-<li>写文件。 需要界面，害没写</li>
-<li>读文件。 同上，两功能一起，害没写，关写了个界面。。丑到哭泣，美工弱鸡哭唧唧</li>
-<li>删除文件。 Ok</li>
-<li>属性界面，害没写，o得k？</li>
-</ul>
-</li>
-</ul>
-<p>使用tablewidget 实现： 好多功能，看着心疼=. =</p>
-<p>操作表单，（添加删除行 ✔️</p>
-<p>双击某行打开该行文件</p>
-<p>右键菜单 ✔️</p>
-<p>打开某行重命名 ✔️</p>
-<p>嗷嗷！重命名还么有写成功！</p>
-<h3 id="1-qt-tablewidget初始化"><a href="#1-qt-tablewidget初始化" class="headerlink" title="1. qt tablewidget初始化"></a>1. qt tablewidget初始化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//å¯¹tablewidgetçš„åˆå§‹åŒ–</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;setColumnCount(<span class="number">4</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setDefaultSectionSize(<span class="number">150</span>);</span><br><span class="line">      <span class="comment">//è®¾ç½®è¡¨å¤´</span></span><br><span class="line">   QStringList header;</span><br><span class="line">   header&lt;&lt;tr(<span class="string">"åç§°"</span>)&lt;&lt;tr(<span class="string">"ä¿®æ”¹æ—¥æœŸ"</span>)&lt;&lt;tr(<span class="string">"å¤§å°"</span>)&lt;&lt;tr(<span class="string">"ç§ç±»"</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setHorizontalHeaderLabels(header);</span><br><span class="line">      <span class="comment">//è®¾ç½®è¡¨åç§°åŠ ç²—</span></span><br><span class="line">   QFont font = ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;font();</span><br><span class="line">   font.setBold(<span class="literal">true</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setFont(font);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setStretchLastSection(<span class="literal">true</span>); <span class="comment">//è®¾ç½®å……æ»¡è¡¨å®½åº¦</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;sectionResizeMode(QHeaderView::ResizeToContents);</span><br><span class="line">   <span class="comment">//ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setResizeMode(QHeaderView::ResizeToContents);</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setDefaultSectionSize(<span class="number">20</span>); <span class="comment">//è®¾ç½®è¡Œé«˜</span></span><br><span class="line">   ui-&gt;tableWidget-&gt;setFrameShape(QFrame::NoFrame); </span><br><span class="line">   ui-&gt;tableWidget-&gt;setShowGrid(<span class="literal">false</span>); </span><br><span class="line">   ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setVisible(<span class="literal">false</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setSelectionMode(QAbstractItemView::ExtendedSelection);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setSelectionBehavior(QAbstractItemView::SelectRows);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setEditTriggers(QAbstractItemView::SelectedClicked);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;resizeSection(<span class="number">0</span>,<span class="number">150</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setFixedHeight(<span class="number">25</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;setStyleSheet(<span class="string">"selection-background-color:lightblue;"</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;setAlternatingRowColors(<span class="literal">true</span>);</span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setStyleSheet(<span class="string">"QHeaderView::section&#123;background:lightgray;&#125;"</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalScrollBar()-&gt;setStyleSheet(<span class="string">"QScrollBar&#123;background:transparent; height:10px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle&#123;background:lightgray; border:2px solid transparent; border-radius:5px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle:hover&#123;background:gray;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::sub-line&#123;background:transparent;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::add-line&#123;background:transparent;&#125;"</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;verticalScrollBar()-&gt;setStyleSheet(<span class="string">"QScrollBar&#123;background:transparent; width: 10px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle&#123;background:lightgray; border:2px solid transparent; border-radius:5px;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::handle:hover&#123;background:gray;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::sub-line&#123;background:transparent;&#125;"</span></span><br><span class="line">   <span class="string">"QScrollBar::add-line&#123;background:transparent;&#125;"</span>);</span><br><span class="line"></span><br><span class="line">   ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setHighlightSections(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-<p>什么鬼什么鬼</p>
-<h3 id="2-创建目录文件"><a href="#2-创建目录文件" class="headerlink" title="2. 创建目录文件"></a>2. 创建目录文件</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">QCursor cur = <span class="keyword">this</span>-&gt;cursor();</span><br><span class="line">QMenu* popMenu = <span class="keyword">new</span> QMenu(<span class="keyword">this</span>);</span><br><span class="line">QPoint point = QCursor::pos();</span><br><span class="line">QTableWidgetItem *item = ui-&gt;tableWidget-&gt;itemAt(point);</span><br><span class="line"></span><br><span class="line">popMenu-&gt;addAction(rMenu.action_open);</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_rename);</span><br><span class="line">popMenu-&gt;addSeparator();</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_delete);</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_atrribute);</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_flush);</span><br><span class="line">popMenu-&gt;addSeparator();</span><br><span class="line">popMenu-&gt;addAction(rMenu.action_create_folder);</span><br><span class="line"></span><br><span class="line"><span class="comment">//è®¾ç½®å¿«æ·é”®     这就是我坚持用英文写注释的原因= =</span></span><br><span class="line">rMenu.action_open-&gt;setShortcut(QKeySequence::Open);</span><br><span class="line">rMenu.action_create_folder-&gt;setShortcut(QKeySequence::New);</span><br><span class="line">rMenu.action_flush-&gt;setShortcut(QKeySequence::Refresh);</span><br><span class="line">rMenu.action_delete-&gt;setShortcut(QKeySequence::Delete);</span><br><span class="line"></span><br><span class="line">popMenu-&gt;exec(QCursor::pos());</span><br><span class="line">event-&gt;accept();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Connect 方法需要写在ui初始化函数里，写在成员函数里会被多次唤醒导致一些奇奇怪怪的东西？</li>
-</ul>
-<h3 id="3-右键菜单创建"><a href="#3-右键菜单创建" class="headerlink" title="3. 右键菜单创建"></a>3. 右键菜单创建</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> rootItem = <span class="keyword">new</span>     QTreeWidgetItem(ui&gt;treeWidget,QStringList(“myFile<span class="string">"));</span></span><br><span class="line"><span class="string">rootItem-&gt;setIcon(0,folderIcon);</span></span><br><span class="line"><span class="string">itemNode.insert(root,rootItem);</span></span><br></pre></td></tr></table></figure>
-<p>对于tablewidget 表的初始化，设置表头表的格式等等</p>
-<p>2018.6.20</p>
-<p>//made by may   乱糟糟的重新整理一遍？</p>
-<h3 id="4-文件相关操作"><a href="#4-文件相关操作" class="headerlink" title="4. 文件相关操作"></a>4. 文件相关操作</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    QDir dir = QDir::current();</span><br><span class="line">    <span class="keyword">if</span>(!dir.exists(<span class="string">"myFile"</span>))&#123;</span><br><span class="line">        dir.mkdir(<span class="string">"myFile"</span>);</span><br><span class="line">    &#125;   <span class="comment">//mkdir为创建新的目录</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(root!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">        qDebug()&lt;&lt;<span class="string">"i am so cool!  "</span>&lt;&lt;root-&gt;fileName;</span><br><span class="line">    &#125;</span><br><span class="line">    QDir dir = QDir::current();</span><br><span class="line">    QString path = dir.absolutePath();</span><br><span class="line">    qDebug()&lt;&lt;path;</span><br><span class="line">    path = path + QDir::separator() + <span class="string">"myFile"</span>;</span><br><span class="line">    QFile* tempFile = <span class="keyword">new</span> QFile;</span><br><span class="line">    dir.mkpath(path);</span><br><span class="line">    dir.setCurrent(path);</span><br><span class="line">    dir.setPath(path);      <span class="comment">//此处修改了当前路径</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">补充：file-&gt;setFileName(fileName) 为在该路径下创建一个新的文件，默认为txt，其实吧。。。。我也还不知道怎么创建其他形式的文件（比如ppt啥的，但是印象中mac好像都是要打开对应的app才能新建文件的</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">QFileInfoList Widget::getFileList(QString path,node* root)&#123;</span><br><span class="line">    <span class="function">QDir <span class="title">dir</span><span class="params">(path)</span></span>;</span><br><span class="line">    QDir absDir = QDir::currentPath();</span><br><span class="line">    QString absPath = absDir.absolutePath();</span><br><span class="line">    qDebug()&lt;&lt;<span class="string">"absPath : "</span>&lt;&lt;absPath;</span><br><span class="line">    QFileIconProvider fileIconPro;</span><br><span class="line">    QIcon icon;</span><br><span class="line">    QString fileName;</span><br><span class="line">    QFileInfoList fileInfoList = dir.entryInfoList();</span><br><span class="line">    dir.setSorting(QDir::Name);</span><br><span class="line">    QFileInfoList folderList = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Dirs|QDir::Files);</span><br><span class="line">    qDebug()&lt;&lt;<span class="string">"now path: "</span>&lt;&lt;path;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i != folderList.size();i++)&#123;</span><br><span class="line">        QString name = folderList.at(i).absoluteFilePath();</span><br><span class="line">        <span class="keyword">if</span>(absPath.contains(<span class="string">'/'</span>))&#123;</span><br><span class="line">            fileName = name.replace(path+<span class="string">"/"</span>,<span class="string">""</span>);</span><br><span class="line">            fileName = fileName.replace(absPath+<span class="string">"/"</span>,<span class="string">""</span>);   qDebug()&lt;&lt;<span class="string">"parent: "</span>&lt;&lt;root-&gt;fileName&lt;&lt;<span class="string">" child: "</span>&lt;&lt;fileName;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            fileName = name.replace(path+<span class="string">"\\"</span>,<span class="string">""</span>);</span><br><span class="line">            fileName = fileName.replace(absPath+<span class="string">"\\"</span>,<span class="string">""</span>);   qDebug()&lt;&lt;<span class="string">"parent: "</span>&lt;&lt;root-&gt;fileName&lt;&lt;<span class="string">" child: "</span>&lt;&lt;fileName;</span><br><span class="line">        &#125;</span><br><span class="line">        QFileInfo fileInfo = folderList.at(i);</span><br><span class="line">        QString type;</span><br><span class="line">        <span class="keyword">int</span> permission;</span><br><span class="line">        <span class="keyword">if</span>(fileInfo.suffix() == <span class="string">""</span>)&#123;</span><br><span class="line">            type = <span class="string">"folder"</span>;</span><br><span class="line">            permission = ReadOnly;</span><br><span class="line">            icon = fileIconPro.icon(QFileIconProvider::Folder);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            type = fileInfo.suffix();</span><br><span class="line">            permission = Write;</span><br><span class="line">            icon = fileIconPro.icon(fileInfo);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> locate = <span class="number">0</span>;</span><br><span class="line">        <span class="function">FCB <span class="title">fcb</span><span class="params">(count++,fileName,type,fileInfo.created(),fileInfo.lastModified(),locate,fileInfo.size(),permission,<span class="number">0</span>)</span></span>;</span><br><span class="line">        catalog.insert(root,fileName,fcb);</span><br><span class="line">        qDebug()&lt;&lt;<span class="string">"path :"</span>&lt;&lt;name;</span><br><span class="line">        node* childRoot = catalog.find(root,fileName);</span><br><span class="line">        <span class="keyword">auto</span> item = insertTreeItem(root,fileName,icon);</span><br><span class="line">        <span class="keyword">if</span>(childRoot != <span class="literal">NULL</span> &amp;&amp; item != <span class="literal">NULL</span>)</span><br><span class="line">            itemNode.insert(childRoot,item);</span><br><span class="line">        QFileInfoList childFileList = getFileList(name,childRoot);</span><br><span class="line">        fileInfoList.append(childFileList);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileInfoList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>图标获取，</p>
-<p>qt提供了相当方便的图标获取，但提供的图标有限，此处我只用了文本的和文件夹的，也还够用 </p>
-</li>
-<li><p>创建新的文件或文件夹</p>
-</li>
-<li><p>treewidget操作: 添加item</p>
-</li>
-<li><p>获取某一个文件下的所有文件getFileList</p>
-</li>
-<li><p>获取表单此时选择的列</p>
-</li>
-<li><p>右键菜单相应事件</p>
-</li>
-</ol>
-<p>//相当生气了辣鸡pages！我决定去官网下wps，再见pages，辣鸡玩意，表格绕文本能不能别叠起来，能不能别乱跑，操碎老妈子的心了，文档从开始到放弃啊啊啊</p>
-<p>//md真好用</p>
-
-          
+          qt tablewidget2018-6-11
+基于qt的tablewidget 实现文件系统的模拟，treewidget实现树形目录
+配置：mac 10.13。 Qt 5.9
+参考博文：https://www.cnblogs.com/zhoug2020/p/3789076.html
+//前面一部分
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/17/GuideBook/QT_tablewidget/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -742,21 +512,22 @@
       
         
           
-            <h1 id="OpenGL环境的建立："><a href="#OpenGL环境的建立：" class="headerlink" title="OpenGL环境的建立："></a>OpenGL环境的建立：</h1><p><a href="https://www.jianshu.com/p/891d630e30af" target="_blank" rel="noopener">tutorial</a></p>
-<p><a href="https://blog.csdn.net/harryptter/article/details/50380686" target="_blank" rel="noopener">library</a></p>
-<p>上面是教程，下面是出的错的解决方法</p>
-<ol>
-<li>画个三角形</li>
-</ol>
-<p><strong>error</strong>：ld: symbol(s) not found for architecture x86_64</p>
-<p>clang: error: linker command failed with exit code 1 (use -v to see invocation)</p>
-<p><strong>solve</strong>：缺少某个库，在build phases-&gt;link binary with libraries处添加“libgltools.dylib”文件，之后就报了另一个错。。。</p>
-<p><strong>error</strong>：ld: library not found for -lgltools</p>
-<p>clang: error: linker command failed with exit code 1 (use -v to see invocation)</p>
-<p><strong>solve</strong>：library  <a href="https://blog.csdn.net/harryptter/article/details/50380686" target="_blank" rel="noopener">https://blog.csdn.net/harryptter/article/details/50380686</a></p>
-<p>（  ！在这里强烈👍一下我们孙雨馨同学，找的教程太管用了！）</p>
+          OpenGL环境的建立：tutorial
+library
+上面是教程，下面是出的错的解决方法
 
-          
+画个三角形
+
+error：ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/17/GuideBook/OpenGL环境的建立/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -888,29 +659,19 @@
       
         
           
-            <h1 id="xcode真机测试-无开发者模式"><a href="#xcode真机测试-无开发者模式" class="headerlink" title="xcode真机测试 无开发者模式"></a>xcode真机测试 无开发者模式</h1><p>%&gt;. &lt; 作为交不起开发者账号年费的穷逼，hci作业要用到真机测试只能酱紫了噗</p>
-<p>% 希望哪天可以自己做个app上架，不求发家致富只求流量钱能够我交个年费</p>
-<p>测试设备：mac 10.13.4； xcode9.4； iphone ios 11.3</p>
-<ol>
-<li><p>将自己的手机用数据线连到电脑上，开启信任</p>
-</li>
-<li><p>xcode打开需要模拟的工程，此处为ARPra1，将测试设备调整为自己的设备 </p>
-<p><img src="/images/xcode真机测试0.png" alt="xcode真机测试0"></p>
-</li>
-<li><p>添加开发者账户，xcode-&gt;prefrence-&gt;account ,点击“+” -&gt; apple ID,输入自己的apple ID，点击manage，添加开发者证书  </p>
-<p><img src="/images/image-20190117101052287.png" alt="image-20190117101052287"></p>
-<p><img src="/images/image-20190117101104047.png" alt="image-20190117101104047"></p>
-</li>
-<li><p>返回工程，打开general，将identify处的bundle id 改为未出现过的id名，team处改成刚刚添加的apple id </p>
-<p><img src="/images/image-20190117101114509.png" alt="image-20190117101114509"></p>
-</li>
-<li><p>run一下这个项目你就会发现手机上装了个app，如果无法打开，打开手机上的 设置——通用——设备管理——将Apple id所对应的开发者设置为信任</p>
-</li>
-<li><p>ok，现在可以愉快的测试啦</p>
-</li>
-</ol>
+          xcode真机测试 无开发者模式%&gt;. &lt; 作为交不起开发者账号年费的穷逼，hci作业要用到真机测试只能酱紫了噗
+% 希望哪天可以自己做个app上架，不求发家致富只求流量钱能够我交个年费
+测试设备：mac 10.13.4； xcode9.4； iphone ios 11.3
 
-          
+将自己的手
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/17/GuideBook/xcode真机测试 无开发者模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1042,22 +803,23 @@
       
         
           
-            <h1 id="Django实现衣型识别"><a href="#Django实现衣型识别" class="headerlink" title="Django实现衣型识别"></a>Django实现衣型识别</h1><p>衣型识别出：类型、颜色、款式</p>
-<ul>
-<li style="list-style: none"><input type="checkbox"> 主要物体提取（目标检测），<a href="https://imageai-cn.readthedocs.io/zh_CN/latest/ImageAI_Object_Detection.html#" target="_blank" rel="noopener">imageAI</a></li>
-<li style="list-style: none"><input type="checkbox"> 裁剪图片，cv2</li>
-<li style="list-style: none"><input type="checkbox"> 生成透明背景的图片</li>
-<li style="list-style: none"><input type="checkbox"> 类型识别：CNN网络， tf</li>
-<li style="list-style: none"><input type="checkbox" checked> 颜色和配色提取：haishoku 库，获取主要颜色和配色，<a href="https://github.com/LanceGin/haishoku" target="_blank" rel="noopener">haishoku</a></li>
-<li style="list-style: none"><input type="checkbox"> 一些小函数：<ul>
-<li style="list-style: none"><input type="checkbox" checked> RGB（Tuple、十六进制互转</li>
-<li style="list-style: none"><input type="checkbox"> string、url互转</li>
-<li style="list-style: none"><input type="checkbox"> 向数据库中批量添加数据</li>
-</ul>
-</li>
-</ul>
+          Django实现衣型识别衣型识别出：类型、颜色、款式
 
-          
+ 主要物体提取（目标检测），imageAI
+ 裁剪图片，cv2
+ 生成透明背景的图片
+ 类型识别：CNN网络， tf
+ 颜色和配色提取：haishoku 库，获取主要颜色和配色，haishoku
+ 一些小函数：
+ RGB（Tuple、十六进制互
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/04/GuideBook/Django/Django实现衣型识别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1189,19 +951,17 @@
       
         
           
-            <h1 id="Django图片上传和访问"><a href="#Django图片上传和访问" class="headerlink" title="Django图片上传和访问"></a>Django图片上传和访问</h1><p>配置：</p>
-<p>nginx+Django</p>
-<h2 id="1-图片上传"><a href="#1-图片上传" class="headerlink" title="1. 图片上传"></a>1. 图片上传</h2><h3 id="1-1-settings-py"><a href="#1-1-settings-py" class="headerlink" title="1.1 settings.py"></a>1.1 settings.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># closetUsers/settings.py</span></span><br><span class="line"><span class="comment"># Static files (CSS, JavaScript, Images)</span></span><br><span class="line"><span class="comment"># https://docs.djangoproject.com/en/2.1/howto/static-files/</span></span><br><span class="line"><span class="comment"># 收集Django的静态文件到同一个static中</span></span><br><span class="line">STATIC_ROOT = os.path.join(BASE_DIR, <span class="string">"static/"</span>)</span><br><span class="line"></span><br><span class="line">STATIC_URL = <span class="string">'/static/'</span></span><br><span class="line"></span><br><span class="line">MEDIA_ROOT = os.path.join(STATIC_ROOT, <span class="string">"media/"</span>)</span><br><span class="line">MEDIA_URL = <span class="string">'/media/'</span></span><br><span class="line"></span><br><span class="line">IMG_ROOT = os.path.join(STATIC_ROOT, <span class="string">"img"</span>)</span><br><span class="line">IMG_URL = <span class="string">'img/'</span></span><br></pre></td></tr></table></figure>
-<h3 id="1-2-views-py"><a href="#1-2-views-py" class="headerlink" title="1.2 views.py"></a>1.2 views.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># users/views.py</span></span><br><span class="line"><span class="comment"># 上传图片到静态文件的文件夹</span></span><br><span class="line"><span class="meta">@csrf_exempt</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_img</span><span class="params">(request)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        img = request.FILES.get(<span class="string">'file'</span>, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> img:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"没有上传的图片文件"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        <span class="comment"># to do, 验证用户权限</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">'name'</span> <span class="keyword">not</span> <span class="keyword">in</span> img:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"无名文件无法上传"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        file_path = os.path.join(settings.IMG_ROOT, img.name)</span><br><span class="line">        dest_img_path = open(file_path, <span class="string">'wb+'</span>)</span><br><span class="line">        <span class="keyword">for</span> chunk <span class="keyword">in</span> img.chunks():</span><br><span class="line">            dest_img_path.write(chunk)</span><br><span class="line">        dest_img_path.close()</span><br><span class="line">        <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"图片上传成功"</span>, <span class="string">"url"</span>: file_path&#125;, status=status.HTTP_202_ACCEPTED)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"this method is not allowed"</span>&#125;, status=status.HTTP_405_METHOD_NOT_ALLOWED)</span><br></pre></td></tr></table></figure>
-<h3 id="1-3-urls-py"><a href="#1-3-urls-py" class="headerlink" title="1.3 urls.py"></a>1.3 urls.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># users/urls.py</span></span><br><span class="line">   path(<span class="string">'upload/'</span>, views.upload_img),</span><br></pre></td></tr></table></figure>
-<h2 id="2-图片访问"><a href="#2-图片访问" class="headerlink" title="2. 图片访问"></a>2. 图片访问</h2><p>所有访问静态文件都可以使用该方法，图片访问为只读请求，不需要经过用户认证等权限处理，使用该方法的好处是不需要经过django的进一步处理，减轻服务器的压力。</p>
-<p>修改<code>nginx.conf</code>配置文件，添加一下部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /img &#123;</span><br><span class="line">    alias /home/projects/closet/closetUsers/tempPhotos; #存放图片的文件夹路径</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>访问方式：<a href="http://120.76.62.132/img/tank_sample_4.jpeg" target="_blank" rel="noopener">http://120.76.62.132/img/tank_sample_4.jpeg</a></p>
-<p><a href="https://blog.csdn.net/qq_35066345/article/details/79690322" target="_blank" rel="noopener">403Forbbien</a></p>
-<p><a href="http://www.cnblogs.com/jiongchen/p/9139156.html" target="_blank" rel="noopener">alwasy 404 </a></p>
-
-          
+          Django图片上传和访问配置：
+nginx+Django
+1. 图片上传1.1 settings.py12345678910111213# closetUsers/settings.py# Static files (CSS, JavaScript, Images)# https://docs.d
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/02/GuideBook/Django/Django图片上传和访问/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1333,27 +1093,18 @@
       
         
           
-            <h1 id="Django-nginx-uwsgi配置"><a href="#Django-nginx-uwsgi配置" class="headerlink" title="Django+nginx+uwsgi配置"></a>Django+nginx+uwsgi配置</h1><p><a href="https://blog.csdn.net/huanbia/article/details/54630180" target="_blank" rel="noopener">Django+nginx+uwsgi配置</a></p>
-<p>在线项目部署</p>
-<h2 id="1-uwsgi安装测试"><a href="#1-uwsgi安装测试" class="headerlink" title="1. uwsgi安装测试"></a>1. uwsgi安装测试</h2><h3 id="1-1-uwsgi安装"><a href="#1-1-uwsgi安装" class="headerlink" title="1.1 uwsgi安装"></a>1.1 uwsgi安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python3 -m pip install uwsgi</span><br></pre></td></tr></table></figure>
-<h3 id="1-2-uwsgi测试"><a href="#1-2-uwsgi测试" class="headerlink" title="1.2 uwsgi测试"></a>1.2 uwsgi测试</h3><p>测试 uwsgi 是否正常：</p>
-<p>新建 test.py 文件，内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>,<span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello World"</span></span><br></pre></td></tr></table></figure>
-<p>然后在终端运行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http :8001 --wsgi-file test.py</span><br></pre></td></tr></table></figure>
-<p>在浏览器内输入：<a href="http://127.0.0.1:8001，查看是否有&quot;Hello" target="_blank" rel="noopener">http://127.0.0.1:8001，查看是否有&quot;Hello</a> World”输出，若没有输出，请检查你的安装过程。</p>
-<h2 id="2-nginx-安装测试"><a href="#2-nginx-安装测试" class="headerlink" title="2. nginx 安装测试"></a>2. nginx 安装测试</h2><h3 id="2-1-安装-Nginx"><a href="#2-1-安装-Nginx" class="headerlink" title="2.1 安装 Nginx"></a>2.1 安装 Nginx</h3><p>安装命令如下：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">wget http:<span class="string">//nginx.org/download/nginx-1.11.0.tar.gz</span></span><br><span class="line">tar xf nginx-1.11.0.tar.gz</span><br><span class="line"><span class="keyword">cd</span> nginx-1.11.0</span><br><span class="line"><span class="string">./configure</span> <span class="params">--prefix=/usr/local/nginx-1</span>.11.0 \</span><br><span class="line"><span class="params">--with-http_stub_status_module</span> \</span><br><span class="line"><span class="params">--with-http_gzip_static_module</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>你可以阅读 <a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="noopener">Nginx 安装配置</a> 了解更多内容。</p>
-<h2 id="3-Django安装测试"><a href="#3-Django安装测试" class="headerlink" title="3. Django安装测试"></a>3. Django安装测试</h2><p>笔者用的是python3以上的版本</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> django</span><br></pre></td></tr></table></figure>
-<p>测试 django 是否正常，运行：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">django-admin</span><span class="selector-class">.py</span> <span class="selector-tag">startproject</span> <span class="selector-tag">demosite</span></span><br><span class="line"><span class="selector-tag">cd</span> <span class="selector-tag">demosite</span></span><br><span class="line"><span class="selector-tag">python2</span><span class="selector-class">.7</span> <span class="selector-tag">manage</span><span class="selector-class">.py</span> <span class="selector-tag">runserver</span> 0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:8002</span></span><br></pre></td></tr></table></figure>
-<p>在浏览器内输入：<a href="http://127.0.0.1:8002，检查django是否运行正常。" target="_blank" rel="noopener">http://127.0.0.1:8002，检查django是否运行正常。</a></p>
-<p>项目组织结构：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# tree</span><br><span class="line">.</span><br><span class="line">├── closetUsers</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   ├── __pycache__</span><br><span class="line">│   │   ├── __init__.cpython-37.pyc</span><br><span class="line">│   │   ├── settings.cpython-37.pyc</span><br><span class="line">│   │   ├── urls.cpython-37.pyc</span><br><span class="line">│   │   └── wsgi.cpython-37.pyc</span><br><span class="line">│   ├── settings.py</span><br><span class="line">│   ├── urls.py</span><br><span class="line">│   └── wsgi.py</span><br><span class="line">├── __init__.py</span><br><span class="line">├── jsonTest</span><br><span class="line">│   ├── modifyUserInfo.json</span><br><span class="line">│   └── test.json</span><br><span class="line">├── manage.py</span><br><span class="line">├── __pycache__</span><br><span class="line">│   ├── __init__.cpython-37.pyc</span><br><span class="line">│   ├── manage.cpython-37.pyc</span><br><span class="line">│   ├── settings.cpython-37.pyc</span><br><span class="line">│   ├── urls.cpython-37.pyc</span><br><span class="line">│   └── wsgi.cpython-37.pyc</span><br><span class="line">├── settings.py</span><br><span class="line">├── static</span><br><span class="line">├── tempPhotos</span><br><span class="line">├── urls.py</span><br><span class="line">├── users</span><br><span class="line">│   ├── admin.py</span><br><span class="line">│   ├── apps.py</span><br><span class="line">│   ├── backends.py</span><br><span class="line">│   ├── forms.py</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   ├── matches.py</span><br><span class="line">│   ├── migrations</span><br><span class="line">│   │   ├── 0001_initial.py</span><br><span class="line">│   │   ├── 0002_auto_20181222_1315.py</span><br><span class="line">│   │   ├── 0003_auto_20181222_1428.py</span><br><span class="line">│   │   ├── 0004_auto_20181229_1631.py</span><br><span class="line">│   │   ├── __init__.py</span><br><span class="line">│   │   └── __pycache__</span><br><span class="line">│   │       ├── 0001_initial.cpython-37.pyc</span><br><span class="line">│   │       ├── 0002_auto_20181222_1315.cpython-37.pyc</span><br><span class="line">│   │       ├── 0003_auto_20181222_1428.cpython-37.pyc</span><br><span class="line">│   │       ├── 0004_auto_20181229_1631.cpython-37.pyc</span><br><span class="line">│   │       └── __init__.cpython-37.pyc</span><br><span class="line">│   ├── models.py</span><br><span class="line">│   ├── permissions.py</span><br><span class="line">│   ├── __pycache__</span><br><span class="line">│   │   ├── admin.cpython-37.pyc</span><br><span class="line">│   │   ├── backends.cpython-37.pyc</span><br><span class="line">│   │   ├── __init__.cpython-37.pyc</span><br><span class="line">│   │   ├── matches.cpython-37.pyc</span><br><span class="line">│   │   ├── models.cpython-37.pyc</span><br><span class="line">│   │   ├── permissions.cpython-37.pyc</span><br><span class="line">│   │   ├── serializers.cpython-37.pyc</span><br><span class="line">│   │   ├── urls.cpython-37.pyc</span><br><span class="line">│   │   └── views.cpython-37.pyc</span><br><span class="line">│   ├── serializers.py</span><br><span class="line">│   ├── test.png</span><br><span class="line">│   ├── tests.py</span><br><span class="line">│   ├── urls.py</span><br><span class="line">│   └── views.py</span><br><span class="line">└── wsgi.py</span><br><span class="line"></span><br><span class="line">10 directories, 52 files</span><br></pre></td></tr></table></figure>
-
-          
+          Django+nginx+uwsgi配置Django+nginx+uwsgi配置
+在线项目部署
+1. uwsgi安装测试1.1 uwsgi安装1root@iZwz969jm0y04abuhgx4byZ:~# python3 -m pip install uwsgi
+1.2 uwsgi测试测试 uws
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/01/GuideBook/Django/Django+nginx+uwsgi配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1485,19 +1236,17 @@
       
         
           
-            <h1 id="Android-打包"><a href="#Android-打包" class="headerlink" title="Android 打包"></a>Android 打包</h1><p>keystore.jks Password:  closet123</p>
-<p><strong>Error:</strong>error: failed to read PNG signature: file does not start with PNG signature.</p>
-<p>android studio 打包apk时报错.</p>
-<p>错误：无法读取PNG签名：文件没有从PNG签名开始。</p>
-<p>一般都是图片格式有问题 可能是后缀更改了，可能是图片压缩时产生的问题。 重新处理图片再加载 </p>
-<p><strong>Solve:</strong></p>
-<p>找到对应的图片,右键编辑下,重新另存为png类型的图片即可</p>
-<ol>
-<li>生成keystore.jks</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">luomeideMacBook-Pro:MyApplication 2 luomei$ keytool -list -v -keystore /Users/luomei/Desktop/closet/app/keystore.jks输入密钥库口令:  </span><br><span class="line">密钥库类型: JKS</span><br><span class="line">密钥库提供方: SUN</span><br><span class="line"></span><br><span class="line">您的密钥库包含 1 个条目</span><br><span class="line"></span><br><span class="line">别名: closet</span><br><span class="line">创建日期: 2018年12月30日</span><br><span class="line">条目类型: PrivateKeyEntry</span><br><span class="line">证书链长度: 1</span><br><span class="line">证书[1]:</span><br><span class="line">所有者: CN=closet, OU=closetTJ, O=closetTJ, L=shanghai, ST=shanghai, C=86</span><br><span class="line">发布者: CN=closet, OU=closetTJ, O=closetTJ, L=shanghai, ST=shanghai, C=86</span><br><span class="line">序列号: f0fd6fc</span><br><span class="line">生效时间: Sun Dec 30 15:23:13 CST 2018, 失效时间: Thu Dec 24 15:23:13 CST 2043</span><br><span class="line">证书指纹:</span><br><span class="line">         SHA1: CD:57:AE:DF:A5:13:C6:6D:3B:1A:4B:21:4B:FC:60:75:FE:FA:29:3C</span><br><span class="line">         SHA256: 8F:56:BD:59:35:DE:7E:68:97:E0:E8:18:E0:86:0D:EF:1C:B0:22:BD:9D:2B:71:1D:27:D3:41:4E:88:34:66:B2</span><br><span class="line">签名算法名称: SHA256withRSA</span><br><span class="line">主体公共密钥算法: 2048 位 RSA 密钥</span><br><span class="line">版本: 3</span><br><span class="line"></span><br><span class="line">扩展: </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">1: ObjectId: 2.5.29.14 Criticality=<span class="literal">false</span></span></span><br><span class="line">SubjectKeyIdentifier [</span><br><span class="line">KeyIdentifier [</span><br><span class="line">0000: 83 3E 3F 13 08 81 C6 D1   0F B2 69 D7 5C AB D4 24  .&gt;?.......i.\..$</span><br><span class="line">0010: D7 CD AD 58                                        ...X</span><br><span class="line">]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*******************************************</span><br><span class="line">*******************************************</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Warning:</span><br><span class="line">JKS 密钥库使用专用格式。建议使用 "keytool -importkeystore -srckeystore /Users/luomei/Desktop/closet/app/keystore.jks -destkeystore /Users/luomei/Desktop/closet/app/keystore.jks -deststoretype p格式 PKCS12。</span><br></pre></td></tr></table></figure>
-
-          
+          Android 打包keystore.jks Password:  closet123
+Error:error: failed to read PNG signature: file does not start with PNG signature.
+android studio 打包apk时报错
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/27/GuideBook/Android/Android_打包/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1629,72 +1378,21 @@
       
         
           
-            <h1 id="Django拓展auth-用户"><a href="#Django拓展auth-用户" class="headerlink" title="Django拓展auth 用户"></a>Django拓展auth 用户</h1><p>完成注册登录登出注销操作</p>
-<p>！！！拓展auth用户请务必在 <code>python manage.py migrate</code> 前进行！！！</p>
-<ol>
-<li><p>新建一个project：<code>closetUsers</code></p>
-</li>
-<li><p>修改 <code>settings.py</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#closetUsers/settings.py</span></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="string">'users'</span>,  <span class="comment"># modify </span></span><br><span class="line">    <span class="string">'rest_framework'</span>, <span class="comment"># modify </span></span><br><span class="line">    <span class="string">'django_filters'</span>, <span class="comment"># modify </span></span><br><span class="line">]</span><br><span class="line"><span class="comment">#update database config </span></span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'closetUser'</span>,</span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'may'</span>,</span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'may233'</span>,</span><br><span class="line">        <span class="string">'HOST'</span>: <span class="string">'120.76.62.132'</span>,</span><br><span class="line">        <span class="string">'PORT'</span>: <span class="string">'3306'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#add auth_user_model !after! add the extended user</span></span><br><span class="line">AUTH_USER_MODEL = <span class="string">'users.User'</span>   <span class="comment">#pattern: &lt;appName&gt;.&lt;className&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新建一个app：<code>users</code></p>
-</li>
-<li><p>修改 <code>users/__init__.py</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/__init__.py</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br><span class="line"><span class="comment">#use for django2.x version to link mysql database</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在 <code>users</code>底下添加文件 <code>urls.py</code> ，修改 <code>closetUsers.urls.py</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#closetUsers/urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> include  <span class="comment">#add this</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">''</span>, include(<span class="string">'users.urls'</span>)), </span><br><span class="line">    <span class="comment">#add this, pattern: &lt;appName&gt;.urls</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改 <code>users.models.py</code>， 添加拓展的用户类，继承自 AbstractUser， 注：如原来的auth.User 已有的属性不需要再添加</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/models.py</span></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(AbstractUser)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    save the user info</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    style = models.CharField(max_length=<span class="number">30</span>, default=<span class="string">'casual'</span>, null=<span class="literal">True</span>, blank=<span class="literal">True</span>)</span><br><span class="line">    profile = models.URLField(default=<span class="string">'http://120.76.62.132:8080/photos/40padded.jpg'</span>, blank=<span class="literal">True</span>)</span><br><span class="line">    phone = models.CharField(max_length=<span class="number">11</span>,  null=<span class="literal">True</span>, blank=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.username</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>建表</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:closetUsers xxx$ python3 manage.py migrate</span><br><span class="line">xxxdeMacBook-Pro:closetUsers xxx$ python3 manage.py makemigrations users</span><br><span class="line">xxxdeMacBook-Pro:closetUsers xxx$ python3 manage.py migrate users</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重写UserCreationForm, UserChangeForm， 在users 底下新建 form.py文件，其实我只是想要提供一个restful的API而不是建立一个网站，因而应该不需要使用到表单创建，但Django文档中说明拓展User需要重写这两个表单因此还是重写了。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/forms.py</span></span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.forms <span class="keyword">import</span> UserCreationForm, UserChangeForm</span><br><span class="line"><span class="keyword">from</span> django <span class="keyword">import</span> forms</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RegisterForm</span><span class="params">(UserCreationForm)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span><span class="params">(UserCreationForm.Meta)</span>:</span></span><br><span class="line">        model = User</span><br><span class="line">        fields = (<span class="string">'username'</span>, <span class="string">'email'</span>, <span class="string">'phone'</span>, <span class="string">'style'</span>, <span class="string">'profile'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># check if email is valid</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clean_email</span><span class="params">(self)</span>:</span></span><br><span class="line">        email = self.cleaned_data[<span class="string">'email'</span>]</span><br><span class="line">        users = User.objects.filter(email=email)</span><br><span class="line">        <span class="keyword">if</span> users:</span><br><span class="line">            <span class="keyword">raise</span> forms.ValidationError(<span class="string">"该邮箱已注册过，尝试登录？"</span>)</span><br><span class="line">        <span class="keyword">return</span> email</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChangeInfoForm</span><span class="params">(UserChangeForm)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span><span class="params">(UserChangeForm.Meta)</span>:</span></span><br><span class="line">        model = User</span><br><span class="line">        fields = (<span class="string">'username'</span>, <span class="string">'email'</span>, <span class="string">'phone'</span>, <span class="string">'style'</span>, <span class="string">'profile'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="一、注册"><a href="#一、注册" class="headerlink" title="一、注册"></a>一、注册</h2><h3 id="法一：暴力解决"><a href="#法一：暴力解决" class="headerlink" title="法一：暴力解决"></a>法一：暴力解决</h3><ol>
-<li><p>在 views.py中添加相关类或函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/views.py</span></span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> JsonResponse, HttpResponse</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> status</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your views here.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sign_up</span><span class="params">(request)</span>:</span></span><br><span class="line">    username = request.data[<span class="string">'username'</span>]</span><br><span class="line">    password = request.data[<span class="string">'password'</span>]</span><br><span class="line">    users = User.objects.filter(username=username)</span><br><span class="line">    <span class="keyword">if</span> users:</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">'该用户已存在'</span>, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">    user = User.objects.create_user(username=username, password=password)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'创建成功，登录？'</span>, status=status.HTTP_200_OK)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在 urls.py 中添加相关路径</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> rest_framework.urlpatterns <span class="keyword">import</span> format_suffix_patterns</span><br><span class="line"><span class="keyword">from</span> users <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = format_suffix_patterns([</span><br><span class="line">    path(<span class="string">'users/add1/'</span>, views.sign_up),</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 <a href="https://httpie.org" target="_blank" rel="noopener">httpie</a> 模拟post请求</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">pattern: http post &lt;urlAddress&gt; @&lt;jsonFileAddress&gt;</span></span><br><span class="line">xxxdeMacBook-Pro:closetUsers xxx$ http --json post http://127.0.0.1:8000/users/add1/ @/Users/xxx/Desktop/closet/jsonTest/login.json</span><br><span class="line">HTTP/1.1 403 Forbidden</span><br></pre></td></tr></table></figure>
-<p><strong>Error:</strong>  HTTP/1.1 403 Forbidden,  CSRF verification failed. Request aborted.</p>
-<p><strong>Solve: </strong>  为了防止跨站伪造请求，django引入了csrf机制，引入csrf_exempt</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/views.py</span></span><br><span class="line"><span class="keyword">from</span> django.views.decorators.csrf <span class="keyword">import</span> csrf_exempt</span><br><span class="line"></span><br><span class="line"><span class="meta">@csrf_exempt</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sign_up</span><span class="params">(request)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<p><strong>Error:  </strong>  HTTP/1.1 500 Internal Server Error,继续看报错信息，发现进行sign_up函数解析后出现错误，发现是request以json格式发送请求时，无法以<code>request.data[&#39;username&#39;]</code> 的方式获取数据</p>
-<p><strong>Solve：</strong> </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/views.py  inside sign_up function </span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">post_body = request.body </span><br><span class="line"><span class="comment">#django2.x use body, while django1.x use raw_post_data</span></span><br><span class="line">data = json.loads(post_body)</span><br><span class="line">username = data[<span class="string">'username'</span>]</span><br><span class="line">password = data[<span class="string">'password'</span>]</span><br></pre></td></tr></table></figure>
-<p>再次尝试使用httpie发送请求，成功！开心！</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:closetUsers xxx$ http --json post http://127.0.0.1:8000/users/add1/ @/Users/xxx/Desktop/closet/jsonTest/login.json</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Length: 24</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line">Date: Sat, 22 Dec 2018 05:17:42 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.7.0</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">创建成功，登录？</span><br><span class="line"></span><br><span class="line">xxxdeMacBook-Pro:closetUsers xxx$</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>以上只是简单的注册，下面我们来拓展一下，加上对于信息的验证，加上了对于手机号码和邮箱的格式验证</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/views.py</span></span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> JsonResponse, HttpResponse</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> status</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> User</span><br><span class="line"><span class="keyword">from</span> django.views.decorators.csrf <span class="keyword">import</span> csrf_exempt</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth <span class="keyword">import</span> login, authenticate, logout</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your views here.</span></span><br><span class="line"><span class="meta">@csrf_exempt</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sign_up</span><span class="params">(request)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        post_body = request.body</span><br><span class="line">        data = json.loads(post_body)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'username'</span> <span class="keyword">in</span> data:</span><br><span class="line">            username = data[<span class="string">'username'</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            username = <span class="string">'may'</span></span><br><span class="line">        password = data[<span class="string">'password'</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'email'</span> <span class="keyword">in</span> data:</span><br><span class="line">            email = data[<span class="string">'email'</span>]</span><br><span class="line">            <span class="comment"># check if email is valid</span></span><br><span class="line">            email_pat = re.compile(<span class="string">r'^[0-9a-zA-Z_]&#123;0,19&#125;@[0-9a-zA-Z]&#123;1,13&#125;\.[com,cn,net]&#123;1,3&#125;$'</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> re.match(email_pat, email):</span><br><span class="line">                <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"请输入正确的邮箱名"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            email = <span class="string">'error'</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">'phone'</span> <span class="keyword">in</span> data:</span><br><span class="line">            phone = data[<span class="string">'phone'</span>]</span><br><span class="line">            <span class="comment"># check if phone is valid</span></span><br><span class="line">            phone_pat = re.compile(<span class="string">r'^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d&#123;8&#125;$'</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> re.match(phone_pat, phone):</span><br><span class="line">                <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"请输入正确的手机号"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            phone = <span class="string">'error'</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">'profile'</span> <span class="keyword">in</span> data:</span><br><span class="line">            profile = data[<span class="string">'profile'</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            profile = <span class="string">'http://120.76.62.132:8080/photos/default.jpg'</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">'style'</span> <span class="keyword">in</span> data:</span><br><span class="line">            style = data[<span class="string">'style'</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            style = <span class="string">'casual'</span></span><br><span class="line">        <span class="comment"># users = User.objects.filter(username=username)</span></span><br><span class="line">        email_users = User.objects.filter(email=email)</span><br><span class="line">        phone_users = User.objects.filter(phone=phone)</span><br><span class="line">        name_users = User.objects.filter(username=username)</span><br><span class="line">        <span class="keyword">if</span> email_users:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"该邮箱已注册过"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        <span class="keyword">if</span> phone_users:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"该手机号已注册过"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        <span class="keyword">if</span> name_users:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"该用户已存在"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        <span class="keyword">if</span> email == <span class="string">'error'</span>:</span><br><span class="line">            email = <span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> phone == <span class="string">'error'</span>:</span><br><span class="line">            phone = <span class="string">''</span></span><br><span class="line">        user = User.objects.create_user(username=username, password=password, email=email,</span><br><span class="line">                                        phone=phone, style=style, profile=profile)</span><br><span class="line">        <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"创建成功，登录？"</span>&#125;, status=status.HTTP_200_OK)</span><br></pre></td></tr></table></figure>
-</li>
-<li></li>
-</ol>
-<h3 id="法二：django-rest-framework"><a href="#法二：django-rest-framework" class="headerlink" title="法二：django-rest-framework"></a>法二：django-rest-framework</h3><p>尝试用django-rest-framework提供的方法实现</p>
-<h2 id="二、登录"><a href="#二、登录" class="headerlink" title="二、登录"></a>二、登录</h2><h3 id="法一：沿袭我们的暴力方案"><a href="#法一：沿袭我们的暴力方案" class="headerlink" title="法一：沿袭我们的暴力方案"></a>法一：沿袭我们的暴力方案</h3><h4 id="2-1-使用auth模块提供的login"><a href="#2-1-使用auth模块提供的login" class="headerlink" title="2.1 使用auth模块提供的login"></a>2.1 使用auth模块提供的login</h4><p>使用username和password登录</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/views.py</span></span><br><span class="line"><span class="meta">@csrf_exempt</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sign_in</span><span class="params">(request)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        post_body = request.body</span><br><span class="line">        data = json.loads(post_body)</span><br><span class="line">        username = data[<span class="string">'username'</span>]</span><br><span class="line">        password = data[<span class="string">'password'</span>]</span><br><span class="line">        print(username)</span><br><span class="line">        user = authenticate(username=username, password=password)</span><br><span class="line">        <span class="keyword">if</span> user:</span><br><span class="line">            <span class="keyword">if</span> user.is_active:</span><br><span class="line">                login(request, user)</span><br><span class="line">                print(request.user)</span><br><span class="line">                <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"OK"</span>&#125;, status=status.HTTP_200_OK)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"用户不存在"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"用户或密码错误"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-拓展，自定义后端，使用邮箱登录"><a href="#2-2-拓展，自定义后端，使用邮箱登录" class="headerlink" title="2.2 拓展，自定义后端，使用邮箱登录"></a>2.2 拓展，自定义后端，使用邮箱登录</h4><p><a href="https://www.zmrenwu.com/post/50/" target="_blank" rel="noopener">参考自定义认证后台</a></p>
-<ol>
-<li><p>添加 backends.py文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmailBackend</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span><span class="params">(self, request, **credentials)</span>:</span></span><br><span class="line">        <span class="comment"># 要注意登录表单中用户输入的用户名或者邮箱的 field 名均为 username</span></span><br><span class="line">        email = credentials.get(<span class="string">'email'</span>, credentials.get(<span class="string">'username'</span>))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            user = User.objects.get(email=email)</span><br><span class="line">        <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> user.check_password(credentials[<span class="string">"password"</span>]):</span><br><span class="line">                <span class="keyword">return</span> user</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_user</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        该方法是必须的</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> User.objects.get(pk=user_id)</span><br><span class="line">        <span class="keyword">except</span> User.DoesNotExist:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在 setttings.py 中加入后端文件告诉Django 你使用了自定义后端</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AUTHENTICATION_BACKENDS = (</span><br><span class="line">    <span class="string">'django.contrib.auth.backends.ModelBackend'</span>,</span><br><span class="line">    <span class="string">'users.backends.EmailBackend'</span>,</span><br><span class="line">    <span class="string">'users.backends.PhoneBackend'</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="2-3-同理拓展，自定义后端，使用手机登录"><a href="#2-3-同理拓展，自定义后端，使用手机登录" class="headerlink" title="2.3 同理拓展，自定义后端，使用手机登录"></a>2.3 同理拓展，自定义后端，使用手机登录</h4><p>代码大同小异，不赘述了</p>
-<h2 id="三、登出"><a href="#三、登出" class="headerlink" title="三、登出"></a>三、登出</h2><h3 id="法一：继续，暴力解决一切事物"><a href="#法一：继续，暴力解决一切事物" class="headerlink" title="法一：继续，暴力解决一切事物"></a>法一：继续，暴力解决一切事物</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/views.py</span></span><br><span class="line"><span class="meta">@csrf_exempt</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sign_out</span><span class="params">(request)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        logout(request)</span><br><span class="line">        <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"登出成功"</span>&#125;, status=status.HTTP_200_OK)</span><br></pre></td></tr></table></figure>
-<h2 id="四、注销"><a href="#四、注销" class="headerlink" title="四、注销"></a>四、注销</h2><h3 id="法一：继续，暴力解决一切事物-1"><a href="#法一：继续，暴力解决一切事物-1" class="headerlink" title="法一：继续，暴力解决一切事物"></a>法一：继续，暴力解决一切事物</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#users/views.py</span></span><br><span class="line"><span class="meta">@csrf_exempt</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sign_off</span><span class="params">(request)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        post_body = request.body</span><br><span class="line">        data = json.loads(post_body)</span><br><span class="line">        username = data[<span class="string">'username'</span>]</span><br><span class="line">        password = data[<span class="string">'password'</span>]</span><br><span class="line">        user = authenticate(username=username, password=password)</span><br><span class="line">        <span class="keyword">if</span> user:</span><br><span class="line">            email_pat = re.compile(<span class="string">r'^[0-9a-zA-Z_]&#123;0,19&#125;@[0-9a-zA-Z]&#123;1,13&#125;\.[com,cn,net]&#123;1,3&#125;$'</span>)</span><br><span class="line">            phone_pat = re.compile(<span class="string">r'^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d&#123;8&#125;$'</span>)</span><br><span class="line">            <span class="keyword">if</span> re.match(email_pat, username):</span><br><span class="line">                delete_result = User.objects.filter(email=username).delete()</span><br><span class="line">            <span class="keyword">elif</span> re.match(phone_pat, username):</span><br><span class="line">                delete_result = User.objects.filter(phone=username).delete()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                delete_result = User.objects.filter(username=username).delete()</span><br><span class="line">            <span class="keyword">if</span> delete_result:</span><br><span class="line">                <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"注销成功"</span>&#125;, status=status.HTTP_200_OK)</span><br><span class="line">        <span class="keyword">return</span> JsonResponse(data=&#123;<span class="string">"msg"</span>: <span class="string">"用户不存在"</span>&#125;, status=status.HTTP_400_BAD_REQUEST)</span><br></pre></td></tr></table></figure>
+          Django拓展auth 用户完成注册登录登出注销操作
+！！！拓展auth用户请务必在 python manage.py migrate 前进行！！！
 
-          
+新建一个project：closetUsers
+
+修改 settings.py
+123456789101112131415161718192021
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/22/GuideBook/Django/Django拓展auth 用户/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1826,22 +1524,160 @@
       
         
           
-            <h1 id="Django-on-Mac-part0"><a href="#Django-on-Mac-part0" class="headerlink" title="Django on Mac part0"></a>Django on Mac part0</h1><h2 id="1-Django连接MySQL"><a href="#1-Django连接MySQL" class="headerlink" title="1. Django连接MySQL"></a>1. Django连接MySQL</h2><h3 id="1-1-未安装驱动"><a href="#1-1-未安装驱动" class="headerlink" title="1.1 未安装驱动"></a>1.1 未安装驱动</h3><p><strong>Error:</strong>  django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module.</p>
-<p>Did you install mysqlclient?</p>
-<p><strong>Solve:</strong>修改 <code>__init__.py</code>文件：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
-<h3 id="1-2-连接超时"><a href="#1-2-连接超时" class="headerlink" title="1.2 连接超时"></a>1.2 连接超时</h3><p><strong>Error:</strong>   django.db.utils.OperationalError: (2003, “Can’t connect to MySQL server on ‘120.76.62.132’ (timed out)”)</p>
-<p><strong>Solve</strong>: 先试一下能不能ping通服务器，如果能ping通但连接不上可能是因为服务器的防火墙没有开放3306端口</p>
-<h3 id="1-3-mysql未监听"><a href="#1-3-mysql未监听" class="headerlink" title="1.3 mysql未监听"></a>1.3 mysql未监听</h3><p>ERROR 2003 (HY000): Can’t connect to MySQL server on ‘120.76.62.132’ (61)</p>
-<p><strong>Solve：</strong></p>
-<p>查看mysql监听IP和端口是否正常。</p>
-<p>使用：netstat -anpt</p>
-<p>监听得地址如果是:::3306或者是0.0.0.0:3306，表示监听所有IP地址，这监听状态是正常。若出现127.0.0.0:3306，说明监听的本地地址，需要在mysql配置文件中将bind-address选项设置为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">bind_address=<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br></pre></td></tr></table></figure>
-<p>重启mysql。</p>
-<h3 id="1-4-密码错误"><a href="#1-4-密码错误" class="headerlink" title="1.4 密码错误"></a>1.4 密码错误</h3><p>ERROR 1045 (28000): Access denied for user ‘root‘@’58.41.202.207’ (using password: YES)</p>
+          Django on Mac part01. Django连接MySQL1.1 未安装驱动Error:  django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module.
+Did you install mysqlcl
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/16/GuideBook/Django/DjangoOnMac_0/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2018/12/16/GuideBook/Django/DjangoInUbuntu_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/16/GuideBook/Django/DjangoInUbuntu_2/" itemprop="url">DjangoInUbuntu_2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-16T09:45:10+08:00">
+                2018-12-16
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/16/GuideBook/Django/DjangoInUbuntu_2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/16/GuideBook/Django/DjangoInUbuntu_2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Django in Ubuntu part2Django和服务器的配置
+Django+Nginx + Tomcat?
+Nginx
+1root@iZwz969jm0y04abuhgx4byZ:~# apt-get install nginx
+
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/16/GuideBook/Django/DjangoInUbuntu_2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1928,7 +1764,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

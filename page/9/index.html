@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_8_Quality/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -304,7 +304,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_8_Quality/" itemprop="url">MgtPro_8_QualityMgt</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/" itemprop="url">2.3 Internal non-technical</a></h1>
         
 
         <div class="post-meta">
@@ -357,8 +357,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/SoftwareManagement/MgtPro_8_Quality/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_8_Quality/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -390,278 +390,23 @@
       
         
           
-            <h1 id="MgtPro-8-QualityMgt"><a href="#MgtPro-8-QualityMgt" class="headerlink" title="MgtPro_8_QualityMgt"></a>MgtPro_8_QualityMgt</h1><h2 id="Quality-Baseline-Goals"><a href="#Quality-Baseline-Goals" class="headerlink" title="Quality Baseline/Goals"></a>Quality Baseline/Goals</h2><h3 id="1-Functionality"><a href="#1-Functionality" class="headerlink" title="1. Functionality:"></a>1. Functionality:</h3><h4 id="a-Suitability"><a href="#a-Suitability" class="headerlink" title="a. Suitability:"></a>a. Suitability:</h4><ol>
-<li>The function of the sub-functions in the system should meet the principle of high cohesion and low coupling.</li>
-<li>The number of database table rows does not exceed 1 million rows, the maximum capacity of the database does not exceed 1000 GB, and the disk space needs at least 40G. 1000000.</li>
-<li>All the requirement should be implemented as requirement document says.</li>
-<li>The maximum number of transactions per day is 3,000.</li>
-<li>The average number of concurrent transactions is 20, and the maximum number of concurrent transactions is 50.</li>
-<li>The estimated number of users is 10,000, the number of login users per day is about 3000, and the bandwidth of the network is 100M bandwidth.</li>
-<li>The system can simultaneously satisfy 10,000 user requests and provide browsing capabilities for 25,000 concurrent users.</li>
-</ol>
-<h4 id="b-Accuracy"><a href="#b-Accuracy" class="headerlink" title="b. Accuracy:"></a>b. Accuracy:</h4><ol>
-<li>The data stored by the system should be atomic and persistent.</li>
-<li>The accuracy of the calculation is 7 digits after the decimal point.</li>
-</ol>
-<h4 id="c-Interoperability-Interoperability"><a href="#c-Interoperability-Interoperability" class="headerlink" title="c. Interoperability (Interoperability):"></a>c. Interoperability (Interoperability):</h4><ol>
-<li>The system should have good interaction with the delivery platform.</li>
-</ol>
-<h4 id="d-Compliance"><a href="#d-Compliance" class="headerlink" title="d. Compliance:"></a>d. Compliance:</h4><ol>
-<li>Software coding should follow a uniform standard.</li>
-</ol>
-<h3 id="2-Reliability"><a href="#2-Reliability" class="headerlink" title="2. Reliability:"></a>2. Reliability:</h3><ol>
-<li>There is a prompt for the input, the data is checked to prevent data anomalies.</li>
-<li>The system is robust and should be able to handle various abnormal situations that occur during system operation, such as human error, illegal data input, hardware device failure, etc. The system should be able to handle it correctly and avoid it properly.</li>
-<li>The probability that the service cannot be completed due to the failure of the software system is less than 5‰.</li>
-<li>The system is required to run 24 hours a day, and the continuous operation failure time of the whole year cannot exceed 10 hours.</li>
-<li>The system defect rate has a maximum of 1 failure every 1,000 hours.</li>
-<li>In 1,000,000 transactions, there is a maximum of 1 time when the system needs to be restarted.</li>
-</ol>
-<h3 id="3-Usability"><a href="#3-Usability" class="headerlink" title="3. Usability:"></a>3. Usability:</h3><h4 id="a-Learnability"><a href="#a-Learnability" class="headerlink" title="a. Learnability:"></a>a. Learnability:</h4><ol>
-<li>Within 3 months of the introduction of the product, 60% of users should be able to use it to complete the transfer task within 45 seconds, the failure rate is controlled within one ten thousandth.</li>
-<li>60% of users will realize that this is the bank’s online banking within 5 seconds of seeing the product for the first time.</li>
-<li>80% of users can successfully buy a book within 5 minutes after receiving a half-hour system introduction training.</li>
-</ol>
-<h4 id="b-Operability"><a href="#b-Operability" class="headerlink" title="b. Operability:"></a>b. Operability:</h4><ol>
-<li>Some rural areas have poor network quality and low bandwidth. Guarantee the availability of the system under conditions of poor network environment.</li>
-<li>In 95% of the failures, the system takes up to 20 seconds to restart.</li>
-<li>Provide data backup and recovery functions to enable timely recovery and restore of data (provided by hardware and third-party software) when system data is lost due to system errors or other reasons or system data is corrupted.</li>
-</ol>
-<h3 id="4-Efficiency"><a href="#4-Efficiency" class="headerlink" title="4. Efficiency:"></a>4. Efficiency:</h3><h4 id="a-Time-Behaviour"><a href="#a-Time-Behaviour" class="headerlink" title="a. Time Behaviour:"></a>a. Time Behaviour:</h4><ol>
-<li>In 95% of cases, the general time response time does not exceed 1.5 seconds, and the peak time does not exceed 4 seconds.</li>
-<li>The time required for the positioning system to display from the click to the first interface must not exceed 300 milliseconds.</li>
-<li>When the network is unblocked, the time required to dial-up to the GPRS network must not exceed 5 seconds.</li>
-<li>When the network is unblocked, the website page refresh time does not exceed 10 seconds.</li>
-<li>In the recommended configuration environment: the login response time is within 2 seconds, the refresh response time of the column is within 2 seconds, the response time of the entry page list is refreshed within 2 seconds, and the response time of the information entry is turned on within 1 second, and the department and personnel list response is refreshed. Time is 2 seconds.</li>
-<li>Search during the off-peak hours according to the number and name specific conditions, and the search results can be obtained within 3 seconds.</li>
-</ol>
-<h4 id="b-Resource-Behaviour"><a href="#b-Resource-Behaviour" class="headerlink" title="b. Resource Behaviour:"></a>b. Resource Behaviour:</h4><ol>
-<li>CPU usage &lt;=50%.</li>
-<li>Memory usage &lt;=50%.</li>
-</ol>
-<h3 id="5-Maintainability"><a href="#5-Maintainability" class="headerlink" title="5. Maintainability:"></a>5. Maintainability:</h3><h4 id="a-Changeability"><a href="#a-Changeability" class="headerlink" title="a. Changeability:"></a>a. Changeability:</h4><ol>
-<li>After receiving the modification request, the general modification should be completed within 1-2 days; for the major demand or design modification after the assessment, it should be completed within 1 week.</li>
-<li>90% of the BUG modification time does not exceed 1 working day, and the other does not exceed 2 working days.</li>
-<li>The circle complexity of the code must be within 10.</li>
-<li>Any method of any object does not allow more than 200 lines of code.</li>
-<li>Install the new version and keep all database contents and all personal settings unchanged.</li>
-<li>The product must provide tools to track any database fields.</li>
-</ol>
-<h4 id="b-Testability"><a href="#b-Testability" class="headerlink" title="b. Testability:"></a>b. Testability:</h4><ol>
-<li>The maximum circle complexity of a module cannot exceed 15.</li>
-<li>The delivered system must pass unit testing and be 100% covered.</li>
-<li>Development activities must use regression testing and allow for a complete test to be re-run within 12 hours.</li>
-</ol>
-<h3 id="6-Portability"><a href="#6-Portability" class="headerlink" title="6. Portability:"></a>6. Portability:</h3><ol>
-<li>The code change rate should be less than 20% when the system is migrated.</li>
-<li>The installation success rate should be greater than 90% when the system is transplanted.</li>
-<li>Functional integrity should reach 90% and above in the new target environment after system migration.</li>
-</ol>
-<h3 id="7-Security"><a href="#7-Security" class="headerlink" title="7. Security"></a>7. Security</h3><ol>
-<li>Strict access control. After the user is authenticated, the user can only access the data within the scope of his or her rights, and can only perform operations within its scope of authority.</li>
-<li>Different users have different identities and rights. They need to provide trusted authorization management services under the premise of authenticity of users, protect data from illegal/over-authorized access and tampering, and ensure confidentiality and integrity of data. Sex.</li>
-<li>Provide running log management and security auditing functions to track the historical usage of the system.</li>
-<li>Can withstand general malicious attacks from the Internet. Such as viruses (including Trojans) attacks, password guessing attacks, hacking, etc.</li>
-<li>At least 99% of attacks need to be detected within 10 seconds.</li>
-<li>Network delivery data should be encrypted. It is necessary to ensure that data is not sneaked, stolen or tampered with during collection, transmission and processing. Business data needs to be encrypted at the time of storage to ensure that it is not hackable.</li>
-</ol>
-<h3 id="8-Compatibility"><a href="#8-Compatibility" class="headerlink" title="8. Compatibility"></a>8. Compatibility</h3><ol>
-<li>The system should support IOS, Android, Windows operating system;</li>
-<li>The system should support Oracle, DB2 database system;</li>
-<li>Up to 5% of system implementations need to be specific to a particular operating system.</li>
-<li>The average time to replace the relational database system is no more than 2 hours, and no data loss is guaranteed.</li>
-</ol>
-<h2 id="Quality-Metric"><a href="#Quality-Metric" class="headerlink" title="Quality Metric"></a>Quality Metric</h2><p>The following metrics are majorly used for generating the daily/weekly status report with accurate data during test case development/execution phase and this is also useful for tracking the project status and Quality of the software.</p>
-<h3 id="1-percentage-Test-cases-Executed"><a href="#1-percentage-Test-cases-Executed" class="headerlink" title="1. percentage Test cases Executed:"></a>1. percentage Test cases Executed:</h3><p>This metric is used to obtain the execution status of the test cases in terms of percentage.<br>$$<br>TestCaseExecuted\% = \frac{No_{TestCaseExecuted}}{Total \space No_{TestCasesWritten}}* 100.<br>$$</p>
-<h3 id="2-percentage-Test-cases-not-executed"><a href="#2-percentage-Test-cases-not-executed" class="headerlink" title="2. percentage Test cases not executed:"></a>2. percentage Test cases not executed:</h3><p>This metric is used to obtain the pending execution status of the test cases in terms of percentage.<br>$$<br>TestCasesNotExecuted\% = \frac{No_{TestCasesNotExecuted}}{Total \space No_{TestCasesWritten}} * 100.<br>$$</p>
-<p><img src="/images/20161202085815466.png" alt="这里写图片描述"><br><img src="/images/20161202085848369.png" alt="这里写图片描述"></p>
-<h3 id="3-percentage-Test-cases-Passed"><a href="#3-percentage-Test-cases-Passed" class="headerlink" title="3. percentage Test cases Passed:"></a>3. percentage Test cases Passed:</h3><p>This metric is used to obtain the Pass percentage of the executed test cases.<br>$$<br>Test Cases Passed\% = \frac{No_{ Test Cases Passed} }{Total \space No_{Test Cases Executed}} * 100.<br>$$</p>
-<h3 id="4-percentage-Test-cases-Failed"><a href="#4-percentage-Test-cases-Failed" class="headerlink" title="4. percentage Test cases Failed:"></a>4. percentage Test cases Failed:</h3><p> This metric is used to obtain the Fail percentage of the executed test cases.<br>$$<br> Test Cases Failed \%= \frac{No_{ Test Cases Failed }}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$</p>
-<h3 id="5-percentage-Test-cases-Blocked"><a href="#5-percentage-Test-cases-Blocked" class="headerlink" title="5. percentage Test cases Blocked:"></a>5. percentage Test cases Blocked:</h3><p> This metric is used to obtain the blocked percentage of the executed test cases. A detailed report can be submitted by specifying the actual reason of blocking the test cases.<br>$$<br>Test Cases Blocked \% = \frac{No_{ Test Cases Blocked}}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$<br><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="Test Execution Status这里写图片描述"></p>
-<p><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="这里写图片描述"></p>
-<h3 id="6-Defect-Density"><a href="#6-Defect-Density" class="headerlink" title="6. Defect Density"></a>6. Defect Density</h3><p>$$<br>Defect Density =  No_{ Defects identified }/ size<br>$$</p>
-<p>(Here “Size” is considered as requirement. Hence here the Defect Density is calculated as number of defects identified per requirement. Similarly, Defect Density can be calculated as number of Defects identified per 100 lines of code [OR] No. of defects identified per module etc.) </p>
-<h3 id="7-Defect-Removal-Efficiency-DRE"><a href="#7-Defect-Removal-Efficiency-DRE" class="headerlink" title="7. Defect Removal Efficiency (DRE)"></a>7. Defect Removal Efficiency (DRE)</h3><p>$$<br>Defect Removal Efficiency(DRE) = (\frac{No_{ Defects Found During QA Testing}}{ No_{ Defects Found During QA Testing}} +No_{ Defects Found By End user}) * 100<br>$$</p>
-<p>DRE is used to identify the test effectiveness of the system. </p>
-<h3 id="8-Defect-Leakage"><a href="#8-Defect-Leakage" class="headerlink" title="8. Defect Leakage:"></a>8. Defect Leakage:</h3><p>Defect Leakage is the Metric which is used to identify the efficiency of the QA testing i.e., how many defects are missed / slipped during the QA testing.<br>$$<br>Defect Leakage = \frac{No_{ Defects Found in UAT }}{No_{ Defects Found in QA Testing.}}* 100<br>$$</p>
-<h3 id="9-Defects-by-Priority"><a href="#9-Defects-by-Priority" class="headerlink" title="9. Defects by Priority:"></a>9. Defects by Priority:</h3><p>This metric is used to identify the no. of defects identified based on the Severity / Priority of the defect which is used to decide the quality of the software.<br>$$<br>\begin{align}<br> Critical Defects\% &amp;= \frac{No_{ Critical Defects Identified }}{ Total \space No_{ Defects Identified} }* 100  \</p>
-<p> High Defects\% &amp;= \frac{No_{ High Defects Identified}}{Total \space No_{ Defects Identified}} * 100  \</p>
-<p> Medium Defects\% &amp;=\frac{ No_{ Medium Defects Identified }}{ Total \space No_{ Defects Identified}} * 100 \</p>
-<p> Low Defects\% &amp;= \frac{No_{ Low Defects Identified}}{Total \space No_{ Defects Identified}} * 100<br>\end{align}<br>$$</p>
-<p><img src="/images/20161202090431083.png" alt="Defect Status by Priority这里写图片描述"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+          2.3 Internal non-technical2.3.3 Organizational
+分工不合理（工作难度分配不合理、工作种类分工不合理）
+及时根据当前工作进度调整工作分工
+进行工作分工时跟技术人员沟通
 
 
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Web/Web_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/Web/Web_1/" itemprop="url">Web_1 web architecture?</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/Web/Web_1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Web/Web_1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Web-1-web-architecture"><a href="#Web-1-web-architecture" class="headerlink" title="Web_1 web architecture?"></a>Web_1 web architecture?</h1><p>HyperText Markup Language</p>
-<p>主动指针（多媒体：图片、音频等</p>
-<p>被动指针（href</p>
-<h2 id="Web-Browser-Architecture"><a href="#Web-Browser-Architecture" class="headerlink" title="Web Browser Architecture"></a>Web Browser Architecture</h2><p>A controller </p>
-<p>A set of clients</p>
-<p>A set of interpreters</p>
-<h2 id="Web-type"><a href="#Web-type" class="headerlink" title="Web type"></a>Web type</h2><h3 id="Static-web-document"><a href="#Static-web-document" class="headerlink" title="Static web document"></a>Static web document</h3><h3 id="Active-web-document"><a href="#Active-web-document" class="headerlink" title="Active web document"></a>Active web document</h3><ol>
-<li>Textual representation: js，可以改变网页内控件</li>
-<li>Binary representation: 相对独立，与网页的控件没有交互</li>
-</ol>
-<p>==typescript==</p>
-<h3 id="Dynamic-web-document"><a href="#Dynamic-web-document" class="headerlink" title="Dynamic web document"></a>Dynamic web document</h3><p>runs on web server : can create a html document each time a request arrives</p>
-<p>Common Gateway Interface</p>
-<p>==install php(first) , apache==</p>
-<p>不考虑网页状态，不断动态更新可能会导致服务器压力很大</p>
-<p>由此，Ajax诞生</p>
-
-          
+运转资金不足
+技术中心及相关设计人员慎重研究设计变更，减少设计变更造成的各种损失
+加
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/SoftwareManagement/MgtPro_6_RiskMgt/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -815,250 +560,21 @@
       
         
           
-            <h1 id="MgtPro-5"><a href="#MgtPro-5" class="headerlink" title="MgtPro_5"></a>MgtPro_5</h1><h2 id="1-risk-identification"><a href="#1-risk-identification" class="headerlink" title="1. risk identification"></a>1. risk identification</h2><h3 id="1-1-Diagramming"><a href="#1-1-Diagramming" class="headerlink" title="1.1 Diagramming"></a>1.1 Diagramming</h3><h4 id="Equipment"><a href="#Equipment" class="headerlink" title="Equipment"></a>Equipment</h4><ol>
-<li>设备未到位（缺失、不足</li>
-<li>设备因不可坑因素损坏</li>
-</ol>
-<h4 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h4><h4 id="People"><a href="#People" class="headerlink" title="People"></a>People</h4><h4 id="Materials"><a href="#Materials" class="headerlink" title="Materials"></a>Materials</h4><h4 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h4><ol>
-<li>新的开发工具学习期比预期长</li>
-<li>开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；</li>
-</ol>
-<h4 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h4><table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Possible risk</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Technology</td>
-<td></td>
-</tr>
-<tr>
-<td>People</td>
-<td></td>
-</tr>
-<tr>
-<td>Organizational</td>
-<td></td>
-</tr>
-<tr>
-<td>Tools</td>
-<td></td>
-</tr>
-<tr>
-<td>Requirements</td>
-<td></td>
-</tr>
-<tr>
-<td>Estimation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1-2-type-based"><a href="#1-2-type-based" class="headerlink" title="1.2 type-based"></a>1.2 type-based</h3><h4 id="Technology"><a href="#Technology" class="headerlink" title="Technology"></a>Technology</h4><ol>
-<li>系统架构不合理</li>
-<li>可复用组件不适用</li>
-<li>数据库<ol>
-<li>对于并发性的支持</li>
-<li>事件的四大特性（一致性、持久性、原子性、隔离性）</li>
-<li>数据库数据丢失（</li>
-<li>数据库数据安全（恶意攻击，恶意入侵数据库，备份数据的保护</li>
-</ol>
-</li>
-<li>服务器<ol>
-<li>设备失效，宕机</li>
-</ol>
-</li>
-<li>设计质量低下，导致重复设计；</li>
-<li>一些必要的功能无法使用现有的代码和库实现，开发人员必须使用新的库或者自行开发新的功能；</li>
-<li>代码和库质量低下，导致需要进行额外的测试，修正错误，或重新制作；</li>
-<li>过高估计了增强型工具对计划进度的节省量；</li>
-<li>分别开发的模块无法有效集成，需要重新设计或制作。</li>
-</ol>
-<h4 id="People-1"><a href="#People-1" class="headerlink" title="People"></a>People</h4><ol>
-<li>人员的变更：人员辞职（底层程序员、管理层人员），关键人员因不可抗因素没办法工作，新的人员的加入</li>
-<li>人员技术水平不够</li>
-<li>人员培训效果不足</li>
-<li>人员消极怠工</li>
-<li>人员之间沟通不足引发冲突，导致工作因沟通不够出现错误或额外的重复工作</li>
-</ol>
-<h4 id="Organizational"><a href="#Organizational" class="headerlink" title="Organizational"></a>Organizational</h4><ol>
-<li>分工不合理（工作难度分配不合理、工作种类分工不合理）</li>
-<li>运转资金不足</li>
-<li>仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；</li>
-<li>低效的项目组结构降低生产率；</li>
-<li>管理层审查 决策的周期比预期的时间长；</li>
-<li>预算削减，打乱项目计划；</li>
-<li>缺乏必要的规范，导致工作失误与重复工作；</li>
-<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
-</ol>
-<h4 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h4><ol>
-<li>代码生成失误</li>
-<li>工具不兼容</li>
-<li>源码丢失</li>
-</ol>
-<h4 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h4><ol>
-<li>需求已经成为项目基准，但需求还在继续变化；</li>
-<li>需求定义欠佳，而进一步的定义会扩展项目范畴；</li>
-<li>产品定义含混的部分比预期需要更多的时间；</li>
-<li>在做需求中客户参与不够</li>
-</ol>
-<h4 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h4><ol>
-<li>工作量工作时间工作进度预估错误</li>
-<li>低估软件规模</li>
-<li>低估缺陷修复率</li>
-</ol>
-<h3 id="1-3-Brainstorm"><a href="#1-3-Brainstorm" class="headerlink" title="1.3 Brainstorm"></a>1.3 Brainstorm</h3><h4 id="客户风险："><a href="#客户风险：" class="headerlink" title="客户风险："></a>客户风险：</h4><ol>
-<li>客户对于交付的产品不满意</li>
-</ol>
-<h4 id="scope-risk："><a href="#scope-risk：" class="headerlink" title="scope risk："></a>scope risk：</h4><ol>
-<li>产品跨领域</li>
-</ol>
-<h3 id="1-4-Document-review"><a href="#1-4-Document-review" class="headerlink" title="1.4 Document review"></a>1.4 Document review</h3><h4 id="非功能需求"><a href="#非功能需求" class="headerlink" title="非功能需求"></a>非功能需求</h4><p>法律：</p>
-<ol>
-<li>某些地区有特定的法律法规，系统需要根据所在地区进行调整</li>
-</ol>
-<h2 id="2-classification"><a href="#2-classification" class="headerlink" title="2. classification"></a>2. classification</h2><p>RBS</p>
-<h3 id="2-1-External-Unpredictable"><a href="#2-1-External-Unpredictable" class="headerlink" title="2.1 External Unpredictable"></a>2.1 External Unpredictable</h3><ol>
-<li>设备风险<ol>
-<li>Natural Hazards（设备因不可坑因素损坏</li>
-<li>设备未到位</li>
-</ol>
-</li>
-<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
-</ol>
-<h3 id="2-2-Externel-Predictable"><a href="#2-2-Externel-Predictable" class="headerlink" title="2.2 Externel Predictable"></a>2.2 Externel Predictable</h3><ol>
-<li>market risk： <ol>
-<li>软件功能不符合市场需求，投入市场后反映惨淡</li>
-<li>行业竞争</li>
-</ol>
-</li>
-<li>运营风险：<ol>
-<li>经营成本上升，宣传成本，人员成本上升</li>
-</ol>
-</li>
-<li>通货膨胀</li>
-<li>汇率</li>
-</ol>
-<h3 id="2-3-Internal-Non-technical"><a href="#2-3-Internal-Non-technical" class="headerlink" title="2.3 Internal Non-technical"></a>2.3 Internal Non-technical</h3><ol>
-<li>Environment<ol>
-<li>新的开发工具学习期比预期长</li>
-<li>开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；</li>
-</ol>
-</li>
-<li>People<ol>
-<li>人员的变更：人员辞职（底层程序员、管理层人员），关键人员因不可抗因素没办法工作，新的人员的加入</li>
-<li>人员技术水平不够</li>
-<li>人员培训效果不足</li>
-<li>人员消极怠工</li>
-<li>人员之间沟通不足引发冲突，导致工作因沟通不够出现错误或额外的重复工作</li>
-</ol>
-</li>
-<li>Organizational<ol>
-<li>分工不合理（工作难度分配不合理、工作种类分工不合理）</li>
-<li>运转资金不足</li>
-<li>仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；</li>
-<li>低效的项目组结构降低生产率；</li>
-<li>管理层审查 决策的周期比预期的时间长；</li>
-<li>预算削减，打乱项目计划；</li>
-<li>缺乏必要的规范，导致工作失误与重复工作；</li>
-<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
-</ol>
-</li>
-<li>Requirements<ol>
-<li>需求已经成为项目基准，但需求还在继续变化；</li>
-<li>需求定义欠佳，而进一步的定义会扩展项目范畴；</li>
-<li>产品定义含混的部分比预期需要更多的时间；</li>
-<li>在做需求中客户参与不够</li>
-</ol>
-</li>
-<li>Estimation<ol>
-<li>工作量工作时间工作进度预估错误</li>
-<li>低估软件规模</li>
-<li>低估缺陷修复率</li>
-</ol>
-</li>
-<li>客户风险<ol>
-<li>客户对于交付的产品不满意</li>
-</ol>
-</li>
-<li>scope risk：<ol>
-<li>产品跨领域发展</li>
-</ol>
-</li>
-</ol>
-<h3 id="2-4-Technical"><a href="#2-4-Technical" class="headerlink" title="2.4 Technical"></a>2.4 Technical</h3><ol>
-<li>数据库<ol>
-<li>对于并发性的支持</li>
-<li>事件的四大特性（一致性、持久性、原子性、隔离性）</li>
-<li>数据库数据丢失（</li>
-<li>数据库数据安全（恶意攻击，恶意入侵数据库，备份数据的保护</li>
-</ol>
-</li>
-<li>服务器<ol>
-<li>设备失效，宕机</li>
-</ol>
-</li>
-<li>design：<ol>
-<li>设计质量低下，导致重复设计；</li>
-<li>一些必要的功能无法使用现有的代码和库实现，开发人员必须使用新的库或者自行开发新的功能；</li>
-<li>代码和库质量低下，导致需要进行额外的测试，修正错误，或重新制作；</li>
-<li>过高估计了增强型工具对计划进度的节省量；</li>
-<li>分别开发的模块无法有效集成，需要重新设计或制作。</li>
-</ol>
-</li>
-<li>Tools：<ol>
-<li>代码生成失误</li>
-<li>工具不兼容</li>
-<li>源码丢失</li>
-</ol>
-</li>
-</ol>
-<h3 id="2-5-Legal"><a href="#2-5-Legal" class="headerlink" title="2.5 Legal"></a>2.5 Legal</h3><ol>
-<li>某些地区有特定的法律法规，系统需要根据所在地区进行调整</li>
-<li>专利问题，使用第三方库涉及的侵权问题</li>
-<li>消费者权益受损，平台未及时处理而遭诉讼</li>
-</ol>
-<h2 id="3-risk-analysis"><a href="#3-risk-analysis" class="headerlink" title="3. risk analysis"></a>3. risk analysis</h2><p>分工：各自按照流程风险分析，register，应对措施= =自己看ppt吧</p>
-<p>文添： 2.5+ppt</p>
-<p>陈超： 2.1、2.2（+补充</p>
-<p>陈润乾、罗媚、谈瑞： 2.3 3个人</p>
-<p>梁程伟： 2.4（+补充</p>
-<p>Pre 建议：</p>
-<p>资源分配，依据什么将资源分配给<strong>WBS</strong>中的任务</p>
-<p>介绍一下自己使用的风险管理工具</p>
-<p>WBS从不同的方面进行分解？合理分解（对于WBS不同的划分</p>
-<p>甘特图</p>
-<p>注意所写的风险是否与软件开发是否有关</p>
-<p>参考一些现有的技术文档</p>
-<p>现有的技术模型</p>
-<p>PPT流程：</p>
-<ol>
-<li>Risk Mgt Plan（略）</li>
-<li>Risk Identification<ol>
-<li>使用方法：brainstorm、diagramming、document review</li>
-<li>展示RBS</li>
-</ol>
-</li>
-<li>Risk Analysis<ol>
-<li>定性分析：probability-impact矩阵，impact分析表</li>
-<li>定量分析：决策树、蒙特卡洛分析</li>
-</ol>
-</li>
-<li>response<ol>
-<li>面对的态度：积极、消极</li>
-<li>strategy</li>
-</ol>
-</li>
-<li>WBS（使用工具：甘特图、ones.ai</li>
-</ol>
-<p>建议：</p>
-<p>schedule中包含工作的分配和资源的分配</p>
-<p>给这个分值的原因</p>
-<p>WBS分解的依据</p>
+          MgtPro_51. risk identification1.1 DiagrammingEquipment
+设备未到位（缺失、不足
+设备因不可坑因素损坏
 
-          
+ProcessPeopleMaterialsEnvironment
+新的开发工具学习期比预期长
+开发工具不如期望的那样有效，开发人员需要时间创
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/SoftwareManagement/MgtPro_5/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1107,7 +623,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/R-CNN/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_8_Quality/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1126,7 +642,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/SLAM/R-CNN/" itemprop="url">R-CNN</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_8_Quality/" itemprop="url">MgtPro_8_QualityMgt</a></h1>
         
 
         <div class="post-meta">
@@ -1161,8 +677,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/" itemprop="url" rel="index">
-                    <span itemprop="name">SLAM</span>
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
                   </a>
                 </span>
 
@@ -1179,8 +695,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/SLAM/R-CNN/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/R-CNN/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/MgtPro_8_Quality/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_8_Quality/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1212,9 +728,183 @@
       
         
           
-            <h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><p><a href="https://blog.csdn.net/v1_vivian/article/details/78599229" target="_blank" rel="noopener">R-CNN论文解析</a></p>
+          MgtPro_8_QualityMgtQuality Baseline/Goals1. Functionality:a. Suitability:
+The function of the sub-functions in the system should meet the principle of
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/SoftwareManagement/MgtPro_8_Quality/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Web/Web_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/Web/Web_1/" itemprop="url">Web_1 web architecture?</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/Web/Web_1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Web/Web_1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Web_1 web architecture?HyperText Markup Language
+主动指针（多媒体：图片、音频等
+被动指针（href
+Web Browser ArchitectureA controller 
+A set of clients
+A set of interpreter
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/Web/Web_1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1368,10 +1058,17 @@
       
         
           
-            <h1 id="Web-2-HTML-basis"><a href="#Web-2-HTML-basis" class="headerlink" title="Web_2 HTML basis"></a>Web_2 HTML basis</h1><p>Markup language</p>
-<p><strong>Exercise：</strong>简历（html+css</p>
+          Web_2 HTML basisMarkup language
+Exercise：简历（html+css
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/Web/Web_2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1420,7 +1117,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/CNN/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/软工经验汇总：/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1439,7 +1136,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/SLAM/CNN/" itemprop="url">CNN</a></h1>
+                <a class="post-title-link" href="/2019/05/11/Mess/软工经验汇总：/" itemprop="url">软工经验汇总：</a></h1>
         
 
         <div class="post-meta">
@@ -1474,8 +1171,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/" itemprop="url" rel="index">
-                    <span itemprop="name">SLAM</span>
+                  <a href="/categories/Mess/" itemprop="url" rel="index">
+                    <span itemprop="name">Mess</span>
                   </a>
                 </span>
 
@@ -1492,8 +1189,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/SLAM/CNN/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/CNN/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/Mess/软工经验汇总：/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/软工经验汇总：/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1525,423 +1222,20 @@
       
         
           
-            <h1 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h1><p><img src="/images/20160107230058907.png" alt="20160107230058907"></p>
-<h2 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h2><p>原图像经过卷积模版之后得到的？</p>
-<h2 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h2><p>这里再展开叙述池化层的具体作用。</p>
-<ol>
-<li><p>特征不变性，也就是我们在图像处理中经常提到的特征的尺度不变性，池化操作就是图像的resize，平时一张狗的图像被缩小了一倍我们还能认出这是一张狗的照片，这说明这张图像中仍保留着狗最重要的特征，我们一看就能判断图像中画的是一只狗，图像压缩时去掉的信息只是一些无关紧要的信息，而留下的信息则是具有尺度不变性的特征，是最能表达图像的特征。</p>
-</li>
-<li><p>特征降维，我们知道一幅图像含有的信息是很大的，特征也很多，但是有些信息对于我们做图像任务时没有太多用途或者有重复，我们可以把这类冗余信息去除，把最重要的特征抽取出来，这也是池化操作的一大作用。</p>
-</li>
-<li><p>在一定程度上防止过拟合，更方便优化。</p>
-</li>
-</ol>
-<p>激活函数</p>
-<p>全连接层</p>
-<p><strong>卷积神经网络之 fine-tuning</strong><br>何谓fine-tuning？<br>fine-tuning就是使用已用于其他目标、预训练好模型的权重或者部分权重，作为初始值开始训练。</p>
-<p>那为什么我们不用随机选取选几个数作为权重初始值？原因很简单，第一，自己从头训练卷积神经网络容易出现问题；第二，fine-tuning能很快收敛到一个较理想的状态，省时又省心。</p>
-<p>那fine-tuning的具体做法是？<br>　　•    复用相同层的权重，新定义层取随机权重初始值<br>　　•    调大新定义层的的学习率，调小复用层学习率</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/" itemprop="url">SRS part2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
-                    <span itemprop="name">SoftwareManagement</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SRS-part2"><a href="#SRS-part2" class="headerlink" title="SRS part2"></a>SRS part2</h1><h1 id="2-Overall-Description"><a href="#2-Overall-Description" class="headerlink" title="2. Overall Description"></a>2. Overall Description</h1><p>This section of the SRS gives an overview description of the general factors that affect<br>the product and its requirements. This section does not state specific requirements.<br>Instead, it provides a background for those requirements.</p>
-<h2 id="2-1-Product-Perspective"><a href="#2-1-Product-Perspective" class="headerlink" title="2.1 Product Perspective"></a>2.1 Product Perspective</h2><p>\<describe the context and origin of product being specified in this srs. for example, state whether is a follow-on member family, replacement certain existing systems, or new, self-contained product. if srs defines component larger system, relate requirements system to functionality software identify interfaces between two. simple diagram that shows major components overall subsystem interconnections, external can be helpful.\></describe></p>
-<ul>
-<li>产品上下文关联（是否是产品系列的后续成员etc</li>
-</ul>
-<p>Online bookstore system is a new, web-based product design to provide online bookselling.</p>
-<p>While the web-based application is the main focus of the project, there is also a server- side component which will be responsible for database and synchronization services. And there should be a client-side smart phone application to provide necessary working information to drivers. The scope of the project encompasses both server- and client- side functionalities. </p>
-<p>The <strong>diagram</strong> shown above demonstrates the interactions between the user and the system, including the system structure. </p>
-<h2 id="2-2-Product-Functions"><a href="#2-2-Product-Functions" class="headerlink" title="2.2 Product Functions"></a>2.2 Product Functions</h2><p>\<summarize the major functions product must perform or let user perform. details will be provided in section 3, so only a high level summary (such as bullet list) is needed here. organize to make them understandable any reader of srs. picture groups related requirements and how they relate, such top data flow diagram object class **diagram**, often effective.\></summarize></p>
-<ul>
-<li>产品的主要功能（详细说明在后面）</li>
-<li><p>可用类图说明</p>
-</li>
-<li><p>图书系统</p>
-<ul>
-<li>图书信息管理<ul>
-<li>书籍上架/下架：图书管理员可以上架下架书籍，书籍下架后，客户无法购买该书籍。</li>
-<li>书籍信息修改：图书管理员可更改某本书籍的具体信息，如书的价格、标签、打折信息、促销信息、书的简介等</li>
-<li>书籍查询：系统所有用户均可查找书籍的相关信息</li>
-</ul>
-</li>
-<li>库存管理<ul>
-<li>增/减：【？仓库管理员】可以增加减少某本书的仓库容量</li>
-<li>查询：【？仓库管理员】可以查询书籍的仓库容量</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>订单系统<ul>
-<li>交易模块<ul>
-<li>支付(微信、支付宝、网银)：customers would pay by credit card, Alipay, or WeChat.</li>
-<li>计算价格：The system must calculate taxes and delivery fee as well as applying discounts to the sale when applicable.</li>
-</ul>
-</li>
-<li>订单管理模块<ul>
-<li>订单创建：客户可通过系统可以创建订单</li>
-<li>订单修改：客服可通过系统修改订单的部分信息（如订单的收货地址</li>
-<li>取消订单：在书籍未发货前，客户可通过系统取消自身的订单</li>
-<li>订单查询：<ul>
-<li>客户可通过系统查询自身产生的订单状态</li>
-<li>客服可通过系统查询自己所负责区域的客户所产生的所有订单</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>服务系统<ul>
-<li>销售服务<ul>
-<li>客服和用户沟通：客服可与客户沟通，帮助客户购买到想要的书籍</li>
-<li>物流跟踪：系统提供每个订单的物流状况</li>
-<li>退换货：系统支持客户退换购买的书籍</li>
-<li>投诉：系统支持客户投诉客服的服务态度</li>
-</ul>
-</li>
-<li>书籍服务<ul>
-<li>推荐：系统提供推荐书单，如年度榜单、本月/本季度最热销书籍</li>
-<li>收藏：客户可将书籍添加到自己的收藏书单内</li>
-<li>评论：客户可对某本书籍编写书评</li>
-<li>举报：客户可举报书籍</li>
-</ul>
-</li>
-<li>消息通知<ul>
-<li>出版社通知：当某本书的库存到达某一阈值时，系统将会给出版社发送进货通知</li>
-<li>用户通知：<ul>
-<li>系统发送流程信息提示（如登陆成功、订单创建成功</li>
-<li>若书籍缺货，系统应发送缺货提醒并给出确切的deadline，a compatible deadline is informed to the customer.</li>
-</ul>
-</li>
-<li>管理员通知：？</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>统计分析系统<ul>
-<li>销量：The system must allow a manager to generate reports on bestselling books, and on most profitable customers</li>
-<li>书籍分析：</li>
-</ul>
-</li>
-<li>用户系统<ul>
-<li>管理员<ul>
-<li>超级管理员<ul>
-<li>封禁用户：超级管理员可以封禁普通用户账号</li>
-<li>修改用户信息：超级管理员可以修改普通用户信息</li>
-<li>删除评论：超级管理员可以删除含敏感信息的或不适宜的书籍评论</li>
-</ul>
-</li>
-<li>客服(订单管理员)</li>
-<li>图书管理员</li>
-</ul>
-</li>
-<li>普通用户<ul>
-<li>购物车<ul>
-<li>添加书：</li>
-<li>删除书</li>
-</ul>
-</li>
-<li>个人信息管理：修改个人基本信息</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>After requirement classification, we got some subsystems mainly  based on the entity that function is related to. Details of functions that each subsystem implements are listed as follows.</p>
-<ul>
-<li>Book system<ul>
-<li>Book Information Management<ul>
-<li>Books on shelves / off shelves: Librarians can put books on the shelves. If a book is off shelves, customers could not buy the book via the system.</li>
-<li>Book information modification: The librarian can change the specific information of a book, such as book price, label, discount information, promotion information, book introduction, etc.</li>
-<li>Book search: All users of the system can find information about books.</li>
-</ul>
-</li>
-<li>Inventory management<ul>
-<li>Increase/decrease: [? Warehouse administrator] can increase the warehouse capacity of a book</li>
-<li>Inquire:【? Warehouse administrator] can query the warehouse capacity of books</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Order System<ul>
-<li>Trading module<ul>
-<li>Payment (WeChat, Alipay, online banking): customers would pay by credit card, Alipay, or WeChat.</li>
-<li>The system must calculate taxes and delivery fee as well as applying discounts to the sale when applicable.</li>
-</ul>
-</li>
-<li>Order Management Module<ul>
-<li>Order creation: Customers can create orders through the system</li>
-<li>Order modification: Customer service can modify part of the order information through the system (such as the order receipt address)</li>
-<li>Cancellation of orders: Customers can cancel their orders through the system before the books are shipped.</li>
-<li>Order Tracking:<ul>
-<li>Customers can check the status of their own orders through the system</li>
-<li>Customer service can query all orders generated from the area where  customers work in through the system</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>service system<ul>
-<li>Sales service<ul>
-<li>Customer service and user communication: Customer service can communicate with customers to help customers purchase the books they want.</li>
-<li>Logistics tracking: the system provides the logistics status of each order</li>
-<li>Return and exchange: the system supports customers to return or exchange the purchased books</li>
-<li>Complaint: System support customer complaints Customer service attitude</li>
-</ul>
-</li>
-<li>Book service<ul>
-<li>Recommendation: The system provides a list of book recommendations, such as the annual list, the best selled books during this month / this quarter</li>
-<li>Collection: Customers can add books to their collections</li>
-<li>Comments: Customers can write a book review of a book</li>
-<li>Report: Customers can report a  book if the book has some sensitive content.</li>
-</ul>
-</li>
-<li>notification<ul>
-<li>Publisher notice: When the inventory of a book reaches a certain threshold, the system will send a delivery notice to the publisher.</li>
-<li>User notification:<ul>
-<li>The system sends a process information prompt (if the login is successful, the order is created successfully)</li>
-<li>If the book is out of stock, the system should send a stockout reminder and a compatible deadline is informed to the customer.</li>
-</ul>
-</li>
-<li>Administrator notification:?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Statistical Analysis System<ul>
-<li>Sales: The system must allow a manager to generate reports on bestselling books, and on most profitable customers ？</li>
-<li>Book analysis: ？</li>
-</ul>
-</li>
-<li>User system<ul>
-<li>Administrator<ul>
-<li>Super administrator<ul>
-<li>Blocked users: Super administrators can block ordinary user accounts</li>
-<li>Modify user information: Super administrator can modify common user information</li>
-<li>Delete comments: Super administrators can delete book comments with sensitive information or inappropriate content.</li>
-</ul>
-</li>
-<li>Customer Service (Order Administrator) ?</li>
-<li>librarian ?</li>
-</ul>
-</li>
-<li>general user<ul>
-<li>shopping cart<ul>
-<li>Add a book: customers can add books to their shopping cart</li>
-<li>delete the book: customers can delete books from their shopping cart.</li>
-</ul>
-</li>
-<li>Personal Information Management:  Customers can modifying personal basic information through the system.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-2-2-Features"><a href="#2-2-2-Features" class="headerlink" title="2.2.2 Features"></a>2.2.2 Features</h4><ul>
-<li><p>The system should run on an internet-based environment. </p>
-</li>
-<li><p>The system is a web-service-based application. </p>
-</li>
-<li><p>The system should have a centralized database. </p>
-</li>
-<li><p>The system should have authentication functionality. </p>
-</li>
-<li><p>The system should be scalable and extendable, e.g. extend Mobile APP. </p>
-</li>
-<li><p>The system should have reasonable external interface, e.g. add new interface </p>
-<p>for PayPal. </p>
-</li>
-<li><p>The system should have a user-friendly UI and be easy to use. </p>
-</li>
-<li><p>The driver should be able to download his working schedule, see the routes, </p>
-<p>and commit the work when he is done via his smart phone. </p>
-</li>
-</ul>
-<h2 id="2-3-User-Classes-and-Characteristics"><a href="#2-3-User-Classes-and-Characteristics" class="headerlink" title="2.3 User Classes and Characteristics"></a>2.3 User Classes and Characteristics</h2><p>\<identify the various user classes that you anticipate will use this product. may be differentiated based on frequency of use, subset product functions used, technical expertise, security or privilege levels, educational level, experience. describe pertinent characteristics each class. certain requirements pertain only to classes. distinguish most important for from those who are less satisfy.\></identify></p>
-<ul>
-<li>用户类</li>
-<li>用户特征</li>
-</ul>
-<p>用户：</p>
-<p>客户：可以查询书籍信息，购买书籍</p>
-<p>仓库管理员：可查询书籍的库存信息，更改书籍的库存信息</p>
-<p>超级管理员：可以修改用户</p>
-<p>客服：可以与用户沟通，修改订单的部分信息</p>
-<p><strong>Customer</strong> can inquiry the information of book through the system without any particular prerequisite. But customer must log in the system before buying books, query orders or return book.</p>
-<p><strong>Warehouse administrator</strong> can query the inventory information of books and change the inventory information of books</p>
-<p><strong>Super administrator</strong> take charge of the common users and book reviews in the system. They can block the common users, modify user information and delete inappropriate book review. </p>
-<p><strong>Customer service</strong> can communicate with users and modify part of the order information.</p>
-<h2 id="2-4-Operating-Environment"><a href="#2-4-Operating-Environment" class="headerlink" title="2.4 Operating Environment"></a>2.4 Operating Environment</h2><p>\<describe the environment in which software will operate, including hardware platform, operating system and versions, any other components or applications with it must peacefully coexist.\></describe></p>
-<ul>
-<li>操作环境：硬件平台、操作系统、版本</li>
-</ul>
-<h2 id="2-5-Design-and-Implementation-Constraints"><a href="#2-5-Design-and-Implementation-Constraints" class="headerlink" title="2.5 Design and Implementation Constraints"></a>2.5 Design and Implementation Constraints</h2><p>\&lt;Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).></p>
-<ul>
-<li>项目设计和实现约束</li>
-</ul>
-<h2 id="2-6-User-Documentation"><a href="#2-6-User-Documentation" class="headerlink" title="2.6 User Documentation"></a>2.6 User Documentation</h2><p>\<list the user documentation components (such as manuals, on-line help, and tutorials) that will be delivered along with software. identify any known delivery formats or standards.\></list></p>
-<ul>
-<li>用户手册</li>
-</ul>
-<h2 id="2-7-Assumptions-and-Dependencies"><a href="#2-7-Assumptions-and-Dependencies" class="headerlink" title="2.7 Assumptions and Dependencies"></a>2.7 Assumptions and Dependencies</h2><p>\<list any assumed factors (as opposed to known facts) that could affect the requirements stated in srs. these include third-party or commercial components you plan use, issues around development operating environment, constraints. project be affected if assumptions are incorrect, not shared, change. also identify dependencies has on external factors, such as software intend reuse from another project, unless they already documented elsewhere (for example, vision and scope document plan).\></list></p>
-<ul>
-<li>假设和依赖，可能使用的第三方组件</li>
-</ul>
-
-          
+          软工经验汇总：
+保存每次的会议记录，每次开会找一个会议记录员（Q&amp;A，ToDoList，讨论内容。目标，讨论结果，分工安排
+项目初期寻找一个合适的项目管理平台，包括项目需求跟踪、任务完成进度等等
+找文档的模版！
+工作量的合理预估！给一个弹性的时间！（哭了，忽略的前后端的整合让人头秃
+阶段性的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/Mess/软工经验汇总：/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2073,72 +1367,15 @@
       
         
           
-            <h1 id="MgtPro-9-MonteCarlo"><a href="#MgtPro-9-MonteCarlo" class="headerlink" title="MgtPro_9_MonteCarlo"></a>MgtPro_9_MonteCarlo</h1><h2 id="Monte-Carlo-method"><a href="#Monte-Carlo-method" class="headerlink" title="Monte Carlo method"></a>Monte Carlo method</h2><p>​    Monte Carlo simulation is a method in the risk analysis and evaluation of engineering projects. It is a quantitative analysis method. When the number of random variables input in the project evaluation is more than three, there may be three or more states in each input variable. Monte Carlo simulation techniques should be used. </p>
-<p>​    The principle of this method is to use a random sampling method to extract the values of a set of input variables, and calculate the project evaluation index based on the numerical values of the input variables. Through a large number of simulations of tens of thousands or even millions of times, the final evaluation is obtained. The probability distribution of the indicator and the cumulative probability distribution map, expected value, variance, and standard deviation, and the probability that the calculation item will change from feasible to infeasible, thereby estimating the risk assumed by the project investment.</p>
-<h2 id="General-steps-for-Monte-Carlo-simulation"><a href="#General-steps-for-Monte-Carlo-simulation" class="headerlink" title="General steps for Monte Carlo simulation"></a>General steps for Monte Carlo simulation</h2><ol>
-<li><p>Select a random variable, the variable that is most sensitive to the net present value.</p>
-</li>
-<li><p>Determine the probability distribution of random variables</p>
-</li>
-<li><p>Extract random numbers for each random variable</p>
-</li>
-<li><p>Convert the extracted random number into the sampled value of each input variable</p>
-</li>
-<li><p>The sampled values constitute a set of project evaluation basic data</p>
-</li>
-<li><p>Calculate the value of the evaluation index under a random condition based on the basic data.</p>
-</li>
-<li><p>Repeat the above process and perform repeated simulations to obtain multiple sets of evaluation index values.</p>
-</li>
-<li><p>Organize the expected value, variance, standard deviation, probability distribution and cumulative probability distribution of the evaluation indicators obtained from the simulation results, draw the cumulative probability map, and at the same time, check whether the simulation times meet the predetermined accuracy requirements.</p>
-</li>
-</ol>
-<p>Based on the above results, the impact of each random variable on project revenue is analyzed.</p>
-<h3 id="Sample"><a href="#Sample" class="headerlink" title="Sample:"></a>Sample:</h3><p>The time of the total construction period is estimated based on historical data simulation of each stage.</p>
-<ol>
-<li>According to the elements we divide in WBS, select random variables as four processes of software development: requirements engineering, design, development, testing</li>
-</ol>
-<p>The total duration is the sum of the four processes</p>
-<ol start="2">
-<li>Determine the probability distribution of random variables</li>
-</ol>
-<p>According to historical data, pessimistic estimates, general estimates and optimistic estimates of each variable are obtained. It is assumed that the random variables obey the Gaussian distribution and the parameters of the Gaussian distribution are determined from the historical data.</p>
-<p><img src="/images/1407D354-1C94-4BCA-A8A7-AF53D851801E.png" alt="1407D354-1C94-4BCA-A8A7-AF53D851801E"></p>
-<p>All variable are distributed as Gaussian distribution.</p>
-<p><img src="/images/VariableDistribution.png" alt="VariableDistribution"></p>
-<ol start="3">
-<li><p>Extract random numbers for each random variable</p>
-</li>
-<li><p>Convert the extracted random number into the sampled value of each input variable</p>
-<p><img src="/images/randomInput.png" alt="randomInput"></p>
-</li>
-<li><p>The sampled values constitute a set of project evaluation basic data</p>
-</li>
-<li><p>Calculate the value of the evaluation index under a random condition based on the basic data.</p>
-</li>
-<li><p>Repeat the above process and perform repeated simulations to obtain multiple sets of evaluation index values.</p>
-</li>
-<li><p>Organize the expected value, variance, standard deviation, probability distribution and cumulative probability distribution of the evaluation indicators obtained from the simulation results, draw the cumulative probability map, and at the same time, check whether the simulation times meet the predetermined accuracy requirements.</p>
-</li>
-</ol>
-<p><img src="/images/ProbabilityDistributionHist.png" alt="ProbabilityDistributionHist"></p>
-<p><img src="/images/MonteCarlo.png" alt="MonteCarlo"></p>
-<table>
-<thead>
-<tr>
-<th>Ex</th>
-<th>StandVar</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>103.8</td>
-<td>19.2</td>
-</tr>
-</tbody>
-</table>
-
-          
+          MgtPro_9_MonteCarloMonte Carlo method​    Monte Carlo simulation is a method in the risk analysis and evaluation of engineering projects. It is a quan
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/08/SoftwareManagement/MgtPro_9_MonteCarlo/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2270,75 +1507,25 @@
       
         
           
-            <h2 id="1-introduction"><a href="#1-introduction" class="headerlink" title="1. introduction"></a>1. introduction</h2><ul>
-<li>purpose</li>
-<li>scope</li>
-<li>assumptions</li>
-</ul>
-<p>主要照之前的部分</p>
-<h2 id="2-Project-practices"><a href="#2-Project-practices" class="headerlink" title="2. Project practices"></a>2. Project practices</h2><ul>
-<li>scope management（using appendix）</li>
-<li>quality management  doc structure<ul>
-<li>planning</li>
-<li>assurance</li>
-<li>Control</li>
-</ul>
-</li>
-<li>risk management<ul>
-<li>identification <ul>
-<li>思维导图类似物（包含总体的风险，根据我们分的大点</li>
-</ul>
-</li>
-<li>analysis（加引言）<ul>
-<li>impact 表</li>
-<li>展示矩阵图</li>
-<li>蒙特卡洛</li>
-</ul>
-</li>
-<li>response</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-Work-Breakdown-Structure-WBS"><a href="#3-Work-Breakdown-Structure-WBS" class="headerlink" title="3. Work Breakdown Structure(WBS)"></a>3. Work Breakdown Structure(WBS)</h2><h2 id="4-Project-Organization"><a href="#4-Project-Organization" class="headerlink" title="4. Project Organization"></a>4. Project Organization</h2><ul>
-<li>team structure</li>
-<li>roles、responsibilities， and authorities</li>
-</ul>
-<h2 id="5-Resource-Allocation"><a href="#5-Resource-Allocation" class="headerlink" title="5. Resource Allocation"></a>5. Resource Allocation</h2><ul>
-<li>staffing profile</li>
-<li>schedule</li>
-</ul>
-<h2 id="6-Glossary"><a href="#6-Glossary" class="headerlink" title="6. Glossary"></a>6. Glossary</h2><p>第一次文档</p>
-<p>分工：</p>
-<p>3、4、5：超哥，谈瑞</p>
-<p>1、6、impact的表，可能性-影响矩阵，决策树（5个）: 文添</p>
-<p>2.1、quality planning、identification：梁程伟</p>
-<p>2.2、2.3：罗媚，陈润乾</p>
-<p>quality management</p>
-<ol>
-<li>Planning:[short] ，output：<ul>
-<li>管理计划</li>
-<li>衡量标准</li>
-<li>checklist</li>
-<li>Output需求跟踪矩阵</li>
-</ul>
-</li>
-<li>Assurance</li>
-</ol>
-<p>Quality Planning Doc Template</p>
-<p>1.0 Quality Assurance Plan 1.1 Introduction </p>
-<p>​    1.2 Purpose<br>​     1.3 Policy Statement 1.4 Scope </p>
-<p>2.0 Management<br>     2.1 Organization structure </p>
-<p>​    2.2 Roles and Responsibilities </p>
-<p>​         2.2.1 Technical Monitor/Senior Management 2.2.2 Task Leader<br>​         2.2.3 Quality Assurance Team<br>​         2.2.4 Technical staff </p>
-<p>3.0 Required Documentation </p>
-<p>4.0 Quality Assurance Procedures </p>
-<p>​    4.1 Walkthrough Procedure<br>     4.2 Review Procedure<br>​     4.3 Audit Procedure </p>
-<p>​    4.4 Evaluation Procedure</p>
-<p>​     4.5 Process Improvement </p>
-<p>5.0 Problem Reporting procedure</p>
-<p> 6.0 Quality Assurance Metrics Appendix</p>
+          1. introduction
+purpose
+scope
+assumptions
 
-          
+主要照之前的部分
+2. Project practices
+scope management（using appendix）
+quality management  doc structure
+planning
+a
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/06/SoftwareManagement/MgtPro_7/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2470,42 +1657,162 @@
       
         
           
-            <h1 id="MgtPro-0"><a href="#MgtPro-0" class="headerlink" title="MgtPro_0"></a>MgtPro_0</h1><p>标准－IEEE/ANSI 830-1998</p>
-<p><strong>1、引言</strong><br>1.1 需求文档的目的<br>1.2 产品范围<br>1.3 定义、首字母缩写词和缩略词<br>1.4 参考文献<br>1.5 文档的其余部分概览<br><strong>2、一般描述</strong><br>2.1 产品透视<br>2.2  <a href="https://www.baidu.com/s?wd=%E4%BA%A7%E5%93%81%E5%8A%9F%E8%83%BD&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">产品功能</a><br>2.3 用户特征<br>2.4 一般约束<br>2.5 假设和依赖性<br><strong>3、专门需求</strong><br>覆盖功能，非功能和接口需求<br>——显然，这是文档中最实质性的部分，但是因为在组织的实践中存在极大的变数，对这一节定义标准的结构是不适当的。需求可能记录外部接口，描述系统功能和特征、定义逻辑的数据库需求、设计约束、系统总体特征和质量特征。<br><strong>4、附录</strong></p>
-<p><a href="https://wenku.baidu.com/view/ee90df5383c4bb4cf7ecd19b.html" target="_blank" rel="noopener">英文版</a></p>
-<p>introduction</p>
-<h2 id="互联网书店的要求清单"><a href="#互联网书店的要求清单" class="headerlink" title="互联网书店的要求清单"></a>互联网书店的要求清单</h2><p>从下一章开始，我们将通过我们刚刚为您概述的流程的每个阶段，跟随一个运行的示例，我们称之为Internet Bookstore。我们将要完成的用例以及我们将要发现的类存在，以满足我们的客户（我们将要构建的书店的所有者）指定的某些要求。这些要求包括以下内容：</p>
-<ul>
-<li>书店应通过互联网接受订单。</li>
-<li>书店应保留最多1,000,000名客户的帐户清单。</li>
-<li>书店应为所有帐户提供密码保护。</li>
-<li>书店应提供搜索主书目录的能力。</li>
-<li>书店应在该目录上提供多种搜索方法，包括按作者搜索，按标题搜索，按ISBN编号搜索，以及按关键字搜索。</li>
-<li>书店应提供允许客户通过信用卡支付的安全方式。</li>
-<li>书店应提供允许客户通过采购订单支付的安全方式。</li>
-<li>书店应提供一种特殊类型的帐户，预先通过采购订单支付。</li>
-<li>书店应提供Web和数据库以及运输履行系统之间的电子链接。</li>
-<li>书店应提供Web和数据库以及库存管理系统之间的电子链接。</li>
-<li>书店应保持对书籍的评论，并允许任何人上传评论评论。</li>
-<li>书店应根据客户意见对书籍进行评级。</li>
-</ul>
-<h2 id="Requirements-List-for-The-Internet-Bookstore"><a href="#Requirements-List-for-The-Internet-Bookstore" class="headerlink" title="Requirements List for The Internet Bookstore"></a>Requirements List for The Internet Bookstore</h2><p>Starting in the next chapter, we’re going to be following a running example, which we call The Internet Bookstore, through each phase of the process we’ve just outlined for you. The use cases we’ll be working through, and the classes we’ll discover, exist to satisfy certain requirements that our client (the owner of the bookstore we’re going to build) has specified. These requirements include the following:</p>
-<ul>
-<li>The bookstore shall accept orders over the Internet.</li>
-<li>The bookstore shall maintain a list of accounts for up to 1,000,000 customers.</li>
-<li>The bookstore shall provide password protection for all accounts.</li>
-<li>The bookstore shall provide the ability to search the master book catalog.</li>
-<li>The bookstore shall provide a number of search methods on that catalog, including search by author, search by title, search by ISBN number, and search by keyword.</li>
-<li>The bookstore shall provide a secure means of allowing customers to pay by credit card.</li>
-<li>The bookstore shall provide a secure means of allowing customers to pay via purchase order.</li>
-<li>The bookstore shall provide a special kind of account that is preauthorized to pay via purchase order.</li>
-<li>The bookstore shall provide electronic links between the Web and database and the shipping fulfillment system.</li>
-<li>The bookstore shall provide electronic links between the Web and database and the inventory management system.</li>
-<li>The bookstore shall maintain reviews of books, and allow anyone to upload review comments.</li>
-<li>The bookstore shall maintain ratings on books, based on customer inputs.</li>
-</ul>
+          MgtPro_0标准－IEEE/ANSI 830-1998
+1、引言1.1 需求文档的目的1.2 产品范围1.3 定义、首字母缩写词和缩略词1.4 参考文献1.5 文档的其余部分概览2、一般描述2.1 产品透视2.2  产品功能2.3 用户特征2.4 一般约束2.5 假设和依赖性3、专门需求覆盖功能
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/15/SoftwareManagement/MgtPro_0/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/01/17/GuideBook/hexo搭建github博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/17/GuideBook/hexo搭建github博客/" itemprop="url">Djangohexo搭建github博客</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T17:48:03+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/17/GuideBook/hexo搭建github博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/17/GuideBook/hexo搭建github博客/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          hexo搭建github博客1. 前提条件
+已有GitHub账号
+（Mac）已安装Xcode command line tools
+安装的工具我使用的是npm和brew
+
+2. 安装git与Node.js12brew install gitbrew install node
+3. 安装Hexo1np
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/17/GuideBook/hexo搭建github博客/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2592,7 +1899,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

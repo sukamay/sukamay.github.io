@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/开源框架源码分析/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/事件分发机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -304,7 +304,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="url">框架源码分析</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/事件分发机制/" itemprop="url">事件分发机制</a></h1>
         
 
         <div class="post-meta">
@@ -368,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/事件分发机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/事件分发机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,8 +401,18 @@
       
         
           
-            <h2 id="框架源码分析"><a href="#框架源码分析" class="headerlink" title="#框架源码分析"></a>#框架源码分析</h2><h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="###Retrofit"></a>###Retrofit</h2><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="###EventBus"></a>###EventBus</h2><h2 id="Glide"><a href="#Glide" class="headerlink" title="###Glide"></a>###Glide</h2>
-          
+          事件分发机制
+
+对于一个根ViewGroup来说,发生点击事件首先调用dispatchTouchEvent
+如果这个ViewGroup的onIterceptTouchEvent返回true就表示它要拦截当前事件,接着这个ViewGroup的onTouchEvent就会被调用.如果onItercept
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/事件分发机制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -567,10 +577,17 @@
       
         
           
-            <h2 id="查漏补缺"><a href="#查漏补缺" class="headerlink" title="#查漏补缺"></a>#查漏补缺</h2><p>请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小</p>
-<p><a href="http://m.blog.csdn.net/article/details?id=7856519" target="_blank" rel="noopener">http://m.blog.csdn.net/article/details?id=7856519</a></p>
+          #查漏补缺请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小
+http://m.blog.csdn.net/article/details?id=7856519
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/查漏补缺/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -735,56 +752,19 @@
       
         
           
-            <h2 id="热修复技术"><a href="#热修复技术" class="headerlink" title="#热修复技术"></a>#热修复技术</h2><p>APP提早发出去的包，如果出现客户端的问题，实在是干着急，覆水难收。因此线上修复方案迫在眉睫。</p>
-<p>###概述</p>
-<p>基于Xposed中的思想，通过修改c层的Method实例描述，来实现更改与之对应的java方法的行为，从而达到修复的目的。</p>
-<p>###Xposed</p>
-<p>诞生于XDA论坛，类似一个应用平台，不同的是其提供诸多系统级的应用。可实现许多神奇的功能。Xposed需要以越狱为前提，像是iOS中的cydia。</p>
-<p>Xposed可以修改任何程序的任何java方法（需root），github上提供了XposedInstaller，是一个android app。提供很多framework层，应用层级的程序。开发者可以为其开发一些系统或应用方面的插件，自定义android系统，它甚至可以做动态权限管理（XposedMods）。</p>
-<p>###Android系统启动与应用启动</p>
-<p>Zygote进程是Android手机系统启动后，常驻的一个名为‘受精卵’的进程。</p>
-<ul>
-<li>zygote的启动实现脚本在/init.rc文件中</li>
-<li>启动过程中执行的二进制文件在/system/bin/app_process</li>
-</ul>
-<p>任何应用程序启动时，会从zygote进程fork出一个新的进程。并装载一些必要的class，invoke一些初始化方法。这其中包括像：</p>
-<ul>
-<li>ActivityThread</li>
-<li>ServiceThread</li>
-<li>ApplicationPackageManager</li>
-</ul>
-<p>等应用启动中必要的类，触发必要的方法，比如：handleBindApplication，将此进程与对应的应用绑定的初始化方法；同时，会将zygote进程中的dalvik虚拟机实例复制一份，因此每个应用程序进程都有自己的dalvik虚拟机实例；会将已有Java运行时加载到进程中；会注册一些android核心类的jni方法到虚拟机中，支撑从c到java的启动过程。</p>
-<p>###Xposed做了手脚</p>
-<p>Xposed在这个过程改写了app_process(源码在Xposed : a modified app_process binary)，替换/system/bin/app_process这个二进制文件。然后做了两个事：</p>
-<ol>
-<li>通过Xposed的hook技术，在上述过程中，对上面提到的那些加载的类的方法hook。</li>
-<li>加载XposedBridge.jar</li>
-</ol>
-<p>这时hook必要的方法是为了方便开发者为它开发插件，加载XposedBridge.jar是为动态hook提供了基础。在这个时候加载它意味着，所有的程序在启动时，都可以加载这个jar（因为上面提到的fork过程）。结合hook技术，从而达到了控制所有程序的所有方法。</p>
-<p>为获得/system/bin/目录的读写权限，因而需要以root为前提。</p>
-<p>###Xposed的hook思想</p>
-<p>那么Xposed是怎么hook java方法的呢？要从XposedBridge看起，重点在<br>XposedBridge.hookmethod(原方法的Member对象，含有新方法的XC_MethodHook对象)；，这里会调到</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> native synchronized <span class="keyword">static</span> void hookMethodNative(Member <span class="function"><span class="keyword">method</span>, <span class="title">Class</span>&lt;?&gt; <span class="title">declaringClass</span>, <span class="title">int</span> <span class="title">slot</span>, <span class="title">Object</span> <span class="title">additionalInfo</span>);</span></span><br></pre></td></tr></table></figure>
-<p>这个native的方法，通过这个方法，可以让所hook的方法，转向native层的一个c方法。如何做到？</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">When a transmit <span class="keyword">from</span> java <span class="keyword">to</span> native occurs, dvm sets up a native stack.</span><br><span class="line"><span class="keyword">In</span> dvmCallJNIMethod(), dvmPlatformInvoke <span class="keyword">is</span> used <span class="keyword">to</span> call the native <span class="function"><span class="keyword">method</span><span class="params">(signature <span class="keyword">in</span> <span class="keyword">Method</span>.insns)</span>.</span></span><br></pre></td></tr></table></figure>
-<p>在jni这个中间世界里，类型数据由jni表来沟通java和c的世界；方法由c++指针结合DVM*系(如dvmSlotToMethod,dvmDecodeIndirectRef等方法)的api方法，操作虚拟机，从而实现java方法与c方法的世界。</p>
-<p>那么hook的过程是这样：首先通过dexclassload来load所要hook的方法，分析类后，进c层，见代码XposedBridge_hookMethodNative方法，拿到要hook的Method类，然后通过dvmslotTomethod方法获取Method*指针，</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">Method</span>* <span class="title">method</span> = <span class="title">dvmSlotToMethod</span><span class="params">(declaredClass, slot)</span>;</span></span><br></pre></td></tr></table></figure>
-<p>declaredClass就是所hook方法所在的类，对应的jobject。slot是Method类中，描述此java对象在vm中的索引；那么通过这个方法，我们就获取了c层的Method指针,通过</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET_METHOD_FLAG(<span class="function"><span class="keyword">method</span>, <span class="title">ACC_NATIVE</span>);</span></span><br></pre></td></tr></table></figure>
-<p>将该方法标记为一个native方法，然后通过</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">nativeFunc</span> = &amp;<span class="title">hookedMethodCallback</span>;</span></span><br></pre></td></tr></table></figure>
-<p>定向c层方法到hookedMethodCallback，这样当被hook的java方法执行时，就会调到c层的hookedMethodCallback方法。</p>
-<p>通过meth-&gt;nativeFunc重定向MethodCallBridge到hookedMethodCallback这个方法上，控制这个c++指针是无视java的private的。</p>
-<p>另外，在method结构体中有</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">insns</span> = <span class="params">(<span class="keyword">const</span> u2*)</span> <span class="title">hookInfo</span>;</span></span><br></pre></td></tr></table></figure>
-<p>用insns指向替换成为的方法，以便hookedMethodCallback可以获取真正期望执行的java方法。</p>
-<p>现在所有被hook的方法，都指向了hookedMethodCallbackc方法中，然后在此方法中实现调用替换成为的java方法。</p>
-<p>###从Xposed提炼精髓</p>
-<p>回顾Xposed，以root为必要条件，在app_process加载XposedBidge.jar，从而实现有hook所有应用的所有方法的能力；而后续动态hook应用内的方法，其实只是load了从zypote进程复制出来的运行时的这个XposedBidge.jar，然后hook而已。因此，若在一个应用范围内的hook，root不是必须的，只是单纯的加载hook的实现方法，即可修改本应用的方法。</p>
-<p>业界内也不乏通过「修改BaseDexClassLoader中的pathList，来动态加载dex」方式实现热修复。后者纯java实现，但需要hack类的优化流程，将打CLASS_ISPREVERIFIED标签的类，去除此标签，以解决类与类引用不在一个dex中的异常问题。这会放弃dex optimize对启动运行速度的优化。原则上，这对于方法数没有大到需要multidex的应用，损失更明显。而前者不触犯原有的优化流程，只点杀需要hook的方法，更为纯粹、有效。</p>
-
-          
+          #热修复技术APP提早发出去的包，如果出现客户端的问题，实在是干着急，覆水难收。因此线上修复方案迫在眉睫。
+###概述
+基于Xposed中的思想，通过修改c层的Method实例描述，来实现更改与之对应的java方法的行为，从而达到修复的目的。
+###Xposed
+诞生于XDA论坛，类似一个应用平台，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/热修复技术/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -949,15 +929,22 @@
       
         
           
-            <h2 id="自定义控件"><a href="#自定义控件" class="headerlink" title="#自定义控件"></a>#自定义控件</h2><p>自定义View的步骤：</p>
-<ul>
-<li>自定义View的属性</li>
-<li>在View的构造方法中获得我们自定义View的步骤</li>
-<li>［3.重写onMeasure］(不必须)</li>
-<li>重写onDraw</li>
-</ul>
+          #自定义控件自定义View的步骤：
+
+自定义View的属性
+在View的构造方法中获得我们自定义View的步骤
+［3.重写onMeasure］(不必须)
+重写onDraw
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/自定义控件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1060,7 +1047,18 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/" itemprop="url" rel="index">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Django/" itemprop="url" rel="index">
                     <span itemprop="name">Django</span>
                   </a>
                 </span>
@@ -1111,59 +1109,19 @@
       
         
           
-            <h1 id="Django本地项目部署到云服务器"><a href="#Django本地项目部署到云服务器" class="headerlink" title="Django本地项目部署到云服务器"></a>Django本地项目部署到云服务器</h1><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>开发语言： Python<br>后台框架：Django<br>web服务器：nginx<br>wsgi服务器：uwsgi</p>
-<p>云服务器系统：Ubuntu</p>
-<p>查看本地项目Django和Python版本：</p>
-<p>（可以直接安装Django最新版本就可以了，Python版本不能低于3.4） </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# python3</span><br><span class="line">Python 3.5.2 (default, Nov 12 2018, 13:43:14) </span><br><span class="line">[GCC 5.4.0 20160609] on linux</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import django</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; django.VERSION</span></span><br><span class="line">(2, 1, 4, 'final', 0)</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
-<p><a href="https://blog.csdn.net/qq_30501975/article/details/80423547" target="_blank" rel="noopener">参考了别家的教程</a></p>
-<h2 id="1-预备安装"><a href="#1-预备安装" class="headerlink" title="1. 预备安装"></a>1. 预备安装</h2><h3 id="1-1-安装数据库"><a href="#1-1-安装数据库" class="headerlink" title="1.1 安装数据库"></a>1.1 安装数据库</h3><p>安装mysql</p>
-<p><a href="./Ubuntu上的MySQL搭建.md">Ubuntu上的MySQL搭建</a></p>
-<h3 id="1-2-安装Django"><a href="#1-2-安装Django" class="headerlink" title="1.2 安装Django"></a>1.2 安装Django</h3><p><a href="./DjangoInUbuntu_0.md">安装Django</a></p>
-<p>Django初步使用移步Django系列教程：</p>
-<p><a href="./DjangoInUbuntu_1.md">Django数据库配置</a></p>
-<h3 id="1-3-安装uwsgi"><a href="#1-3-安装uwsgi" class="headerlink" title="1.3 安装uwsgi"></a>1.3 安装uwsgi</h3><h4 id="1-3-1-uwsgi安装"><a href="#1-3-1-uwsgi安装" class="headerlink" title="1.3.1 uwsgi安装"></a>1.3.1 uwsgi安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python3 -m pip install uwsgi</span><br></pre></td></tr></table></figure>
-<p><code>Successfully installed uwsgi-2.0.17</code></p>
-<h4 id="1-3-2-uwsgi测试"><a href="#1-3-2-uwsgi测试" class="headerlink" title="1.3.2 uwsgi测试"></a>1.3.2 uwsgi测试</h4><p>测试 uwsgi 是否正常：</p>
-<p>新建 test.py 文件，内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>,<span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"cloestUsers World"</span></span><br></pre></td></tr></table></figure>
-<p>然后在终端运行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http :8001 --wsgi-file test.py</span><br></pre></td></tr></table></figure>
-<p>在浏览器内输入：<a href="http://127.0.0.1:8001，查看是否有&quot;cloestUsers" target="_blank" rel="noopener">http://127.0.0.1:8001，查看是否有&quot;cloestUsers</a> World”输出，若没有输出，请检查你的安装过程。</p>
-<h4 id="1-3-3-uwsgi关闭"><a href="#1-3-3-uwsgi关闭" class="headerlink" title="1.3.3 uwsgi关闭"></a>1.3.3 uwsgi关闭</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">killall -9 uwsgi # 	强行关闭</span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭某一个进程</span></span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# netstat -ntpl</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 127.0.0.1:8005          0.0.0.0:*               LISTEN      22256/java      </span><br><span class="line">tcp        0      0 0.0.0.0:8009            0.0.0.0:*               LISTEN      22256/java      </span><br><span class="line">tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      18840/mysqld    </span><br><span class="line">tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      3044/nginx.conf </span><br><span class="line">tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      22256/java      </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      11022/sshd </span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# kill -9 22256</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看哪个要关闭的进程的pid，使用<span class="built_in">kill</span> -9 &lt;pid&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="1-4-安装nginx"><a href="#1-4-安装nginx" class="headerlink" title="1.4 安装nginx"></a>1.4 安装nginx</h3><h4 id="1-4-1-安装-Nginx"><a href="#1-4-1-安装-Nginx" class="headerlink" title="1.4.1 安装 Nginx"></a>1.4.1 安装 Nginx</h4><p>安装命令如下：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">wget http:<span class="string">//nginx.org/download/nginx-1.11.0.tar.gz</span></span><br><span class="line">tar xf nginx-1.11.0.tar.gz</span><br><span class="line"><span class="keyword">cd</span> nginx-1.11.0</span><br><span class="line"><span class="string">./configure</span> <span class="params">--prefix=/usr/local/nginx-1</span>.11.0 \</span><br><span class="line"><span class="params">--with-http_stub_status_module</span> \</span><br><span class="line"><span class="params">--with-http_gzip_static_module</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>你可以阅读 <a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="noopener">Nginx 安装配置</a> 了解更多内容。</p>
-<h4 id="1-4-2-测试nginx"><a href="#1-4-2-测试nginx" class="headerlink" title="1.4.2 测试nginx"></a>1.4.2 测试nginx</h4><p>查看nginx是否安装成功，查看nginx的版本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/closetUsers# nginx -v</span><br><span class="line">nginx version: nginx/1.10.3 (Ubuntu)</span><br></pre></td></tr></table></figure>
-<p>在/home/projects目录下新建一个test目录，在里面添加一个简单的html文件。然后在nginx.conf中简单配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">events&#123;&#125;</span><br><span class="line">http&#123;</span><br><span class="line">    server&#123;</span><br><span class="line">        server_name www.sukamay.xyz;  # 域名或者ip地址</span><br><span class="line">        root /home/projects/test;</span><br><span class="line">        index index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>启动该nginx：（启动之前，要将/usr/local/nginx/mime.types文件复制到该nginx.conf所在目录，并且必须使用绝对路径）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -c /home/projects/test/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>如果端口被占用，则先释放该端口,则使用<code>lsof -i :8082</code>查看占用端口进程的pid，并使用<code>kill -9 [pid]</code>关闭相应的进程。</p>
-<p>若想要关闭所有nginx打开的进程，可使用：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall <span class="number">-9</span> nginx</span><br></pre></td></tr></table></figure>
-<p>在浏览器中访问自己的域名<a href="http://www.sukamay.xyz，访问成功。（域名要先做好dns解析）" target="_blank" rel="noopener">http://www.sukamay.xyz，访问成功。（域名要先做好dns解析）</a></p>
-<h4 id="1-4-3-关闭nginx"><a href="#1-4-3-关闭nginx" class="headerlink" title="1.4.3 关闭nginx"></a>1.4.3 关闭nginx</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop</span><br><span class="line"><span class="meta">#</span><span class="bash"> or /etc/init.d/nginx stop</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-在线项目部署"><a href="#2-在线项目部署" class="headerlink" title="2. 在线项目部署"></a>2. 在线项目部署</h2><p>部署本地Django项目到服务器，结合uwsgi+Django+nginx。</p>
-<h3 id="2-1-项目代码上传到服务器"><a href="#2-1-项目代码上传到服务器" class="headerlink" title="2.1 项目代码上传到服务器"></a>2.1 项目代码上传到服务器</h3><p>clone本地项目代码到服务器/通过ftp复制项目到服务器</p>
-<p>我使用的是scp</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxxdeMacBook-Pro:~ xxx$ scp -r /Users/xxx/Desktop/closet/closetUsers root@120.76.62.132:/home/projects/closetTest1.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> pattern: scp &lt;option&gt; &lt;local_file_path&gt; root@&lt;server_ip_address&gt;:&lt;goal_file_path&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在我的项目目录/home/projects里创建一个closet目录，并在里面创建一个conf目录，用来存放配置文件,这样分离开来，方便更新维护项目代码。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects# tree -L 3</span><br><span class="line">.</span><br><span class="line">├── closet</span><br><span class="line">│   ├── closetUsers</span><br><span class="line">│   │   ├── closetUsers</span><br><span class="line">│   │   ├── jsonTest</span><br><span class="line">│   │   ├── manage.py</span><br><span class="line">│   │   ├── __pycache__</span><br><span class="line">│   │   ├── static</span><br><span class="line">│   │   ├── users</span><br><span class="line">│   └── conf</span><br><span class="line">│       ├── mime.types	#copy from /usr/local/nginx/conf</span><br><span class="line">│       ├── nginx.conf	#configure file of nginx </span><br><span class="line">│       ├── uwsgi.ini	#configure file of uwsgi</span><br><span class="line">│       └── uwsgi.log</span><br><span class="line">└── closetTest1.0</span><br><span class="line">    └── closetUsers</span><br><span class="line">        ├── closetUsers</span><br><span class="line">        ├── manage.py</span><br><span class="line">        └── users</span><br><span class="line"></span><br><span class="line">13 directories, 10 files</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-修改项目代码"><a href="#2-2-修改项目代码" class="headerlink" title="2.2 修改项目代码"></a>2.2 修改项目代码</h3><h4 id="2-2-1-修改settings-py："><a href="#2-2-1-修改settings-py：" class="headerlink" title="2.2.1 修改settings.py："></a>2.2.1 修改settings.py：</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DEBUG</span> = <span class="literal">False</span>   # Django是否加载静态资源</span><br><span class="line"><span class="attr">ALLOWED_HOSTS</span> = [<span class="string">'localhost'</span>,<span class="string">'127.0.0.1'</span>,<span class="string">'120.76.62.132'</span>] # 允许访问的主机地址</span><br><span class="line"></span><br><span class="line"><span class="attr">STATIC_ROOT</span> = os.path.join(BASE_DIR, <span class="string">"static/"</span>) # 收集Django的静态文件到同一个static中</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-2-创建uwsgi-ini和uwsgi-log"><a href="#2-2-2-创建uwsgi-ini和uwsgi-log" class="headerlink" title="2.2.2 创建uwsgi.ini和uwsgi.log"></a>2.2.2 创建uwsgi.ini和uwsgi.log</h4><p>uwsgi.ini不变，依旧为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/conf# vim uwsgi.ini </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> closet uwsgi.ini file</span></span><br><span class="line">[uwsgi]</span><br><span class="line"></span><br><span class="line">socket = 127.0.0.1:8002</span><br><span class="line"><span class="meta">#</span><span class="bash"> http = :8002 如果不通过nginx可以直接用http，但要通过web服务器就必须要用socket</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http = 127.0.0.1:8002</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> the base directory (full path)</span></span><br><span class="line">chdir           = /home/projects/closet/closetUsers</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Django<span class="string">'s wsgi file</span></span></span><br><span class="line">module          = closetUsers.wsgi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> process-related settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> master</span></span><br><span class="line">master          = true</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> maximum number of worker processes</span></span><br><span class="line">processes       = 4</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> clear environment on <span class="built_in">exit</span></span></span><br><span class="line">vacuum          = true</span><br><span class="line"></span><br><span class="line">processes = 4</span><br><span class="line">"uwsgi.ini" 29L, 549C                                                 1,0-1         Top</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-3-创建nginx-conf"><a href="#2-2-3-创建nginx-conf" class="headerlink" title="2.2.3 创建nginx.conf"></a>2.2.3 创建nginx.conf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:/home/projects/closet/conf# vim nginx.conf </span><br><span class="line"></span><br><span class="line">http&#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    server&#123;       </span><br><span class="line">    </span><br><span class="line">        listen 80;</span><br><span class="line">       # server_name www.sukamay.xyz;</span><br><span class="line">        server_name 120.76.62.132;</span><br><span class="line">        index index.html ;</span><br><span class="line">        root  /home/projects/closet/closetUsers;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        </span><br><span class="line">            location /static &#123;</span><br><span class="line">                alias /home/projects/closet/closetUsers/static; # your Django project's static files - amend as required</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            # Finally, send all non-media requests to the Django server.</span><br><span class="line">            location / &#123;</span><br><span class="line">                include     /etc/nginx/uwsgi_params; # the uwsgi_params file you installed              </span><br><span class="line">                uwsgi_pass 127.0.0.1:8002;</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将 <code>/usr/local/nginx/conf/mime.types</code>文件copy到conf下</p>
-<h3 id="2-3-创建数据库、收集静态文件"><a href="#2-3-创建数据库、收集静态文件" class="headerlink" title="2.3 创建数据库、收集静态文件"></a>2.3 创建数据库、收集静态文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate </span><br><span class="line">python manage.py collectstatic</span><br></pre></td></tr></table></figure>
-<h3 id="2-4-启动服务"><a href="#2-4-启动服务" class="headerlink" title="2.4 启动服务"></a>2.4 启动服务</h3><p>启动nginx</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -c /home/projects/closet/conf/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>后台启动uwsgi</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi /home/projects/closet/conf/uwsgi.ini -d /home/projects/closet/conf/uwsgi.log</span><br></pre></td></tr></table></figure>
-<p>访问 <a href="http://120.76.62.132/" target="_blank" rel="noopener">http://120.76.62.132/</a> （我没写默认index.html，访问的是<a href="http://120.76.62.132/users/）可以看到接口写好的返回内容，" target="_blank" rel="noopener">http://120.76.62.132/users/）可以看到接口写好的返回内容，</a> 则创建成功</p>
-<h2 id="3-error-summary"><a href="#3-error-summary" class="headerlink" title="3. error summary"></a>3. error summary</h2>
-          
+          Django本地项目部署到云服务器开发环境开发语言： Python后台框架：Djangoweb服务器：nginxwsgi服务器：uwsgi
+云服务器系统：Ubuntu
+查看本地项目Django和Python版本：
+（可以直接安装Django最新版本就可以了，Python版本不能低于3.4） 
+123
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Django/Django本地项目部署到云服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1212,7 +1170,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVP/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/AIDL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1231,7 +1189,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVP/" itemprop="url">MVP</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/AIDL/" itemprop="url">AIDL</a></h1>
         
 
         <div class="post-meta">
@@ -1295,8 +1253,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/MVP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVP/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/AIDL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/AIDL/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1328,229 +1286,18 @@
       
         
           
-            <h2 id="MVP"><a href="#MVP" class="headerlink" title="#MVP"></a>#MVP</h2><p>###为什么需要MVP</p>
-<ol>
-<li>尽量简单<br> 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需要回调函数。View逻辑变成十分直接。</li>
-<li>后台任务<br> 当你编写一个Actviity、Fragment、自定义View的时候，你会把所有的和后台任务相关的方法写在一个静态类或者外部类中。这样，你的Task不再和Activity联系在一起，这既不会导致内存泄露，也不依赖于Activity的重建。</li>
-</ol>
-<p>###优缺点</p>
-<p>优点：</p>
-<ol>
-<li>降低耦合度，实现了Model和View真正的完全分离，可以修改View而不影响Modle</li>
-<li>模块职责划分明显，层次清晰</li>
-<li>隐藏数据</li>
-<li>Presenter可以复用，一个Presenter可以用于多个View，而不需要更改Presenter的逻辑（当然是在View的改动不影响业务逻辑的前提下）</li>
-<li>利于测试驱动开发。以前的Android开发是难以进行单元测试的（虽然很多Android开发者都没有写过测试用例，但是随着项目变得越来越复杂，没有测试是很难保证软件质量的；而且近几年来Android上的测试框架已经有了长足的发展——开始写测试用例吧），在使用MVP的项目中Presenter对View是通过接口进行，在对Presenter进行不依赖UI环境的单元测试的时候。可以通过Mock一个View对象，这个对象只需要实现了View的接口即可。然后依赖注入到Presenter中，单元测试的时候就可以完整的测试Presenter应用逻辑的正确性。</li>
-<li>View可以进行组件化。在MVP当中，View不依赖Model。这样就可以让View从特定的业务场景中脱离出来，可以说View可以做到对业务完全无知。它只需要提供一系列接口提供给上层操作。这样就可以做到高度可复用的View组件。</li>
-<li>代码灵活性</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>Presenter中除了应用逻辑以外，还有大量的View-&gt;Model，Model-&gt;View的手动同步逻辑，造成Presenter比较笨重，维护起来会比较困难。</li>
-<li>由于对视图的渲染放在了Presenter中，所以视图和Presenter的交互会过于频繁。</li>
-<li>如果Presenter过多地渲染了视图，往往会使得它与特定的视图的联系过于紧密。一旦视图需要变更，那么Presenter也需要变更了。</li>
-<li>额外的代码复杂度及学习成本。</li>
-</ol>
-<p><strong>在MVP模式里通常包含4个要素：</strong></p>
-<ol>
-<li>View :负责绘制UI元素、与用户进行交互(在Android中体现为Activity);</li>
-<li>View interface :需要View实现的接口，View通过View interface与Presenter进行交互，降低耦合，方便进行单元测试;</li>
-<li>Model :负责存储、检索、操纵数据(有时也实现一个Model interface用来降低耦合);</li>
-<li>Presenter :作为View与Model交互的中间纽带，处理与用户交互的负责逻辑。</li>
-</ol>
+          #AIDL
+创建一个接口，再里面定义方法
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="url">MVC,MVP,MVVM的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="MVC-MVP-MVVM的区别"><a href="#MVC-MVP-MVVM的区别" class="headerlink" title="#MVC,MVP,MVVM的区别"></a>#MVC,MVP,MVVM的区别</h2><p>#MVC<br>软件可以分为三部分</p>
-<ul>
-<li>视图（View）:用户界面</li>
-<li>控制器（Controller）:业务逻辑</li>
-<li>模型（Model）:数据保存</li>
-</ul>
-<p>各部分之间的通信方式如下：</p>
-<ol>
-<li>View传送指令到Controller</li>
-<li>Controller完成业务逻辑后，要求Model改变状态</li>
-<li>Model将新的数据发送到View，用户得到反馈</li>
-</ol>
-<p>Tips：所有的通信都是单向的。</p>
-<p>#互动模式<br>接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。</p>
-<p>另一种是直接通过Controller接受指令</p>
-<p>#MVP</p>
-<p>MVP模式将Controller改名为Presenter，同时改变了通信方向。</p>
-<ol>
-<li>各部分之间的通信，都是双向的</li>
-<li>View和Model不发生联系，都通过Presenter传递</li>
-<li>View非常薄，不部署任何业务逻辑，称为”被动视图”(Passive View)，即没有任何主动性，而Presenter非常厚，所有逻辑都部署在那里。</li>
-</ol>
-<p>#MVVM</p>
-<p>MVVM模式将Presenter改名为ViewModel，基本上与MVP模式完全一致。</p>
-<p>唯一的区别是，它采用双向绑定(data-binding)：View的变动，自动反映在ViewModel，反之亦然。</p>
-
-          
+123456package com.example.taidl;  interface ICalcAIDL  &#123;      int add(int x , int y);      int min(int x , int y );  &#125;
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/AIDL/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1704,197 +1451,23 @@
       
         
           
-            <p>专业综合项目</p>
-<p>从第3周开始：</p>
-<p>每周选择3组来进行汇报</p>
-<p>每两周研究生会来面对面交流</p>
-<p>可选topic：</p>
-<ol>
-<li>环视图像中语义视觉目标的分割：识别目标：方向标志、减速带、泊车位</li>
-<li>inverse tone mapping with deep learning，低维到高维的映射（LDR-HDR）</li>
-<li>基于单目相机的时间里程器。15221927149</li>
-<li>移动端游戏平台（休闲类小游戏，时长为几分钟）游戏大厅+游戏 15801758610</li>
-<li>ros驱动的移动机器人</li>
-<li>人脸表情和姿态迁移，facerig</li>
-<li>云书籍，类似豆瓣的东西</li>
-<li>语义slam相关研究</li>
-<li>手写数字串识别：切片+单字识别，CRNN</li>
-<li>为图片自动加标签（微软有相关的API</li>
-</ol>
-<p>室内导航？</p>
-<p>VIO？</p>
+          专业综合项目
+从第3周开始：
+每周选择3组来进行汇报
+每两周研究生会来面对面交流
+可选topic：
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/软工经验汇总：/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/Mess/软工经验汇总：/" itemprop="url">软工经验汇总：</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mess/" itemprop="url" rel="index">
-                    <span itemprop="name">Mess</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/Mess/软工经验汇总：/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/软工经验汇总：/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="软工经验汇总："><a href="#软工经验汇总：" class="headerlink" title="软工经验汇总："></a>软工经验汇总：</h1><ul>
-<li>保存每次的会议记录，每次开会找一个会议记录员（Q&amp;A，ToDoList，讨论内容。目标，讨论结果，分工安排</li>
-<li>项目初期寻找一个合适的项目管理平台，包括项目需求跟踪、任务完成进度等等</li>
-<li>找文档的模版！</li>
-<li>工作量的合理预估！给一个弹性的时间！（哭了，忽略的前后端的整合让人头秃</li>
-<li>阶段性的项目检查！（比如，前端的孩子写的是纯静态的，使用的位置都是绝对位置，后期调起来相当不方便</li>
-<li>找相关的工具：<ul>
-<li>项目进度：ones.ai</li>
-<li>讨论：在线腾讯文档</li>
-<li>uml绘制：staruml</li>
-<li>开发工具，求问有没有代码直接导出图的</li>
-<li>数据库图：powerDesign</li>
-</ul>
-</li>
-</ul>
-
-          
+环视图像中语义视觉目标的分割：识别目标：方向标志、减速带、泊车位
+inverse tone mapping with deep learning，低维到高维的映射（LDR-HDR）
+基于单目相机的时
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/Mess/专业综合项目/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2048,48 +1621,353 @@
       
         
           
-            <p>面试</p>
-<ol>
-<li>TCP协议中第三次握手失败会怎样？</li>
-<li>http和https区别，为什么https安全，（答了数据加密），加密过程，对称还是非对称</li>
-<li>安卓activity生命周期</li>
-<li>安卓跨进程通信，进程间通信机制</li>
-<li>事务的特性，描述一下一致性是什么</li>
-<li>除了关系型数据库，对于其他的数据库还有什么了解吗</li>
-<li>C++的new和malloc有什么区别</li>
-<li>多态是如何实现的</li>
-<li>图的遍历方式，怎么遍历</li>
-<li>排序方法，哪个最慢，哪个最费空间，哪个最不费空间</li>
-<li>leetcode53，用了动规，问你觉得这个方法的分治思想体现在哪</li>
-</ol>
-<p>to know：</p>
-<p>web：</p>
-<p>android</p>
-<p>数据库：</p>
-<p>C++：</p>
-<p>算法：</p>
-<p>面试经验小结？</p>
-<ol>
-<li>明确一下自己面试的岗位需要什么技能？<ul>
-<li>比如我面后台会问数据库、操作系统、服务器、C++相关的知识</li>
-</ul>
-</li>
-<li>看面经，有些问题重复率还是蛮高的，可以预先想一下答案，总归有点谱<ul>
-<li>面经大概主要看：<ul>
-<li>面试流程</li>
-<li>面试题目</li>
-</ul>
-</li>
-<li>对了面试完之后如果面试官说有什么问题想问他的，可以问一下自己的面试表现如何，还有什么技能需要提升之类，表达一下自己的好学之心！</li>
-</ul>
-</li>
-<li>针对简历<ul>
-<li>我们一般会问自己在简历上的经历，简历上的项目，会细致问自己写的项目</li>
-</ul>
-</li>
-</ol>
+          面试
+
+TCP协议中第三次握手失败会怎样？
+http和https区别，为什么https安全，（答了数据加密），加密过程，对称还是非对称
+安卓activity生命周期
+安卓跨进程通信，进程间通信机制
+事务的特性，描述一下一致性是什么
+除了关系型数据库，对于其他的数据库还有什么了解吗
+C++的new和m
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/Mess/面试/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/项目主要成果/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/Mess/项目主要成果/" itemprop="url">项目主要成果</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mess/" itemprop="url" rel="index">
+                    <span itemprop="name">Mess</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/Mess/项目主要成果/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/项目主要成果/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          项目主要成果​    我们制作了android平台的应用，应用软件工程的相关知识，我们进行了需求分析、需求建模、概要设计、详细设计、编程、测试的过程，产生了一系列说明文档，对于产品的各个方面进行了详细的描述，各文档说明如下：
+需求规约文档：
+进行项目初期的市场调研，对于项目的需求以及项目的整体流程、
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/Mess/项目主要成果/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/CNN/" itemprop="url">CNN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          CNN
+卷积层原图像经过卷积模版之后得到的？
+池化层这里再展开叙述池化层的具体作用。
+
+特征不变性，也就是我们在图像处理中经常提到的特征的尺度不变性，池化操作就是图像的resize，平时一张狗的图像被缩小了一倍我们还能认出这是一张狗的照片，这说明这张图像中仍保留着狗最重要的特征，我们一看就能判断图像
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/SLAM/CNN/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2176,7 +2054,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
