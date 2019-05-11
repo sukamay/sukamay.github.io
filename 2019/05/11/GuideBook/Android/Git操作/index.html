@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -471,11 +478,10 @@
 <li>切换分支</li>
 </ul>
 <figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 切换到一个分支</span></span><br><span class="line">git checkout [branch-<span class="keyword">name</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建并切换到该分支</span></span><br><span class="line">git checkout -b [branch-<span class="keyword">name</span>]</span><br></pre></td></tr></table></figure>
-<p>##与github建立ssh通信，让Git操作免去输入密码的繁琐。</p>
-<ul>
+<h2 id="与github建立ssh通信，让Git操作免去输入密码的繁琐。"><a href="#与github建立ssh通信，让Git操作免去输入密码的繁琐。" class="headerlink" title="与github建立ssh通信，让Git操作免去输入密码的繁琐。"></a>与github建立ssh通信，让Git操作免去输入密码的繁琐。</h2><ul>
 <li><p>首先呢，我们先建立ssh密匙。</p>
 <blockquote>
-<p>ssh key must begin with ‘ssh-ed25519’, ‘ssh-rsa’, ‘ssh-dss’, ‘ecdsa-sha2-nistp256’, ‘ecdsa-sha2-nistp384’, or ‘ecdsa-sha2-nistp521’.  – from github</p>
+<p>ssh key must begin with ‘ssh-ed25519’, ‘ssh-rsa’, ‘ssh-dss’, ‘ecdsa-sha2-nistp256’, ‘ecdsa-sha2-nistp384’, or ‘ecdsa-sha2-nistp521’.  — from github</p>
 </blockquote>
 <p>根据以上文段我们可以知道github所支持的ssh密匙类型，这里我们创建ssh-rsa密匙。<br>在command line 中输入以下指令:<code>ssh-keygen -t rsa</code>去创建一个ssh-rsa密匙。如果你并不需要为你的密匙创建密码和修改名字，那么就一路回车就OK，如果你需要，请您自行Google翻译，因为只是英文问题。</p>
 <blockquote>
@@ -542,8 +548,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/" rel="next" title="Handler内存泄漏分析及解决">
-                <i class="fa fa-chevron-left"></i> Handler内存泄漏分析及解决
+              <a href="/2019/05/11/GuideBook/Android/Fragment/" rel="next" title="Fragment">
+                <i class="fa fa-chevron-left"></i> Fragment
               </a>
             
           </div>
@@ -552,8 +558,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/Listview详解/" rel="prev" title="ListView详解">
-                ListView详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/Android几种进程/" rel="prev" title="Android几种进程">
+                Android几种进程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -708,7 +714,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-操作"><span class="nav-text">Git 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-命令"><span class="nav-text">git 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitignore"><span class="nav-text">gitignore</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-操作"><span class="nav-text">Git 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-命令"><span class="nav-text">git 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与github建立ssh通信，让Git操作免去输入密码的繁琐。"><span class="nav-text">与github建立ssh通信，让Git操作免去输入密码的繁琐。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitignore"><span class="nav-text">gitignore</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -734,6 +740,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">May</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">81.9k</span>
   
 </div>
 
@@ -804,8 +819,6 @@
   
 
 
-  
-
 
 
 
@@ -844,11 +857,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

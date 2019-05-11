@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,17 +86,17 @@
 
 
 
-<meta name="description" content="##为什么要使用SurfaceView来实现动画？ ###因为View的绘图存在以下缺陷：  View缺乏双缓冲机制 当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片 新线程无法直接更新View组件  ##SurfaceView的绘图机制  一般会与SurfaceView结合使用 调用SurfaceView的getHolder()方法即可获得SurfaceView关联的Sur">
+<meta name="description" content="为什么要使用SurfaceView来实现动画？因为View的绘图存在以下缺陷： View缺乏双缓冲机制 当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片 新线程无法直接更新View组件  SurfaceView的绘图机制 一般会与SurfaceView结合使用 调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为什么要使用SurfaceView来实现动画？">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/SurfaceView/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="##为什么要使用SurfaceView来实现动画？ ###因为View的绘图存在以下缺陷：  View缺乏双缓冲机制 当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片 新线程无法直接更新View组件  ##SurfaceView的绘图机制  一般会与SurfaceView结合使用 调用SurfaceView的getHolder()方法即可获得SurfaceView关联的Sur">
+<meta property="og:description" content="为什么要使用SurfaceView来实现动画？因为View的绘图存在以下缺陷： View缺乏双缓冲机制 当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片 新线程无法直接更新View组件  SurfaceView的绘图机制 一般会与SurfaceView结合使用 调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么要使用SurfaceView来实现动画？">
-<meta name="twitter:description" content="##为什么要使用SurfaceView来实现动画？ ###因为View的绘图存在以下缺陷：  View缺乏双缓冲机制 当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片 新线程无法直接更新View组件  ##SurfaceView的绘图机制  一般会与SurfaceView结合使用 调用SurfaceView的getHolder()方法即可获得SurfaceView关联的Sur">
+<meta name="twitter:description" content="为什么要使用SurfaceView来实现动画？因为View的绘图存在以下缺陷： View缺乏双缓冲机制 当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片 新线程无法直接更新View组件  SurfaceView的绘图机制 一般会与SurfaceView结合使用 调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder">
 
 
 
@@ -415,20 +422,16 @@
       
 
       
-        <p>##为什么要使用SurfaceView来实现动画？</p>
-<p>###因为View的绘图存在以下缺陷：</p>
-<ol>
+        <h2 id="为什么要使用SurfaceView来实现动画？"><a href="#为什么要使用SurfaceView来实现动画？" class="headerlink" title="为什么要使用SurfaceView来实现动画？"></a>为什么要使用SurfaceView来实现动画？</h2><h3 id="因为View的绘图存在以下缺陷："><a href="#因为View的绘图存在以下缺陷：" class="headerlink" title="因为View的绘图存在以下缺陷："></a>因为View的绘图存在以下缺陷：</h3><ol>
 <li>View缺乏双缓冲机制</li>
 <li>当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片</li>
 <li>新线程无法直接更新View组件</li>
 </ol>
-<p>##SurfaceView的绘图机制</p>
-<ul>
+<h2 id="SurfaceView的绘图机制"><a href="#SurfaceView的绘图机制" class="headerlink" title="SurfaceView的绘图机制"></a>SurfaceView的绘图机制</h2><ul>
 <li>一般会与SurfaceView结合使用</li>
 <li>调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder</li>
 </ul>
-<p>##SurfaceHolder提供了如下方法来获取Canvas对象</p>
-<ol>
+<h2 id="SurfaceHolder提供了如下方法来获取Canvas对象"><a href="#SurfaceHolder提供了如下方法来获取Canvas对象" class="headerlink" title="SurfaceHolder提供了如下方法来获取Canvas对象"></a>SurfaceHolder提供了如下方法来获取Canvas对象</h2><ol>
 <li>Canvas lockCanvas():锁定整个SurfaceView对象，获取该Surface上的Canvas</li>
 <li>Canvas lockCanvas(Rect dirty):锁定SurfaceView上Rect划分的区域，获取该Surface上的Canvas</li>
 <li>unlockCanvasAndPost(canvas):释放绘图、提交所绘制的图形，需要注意，当调用SurfaceHolder上的unlockCanvasAndPost方法之后，该方法之前所绘制的图形还处于缓冲之中，下一次lockCanvas()方法锁定的区域可能会“遮挡”它</li>
@@ -567,8 +570,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -641,6 +653,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用SurfaceView来实现动画？"><span class="nav-text">为什么要使用SurfaceView来实现动画？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#因为View的绘图存在以下缺陷："><span class="nav-text">因为View的绘图存在以下缺陷：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SurfaceView的绘图机制"><span class="nav-text">SurfaceView的绘图机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SurfaceHolder提供了如下方法来获取Canvas对象"><span class="nav-text">SurfaceHolder提供了如下方法来获取Canvas对象</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -660,6 +688,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">May</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">81.9k</span>
   
 </div>
 
@@ -730,8 +767,6 @@
   
 
 
-  
-
 
 
 
@@ -770,11 +805,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

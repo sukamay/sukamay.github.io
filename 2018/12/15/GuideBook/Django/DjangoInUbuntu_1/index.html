@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -399,7 +406,18 @@
 <p>在模板目录 templates 中添加 search_form.html 表单：</p>
 <p>/HelloWorld/templates/search_form.html 文件代码：</p>
 <p>&lt;!DOCTYPE html&gt;</p>
-<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta charset="utf-8"><br><title>菜鸟教程(runoob.com)</title><br></head><br><body><br>    <form action="/search" method="get"><br>        <input type="text" name="q"><br>        <input type="submit" value="搜索"><br>    </form><br></body><br></html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+    <form action="/search" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="搜索">
+    </form>
+</body>
+</html>
 
 <p>urls.py 规则修改为如下形式：</p>
 <p>/HelloWorld/HelloWorld/urls.py 文件代码：</p>
@@ -660,6 +678,15 @@
   <span class="author" itemprop="copyrightHolder">May</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">81.9k</span>
+  
 </div>
 
 
@@ -729,8 +756,6 @@
   
 
 
-  
-
 
 
 
@@ -769,11 +794,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

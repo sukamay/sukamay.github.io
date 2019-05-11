@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,17 +86,17 @@
 
 
 
-<meta name="description" content="#ANR1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
+<meta name="description" content="ANR 1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ANR">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/ANR问题/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#ANR1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
+<meta property="og:description" content="ANR 1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ANR">
-<meta name="twitter:description" content="#ANR1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
+<meta name="twitter:description" content="ANR 1、ANR排错一般有三种类型  KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应 BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成 ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成  2、哪些操作会导致AN">
 
 
 
@@ -415,11 +422,12 @@
       
 
       
-        <h2 id="ANR"><a href="#ANR" class="headerlink" title="#ANR"></a>#ANR</h2><p>1、ANR排错一般有三种类型</p>
+        <h1 id="ANR"><a href="#ANR" class="headerlink" title="ANR"></a>ANR</h1><hr>
+<p>1、ANR排错一般有三种类型</p>
 <ol>
-<li>KeyDispatchTimeout(5 seconds) –主要是类型按键或触摸事件在特定时间内无响应</li>
-<li>BroadcastTimeout(10 seconds) –BroadcastReceiver在特定时间内无法处理完成</li>
-<li>ServiceTimeout(20 secends) –小概率事件 Service在特定的时间内无法处理完成</li>
+<li>KeyDispatchTimeout(5 seconds) —主要是类型按键或触摸事件在特定时间内无响应</li>
+<li>BroadcastTimeout(10 seconds) —BroadcastReceiver在特定时间内无法处理完成</li>
+<li>ServiceTimeout(20 secends) —小概率事件 Service在特定的时间内无法处理完成</li>
 </ol>
 <p>2、哪些操作会导致ANR<br>在主线程执行以下操作：</p>
 <ol>
@@ -457,16 +465,13 @@
 </ol>
 <p>6、监测ANR的Watchdog</p>
 <p>最近出来一个叫LeakCanary</p>
-<p>#FC(Force Close)</p>
-<p>##什么时候会出现</p>
-<ol>
+<h1 id="FC-Force-Close"><a href="#FC-Force-Close" class="headerlink" title="FC(Force Close)"></a>FC(Force Close)</h1><h2 id="什么时候会出现"><a href="#什么时候会出现" class="headerlink" title="什么时候会出现"></a>什么时候会出现</h2><ol>
 <li>Error</li>
 <li>OOM，内存溢出</li>
 <li>StackOverFlowError</li>
 <li>Runtime,比如说空指针异常</li>
 </ol>
-<p>##解决的办法</p>
-<ol>
+<h2 id="解决的办法"><a href="#解决的办法" class="headerlink" title="解决的办法"></a>解决的办法</h2><ol>
 <li>注意内存的使用和管理</li>
 <li>使用Thread.UncaughtExceptionHandler接口</li>
 </ol>
@@ -533,8 +538,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/AIDL/" rel="prev" title="AIDL">
-                AIDL <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/WebAR/周工作汇报4.5/" rel="prev" title="本周学习情况">
+                本周学习情况 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -689,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ANR"><span class="nav-text">#ANR</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ANR"><span class="nav-text">ANR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FC-Force-Close"><span class="nav-text">FC(Force Close)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候会出现"><span class="nav-text">什么时候会出现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决的办法"><span class="nav-text">解决的办法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -715,6 +720,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">May</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">81.9k</span>
   
 </div>
 
@@ -785,8 +799,6 @@
   
 
 
-  
-
 
 
 
@@ -825,11 +837,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

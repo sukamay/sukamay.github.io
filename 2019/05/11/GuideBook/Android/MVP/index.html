@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,17 +86,17 @@
 
 
 
-<meta name="description" content="#MVP###为什么需要MVP  尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时">
+<meta name="description" content="MVP 为什么需要MVP 尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MVP">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVP/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#MVP###为什么需要MVP  尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时">
+<meta property="og:description" content="MVP 为什么需要MVP 尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVP">
-<meta name="twitter:description" content="#MVP###为什么需要MVP  尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时">
+<meta name="twitter:description" content="MVP 为什么需要MVP 尽量简单 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需">
 
 
 
@@ -415,13 +422,12 @@
       
 
       
-        <h2 id="MVP"><a href="#MVP" class="headerlink" title="#MVP"></a>#MVP</h2><p>###为什么需要MVP</p>
-<ol>
+        <h1 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h1><hr>
+<h3 id="为什么需要MVP"><a href="#为什么需要MVP" class="headerlink" title="为什么需要MVP"></a>为什么需要MVP</h3><ol>
 <li>尽量简单<br> 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需要回调函数。View逻辑变成十分直接。</li>
 <li>后台任务<br> 当你编写一个Actviity、Fragment、自定义View的时候，你会把所有的和后台任务相关的方法写在一个静态类或者外部类中。这样，你的Task不再和Activity联系在一起，这既不会导致内存泄露，也不依赖于Activity的重建。</li>
 </ol>
-<p>###优缺点</p>
-<p>优点：</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：</p>
 <ol>
 <li>降低耦合度，实现了Model和View真正的完全分离，可以修改View而不影响Modle</li>
 <li>模块职责划分明显，层次清晰</li>
@@ -508,8 +514,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" rel="prev" title="MVC,MVP,MVVM的区别">
-                MVC,MVP,MVVM的区别 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/Listview详解/" rel="prev" title="ListView详解">
+                ListView详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -664,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVP"><span class="nav-text">#MVP</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVP"><span class="nav-text">MVP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要MVP"><span class="nav-text">为什么需要MVP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-text">优缺点</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -690,6 +696,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">May</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">81.9k</span>
   
 </div>
 
@@ -760,8 +775,6 @@
   
 
 
-  
-
 
 
 
@@ -800,11 +813,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

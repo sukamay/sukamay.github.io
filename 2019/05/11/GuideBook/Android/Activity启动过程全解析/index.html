@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,18 +86,18 @@
 
 
 
-<meta name="description" content="#Activity启动过程###一些基本的概念  ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期 ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作">
+<meta name="description" content="Activity启动过程 一些基本的概念 ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期 ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作 App">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Activity启动过程">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Activity启动过程全解析/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="#Activity启动过程###一些基本的概念  ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期 ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作">
+<meta property="og:description" content="Activity启动过程 一些基本的概念 ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期 ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作 App">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i11.tietuku.com/15eb948d37d9d4b3.png">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Activity启动过程">
-<meta name="twitter:description" content="#Activity启动过程###一些基本的概念  ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期 ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作">
+<meta name="twitter:description" content="Activity启动过程 一些基本的概念 ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期 ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作 App">
 <meta name="twitter:image" content="http://i11.tietuku.com/15eb948d37d9d4b3.png">
 
 
@@ -417,8 +424,8 @@
       
 
       
-        <h2 id="Activity启动过程"><a href="#Activity启动过程" class="headerlink" title="#Activity启动过程"></a>#Activity启动过程</h2><p>###一些基本的概念</p>
-<ul>
+        <h1 id="Activity启动过程"><a href="#Activity启动过程" class="headerlink" title="Activity启动过程"></a>Activity启动过程</h1><hr>
+<h3 id="一些基本的概念"><a href="#一些基本的概念" class="headerlink" title="一些基本的概念"></a>一些基本的概念</h3><ul>
 <li>ActivityManagerServices，简称AMS，服务端对象，负责系统中所有Activity的生命周期</li>
 <li>ActivityThread，App的真正入口。当开启App之后，会调用main()开始运行，开启消息循环队列，这就是传说中的UI线程或者叫主线程。与ActivityManagerServices配合，一起完成Activity的管理工作</li>
 <li>ApplicationThread，用来实现ActivityManagerService与ActivityThread之间的交互。在ActivityManagerService需要管理相关Application中的Activity的生命周期时，通过ApplicationThread的代理对象与ActivityThread通讯。</li>
@@ -428,8 +435,7 @@
 <li>ActivityRecord，ActivityStack的管理对象，每个Activity在AMS对应一个* ActivityRecord，来记录Activity的状态以及其他的管理信息。其实就是服务器端的Activity对象的映像。</li>
 <li>TaskRecord，AMS抽象出来的一个“任务”的概念，是记录ActivityRecord的栈，一个“Task”包含若干个ActivityRecord。AMS用TaskRecord确保Activity启动和退出的顺序。如果你清楚Activity的4种launchMode，那么对这个概念应该不陌生。</li>
 </ul>
-<p>###回答一些问题</p>
-<p><strong>zygote是什么？有什么作用？</strong></p>
+<h3 id="回答一些问题"><a href="#回答一些问题" class="headerlink" title="回答一些问题"></a>回答一些问题</h3><p><strong>zygote是什么？有什么作用？</strong></p>
 <p>zygote意为“受精卵“。Android是基于Linux系统的，而在Linux中，所有的进程都是由init进程直接或者是间接fork出来的，zygote进程也不例外。</p>
 <p>在Android系统里面，zygote是一个进程的名字。Android是基于Linux System的，当你的手机开机的时候，Linux的内核加载完成之后就会启动一个叫“init“的进程。在Linux System里面，所有的进程都是由init进程fork出来的，我们的zygote进程也不例外。</p>
 <p>我们都知道，每一个App其实都是</p>
@@ -585,8 +591,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/APP启动过程/" rel="prev" title="APP启动过程">
-                APP启动过程 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/AIDL/" rel="prev" title="AIDL">
+                AIDL <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -741,7 +747,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity启动过程"><span class="nav-text">#Activity启动过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activity启动过程"><span class="nav-text">Activity启动过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些基本的概念"><span class="nav-text">一些基本的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回答一些问题"><span class="nav-text">回答一些问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -767,6 +773,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">May</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">81.9k</span>
   
 </div>
 
@@ -837,8 +852,6 @@
   
 
 
-  
-
 
 
 
@@ -877,11 +890,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
