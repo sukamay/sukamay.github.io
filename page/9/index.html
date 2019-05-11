@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVP/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_8_Quality/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -304,7 +304,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/MVP/" itemprop="url">MVP</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_8_Quality/" itemprop="url">MgtPro_8_QualityMgt</a></h1>
         
 
         <div class="post-meta">
@@ -316,7 +316,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
                 2019-05-11
               </time>
             
@@ -339,19 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
                   </a>
                 </span>
 
@@ -368,8 +357,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/MVP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/MVP/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SoftwareManagement/MgtPro_8_Quality/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_8_Quality/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,36 +390,105 @@
       
         
           
-            <h2 id="MVP"><a href="#MVP" class="headerlink" title="#MVP"></a>#MVP</h2><p>###为什么需要MVP</p>
-<ol>
-<li>尽量简单<br> 大部分的安卓应用只使用View-Model结构,程序员现在更多的是和复杂的View打交道而不是解决业务逻辑。当你在应用中只使用Model-View时，到最后，你会发现“所有的事物都被连接到一起”。复杂的任务被分成细小的任务，并且很容易解决。越小的东西，bug越少，越容易debug，更好测试。在MVP模式下的View层将会变得简单，所以即便是他请求数据的时候也不需要回调函数。View逻辑变成十分直接。</li>
-<li>后台任务<br> 当你编写一个Actviity、Fragment、自定义View的时候，你会把所有的和后台任务相关的方法写在一个静态类或者外部类中。这样，你的Task不再和Activity联系在一起，这既不会导致内存泄露，也不依赖于Activity的重建。</li>
+            <h1 id="MgtPro-8-QualityMgt"><a href="#MgtPro-8-QualityMgt" class="headerlink" title="MgtPro_8_QualityMgt"></a>MgtPro_8_QualityMgt</h1><h2 id="Quality-Baseline-Goals"><a href="#Quality-Baseline-Goals" class="headerlink" title="Quality Baseline/Goals"></a>Quality Baseline/Goals</h2><h3 id="1-Functionality"><a href="#1-Functionality" class="headerlink" title="1. Functionality:"></a>1. Functionality:</h3><h4 id="a-Suitability"><a href="#a-Suitability" class="headerlink" title="a. Suitability:"></a>a. Suitability:</h4><ol>
+<li>The function of the sub-functions in the system should meet the principle of high cohesion and low coupling.</li>
+<li>The number of database table rows does not exceed 1 million rows, the maximum capacity of the database does not exceed 1000 GB, and the disk space needs at least 40G. 1000000.</li>
+<li>All the requirement should be implemented as requirement document says.</li>
+<li>The maximum number of transactions per day is 3,000.</li>
+<li>The average number of concurrent transactions is 20, and the maximum number of concurrent transactions is 50.</li>
+<li>The estimated number of users is 10,000, the number of login users per day is about 3000, and the bandwidth of the network is 100M bandwidth.</li>
+<li>The system can simultaneously satisfy 10,000 user requests and provide browsing capabilities for 25,000 concurrent users.</li>
 </ol>
-<p>###优缺点</p>
-<p>优点：</p>
-<ol>
-<li>降低耦合度，实现了Model和View真正的完全分离，可以修改View而不影响Modle</li>
-<li>模块职责划分明显，层次清晰</li>
-<li>隐藏数据</li>
-<li>Presenter可以复用，一个Presenter可以用于多个View，而不需要更改Presenter的逻辑（当然是在View的改动不影响业务逻辑的前提下）</li>
-<li>利于测试驱动开发。以前的Android开发是难以进行单元测试的（虽然很多Android开发者都没有写过测试用例，但是随着项目变得越来越复杂，没有测试是很难保证软件质量的；而且近几年来Android上的测试框架已经有了长足的发展——开始写测试用例吧），在使用MVP的项目中Presenter对View是通过接口进行，在对Presenter进行不依赖UI环境的单元测试的时候。可以通过Mock一个View对象，这个对象只需要实现了View的接口即可。然后依赖注入到Presenter中，单元测试的时候就可以完整的测试Presenter应用逻辑的正确性。</li>
-<li>View可以进行组件化。在MVP当中，View不依赖Model。这样就可以让View从特定的业务场景中脱离出来，可以说View可以做到对业务完全无知。它只需要提供一系列接口提供给上层操作。这样就可以做到高度可复用的View组件。</li>
-<li>代码灵活性</li>
+<h4 id="b-Accuracy"><a href="#b-Accuracy" class="headerlink" title="b. Accuracy:"></a>b. Accuracy:</h4><ol>
+<li>The data stored by the system should be atomic and persistent.</li>
+<li>The accuracy of the calculation is 7 digits after the decimal point.</li>
 </ol>
-<p>缺点：</p>
-<ol>
-<li>Presenter中除了应用逻辑以外，还有大量的View-&gt;Model，Model-&gt;View的手动同步逻辑，造成Presenter比较笨重，维护起来会比较困难。</li>
-<li>由于对视图的渲染放在了Presenter中，所以视图和Presenter的交互会过于频繁。</li>
-<li>如果Presenter过多地渲染了视图，往往会使得它与特定的视图的联系过于紧密。一旦视图需要变更，那么Presenter也需要变更了。</li>
-<li>额外的代码复杂度及学习成本。</li>
+<h4 id="c-Interoperability-Interoperability"><a href="#c-Interoperability-Interoperability" class="headerlink" title="c. Interoperability (Interoperability):"></a>c. Interoperability (Interoperability):</h4><ol>
+<li>The system should have good interaction with the delivery platform.</li>
 </ol>
-<p><strong>在MVP模式里通常包含4个要素：</strong></p>
-<ol>
-<li>View :负责绘制UI元素、与用户进行交互(在Android中体现为Activity);</li>
-<li>View interface :需要View实现的接口，View通过View interface与Presenter进行交互，降低耦合，方便进行单元测试;</li>
-<li>Model :负责存储、检索、操纵数据(有时也实现一个Model interface用来降低耦合);</li>
-<li>Presenter :作为View与Model交互的中间纽带，处理与用户交互的负责逻辑。</li>
+<h4 id="d-Compliance"><a href="#d-Compliance" class="headerlink" title="d. Compliance:"></a>d. Compliance:</h4><ol>
+<li>Software coding should follow a uniform standard.</li>
 </ol>
+<h3 id="2-Reliability"><a href="#2-Reliability" class="headerlink" title="2. Reliability:"></a>2. Reliability:</h3><ol>
+<li>There is a prompt for the input, the data is checked to prevent data anomalies.</li>
+<li>The system is robust and should be able to handle various abnormal situations that occur during system operation, such as human error, illegal data input, hardware device failure, etc. The system should be able to handle it correctly and avoid it properly.</li>
+<li>The probability that the service cannot be completed due to the failure of the software system is less than 5‰.</li>
+<li>The system is required to run 24 hours a day, and the continuous operation failure time of the whole year cannot exceed 10 hours.</li>
+<li>The system defect rate has a maximum of 1 failure every 1,000 hours.</li>
+<li>In 1,000,000 transactions, there is a maximum of 1 time when the system needs to be restarted.</li>
+</ol>
+<h3 id="3-Usability"><a href="#3-Usability" class="headerlink" title="3. Usability:"></a>3. Usability:</h3><h4 id="a-Learnability"><a href="#a-Learnability" class="headerlink" title="a. Learnability:"></a>a. Learnability:</h4><ol>
+<li>Within 3 months of the introduction of the product, 60% of users should be able to use it to complete the transfer task within 45 seconds, the failure rate is controlled within one ten thousandth.</li>
+<li>60% of users will realize that this is the bank’s online banking within 5 seconds of seeing the product for the first time.</li>
+<li>80% of users can successfully buy a book within 5 minutes after receiving a half-hour system introduction training.</li>
+</ol>
+<h4 id="b-Operability"><a href="#b-Operability" class="headerlink" title="b. Operability:"></a>b. Operability:</h4><ol>
+<li>Some rural areas have poor network quality and low bandwidth. Guarantee the availability of the system under conditions of poor network environment.</li>
+<li>In 95% of the failures, the system takes up to 20 seconds to restart.</li>
+<li>Provide data backup and recovery functions to enable timely recovery and restore of data (provided by hardware and third-party software) when system data is lost due to system errors or other reasons or system data is corrupted.</li>
+</ol>
+<h3 id="4-Efficiency"><a href="#4-Efficiency" class="headerlink" title="4. Efficiency:"></a>4. Efficiency:</h3><h4 id="a-Time-Behaviour"><a href="#a-Time-Behaviour" class="headerlink" title="a. Time Behaviour:"></a>a. Time Behaviour:</h4><ol>
+<li>In 95% of cases, the general time response time does not exceed 1.5 seconds, and the peak time does not exceed 4 seconds.</li>
+<li>The time required for the positioning system to display from the click to the first interface must not exceed 300 milliseconds.</li>
+<li>When the network is unblocked, the time required to dial-up to the GPRS network must not exceed 5 seconds.</li>
+<li>When the network is unblocked, the website page refresh time does not exceed 10 seconds.</li>
+<li>In the recommended configuration environment: the login response time is within 2 seconds, the refresh response time of the column is within 2 seconds, the response time of the entry page list is refreshed within 2 seconds, and the response time of the information entry is turned on within 1 second, and the department and personnel list response is refreshed. Time is 2 seconds.</li>
+<li>Search during the off-peak hours according to the number and name specific conditions, and the search results can be obtained within 3 seconds.</li>
+</ol>
+<h4 id="b-Resource-Behaviour"><a href="#b-Resource-Behaviour" class="headerlink" title="b. Resource Behaviour:"></a>b. Resource Behaviour:</h4><ol>
+<li>CPU usage &lt;=50%.</li>
+<li>Memory usage &lt;=50%.</li>
+</ol>
+<h3 id="5-Maintainability"><a href="#5-Maintainability" class="headerlink" title="5. Maintainability:"></a>5. Maintainability:</h3><h4 id="a-Changeability"><a href="#a-Changeability" class="headerlink" title="a. Changeability:"></a>a. Changeability:</h4><ol>
+<li>After receiving the modification request, the general modification should be completed within 1-2 days; for the major demand or design modification after the assessment, it should be completed within 1 week.</li>
+<li>90% of the BUG modification time does not exceed 1 working day, and the other does not exceed 2 working days.</li>
+<li>The circle complexity of the code must be within 10.</li>
+<li>Any method of any object does not allow more than 200 lines of code.</li>
+<li>Install the new version and keep all database contents and all personal settings unchanged.</li>
+<li>The product must provide tools to track any database fields.</li>
+</ol>
+<h4 id="b-Testability"><a href="#b-Testability" class="headerlink" title="b. Testability:"></a>b. Testability:</h4><ol>
+<li>The maximum circle complexity of a module cannot exceed 15.</li>
+<li>The delivered system must pass unit testing and be 100% covered.</li>
+<li>Development activities must use regression testing and allow for a complete test to be re-run within 12 hours.</li>
+</ol>
+<h3 id="6-Portability"><a href="#6-Portability" class="headerlink" title="6. Portability:"></a>6. Portability:</h3><ol>
+<li>The code change rate should be less than 20% when the system is migrated.</li>
+<li>The installation success rate should be greater than 90% when the system is transplanted.</li>
+<li>Functional integrity should reach 90% and above in the new target environment after system migration.</li>
+</ol>
+<h3 id="7-Security"><a href="#7-Security" class="headerlink" title="7. Security"></a>7. Security</h3><ol>
+<li>Strict access control. After the user is authenticated, the user can only access the data within the scope of his or her rights, and can only perform operations within its scope of authority.</li>
+<li>Different users have different identities and rights. They need to provide trusted authorization management services under the premise of authenticity of users, protect data from illegal/over-authorized access and tampering, and ensure confidentiality and integrity of data. Sex.</li>
+<li>Provide running log management and security auditing functions to track the historical usage of the system.</li>
+<li>Can withstand general malicious attacks from the Internet. Such as viruses (including Trojans) attacks, password guessing attacks, hacking, etc.</li>
+<li>At least 99% of attacks need to be detected within 10 seconds.</li>
+<li>Network delivery data should be encrypted. It is necessary to ensure that data is not sneaked, stolen or tampered with during collection, transmission and processing. Business data needs to be encrypted at the time of storage to ensure that it is not hackable.</li>
+</ol>
+<h3 id="8-Compatibility"><a href="#8-Compatibility" class="headerlink" title="8. Compatibility"></a>8. Compatibility</h3><ol>
+<li>The system should support IOS, Android, Windows operating system;</li>
+<li>The system should support Oracle, DB2 database system;</li>
+<li>Up to 5% of system implementations need to be specific to a particular operating system.</li>
+<li>The average time to replace the relational database system is no more than 2 hours, and no data loss is guaranteed.</li>
+</ol>
+<h2 id="Quality-Metric"><a href="#Quality-Metric" class="headerlink" title="Quality Metric"></a>Quality Metric</h2><p>The following metrics are majorly used for generating the daily/weekly status report with accurate data during test case development/execution phase and this is also useful for tracking the project status and Quality of the software.</p>
+<h3 id="1-percentage-Test-cases-Executed"><a href="#1-percentage-Test-cases-Executed" class="headerlink" title="1. percentage Test cases Executed:"></a>1. percentage Test cases Executed:</h3><p>This metric is used to obtain the execution status of the test cases in terms of percentage.<br>$$<br>TestCaseExecuted\% = \frac{No_{TestCaseExecuted}}{Total \space No_{TestCasesWritten}}* 100.<br>$$</p>
+<h3 id="2-percentage-Test-cases-not-executed"><a href="#2-percentage-Test-cases-not-executed" class="headerlink" title="2. percentage Test cases not executed:"></a>2. percentage Test cases not executed:</h3><p>This metric is used to obtain the pending execution status of the test cases in terms of percentage.<br>$$<br>TestCasesNotExecuted\% = \frac{No_{TestCasesNotExecuted}}{Total \space No_{TestCasesWritten}} * 100.<br>$$</p>
+<p><img src="/images/20161202085815466.png" alt="这里写图片描述"><br><img src="/images/20161202085848369.png" alt="这里写图片描述"></p>
+<h3 id="3-percentage-Test-cases-Passed"><a href="#3-percentage-Test-cases-Passed" class="headerlink" title="3. percentage Test cases Passed:"></a>3. percentage Test cases Passed:</h3><p>This metric is used to obtain the Pass percentage of the executed test cases.<br>$$<br>Test Cases Passed\% = \frac{No_{ Test Cases Passed} }{Total \space No_{Test Cases Executed}} * 100.<br>$$</p>
+<h3 id="4-percentage-Test-cases-Failed"><a href="#4-percentage-Test-cases-Failed" class="headerlink" title="4. percentage Test cases Failed:"></a>4. percentage Test cases Failed:</h3><p> This metric is used to obtain the Fail percentage of the executed test cases.<br>$$<br> Test Cases Failed \%= \frac{No_{ Test Cases Failed }}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$</p>
+<h3 id="5-percentage-Test-cases-Blocked"><a href="#5-percentage-Test-cases-Blocked" class="headerlink" title="5. percentage Test cases Blocked:"></a>5. percentage Test cases Blocked:</h3><p> This metric is used to obtain the blocked percentage of the executed test cases. A detailed report can be submitted by specifying the actual reason of blocking the test cases.<br>$$<br>Test Cases Blocked \% = \frac{No_{ Test Cases Blocked}}{ Total \space No_{ Test Cases Executed}}* 100.<br>$$<br><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="Test Execution Status这里写图片描述"></p>
+<p><img src="/images/20161202085945171.png" alt="这里写图片描述"><br><img src="/images/20161202090009453.png" alt="这里写图片描述"></p>
+<h3 id="6-Defect-Density"><a href="#6-Defect-Density" class="headerlink" title="6. Defect Density"></a>6. Defect Density</h3><p>$$<br>Defect Density =  No_{ Defects identified }/ size<br>$$</p>
+<p>(Here “Size” is considered as requirement. Hence here the Defect Density is calculated as number of defects identified per requirement. Similarly, Defect Density can be calculated as number of Defects identified per 100 lines of code [OR] No. of defects identified per module etc.) </p>
+<h3 id="7-Defect-Removal-Efficiency-DRE"><a href="#7-Defect-Removal-Efficiency-DRE" class="headerlink" title="7. Defect Removal Efficiency (DRE)"></a>7. Defect Removal Efficiency (DRE)</h3><p>$$<br>Defect Removal Efficiency(DRE) = (\frac{No_{ Defects Found During QA Testing}}{ No_{ Defects Found During QA Testing}} +No_{ Defects Found By End user}) * 100<br>$$</p>
+<p>DRE is used to identify the test effectiveness of the system. </p>
+<h3 id="8-Defect-Leakage"><a href="#8-Defect-Leakage" class="headerlink" title="8. Defect Leakage:"></a>8. Defect Leakage:</h3><p>Defect Leakage is the Metric which is used to identify the efficiency of the QA testing i.e., how many defects are missed / slipped during the QA testing.<br>$$<br>Defect Leakage = \frac{No_{ Defects Found in UAT }}{No_{ Defects Found in QA Testing.}}* 100<br>$$</p>
+<h3 id="9-Defects-by-Priority"><a href="#9-Defects-by-Priority" class="headerlink" title="9. Defects by Priority:"></a>9. Defects by Priority:</h3><p>This metric is used to identify the no. of defects identified based on the Severity / Priority of the defect which is used to decide the quality of the software.<br>$$<br>\begin{align}<br> Critical Defects\% &amp;= \frac{No_{ Critical Defects Identified }}{ Total \space No_{ Defects Identified} }* 100  \</p>
+<p> High Defects\% &amp;= \frac{No_{ High Defects Identified}}{Total \space No_{ Defects Identified}} * 100  \</p>
+<p> Medium Defects\% &amp;=\frac{ No_{ Medium Defects Identified }}{ Total \space No_{ Defects Identified}} * 100 \</p>
+<p> Low Defects\% &amp;= \frac{No_{ Low Defects Identified}}{Total \space No_{ Defects Identified}} * 100<br>\end{align}<br>$$</p>
+<p><img src="/images/20161202090431083.png" alt="Defect Status by Priority这里写图片描述"></p>
 
           
         
@@ -481,7 +539,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Git操作/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Web/Web_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -500,7 +558,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Git操作/" itemprop="url">Git 操作</a></h1>
+                <a class="post-title-link" href="/2019/05/11/Web/Web_1/" itemprop="url">Web_1 web architecture?</a></h1>
         
 
         <div class="post-meta">
@@ -512,7 +570,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
                 2019-05-11
               </time>
             
@@ -535,19 +593,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
                   </a>
                 </span>
 
@@ -564,8 +611,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/Git操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Git操作/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/Web/Web_1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Web/Web_1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -597,1018 +644,1301 @@
       
         
           
-            <h1 id="Git-操作"><a href="#Git-操作" class="headerlink" title="Git 操作"></a>Git 操作</h1><h2 id="git-命令"><a href="#git-命令" class="headerlink" title="git 命令"></a>git 命令</h2><ul>
-<li>创建本地仓库</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git init</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>获取远程仓库</li>
-</ul>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">[url</span>]</span><br><span class="line">例：git <span class="keyword">clone</span> <span class="title">https</span>://github.com/you/yourpro.git</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建远程仓库</li>
-</ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加一个新的 remote 远程仓库</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">add</span> <span class="selector-attr">[remote-name]</span> <span class="selector-attr">[url]</span></span><br><span class="line">例：<span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">add</span> <span class="selector-tag">origin</span> <span class="selector-tag">https</span>:<span class="comment">//github.com/you/yourpro.git</span></span><br><span class="line"><span class="selector-tag">origin</span>：相当于该远程仓库的别名</span><br><span class="line"></span><br><span class="line"><span class="comment">// 列出所有 remote 的别名</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 列出所有 remote 的 url</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">-v</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除一个 renote</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">rm</span> <span class="selector-attr">[name]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 重命名 remote</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">remote</span> <span class="selector-tag">rename</span> <span class="selector-attr">[old-name]</span> <span class="selector-attr">[new-name]</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从本地仓库中删除</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">rm</span> <span class="keyword">file</span>.txt         <span class="comment">// 从版本库中移除，删除文件</span></span><br><span class="line">git <span class="keyword">rm</span> <span class="keyword">file</span>.txt -cached <span class="comment">// 从版本库中移除，不删除原始文件</span></span><br><span class="line">git <span class="keyword">rm</span> -r xxx           <span class="comment">// 从版本库中删除指定文件夹</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从本地仓库中添加新的文件</li>
-</ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">add</span> .              <span class="comment"> // 添加所有文件</span></span><br><span class="line">git <span class="built_in">add</span> <span class="built_in">file</span>.txt       <span class="comment"> // 添加指定文件</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>提交，把缓存内容提交到 HEAD 里</li>
-</ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"注释"</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>撤销</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 撤销最近的一个提交.</span><br><span class="line">git revert HEAD</span><br><span class="line"></span><br><span class="line">// 取消 <span class="keyword">commit</span> + <span class="keyword">add</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--mixed</span></span><br><span class="line"></span><br><span class="line">// 取消 <span class="keyword">commit</span></span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--soft</span></span><br><span class="line"></span><br><span class="line">// 取消 <span class="keyword">commit</span> + <span class="keyword">add</span> + <span class="keyword">local</span> working</span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--hard</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>把本地提交 push 到远程服务器</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">push</span> <span class="selector-attr">[remote-name]</span> <span class="selector-attr">[loca-branch]</span>:<span class="selector-attr">[remote-branch]</span></span><br><span class="line">例：<span class="selector-tag">git</span> <span class="selector-tag">push</span> <span class="selector-tag">origin</span> <span class="selector-tag">master</span><span class="selector-pseudo">:master</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看状态</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git status</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从远程库中下载新的改动</li>
-</ul>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch <span class="string">[remote-name]</span>/<span class="string">[branch]</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>合并下载的改动到分支</li>
-</ul>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge <span class="string">[remote-name]</span>/<span class="string">[branch]</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从远程库中下载新的改动</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pull = fetch + <span class="keyword">merge</span></span><br><span class="line"></span><br><span class="line">git pull [remote-<span class="keyword">name</span>] [branch]</span><br><span class="line">例：git pull origin <span class="keyword">master</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>分支</li>
-</ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 列出分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">branch</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个新的分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">branch</span> (branch-name)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除一个分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">branch</span> <span class="selector-tag">-d</span> (branch-nam)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除 remote 的分支</span></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">push</span> (remote-name) <span class="selector-pseudo">:(remote-branch)</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>切换分支</li>
-</ul>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 切换到一个分支</span></span><br><span class="line">git checkout [branch-<span class="keyword">name</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建并切换到该分支</span></span><br><span class="line">git checkout -b [branch-<span class="keyword">name</span>]</span><br></pre></td></tr></table></figure>
-<p>##与github建立ssh通信，让Git操作免去输入密码的繁琐。</p>
-<ul>
-<li><p>首先呢，我们先建立ssh密匙。</p>
-<blockquote>
-<p>ssh key must begin with ‘ssh-ed25519’, ‘ssh-rsa’, ‘ssh-dss’, ‘ecdsa-sha2-nistp256’, ‘ecdsa-sha2-nistp384’, or ‘ecdsa-sha2-nistp521’.  – from github</p>
-</blockquote>
-<p>根据以上文段我们可以知道github所支持的ssh密匙类型，这里我们创建ssh-rsa密匙。<br>在command line 中输入以下指令:<code>ssh-keygen -t rsa</code>去创建一个ssh-rsa密匙。如果你并不需要为你的密匙创建密码和修改名字，那么就一路回车就OK，如果你需要，请您自行Google翻译，因为只是英文问题。</p>
-<blockquote>
-<p>$ ssh-keygen -t rsa<br>Generating public/private rsa key pair.<br>//您可以根据括号中的路径来判断你的.ssh文件放在了什么地方<br>Enter file in which to save the key (/c/Users/Liang Guan Quan/.ssh/id_rsa):</p>
-</blockquote>
+            <h1 id="Web-1-web-architecture"><a href="#Web-1-web-architecture" class="headerlink" title="Web_1 web architecture?"></a>Web_1 web architecture?</h1><p>HyperText Markup Language</p>
+<p>主动指针（多媒体：图片、音频等</p>
+<p>被动指针（href</p>
+<h2 id="Web-Browser-Architecture"><a href="#Web-Browser-Architecture" class="headerlink" title="Web Browser Architecture"></a>Web Browser Architecture</h2><p>A controller </p>
+<p>A set of clients</p>
+<p>A set of interpreters</p>
+<h2 id="Web-type"><a href="#Web-type" class="headerlink" title="Web type"></a>Web type</h2><h3 id="Static-web-document"><a href="#Static-web-document" class="headerlink" title="Static web document"></a>Static web document</h3><h3 id="Active-web-document"><a href="#Active-web-document" class="headerlink" title="Active web document"></a>Active web document</h3><ol>
+<li>Textual representation: js，可以改变网页内控件</li>
+<li>Binary representation: 相对独立，与网页的控件没有交互</li>
+</ol>
+<p>==typescript==</p>
+<h3 id="Dynamic-web-document"><a href="#Dynamic-web-document" class="headerlink" title="Dynamic web document"></a>Dynamic web document</h3><p>runs on web server : can create a html document each time a request arrives</p>
+<p>Common Gateway Interface</p>
+<p>==install php(first) , apache==</p>
+<p>不考虑网页状态，不断动态更新可能会导致服务器压力很大</p>
+<p>由此，Ajax诞生</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_5/" itemprop="url">MgtPro_5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SoftwareManagement/MgtPro_5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MgtPro-5"><a href="#MgtPro-5" class="headerlink" title="MgtPro_5"></a>MgtPro_5</h1><h2 id="1-risk-identification"><a href="#1-risk-identification" class="headerlink" title="1. risk identification"></a>1. risk identification</h2><h3 id="1-1-Diagramming"><a href="#1-1-Diagramming" class="headerlink" title="1.1 Diagramming"></a>1.1 Diagramming</h3><h4 id="Equipment"><a href="#Equipment" class="headerlink" title="Equipment"></a>Equipment</h4><ol>
+<li>设备未到位（缺失、不足</li>
+<li>设备因不可坑因素损坏</li>
+</ol>
+<h4 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h4><h4 id="People"><a href="#People" class="headerlink" title="People"></a>People</h4><h4 id="Materials"><a href="#Materials" class="headerlink" title="Materials"></a>Materials</h4><h4 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h4><ol>
+<li>新的开发工具学习期比预期长</li>
+<li>开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；</li>
+</ol>
+<h4 id="Management"><a href="#Management" class="headerlink" title="Management"></a>Management</h4><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Possible risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Technology</td>
+<td></td>
+</tr>
+<tr>
+<td>People</td>
+<td></td>
+</tr>
+<tr>
+<td>Organizational</td>
+<td></td>
+</tr>
+<tr>
+<td>Tools</td>
+<td></td>
+</tr>
+<tr>
+<td>Requirements</td>
+<td></td>
+</tr>
+<tr>
+<td>Estimation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-2-type-based"><a href="#1-2-type-based" class="headerlink" title="1.2 type-based"></a>1.2 type-based</h3><h4 id="Technology"><a href="#Technology" class="headerlink" title="Technology"></a>Technology</h4><ol>
+<li>系统架构不合理</li>
+<li>可复用组件不适用</li>
+<li>数据库<ol>
+<li>对于并发性的支持</li>
+<li>事件的四大特性（一致性、持久性、原子性、隔离性）</li>
+<li>数据库数据丢失（</li>
+<li>数据库数据安全（恶意攻击，恶意入侵数据库，备份数据的保护</li>
+</ol>
 </li>
-<li><p>到 <a href="https://github.com/settings/keys" target="_blank" rel="noopener">https://github.com/settings/keys</a> 这个地址中去添加一个新的SSH key，然后把你的xx.pub文件下的内容文本都复制到Key文本域中，然后就可以提交了。</p>
-</li>
-<li>添加完成之后 我们用<code>ssh git@github.com</code> 命令来连通一下github，如果你在response里面看到了你github账号名，那么就说明配置成功了。  <em>let’s enjoy github ;)</em></li>
-</ul>
-<h2 id="gitignore"><a href="#gitignore" class="headerlink" title="gitignore"></a>gitignore</h2><hr>
-<p>在本地仓库根目录创建 .gitignore 文件。Win7 下不能直接创建，可以创建 “.gitignore.” 文件，后面的标点自动被忽略；</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/.idea</span>          <span class="string">//</span> 过滤指定文件夹</span><br><span class="line"><span class="string">/fd/</span>*           <span class="string">//</span> 忽略根目录下的 <span class="string">/fd/</span> 目录的全部内容；</span><br><span class="line">*<span class="string">.iml</span>           <span class="string">//</span> 过滤指定的所有文件</span><br><span class="line">!<span class="string">.gitignore</span>     <span class="string">//</span> 不忽略该文件</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" itemprop="url">RecyclerView和ListView的异同</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="#RecyclerView和ListView的异同"></a>#RecyclerView和ListView的异同</h2><ul>
-<li>ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将导致ListView性能展示迟缓。而在RecyclerView中使用RecyclerView.ViewHolder则变成了必须，尽管实现起来稍显复杂，但它却解决了ListView面临的上述不使用自定义ViewHolder时所面临的问题。</li>
-<li><p>我们知道ListView只能在垂直方向上滚动，Android API没有提供ListView在水平方向上面滚动的支持。或许有多种方式实现水平滑动，但是请想念我，ListView并不是设计来做这件事情的。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：</p>
-<ol>
-<li>LinearLayoutManager，可以支持水平和竖直方向上滚动的列表。</li>
-<li>StaggeredGridLayoutManager，可以支持交叉网格风格的列表，类似于瀑布流或者Pinterest。</li>
-<li>GridLayoutManager，支持网格展示，可以水平或者竖直滚动，如展示图片的画廊。</li>
+<li>服务器<ol>
+<li>设备失效，宕机</li>
 </ol>
 </li>
-<li><p>列表动画是一个全新的、拥有无限可能的维度。起初的Android API中，删除或添加item时，item是无法产生动画效果的。后面随着Android的进化，Google的Chat Hasse推荐使用ViewPropertyAnimator属性动画来实现上述需求。<br>相比较于ListView，RecyclerView.ItemAnimator则被提供用于在RecyclerView添加、删除或移动item时处理动画效果。同时，如果你比较懒，不想自定义ItemAnimator，你还可以使用DefaultItemAnimator。</p>
+<li>设计质量低下，导致重复设计；</li>
+<li>一些必要的功能无法使用现有的代码和库实现，开发人员必须使用新的库或者自行开发新的功能；</li>
+<li>代码和库质量低下，导致需要进行额外的测试，修正错误，或重新制作；</li>
+<li>过高估计了增强型工具对计划进度的节省量；</li>
+<li>分别开发的模块无法有效集成，需要重新设计或制作。</li>
+</ol>
+<h4 id="People-1"><a href="#People-1" class="headerlink" title="People"></a>People</h4><ol>
+<li>人员的变更：人员辞职（底层程序员、管理层人员），关键人员因不可抗因素没办法工作，新的人员的加入</li>
+<li>人员技术水平不够</li>
+<li>人员培训效果不足</li>
+<li>人员消极怠工</li>
+<li>人员之间沟通不足引发冲突，导致工作因沟通不够出现错误或额外的重复工作</li>
+</ol>
+<h4 id="Organizational"><a href="#Organizational" class="headerlink" title="Organizational"></a>Organizational</h4><ol>
+<li>分工不合理（工作难度分配不合理、工作种类分工不合理）</li>
+<li>运转资金不足</li>
+<li>仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；</li>
+<li>低效的项目组结构降低生产率；</li>
+<li>管理层审查 决策的周期比预期的时间长；</li>
+<li>预算削减，打乱项目计划；</li>
+<li>缺乏必要的规范，导致工作失误与重复工作；</li>
+<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
+</ol>
+<h4 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h4><ol>
+<li>代码生成失误</li>
+<li>工具不兼容</li>
+<li>源码丢失</li>
+</ol>
+<h4 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h4><ol>
+<li>需求已经成为项目基准，但需求还在继续变化；</li>
+<li>需求定义欠佳，而进一步的定义会扩展项目范畴；</li>
+<li>产品定义含混的部分比预期需要更多的时间；</li>
+<li>在做需求中客户参与不够</li>
+</ol>
+<h4 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h4><ol>
+<li>工作量工作时间工作进度预估错误</li>
+<li>低估软件规模</li>
+<li>低估缺陷修复率</li>
+</ol>
+<h3 id="1-3-Brainstorm"><a href="#1-3-Brainstorm" class="headerlink" title="1.3 Brainstorm"></a>1.3 Brainstorm</h3><h4 id="客户风险："><a href="#客户风险：" class="headerlink" title="客户风险："></a>客户风险：</h4><ol>
+<li>客户对于交付的产品不满意</li>
+</ol>
+<h4 id="scope-risk："><a href="#scope-risk：" class="headerlink" title="scope risk："></a>scope risk：</h4><ol>
+<li>产品跨领域</li>
+</ol>
+<h3 id="1-4-Document-review"><a href="#1-4-Document-review" class="headerlink" title="1.4 Document review"></a>1.4 Document review</h3><h4 id="非功能需求"><a href="#非功能需求" class="headerlink" title="非功能需求"></a>非功能需求</h4><p>法律：</p>
+<ol>
+<li>某些地区有特定的法律法规，系统需要根据所在地区进行调整</li>
+</ol>
+<h2 id="2-classification"><a href="#2-classification" class="headerlink" title="2. classification"></a>2. classification</h2><p>RBS</p>
+<h3 id="2-1-External-Unpredictable"><a href="#2-1-External-Unpredictable" class="headerlink" title="2.1 External Unpredictable"></a>2.1 External Unpredictable</h3><ol>
+<li>设备风险<ol>
+<li>Natural Hazards（设备因不可坑因素损坏</li>
+<li>设备未到位</li>
+</ol>
 </li>
-<li><p>ListView的Adapter中，getView是最重要的方法，它将视图跟position绑定起来，是所有神奇的事情发生的地方。同时我们也能够通过registerDataObserver在Adapter中注册一个观察者。RecyclerView也有这个特性，RecyclerView.AdapterDataObserver就是这个观察者。ListView有三个Adapter的默认实现，分别是ArrayAdapter、CursorAdapter和SimpleCursorAdapter。然而，RecyclerView的Adapter则拥有除了内置的内DB游标和ArrayList的支持之外的所有功能。RecyclerView.Adapter的实现的，我们必须采取措施将数据提供给Adapter，正如BaseAdapter对ListView所做的那样。</p>
+<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
+</ol>
+<h3 id="2-2-Externel-Predictable"><a href="#2-2-Externel-Predictable" class="headerlink" title="2.2 Externel Predictable"></a>2.2 Externel Predictable</h3><ol>
+<li>market risk： <ol>
+<li>软件功能不符合市场需求，投入市场后反映惨淡</li>
+<li>行业竞争</li>
+</ol>
 </li>
-<li><p>在ListView中如果我们想要在item之间添加间隔符，我们只需要在布局文件中对ListView添加如下属性即可：</p>
-  <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">android:</span>divider=<span class="string">"@android:color/transparent"</span></span><br><span class="line"><span class="symbol">android:</span>dividerHeight=<span class="string">"5dp"</span></span><br></pre></td></tr></table></figure>
+<li>运营风险：<ol>
+<li>经营成本上升，宣传成本，人员成本上升</li>
+</ol>
 </li>
-<li><p>ListView通过AdapterView.OnItemClickListener接口来探测点击事件。而RecyclerView则通过RecyclerView.OnItemTouchListener接口来探测触摸事件。它虽然增加了实现的难度，但是却给予开发人员拦截触摸事件更多的控制权限。</p>
+<li>通货膨胀</li>
+<li>汇率</li>
+</ol>
+<h3 id="2-3-Internal-Non-technical"><a href="#2-3-Internal-Non-technical" class="headerlink" title="2.3 Internal Non-technical"></a>2.3 Internal Non-technical</h3><ol>
+<li>Environment<ol>
+<li>新的开发工具学习期比预期长</li>
+<li>开发工具不如期望的那样有效，开发人员需要时间创建工作环境或者切换新的工具；</li>
+</ol>
 </li>
-<li><p>ListView可以设置选择模式，并添加MultiChoiceModeListener，如下所示：</p>
-  <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);</span><br><span class="line">listView.setMultiChoiceModeListener(<span class="keyword">new</span> MultiChoiceModeListener() &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onCreateActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> onItemCheckedStateChanged(ActionMode mode, <span class="keyword">int</span> position,</span><br><span class="line"><span class="keyword">long</span> id, <span class="keyword">boolean</span> checked) &#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onActionItemClicked</span><span class="params">(ActionMode mode, MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.menu_item_delete_crime:</span><br><span class="line">            CrimeAdapter adapter = (CrimeAdapter)getListAdapter();</span><br><span class="line">            CrimeLab crimeLab = CrimeLab.get(getActivity());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = adapter.getCount() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (getListView().isItemChecked(i)) &#123;</span><br><span class="line">                    crimeLab.deleteCrime(adapter.getItem(i));</span><br><span class="line">                &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        mode.finish();</span><br><span class="line">        adapter.notifyDataSetChanged();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onPrepareActionMode</span><span class="params">(ActionMode mode, Menu menu)</span> </span>&#123; ... &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onDestroyActionMode</span><span class="params">(ActionMode mode)</span> </span>&#123; ... &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>  而RecyclerView则没有此功能。</p>
+<li>People<ol>
+<li>人员的变更：人员辞职（底层程序员、管理层人员），关键人员因不可抗因素没办法工作，新的人员的加入</li>
+<li>人员技术水平不够</li>
+<li>人员培训效果不足</li>
+<li>人员消极怠工</li>
+<li>人员之间沟通不足引发冲突，导致工作因沟通不够出现错误或额外的重复工作</li>
+</ol>
+</li>
+<li>Organizational<ol>
+<li>分工不合理（工作难度分配不合理、工作种类分工不合理）</li>
+<li>运转资金不足</li>
+<li>仅由管理层或市场人员进行技术决策，导致计划进度缓慢，计划时间延长；</li>
+<li>低效的项目组结构降低生产率；</li>
+<li>管理层审查 决策的周期比预期的时间长；</li>
+<li>预算削减，打乱项目计划；</li>
+<li>缺乏必要的规范，导致工作失误与重复工作；</li>
+<li>非技术的第三方的工作(预算批准、设备采购批准、法律方面的审查、安全保证等)时间比预期的延长。</li>
+</ol>
+</li>
+<li>Requirements<ol>
+<li>需求已经成为项目基准，但需求还在继续变化；</li>
+<li>需求定义欠佳，而进一步的定义会扩展项目范畴；</li>
+<li>产品定义含混的部分比预期需要更多的时间；</li>
+<li>在做需求中客户参与不够</li>
+</ol>
+</li>
+<li>Estimation<ol>
+<li>工作量工作时间工作进度预估错误</li>
+<li>低估软件规模</li>
+<li>低估缺陷修复率</li>
+</ol>
+</li>
+<li>客户风险<ol>
+<li>客户对于交付的产品不满意</li>
+</ol>
+</li>
+<li>scope risk：<ol>
+<li>产品跨领域发展</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-4-Technical"><a href="#2-4-Technical" class="headerlink" title="2.4 Technical"></a>2.4 Technical</h3><ol>
+<li>数据库<ol>
+<li>对于并发性的支持</li>
+<li>事件的四大特性（一致性、持久性、原子性、隔离性）</li>
+<li>数据库数据丢失（</li>
+<li>数据库数据安全（恶意攻击，恶意入侵数据库，备份数据的保护</li>
+</ol>
+</li>
+<li>服务器<ol>
+<li>设备失效，宕机</li>
+</ol>
+</li>
+<li>design：<ol>
+<li>设计质量低下，导致重复设计；</li>
+<li>一些必要的功能无法使用现有的代码和库实现，开发人员必须使用新的库或者自行开发新的功能；</li>
+<li>代码和库质量低下，导致需要进行额外的测试，修正错误，或重新制作；</li>
+<li>过高估计了增强型工具对计划进度的节省量；</li>
+<li>分别开发的模块无法有效集成，需要重新设计或制作。</li>
+</ol>
+</li>
+<li>Tools：<ol>
+<li>代码生成失误</li>
+<li>工具不兼容</li>
+<li>源码丢失</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-5-Legal"><a href="#2-5-Legal" class="headerlink" title="2.5 Legal"></a>2.5 Legal</h3><ol>
+<li>某些地区有特定的法律法规，系统需要根据所在地区进行调整</li>
+<li>专利问题，使用第三方库涉及的侵权问题</li>
+<li>消费者权益受损，平台未及时处理而遭诉讼</li>
+</ol>
+<h2 id="3-risk-analysis"><a href="#3-risk-analysis" class="headerlink" title="3. risk analysis"></a>3. risk analysis</h2><p>分工：各自按照流程风险分析，register，应对措施= =自己看ppt吧</p>
+<p>文添： 2.5+ppt</p>
+<p>陈超： 2.1、2.2（+补充</p>
+<p>陈润乾、罗媚、谈瑞： 2.3 3个人</p>
+<p>梁程伟： 2.4（+补充</p>
+<p>Pre 建议：</p>
+<p>资源分配，依据什么将资源分配给<strong>WBS</strong>中的任务</p>
+<p>介绍一下自己使用的风险管理工具</p>
+<p>WBS从不同的方面进行分解？合理分解（对于WBS不同的划分</p>
+<p>甘特图</p>
+<p>注意所写的风险是否与软件开发是否有关</p>
+<p>参考一些现有的技术文档</p>
+<p>现有的技术模型</p>
+<p>PPT流程：</p>
+<ol>
+<li>Risk Mgt Plan（略）</li>
+<li>Risk Identification<ol>
+<li>使用方法：brainstorm、diagramming、document review</li>
+<li>展示RBS</li>
+</ol>
+</li>
+<li>Risk Analysis<ol>
+<li>定性分析：probability-impact矩阵，impact分析表</li>
+<li>定量分析：决策树、蒙特卡洛分析</li>
+</ol>
+</li>
+<li>response<ol>
+<li>面对的态度：积极、消极</li>
+<li>strategy</li>
+</ol>
+</li>
+<li>WBS（使用工具：甘特图、ones.ai</li>
+</ol>
+<p>建议：</p>
+<p>schedule中包含工作的分配和资源的分配</p>
+<p>给这个分值的原因</p>
+<p>WBS分解的依据</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/R-CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/R-CNN/" itemprop="url">R-CNN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/R-CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/R-CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><p><a href="https://blog.csdn.net/v1_vivian/article/details/78599229" target="_blank" rel="noopener">R-CNN论文解析</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Web/Web_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/Web/Web_2/" itemprop="url">Web_2 HTML basis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/Web/Web_2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Web/Web_2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Web-2-HTML-basis"><a href="#Web-2-HTML-basis" class="headerlink" title="Web_2 HTML basis"></a>Web_2 HTML basis</h1><p>Markup language</p>
+<p><strong>Exercise：</strong>简历（html+css</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/CNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/CNN/" itemprop="url">CNN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/CNN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h1><p><img src="/images/20160107230058907.png" alt="20160107230058907"></p>
+<h2 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h2><p>原图像经过卷积模版之后得到的？</p>
+<h2 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h2><p>这里再展开叙述池化层的具体作用。</p>
+<ol>
+<li><p>特征不变性，也就是我们在图像处理中经常提到的特征的尺度不变性，池化操作就是图像的resize，平时一张狗的图像被缩小了一倍我们还能认出这是一张狗的照片，这说明这张图像中仍保留着狗最重要的特征，我们一看就能判断图像中画的是一只狗，图像压缩时去掉的信息只是一些无关紧要的信息，而留下的信息则是具有尺度不变性的特征，是最能表达图像的特征。</p>
+</li>
+<li><p>特征降维，我们知道一幅图像含有的信息是很大的，特征也很多，但是有些信息对于我们做图像任务时没有太多用途或者有重复，我们可以把这类冗余信息去除，把最重要的特征抽取出来，这也是池化操作的一大作用。</p>
+</li>
+<li><p>在一定程度上防止过拟合，更方便优化。</p>
+</li>
+</ol>
+<p>激活函数</p>
+<p>全连接层</p>
+<p><strong>卷积神经网络之 fine-tuning</strong><br>何谓fine-tuning？<br>fine-tuning就是使用已用于其他目标、预训练好模型的权重或者部分权重，作为初始值开始训练。</p>
+<p>那为什么我们不用随机选取选几个数作为权重初始值？原因很简单，第一，自己从头训练卷积神经网络容易出现问题；第二，fine-tuning能很快收敛到一个较理想的状态，省时又省心。</p>
+<p>那fine-tuning的具体做法是？<br>　　•    复用相同层的权重，新定义层取随机权重初始值<br>　　•    调大新定义层的的学习率，调小复用层学习率</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/" itemprop="url">SRS part2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
+                    <span itemprop="name">SoftwareManagement</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/MgtPro_4_SRS_part2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SRS-part2"><a href="#SRS-part2" class="headerlink" title="SRS part2"></a>SRS part2</h1><h1 id="2-Overall-Description"><a href="#2-Overall-Description" class="headerlink" title="2. Overall Description"></a>2. Overall Description</h1><p>This section of the SRS gives an overview description of the general factors that affect<br>the product and its requirements. This section does not state specific requirements.<br>Instead, it provides a background for those requirements.</p>
+<h2 id="2-1-Product-Perspective"><a href="#2-1-Product-Perspective" class="headerlink" title="2.1 Product Perspective"></a>2.1 Product Perspective</h2><p>\<describe the context and origin of product being specified in this srs. for example, state whether is a follow-on member family, replacement certain existing systems, or new, self-contained product. if srs defines component larger system, relate requirements system to functionality software identify interfaces between two. simple diagram that shows major components overall subsystem interconnections, external can be helpful.\></describe></p>
+<ul>
+<li>产品上下文关联（是否是产品系列的后续成员etc</li>
+</ul>
+<p>Online bookstore system is a new, web-based product design to provide online bookselling.</p>
+<p>While the web-based application is the main focus of the project, there is also a server- side component which will be responsible for database and synchronization services. And there should be a client-side smart phone application to provide necessary working information to drivers. The scope of the project encompasses both server- and client- side functionalities. </p>
+<p>The <strong>diagram</strong> shown above demonstrates the interactions between the user and the system, including the system structure. </p>
+<h2 id="2-2-Product-Functions"><a href="#2-2-Product-Functions" class="headerlink" title="2.2 Product Functions"></a>2.2 Product Functions</h2><p>\<summarize the major functions product must perform or let user perform. details will be provided in section 3, so only a high level summary (such as bullet list) is needed here. organize to make them understandable any reader of srs. picture groups related requirements and how they relate, such top data flow diagram object class **diagram**, often effective.\></summarize></p>
+<ul>
+<li>产品的主要功能（详细说明在后面）</li>
+<li><p>可用类图说明</p>
+</li>
+<li><p>图书系统</p>
+<ul>
+<li>图书信息管理<ul>
+<li>书籍上架/下架：图书管理员可以上架下架书籍，书籍下架后，客户无法购买该书籍。</li>
+<li>书籍信息修改：图书管理员可更改某本书籍的具体信息，如书的价格、标签、打折信息、促销信息、书的简介等</li>
+<li>书籍查询：系统所有用户均可查找书籍的相关信息</li>
+</ul>
+</li>
+<li>库存管理<ul>
+<li>增/减：【？仓库管理员】可以增加减少某本书的仓库容量</li>
+<li>查询：【？仓库管理员】可以查询书籍的仓库容量</li>
+</ul>
 </li>
 </ul>
-<p><a href="http://www.cnblogs.com/littlepanpc/p/4497290.html" target="_blank" rel="noopener">http://www.cnblogs.com/littlepanpc/p/4497290.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/SurfaceView/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/SurfaceView/" itemprop="url">为什么要使用SurfaceView来实现动画？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/SurfaceView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/SurfaceView/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##为什么要使用SurfaceView来实现动画？</p>
-<p>###因为View的绘图存在以下缺陷：</p>
-<ol>
-<li>View缺乏双缓冲机制</li>
-<li>当程序需要更新View上的图像时，程序必须重绘View上显示的整张图片</li>
-<li>新线程无法直接更新View组件</li>
-</ol>
-<p>##SurfaceView的绘图机制</p>
-<ul>
-<li>一般会与SurfaceView结合使用</li>
-<li>调用SurfaceView的getHolder()方法即可获得SurfaceView关联的SurfaceHolder</li>
+</li>
+<li>订单系统<ul>
+<li>交易模块<ul>
+<li>支付(微信、支付宝、网银)：customers would pay by credit card, Alipay, or WeChat.</li>
+<li>计算价格：The system must calculate taxes and delivery fee as well as applying discounts to the sale when applicable.</li>
 </ul>
-<p>##SurfaceHolder提供了如下方法来获取Canvas对象</p>
-<ol>
-<li>Canvas lockCanvas():锁定整个SurfaceView对象，获取该Surface上的Canvas</li>
-<li>Canvas lockCanvas(Rect dirty):锁定SurfaceView上Rect划分的区域，获取该Surface上的Canvas</li>
-<li>unlockCanvasAndPost(canvas):释放绘图、提交所绘制的图形，需要注意，当调用SurfaceHolder上的unlockCanvasAndPost方法之后，该方法之前所绘制的图形还处于缓冲之中，下一次lockCanvas()方法锁定的区域可能会“遮挡”它</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SurfaceViewTest</span> <span class="keyword">extends</span> <span class="title">Activity</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment">// SurfaceHolder负责维护SurfaceView上绘制的内容</span></span><br><span class="line">	<span class="keyword">private</span> SurfaceHolder holder;</span><br><span class="line">	<span class="keyword">private</span> Paint paint;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		setContentView(R.layout.main);</span><br><span class="line">		paint = <span class="keyword">new</span> Paint();</span><br><span class="line">		SurfaceView surface = (SurfaceView) findViewById(R.id.show);</span><br><span class="line">		<span class="comment">// 初始化SurfaceHolder对象</span></span><br><span class="line">		holder = surface.getHolder();</span><br><span class="line">		holder.addCallback(<span class="keyword">new</span> Callback()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceChanged</span><span class="params">(SurfaceHolder arg0, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2,</span></span></span><br><span class="line"><span class="function"><span class="params">					<span class="keyword">int</span> arg3)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceCreated</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 锁定整个SurfaceView</span></span><br><span class="line">				Canvas canvas = holder.lockCanvas();</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				Bitmap back = BitmapFactory.decodeResource(</span><br><span class="line">					SurfaceViewTest.<span class="keyword">this</span>.getResources()</span><br><span class="line">					, R.drawable.sun);</span><br><span class="line">				<span class="comment">// 绘制背景</span></span><br><span class="line">				canvas.drawBitmap(back, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line">				<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				<span class="comment">// 重新锁一次，"持久化"上次所绘制的内容</span></span><br><span class="line">				holder.lockCanvas(<span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">				holder.unlockCanvasAndPost(canvas);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceDestroyed</span><span class="params">(SurfaceHolder holder)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">// 为surface的触摸事件绑定监听器</span></span><br><span class="line">		surface.setOnTouchListener(<span class="keyword">new</span> OnTouchListener()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View source, MotionEvent event)</span></span></span><br><span class="line"><span class="function">			</span>&#123;</span><br><span class="line">				<span class="comment">// 只处理按下事件</span></span><br><span class="line">				<span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_DOWN)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> cx = (<span class="keyword">int</span>) event.getX();</span><br><span class="line">					<span class="keyword">int</span> cy = (<span class="keyword">int</span>) event.getY();</span><br><span class="line">					<span class="comment">// 锁定SurfaceView的局部区域，只更新局部内容</span></span><br><span class="line">					Canvas canvas = holder.lockCanvas(<span class="keyword">new</span> Rect(cx - <span class="number">50</span>,</span><br><span class="line">							cy - <span class="number">50</span>, cx + <span class="number">50</span>, cy + <span class="number">50</span>));</span><br><span class="line">					<span class="comment">// 保存canvas的当前状态</span></span><br><span class="line">					canvas.save();</span><br><span class="line">					<span class="comment">// 旋转画布</span></span><br><span class="line">					canvas.rotate(<span class="number">30</span>, cx, cy);</span><br><span class="line">					paint.setColor(Color.RED);</span><br><span class="line">					<span class="comment">// 绘制红色方块</span></span><br><span class="line">					canvas.drawRect(cx - <span class="number">40</span>, cy - <span class="number">40</span>, cx, cy, paint);</span><br><span class="line">					<span class="comment">// 恢复Canvas之前的保存状态</span></span><br><span class="line">					canvas.restore();</span><br><span class="line">					paint.setColor(Color.GREEN);</span><br><span class="line">					<span class="comment">// 绘制绿色方块</span></span><br><span class="line">					canvas.drawRect(cx, cy, cx + <span class="number">40</span>, cy + <span class="number">40</span>, paint);</span><br><span class="line">					<span class="comment">// 绘制完成，释放画布，提交修改</span></span><br><span class="line">					holder.unlockCanvasAndPost(canvas);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的程序为SurfaceHolder添加了一个CallBack实例，该Callback中定义了如下三个方法：</p>
-<ul>
-<li>void surfaceChanged(SurfaceHolder holder, int format, int width, int height):当一个surface的格式或大小发生改变时回调该方法。</li>
-<li>void surfaceCreated(SurfaceHolder holder):当surface被创建时回调该方法</li>
-<li>void surfaceDestroyed(SurfaceHolder holder):当surface将要被销毁时回调该方法</li>
+</li>
+<li>订单管理模块<ul>
+<li>订单创建：客户可通过系统可以创建订单</li>
+<li>订单修改：客服可通过系统修改订单的部分信息（如订单的收货地址</li>
+<li>取消订单：在书籍未发货前，客户可通过系统取消自身的订单</li>
+<li>订单查询：<ul>
+<li>客户可通过系统查询自身产生的订单状态</li>
+<li>客服可通过系统查询自己所负责区域的客户所产生的所有订单</li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/插件化技术学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="url">Android动态加载dex技术初探</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/插件化技术学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/插件化技术学习/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###Android动态加载dex技术初探</p>
-<p><a href="http://blog.csdn.net/u013478336/article/details/50734108" target="_blank" rel="noopener">http://blog.csdn.net/u013478336/article/details/50734108</a></p>
-<p>Android使用Dalvik虚拟机加载可执行程序，所以不能直接加载基于class的jar，而是需要将class转化为dex字节码。</p>
-<p>Android支持动态加载的两种方式是：DexClassLoader和PathClassLoader，DexClassLoader可加载jar/apk/dex，且支持从SD卡加载；PathClassLoader据说只能加载已经安装在Android系统内APK文件。</p>
-<p>###Android插件化基础</p>
-<p>Android简单来说就是如下操作：</p>
-<ul>
-<li>开发者将插件代码封装成Jar或者APK</li>
-<li>宿主下载或者从本地加载Jar或者APK到宿主中</li>
-<li>将宿主调用插件中的算法或者Android特定的Class（如Activity）</li>
+</li>
 </ul>
-<p>###插件化开发—动态加载技术加载已安装和未安装的apk</p>
-<p><a href="http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="noopener">http://blog.csdn.net/u010687392/article/details/47121729?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a><br>为什么引入动态加载技术？</p>
-<ul>
-<li>一个应用程序dex文件的方法数最大不能超过65536个</li>
-<li>可以让应用程序实现插件化、插拔式结构，对后期维护有益</li>
+</li>
 </ul>
-<p>什么是动态加载技术</p>
-<p>动态加载技术就是使用类加载器加载相应的apk、dex、jar(必须含有dex文件)，再通过反射获得该apk、dex、jar内部的资源（class、图片、color等等）进而供宿主app使用。</p>
-<p>关于动态加载使用的类加载器</p>
-<ul>
-<li>PathClassLoader - 只能加载已经安装的apk，即/data/app目录下的apk。</li>
-<li>DexClassLoader  - 能加载手机中未安装的apk、jar、dex，只要能在找到对应的路径。</li>
+</li>
+<li>服务系统<ul>
+<li>销售服务<ul>
+<li>客服和用户沟通：客服可与客户沟通，帮助客户购买到想要的书籍</li>
+<li>物流跟踪：系统提供每个订单的物流状况</li>
+<li>退换货：系统支持客户退换购买的书籍</li>
+<li>投诉：系统支持客户投诉客服的服务态度</li>
 </ul>
-<h2 id="插件化技术学习"><a href="#插件化技术学习" class="headerlink" title="#插件化技术学习"></a>#插件化技术学习</h2><p>原因：</p>
-<p>各大厂商都碰到了AndroidNative平台的瓶颈：</p>
-<ol>
-<li>从技术上讲，业务逻辑的复杂代码急剧膨胀，各大厂商陆续触到65535方法数的天花板；同时，对模块热更新提出了更高的要求。</li>
-<li>在业务层面上，功能模块的解耦以及维护团队的分离也是大势所趋。</li>
-</ol>
-<p>插件化技术主要解决两个问题：</p>
-<ol>
-<li>代码加载</li>
-<li>资源加载</li>
-</ol>
-<p>###代码加载<br>类的加载可以使用Java的ClassLoader机制，还需要组件生命周期管理。</p>
-<p>###资源加载<br>用AssetManager的隐藏方法addAssetPath。</p>
-<p>##Android插件化原理解析——Hook机制之动态代理 </p>
-<p>使用代理机制进行API Hook进而达到方法增强。</p>
-<p>静态代理</p>
-<p>动态代理：可以简单理解为JVM可以在运行时帮我们动态生成一系列的代理类。</p>
-<p>###代理Hook</p>
-<p>如果我们自己创建代理对象，然后把原始对象替换为我们的代理对象，就可以在这个代理对象中为所欲为了；修改参数，替换返回值，称之为Hook。</p>
-<p>整个Hook过程简要总结如下：</p>
-<ol>
-<li>寻找Hook点，原则是静态变量或者单例对象，尽量Hook public的对象和方法，非public不保证每个版本都一样，需要适配。</li>
-<li>选择合适的代理方式，如果是接口可以用动态代理；如果是类可以手动写代理也可以使用cglib。</li>
-<li>偷梁换柱－用代理对象替换原始对象</li>
-</ol>
-<p>##Android插件化原理解析——Hook机制之Binder Hook </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/开源框架源码分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="url">框架源码分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/开源框架源码分析/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="框架源码分析"><a href="#框架源码分析" class="headerlink" title="#框架源码分析"></a>#框架源码分析</h2><h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="###Retrofit"></a>###Retrofit</h2><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="###EventBus"></a>###EventBus</h2><h2 id="Glide"><a href="#Glide" class="headerlink" title="###Glide"></a>###Glide</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/事件分发机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/事件分发机制/" itemprop="url">事件分发机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/事件分发机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/事件分发机制/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="事件分发机制"><a href="#事件分发机制" class="headerlink" title="事件分发机制"></a>事件分发机制</h1><hr>
+</li>
+<li>书籍服务<ul>
+<li>推荐：系统提供推荐书单，如年度榜单、本月/本季度最热销书籍</li>
+<li>收藏：客户可将书籍添加到自己的收藏书单内</li>
+<li>评论：客户可对某本书籍编写书评</li>
+<li>举报：客户可举报书籍</li>
+</ul>
+</li>
+<li>消息通知<ul>
+<li>出版社通知：当某本书的库存到达某一阈值时，系统将会给出版社发送进货通知</li>
+<li>用户通知：<ul>
+<li>系统发送流程信息提示（如登陆成功、订单创建成功</li>
+<li>若书籍缺货，系统应发送缺货提醒并给出确切的deadline，a compatible deadline is informed to the customer.</li>
+</ul>
+</li>
+<li>管理员通知：？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>统计分析系统<ul>
+<li>销量：The system must allow a manager to generate reports on bestselling books, and on most profitable customers</li>
+<li>书籍分析：</li>
+</ul>
+</li>
+<li>用户系统<ul>
+<li>管理员<ul>
+<li>超级管理员<ul>
+<li>封禁用户：超级管理员可以封禁普通用户账号</li>
+<li>修改用户信息：超级管理员可以修改普通用户信息</li>
+<li>删除评论：超级管理员可以删除含敏感信息的或不适宜的书籍评论</li>
+</ul>
+</li>
+<li>客服(订单管理员)</li>
+<li>图书管理员</li>
+</ul>
+</li>
+<li>普通用户<ul>
+<li>购物车<ul>
+<li>添加书：</li>
+<li>删除书</li>
+</ul>
+</li>
+<li>个人信息管理：修改个人基本信息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>After requirement classification, we got some subsystems mainly  based on the entity that function is related to. Details of functions that each subsystem implements are listed as follows.</p>
 <ul>
-<li>对于一个根ViewGroup来说,发生点击事件首先调用dispatchTouchEvent</li>
-<li>如果这个ViewGroup的onIterceptTouchEvent返回true就表示它要拦截当前事件,接着这个ViewGroup的onTouchEvent就会被调用.如果onIterceptTouchEvent返回false,那么就会继续向下调用子View的dispatchTouchEvent方法</li>
-<li>当一个View需要处理事件的时候,如果它没有设置onTouchListener,那么直接调用onTouchEvent.如果设置了Listenter 那么就要看Listener的onTouch方法返回值.为true就不调,为false就调onTouchEvent</li>
-<li>View的默认实现会在onTouchEvent里面把touch事件解析成Click之类的事件</li>
-<li>点击事件传递顺序 Activity -&gt; Window -&gt; View</li>
-<li>一旦一个元素拦截了某事件,那么一个事件序列里面后续的Move,Down事件都会交给它处理.并且它的onInterceptTouchEvent不会再调用</li>
-<li>View的onTouchEvent默认都会消耗事件,除非它的clickable和longClickable都是false(不可点击),但是enable属性不会影响</li>
+<li>Book system<ul>
+<li>Book Information Management<ul>
+<li>Books on shelves / off shelves: Librarians can put books on the shelves. If a book is off shelves, customers could not buy the book via the system.</li>
+<li>Book information modification: The librarian can change the specific information of a book, such as book price, label, discount information, promotion information, book introduction, etc.</li>
+<li>Book search: All users of the system can find information about books.</li>
+</ul>
+</li>
+<li>Inventory management<ul>
+<li>Increase/decrease: [? Warehouse administrator] can increase the warehouse capacity of a book</li>
+<li>Inquire:【? Warehouse administrator] can query the warehouse capacity of books</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Order System<ul>
+<li>Trading module<ul>
+<li>Payment (WeChat, Alipay, online banking): customers would pay by credit card, Alipay, or WeChat.</li>
+<li>The system must calculate taxes and delivery fee as well as applying discounts to the sale when applicable.</li>
+</ul>
+</li>
+<li>Order Management Module<ul>
+<li>Order creation: Customers can create orders through the system</li>
+<li>Order modification: Customer service can modify part of the order information through the system (such as the order receipt address)</li>
+<li>Cancellation of orders: Customers can cancel their orders through the system before the books are shipped.</li>
+<li>Order Tracking:<ul>
+<li>Customers can check the status of their own orders through the system</li>
+<li>Customer service can query all orders generated from the area where  customers work in through the system</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>service system<ul>
+<li>Sales service<ul>
+<li>Customer service and user communication: Customer service can communicate with customers to help customers purchase the books they want.</li>
+<li>Logistics tracking: the system provides the logistics status of each order</li>
+<li>Return and exchange: the system supports customers to return or exchange the purchased books</li>
+<li>Complaint: System support customer complaints Customer service attitude</li>
+</ul>
+</li>
+<li>Book service<ul>
+<li>Recommendation: The system provides a list of book recommendations, such as the annual list, the best selled books during this month / this quarter</li>
+<li>Collection: Customers can add books to their collections</li>
+<li>Comments: Customers can write a book review of a book</li>
+<li>Report: Customers can report a  book if the book has some sensitive content.</li>
+</ul>
+</li>
+<li>notification<ul>
+<li>Publisher notice: When the inventory of a book reaches a certain threshold, the system will send a delivery notice to the publisher.</li>
+<li>User notification:<ul>
+<li>The system sends a process information prompt (if the login is successful, the order is created successfully)</li>
+<li>If the book is out of stock, the system should send a stockout reminder and a compatible deadline is informed to the customer.</li>
+</ul>
+</li>
+<li>Administrator notification:?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Statistical Analysis System<ul>
+<li>Sales: The system must allow a manager to generate reports on bestselling books, and on most profitable customers ？</li>
+<li>Book analysis: ？</li>
+</ul>
+</li>
+<li>User system<ul>
+<li>Administrator<ul>
+<li>Super administrator<ul>
+<li>Blocked users: Super administrators can block ordinary user accounts</li>
+<li>Modify user information: Super administrator can modify common user information</li>
+<li>Delete comments: Super administrators can delete book comments with sensitive information or inappropriate content.</li>
+</ul>
+</li>
+<li>Customer Service (Order Administrator) ?</li>
+<li>librarian ?</li>
+</ul>
+</li>
+<li>general user<ul>
+<li>shopping cart<ul>
+<li>Add a book: customers can add books to their shopping cart</li>
+<li>delete the book: customers can delete books from their shopping cart.</li>
+</ul>
+</li>
+<li>Personal Information Management:  Customers can modifying personal basic information through the system.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-2-Features"><a href="#2-2-2-Features" class="headerlink" title="2.2.2 Features"></a>2.2.2 Features</h4><ul>
+<li><p>The system should run on an internet-based environment. </p>
+</li>
+<li><p>The system is a web-service-based application. </p>
+</li>
+<li><p>The system should have a centralized database. </p>
+</li>
+<li><p>The system should have authentication functionality. </p>
+</li>
+<li><p>The system should be scalable and extendable, e.g. extend Mobile APP. </p>
+</li>
+<li><p>The system should have reasonable external interface, e.g. add new interface </p>
+<p>for PayPal. </p>
+</li>
+<li><p>The system should have a user-friendly UI and be easy to use. </p>
+</li>
+<li><p>The driver should be able to download his working schedule, see the routes, </p>
+<p>and commit the work when he is done via his smart phone. </p>
+</li>
+</ul>
+<h2 id="2-3-User-Classes-and-Characteristics"><a href="#2-3-User-Classes-and-Characteristics" class="headerlink" title="2.3 User Classes and Characteristics"></a>2.3 User Classes and Characteristics</h2><p>\<identify the various user classes that you anticipate will use this product. may be differentiated based on frequency of use, subset product functions used, technical expertise, security or privilege levels, educational level, experience. describe pertinent characteristics each class. certain requirements pertain only to classes. distinguish most important for from those who are less satisfy.\></identify></p>
+<ul>
+<li>用户类</li>
+<li>用户特征</li>
+</ul>
+<p>用户：</p>
+<p>客户：可以查询书籍信息，购买书籍</p>
+<p>仓库管理员：可查询书籍的库存信息，更改书籍的库存信息</p>
+<p>超级管理员：可以修改用户</p>
+<p>客服：可以与用户沟通，修改订单的部分信息</p>
+<p><strong>Customer</strong> can inquiry the information of book through the system without any particular prerequisite. But customer must log in the system before buying books, query orders or return book.</p>
+<p><strong>Warehouse administrator</strong> can query the inventory information of books and change the inventory information of books</p>
+<p><strong>Super administrator</strong> take charge of the common users and book reviews in the system. They can block the common users, modify user information and delete inappropriate book review. </p>
+<p><strong>Customer service</strong> can communicate with users and modify part of the order information.</p>
+<h2 id="2-4-Operating-Environment"><a href="#2-4-Operating-Environment" class="headerlink" title="2.4 Operating Environment"></a>2.4 Operating Environment</h2><p>\<describe the environment in which software will operate, including hardware platform, operating system and versions, any other components or applications with it must peacefully coexist.\></describe></p>
+<ul>
+<li>操作环境：硬件平台、操作系统、版本</li>
+</ul>
+<h2 id="2-5-Design-and-Implementation-Constraints"><a href="#2-5-Design-and-Implementation-Constraints" class="headerlink" title="2.5 Design and Implementation Constraints"></a>2.5 Design and Implementation Constraints</h2><p>\&lt;Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).></p>
+<ul>
+<li>项目设计和实现约束</li>
+</ul>
+<h2 id="2-6-User-Documentation"><a href="#2-6-User-Documentation" class="headerlink" title="2.6 User Documentation"></a>2.6 User Documentation</h2><p>\<list the user documentation components (such as manuals, on-line help, and tutorials) that will be delivered along with software. identify any known delivery formats or standards.\></list></p>
+<ul>
+<li>用户手册</li>
+</ul>
+<h2 id="2-7-Assumptions-and-Dependencies"><a href="#2-7-Assumptions-and-Dependencies" class="headerlink" title="2.7 Assumptions and Dependencies"></a>2.7 Assumptions and Dependencies</h2><p>\<list any assumed factors (as opposed to known facts) that could affect the requirements stated in srs. these include third-party or commercial components you plan use, issues around development operating environment, constraints. project be affected if assumptions are incorrect, not shared, change. also identify dependencies has on external factors, such as software intend reuse from another project, unless they already documented elsewhere (for example, vision and scope document plan).\></list></p>
+<ul>
+<li>假设和依赖，可能使用的第三方组件</li>
 </ul>
 
           
@@ -1660,7 +1990,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Zygote和System进程的启动过程/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/08/SoftwareManagement/MgtPro_9_MonteCarlo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1679,7 +2009,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Zygote和System进程的启动过程/" itemprop="url">Zygote和System进程的启动过程</a></h1>
+                <a class="post-title-link" href="/2019/05/08/SoftwareManagement/MgtPro_9_MonteCarlo/" itemprop="url">MgtPro_9_MonteCarlo</a></h1>
         
 
         <div class="post-meta">
@@ -1691,8 +2021,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-08T13:46:02+08:00">
+                2019-05-08
               </time>
             
 
@@ -1702,39 +2032,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1743,8 +2040,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/Zygote和System进程的启动过程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Zygote和System进程的启动过程/" itemprop="commentCount"></span>
+                <a href="/2019/05/08/SoftwareManagement/MgtPro_9_MonteCarlo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/08/SoftwareManagement/MgtPro_9_MonteCarlo/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1776,45 +2073,70 @@
       
         
           
-            <h2 id="Zygote和System进程的启动过程"><a href="#Zygote和System进程的启动过程" class="headerlink" title="#Zygote和System进程的启动过程"></a>#Zygote和System进程的启动过程</h2><h2 id="init脚本的启动"><a href="#init脚本的启动" class="headerlink" title="##init脚本的启动"></a>##init脚本的启动</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+------------+    +-------+   +-----------+</span><br><span class="line">|Linux Kernel+--&gt; |init.rc+-&gt; |app_process|</span><br><span class="line">+------------+    +-------+   +-----------+</span><br><span class="line">               create <span class="keyword">and</span> public          </span><br><span class="line">                <span class="built_in"> server </span>socket</span><br></pre></td></tr></table></figure>
-<p>linux内核加载完成后，运行init.rc脚本</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service zygote <span class="string">/system/bin/app_process</span> -Xzygote <span class="string">/system/bin</span> <span class="params">--zygote</span> <span class="params">--start-system-server</span> socket zygote stream 666</span><br></pre></td></tr></table></figure>
-<ul>
-<li>/system/bin/app_process Zygote服务启动的进程名</li>
-<li>–start-system-server 表明Zygote启动完成之后，要启动System进程。</li>
-<li>socket zygote stream 666 在Zygote启动时，创建一个权限为666的socket。此socket用来请求Zygote创建新进程。socket的fd保存在名称为“ANDROID_SOCKET_zygote”的环境变量中。</li>
-</ul>
-<h2 id="Zygote进程的启动过程"><a href="#Zygote进程的启动过程" class="headerlink" title="##Zygote进程的启动过程"></a>##Zygote进程的启动过程</h2><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">             create rumtime                            </span><br><span class="line">+-----------+            +----------+                  </span><br><span class="line">|<span class="string">app_process+----------&gt; </span>|<span class="string">ZygoteInit</span>|<span class="string">                  </span></span><br><span class="line"><span class="string">+-----------+            +-----+----+                  </span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string">                               </span>|<span class="string"> registerZygoteSocket()</span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string"> +------+  startSystemServer() </span>|<span class="string">                       </span></span><br><span class="line"><span class="string"> </span>|<span class="string">System</span>|<span class="string"> &lt;-------+            </span>|<span class="string">                       </span></span><br><span class="line"><span class="string"> +------+   fork               </span>|<span class="string"> runSelectLoopMode()   </span></span><br><span class="line"><span class="string">                               </span>|<span class="string">                       </span></span><br><span class="line"><span class="string">                               v</span></span><br></pre></td></tr></table></figure>
-<p><strong>app_process进程</strong></p>
-<hr>
-<p>/system/bin/app_process 启动时创建了一个AppRuntime对象。通过AppRuntime对象的start方法，通过JNI调用创建了一个虚拟机实例，然后运行com.android.internal.os.ZygoteInit类的静态main方法，传递true(boolean startSystemServer)参数。</p>
-<p><strong>ZygoteInit类</strong></p>
-<hr>
-<p>ZygoteInit类的main方法运行时，会通过registerZygoteSocket方法创建一个供ActivityManagerService使用的server socket。然后通过调用startSystemServer方法来启动System进程。最后通过runSelectLoopMode来等待AMS的新建进程请求。</p>
-<ol>
-<li>在registerZygoteSocket方法中，通过名为ANDROID_SOCKET_zygote的环境获取到zygote启动时创建的socket的fd，然后以此来创建server socket。</li>
-<li>在startSystemServer方法中，通过Zygote.forkSystemServer方法创建了一个子进程，并将其用户和用户组的ID设置为1000。</li>
-<li>在runSelectLoopMode方法中，会将之前建立的server socket保存起来。然后进入一个无限循环，在其中通过selectReadable方法，监听socket是否有数据可读。有数据则说明接收到了一个请求。<br>selectReadable方法会返回一个整数值index。如果index为0，则说明这个是AMS发过来的连接请求。这时会与AMS建立一个新的socket连接，并包装成ZygoteConnection对象保存起来。如果index大于0，则说明这是AMS发过来的一个创建新进程的请求。此时会取出之前保存的ZygoteConnection对象，调用其中的runOnce方法创建新进程。调用完成后将connection删除。<br>这就是Zygote处理一次AMS请求的过程。</li>
+            <h1 id="MgtPro-9-MonteCarlo"><a href="#MgtPro-9-MonteCarlo" class="headerlink" title="MgtPro_9_MonteCarlo"></a>MgtPro_9_MonteCarlo</h1><h2 id="Monte-Carlo-method"><a href="#Monte-Carlo-method" class="headerlink" title="Monte Carlo method"></a>Monte Carlo method</h2><p>​    Monte Carlo simulation is a method in the risk analysis and evaluation of engineering projects. It is a quantitative analysis method. When the number of random variables input in the project evaluation is more than three, there may be three or more states in each input variable. Monte Carlo simulation techniques should be used. </p>
+<p>​    The principle of this method is to use a random sampling method to extract the values of a set of input variables, and calculate the project evaluation index based on the numerical values of the input variables. Through a large number of simulations of tens of thousands or even millions of times, the final evaluation is obtained. The probability distribution of the indicator and the cumulative probability distribution map, expected value, variance, and standard deviation, and the probability that the calculation item will change from feasible to infeasible, thereby estimating the risk assumed by the project investment.</p>
+<h2 id="General-steps-for-Monte-Carlo-simulation"><a href="#General-steps-for-Monte-Carlo-simulation" class="headerlink" title="General steps for Monte Carlo simulation"></a>General steps for Monte Carlo simulation</h2><ol>
+<li><p>Select a random variable, the variable that is most sensitive to the net present value.</p>
+</li>
+<li><p>Determine the probability distribution of random variables</p>
+</li>
+<li><p>Extract random numbers for each random variable</p>
+</li>
+<li><p>Convert the extracted random number into the sampled value of each input variable</p>
+</li>
+<li><p>The sampled values constitute a set of project evaluation basic data</p>
+</li>
+<li><p>Calculate the value of the evaluation index under a random condition based on the basic data.</p>
+</li>
+<li><p>Repeat the above process and perform repeated simulations to obtain multiple sets of evaluation index values.</p>
+</li>
+<li><p>Organize the expected value, variance, standard deviation, probability distribution and cumulative probability distribution of the evaluation indicators obtained from the simulation results, draw the cumulative probability map, and at the same time, check whether the simulation times meet the predetermined accuracy requirements.</p>
+</li>
 </ol>
-<h2 id="System进程的启动"><a href="#System进程的启动" class="headerlink" title="##System进程的启动"></a>##System进程的启动</h2><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">+                                                     </span><br><span class="line">|<span class="string">                                                     </span></span><br><span class="line">|<span class="string">                                                     </span></span><br><span class="line"><span class="string">v fork()                                              </span></span><br><span class="line"><span class="string">+--------------+                                      </span></span><br><span class="line">|<span class="string">System Process</span>|<span class="string">                                      </span></span><br><span class="line"><span class="string">+------+-------+                                      </span></span><br><span class="line"><span class="string">       </span>|<span class="string">                                              </span></span><br><span class="line"><span class="string">       </span>|<span class="string"> RuntimeInit.zygoteInit() commonInit, zygoteInitNative                                             </span></span><br><span class="line"><span class="string">       </span>|<span class="string"> init1()  SurfaceFlinger, SensorServic...     </span></span><br><span class="line"><span class="string">       </span>|<span class="string">                                              </span></span><br><span class="line"><span class="string">       </span>|<span class="string">                                              </span></span><br><span class="line"><span class="string">       </span>|<span class="string"> init2() +------------+                       </span></span><br><span class="line"><span class="string">       +-------&gt; </span>|<span class="string">ServerThread</span>|<span class="string">                       </span></span><br><span class="line"><span class="string">       </span>|<span class="string">         +----+-------+                       </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string"> AMS, PMS, WMS...              </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       </span>|<span class="string">              </span>|<span class="string">                               </span></span><br><span class="line"><span class="string">       v              v</span></span><br></pre></td></tr></table></figure>
-<p>System进程是在ZygoteInit的handleSystemServerProcess中开始启动的。</p>
+<p>Based on the above results, the impact of each random variable on project revenue is analyzed.</p>
+<h3 id="Sample"><a href="#Sample" class="headerlink" title="Sample:"></a>Sample:</h3><p>The time of the total construction period is estimated based on historical data simulation of each stage.</p>
 <ol>
-<li>首先，因为System进程是直接fork Zygote进程的，所以要先通过closeServerSocket方法关掉server socket。</li>
-<li>调用RuntimeInit.zygoteInit方法进一步启动System进程。在zygoteInit中，通过commonInit方法设置时区和键盘布局等通用信息，然后通过zygoteInitNative方法启动了一个Binder线程池。最后通过invokeStaticMain方法调用SystemServer类的静态Main方法。</li>
-<li>SystemServer类的main通过JNI调用cpp实现的init1方法。在init1方法中，会启动各种以C++开发的系统服务（例如SurfaceFlinger和SensorService）。然后回调ServerServer类的init2方法来启动以Java开发的系统服务。</li>
-<li>在init2方法中，首先会新建名为”android.server.ServerThread”的ServerThread线程，并调用其start方法。然后在该线程中启动各种Service（例如AMS，PMS，WMS等）。启动的方式是调用对应Service类的静态main方法。</li>
-<li>首先，AMS会被创建，但未注册到ServerManager中。然后PMS被创建，AMS这时候才注册到ServerManager中。然后到ContentService、WMS等。<br>注册到ServerManager中时会制定Service的名字，其后其他进程可以通过这个名字来获取到Binder Proxy对象，以访问Service提供的服务。</li>
-<li>执行到这里，System就将系统的关键服务启动起来了，这时候其他进程便可利用这些Service提供的基础服务了。</li>
-<li>最后会调用ActivityManagerService的systemReady方法，在该方法里会启动系统界面以及Home程序。</li>
+<li>According to the elements we divide in WBS, select random variables as four processes of software development: requirements engineering, design, development, testing</li>
 </ol>
-<p>##Android进程启动</p>
-<hr>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">   +----------------------+       +-------+      +----------+   +----------------+   +-----------+                         </span><br><span class="line">   |<span class="string">ActivityManagerService</span>|<span class="string">       </span>|<span class="string">Process</span>|<span class="string">      </span>|<span class="string">ZygoteInit</span>|<span class="string">   </span>|<span class="string">ZygoteConnection</span>|<span class="string">   </span>|<span class="string">RuntimeInit</span>|<span class="string">                         </span></span><br><span class="line"><span class="string">   +--------------+-------+       +---+---+      +-----+----+   +-----------+----+   +------+----+                         </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string"> startProcessLocked()                 </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">+---------------&gt; </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">  start()          </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">  "android.app.ActivityThread"      </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  +-----------------&gt; </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">openZygoteSocketIfNeeded()           </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   +------+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">      </span>|<span class="string">         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string"> &lt;----+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">sZygoteWriter.write(arg)             </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   +------+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">      </span>|<span class="string">         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">      </span>|<span class="string">         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string"> &lt;----+         </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   +--------------&gt; </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">runSelectLoopMode() </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                +-----------------+  </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                 </span>|<span class="string">  </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string"> &lt;---------------+  </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">   acceptCommandPeer()              </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">  runOnce()         </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                +------------------&gt; </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">forkAndSpecialize()                           </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    +-------------+ </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">             </span>|<span class="string"> </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string"> &lt;-----------+ </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">  handleChildProc()                           </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string"> zygoteInit()  </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    +-------------&gt; </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">in^okeStaticMain()            </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               +----------------&gt;             </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">("android.app.ActivityThread")</span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  </span>|<span class="string">                   </span>|<span class="string">                </span>|<span class="string">                    </span>|<span class="string">               </span>|<span class="string">                              </span></span><br><span class="line"><span class="string">                  +                   +                +                    +               +</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>AMS向Zygote发起请求（通过之前保存的socket），携带各种参数，包括“android.app.ActivityThread”。</li>
-<li>Zygote进程fork自己，然后在新Zygote进程中调用RuntimeInit.zygoteInit方法进行一系列的初始化（commonInit、Binder线程池初始化等）。</li>
-<li>新Zygote进程中调用ActivityThread的main函数，并启动消息循环。</li>
-</ul>
+<p>The total duration is the sum of the four processes</p>
+<ol start="2">
+<li>Determine the probability distribution of random variables</li>
+</ol>
+<p>According to historical data, pessimistic estimates, general estimates and optimistic estimates of each variable are obtained. It is assumed that the random variables obey the Gaussian distribution and the parameters of the Gaussian distribution are determined from the historical data.</p>
+<p><img src="/images/1407D354-1C94-4BCA-A8A7-AF53D851801E.png" alt="1407D354-1C94-4BCA-A8A7-AF53D851801E"></p>
+<p>All variable are distributed as Gaussian distribution.</p>
+<p><img src="/images/VariableDistribution.png" alt="VariableDistribution"></p>
+<ol start="3">
+<li><p>Extract random numbers for each random variable</p>
+</li>
+<li><p>Convert the extracted random number into the sampled value of each input variable</p>
+<p><img src="/images/randomInput.png" alt="randomInput"></p>
+</li>
+<li><p>The sampled values constitute a set of project evaluation basic data</p>
+</li>
+<li><p>Calculate the value of the evaluation index under a random condition based on the basic data.</p>
+</li>
+<li><p>Repeat the above process and perform repeated simulations to obtain multiple sets of evaluation index values.</p>
+</li>
+<li><p>Organize the expected value, variance, standard deviation, probability distribution and cumulative probability distribution of the evaluation indicators obtained from the simulation results, draw the cumulative probability map, and at the same time, check whether the simulation times meet the predetermined accuracy requirements.</p>
+</li>
+</ol>
+<p><img src="/images/ProbabilityDistributionHist.png" alt="ProbabilityDistributionHist"></p>
+<p><img src="/images/MonteCarlo.png" alt="MonteCarlo"></p>
+<table>
+<thead>
+<tr>
+<th>Ex</th>
+<th>StandVar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>103.8</td>
+<td>19.2</td>
+</tr>
+</tbody>
+</table>
 
           
         
@@ -1865,7 +2187,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/查漏补缺/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/06/SoftwareManagement/MgtPro_7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1884,7 +2206,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/查漏补缺/" itemprop="url">查漏补缺</a></h1>
+                <a class="post-title-link" href="/2019/05/06/SoftwareManagement/MgtPro_7/" itemprop="url">MgtPro_7</a></h1>
         
 
         <div class="post-meta">
@@ -1896,8 +2218,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T20:55:23+08:00">
+                2019-05-06
               </time>
             
 
@@ -1907,39 +2229,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1948,8 +2237,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/查漏补缺/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/查漏补缺/" itemprop="commentCount"></span>
+                <a href="/2019/05/06/SoftwareManagement/MgtPro_7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/06/SoftwareManagement/MgtPro_7/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1981,8 +2270,73 @@
       
         
           
-            <h2 id="查漏补缺"><a href="#查漏补缺" class="headerlink" title="#查漏补缺"></a>#查漏补缺</h2><p>请分析一张400*500尺寸的PNG图片加载到程序中占用内存中的大小</p>
-<p><a href="http://m.blog.csdn.net/article/details?id=7856519" target="_blank" rel="noopener">http://m.blog.csdn.net/article/details?id=7856519</a></p>
+            <h2 id="1-introduction"><a href="#1-introduction" class="headerlink" title="1. introduction"></a>1. introduction</h2><ul>
+<li>purpose</li>
+<li>scope</li>
+<li>assumptions</li>
+</ul>
+<p>主要照之前的部分</p>
+<h2 id="2-Project-practices"><a href="#2-Project-practices" class="headerlink" title="2. Project practices"></a>2. Project practices</h2><ul>
+<li>scope management（using appendix）</li>
+<li>quality management  doc structure<ul>
+<li>planning</li>
+<li>assurance</li>
+<li>Control</li>
+</ul>
+</li>
+<li>risk management<ul>
+<li>identification <ul>
+<li>思维导图类似物（包含总体的风险，根据我们分的大点</li>
+</ul>
+</li>
+<li>analysis（加引言）<ul>
+<li>impact 表</li>
+<li>展示矩阵图</li>
+<li>蒙特卡洛</li>
+</ul>
+</li>
+<li>response</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Work-Breakdown-Structure-WBS"><a href="#3-Work-Breakdown-Structure-WBS" class="headerlink" title="3. Work Breakdown Structure(WBS)"></a>3. Work Breakdown Structure(WBS)</h2><h2 id="4-Project-Organization"><a href="#4-Project-Organization" class="headerlink" title="4. Project Organization"></a>4. Project Organization</h2><ul>
+<li>team structure</li>
+<li>roles、responsibilities， and authorities</li>
+</ul>
+<h2 id="5-Resource-Allocation"><a href="#5-Resource-Allocation" class="headerlink" title="5. Resource Allocation"></a>5. Resource Allocation</h2><ul>
+<li>staffing profile</li>
+<li>schedule</li>
+</ul>
+<h2 id="6-Glossary"><a href="#6-Glossary" class="headerlink" title="6. Glossary"></a>6. Glossary</h2><p>第一次文档</p>
+<p>分工：</p>
+<p>3、4、5：超哥，谈瑞</p>
+<p>1、6、impact的表，可能性-影响矩阵，决策树（5个）: 文添</p>
+<p>2.1、quality planning、identification：梁程伟</p>
+<p>2.2、2.3：罗媚，陈润乾</p>
+<p>quality management</p>
+<ol>
+<li>Planning:[short] ，output：<ul>
+<li>管理计划</li>
+<li>衡量标准</li>
+<li>checklist</li>
+<li>Output需求跟踪矩阵</li>
+</ul>
+</li>
+<li>Assurance</li>
+</ol>
+<p>Quality Planning Doc Template</p>
+<p>1.0 Quality Assurance Plan 1.1 Introduction </p>
+<p>​    1.2 Purpose<br>​     1.3 Policy Statement 1.4 Scope </p>
+<p>2.0 Management<br>     2.1 Organization structure </p>
+<p>​    2.2 Roles and Responsibilities </p>
+<p>​         2.2.1 Technical Monitor/Senior Management 2.2.2 Task Leader<br>​         2.2.3 Quality Assurance Team<br>​         2.2.4 Technical staff </p>
+<p>3.0 Required Documentation </p>
+<p>4.0 Quality Assurance Procedures </p>
+<p>​    4.1 Walkthrough Procedure<br>     4.2 Review Procedure<br>​     4.3 Audit Procedure </p>
+<p>​    4.4 Evaluation Procedure</p>
+<p>​     4.5 Process Improvement </p>
+<p>5.0 Problem Reporting procedure</p>
+<p> 6.0 Quality Assurance Metrics Appendix</p>
 
           
         
@@ -2033,7 +2387,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/热修复技术/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/03/15/SoftwareManagement/MgtPro_0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -2052,7 +2406,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/热修复技术/" itemprop="url">热修复技术</a></h1>
+                <a class="post-title-link" href="/2019/03/15/SoftwareManagement/MgtPro_0/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -2064,8 +2418,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-15T17:24:12+08:00">
+                2019-03-15
               </time>
             
 
@@ -2075,39 +2429,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -2116,8 +2437,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/热修复技术/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/热修复技术/" itemprop="commentCount"></span>
+                <a href="/2019/03/15/SoftwareManagement/MgtPro_0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/15/SoftwareManagement/MgtPro_0/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2149,54 +2470,40 @@
       
         
           
-            <h2 id="热修复技术"><a href="#热修复技术" class="headerlink" title="#热修复技术"></a>#热修复技术</h2><p>APP提早发出去的包，如果出现客户端的问题，实在是干着急，覆水难收。因此线上修复方案迫在眉睫。</p>
-<p>###概述</p>
-<p>基于Xposed中的思想，通过修改c层的Method实例描述，来实现更改与之对应的java方法的行为，从而达到修复的目的。</p>
-<p>###Xposed</p>
-<p>诞生于XDA论坛，类似一个应用平台，不同的是其提供诸多系统级的应用。可实现许多神奇的功能。Xposed需要以越狱为前提，像是iOS中的cydia。</p>
-<p>Xposed可以修改任何程序的任何java方法（需root），github上提供了XposedInstaller，是一个android app。提供很多framework层，应用层级的程序。开发者可以为其开发一些系统或应用方面的插件，自定义android系统，它甚至可以做动态权限管理（XposedMods）。</p>
-<p>###Android系统启动与应用启动</p>
-<p>Zygote进程是Android手机系统启动后，常驻的一个名为‘受精卵’的进程。</p>
+            <h1 id="MgtPro-0"><a href="#MgtPro-0" class="headerlink" title="MgtPro_0"></a>MgtPro_0</h1><p>标准－IEEE/ANSI 830-1998</p>
+<p><strong>1、引言</strong><br>1.1 需求文档的目的<br>1.2 产品范围<br>1.3 定义、首字母缩写词和缩略词<br>1.4 参考文献<br>1.5 文档的其余部分概览<br><strong>2、一般描述</strong><br>2.1 产品透视<br>2.2  <a href="https://www.baidu.com/s?wd=%E4%BA%A7%E5%93%81%E5%8A%9F%E8%83%BD&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">产品功能</a><br>2.3 用户特征<br>2.4 一般约束<br>2.5 假设和依赖性<br><strong>3、专门需求</strong><br>覆盖功能，非功能和接口需求<br>——显然，这是文档中最实质性的部分，但是因为在组织的实践中存在极大的变数，对这一节定义标准的结构是不适当的。需求可能记录外部接口，描述系统功能和特征、定义逻辑的数据库需求、设计约束、系统总体特征和质量特征。<br><strong>4、附录</strong></p>
+<p><a href="https://wenku.baidu.com/view/ee90df5383c4bb4cf7ecd19b.html" target="_blank" rel="noopener">英文版</a></p>
+<p>introduction</p>
+<h2 id="互联网书店的要求清单"><a href="#互联网书店的要求清单" class="headerlink" title="互联网书店的要求清单"></a>互联网书店的要求清单</h2><p>从下一章开始，我们将通过我们刚刚为您概述的流程的每个阶段，跟随一个运行的示例，我们称之为Internet Bookstore。我们将要完成的用例以及我们将要发现的类存在，以满足我们的客户（我们将要构建的书店的所有者）指定的某些要求。这些要求包括以下内容：</p>
 <ul>
-<li>zygote的启动实现脚本在/init.rc文件中</li>
-<li>启动过程中执行的二进制文件在/system/bin/app_process</li>
+<li>书店应通过互联网接受订单。</li>
+<li>书店应保留最多1,000,000名客户的帐户清单。</li>
+<li>书店应为所有帐户提供密码保护。</li>
+<li>书店应提供搜索主书目录的能力。</li>
+<li>书店应在该目录上提供多种搜索方法，包括按作者搜索，按标题搜索，按ISBN编号搜索，以及按关键字搜索。</li>
+<li>书店应提供允许客户通过信用卡支付的安全方式。</li>
+<li>书店应提供允许客户通过采购订单支付的安全方式。</li>
+<li>书店应提供一种特殊类型的帐户，预先通过采购订单支付。</li>
+<li>书店应提供Web和数据库以及运输履行系统之间的电子链接。</li>
+<li>书店应提供Web和数据库以及库存管理系统之间的电子链接。</li>
+<li>书店应保持对书籍的评论，并允许任何人上传评论评论。</li>
+<li>书店应根据客户意见对书籍进行评级。</li>
 </ul>
-<p>任何应用程序启动时，会从zygote进程fork出一个新的进程。并装载一些必要的class，invoke一些初始化方法。这其中包括像：</p>
+<h2 id="Requirements-List-for-The-Internet-Bookstore"><a href="#Requirements-List-for-The-Internet-Bookstore" class="headerlink" title="Requirements List for The Internet Bookstore"></a>Requirements List for The Internet Bookstore</h2><p>Starting in the next chapter, we’re going to be following a running example, which we call The Internet Bookstore, through each phase of the process we’ve just outlined for you. The use cases we’ll be working through, and the classes we’ll discover, exist to satisfy certain requirements that our client (the owner of the bookstore we’re going to build) has specified. These requirements include the following:</p>
 <ul>
-<li>ActivityThread</li>
-<li>ServiceThread</li>
-<li>ApplicationPackageManager</li>
+<li>The bookstore shall accept orders over the Internet.</li>
+<li>The bookstore shall maintain a list of accounts for up to 1,000,000 customers.</li>
+<li>The bookstore shall provide password protection for all accounts.</li>
+<li>The bookstore shall provide the ability to search the master book catalog.</li>
+<li>The bookstore shall provide a number of search methods on that catalog, including search by author, search by title, search by ISBN number, and search by keyword.</li>
+<li>The bookstore shall provide a secure means of allowing customers to pay by credit card.</li>
+<li>The bookstore shall provide a secure means of allowing customers to pay via purchase order.</li>
+<li>The bookstore shall provide a special kind of account that is preauthorized to pay via purchase order.</li>
+<li>The bookstore shall provide electronic links between the Web and database and the shipping fulfillment system.</li>
+<li>The bookstore shall provide electronic links between the Web and database and the inventory management system.</li>
+<li>The bookstore shall maintain reviews of books, and allow anyone to upload review comments.</li>
+<li>The bookstore shall maintain ratings on books, based on customer inputs.</li>
 </ul>
-<p>等应用启动中必要的类，触发必要的方法，比如：handleBindApplication，将此进程与对应的应用绑定的初始化方法；同时，会将zygote进程中的dalvik虚拟机实例复制一份，因此每个应用程序进程都有自己的dalvik虚拟机实例；会将已有Java运行时加载到进程中；会注册一些android核心类的jni方法到虚拟机中，支撑从c到java的启动过程。</p>
-<p>###Xposed做了手脚</p>
-<p>Xposed在这个过程改写了app_process(源码在Xposed : a modified app_process binary)，替换/system/bin/app_process这个二进制文件。然后做了两个事：</p>
-<ol>
-<li>通过Xposed的hook技术，在上述过程中，对上面提到的那些加载的类的方法hook。</li>
-<li>加载XposedBridge.jar</li>
-</ol>
-<p>这时hook必要的方法是为了方便开发者为它开发插件，加载XposedBridge.jar是为动态hook提供了基础。在这个时候加载它意味着，所有的程序在启动时，都可以加载这个jar（因为上面提到的fork过程）。结合hook技术，从而达到了控制所有程序的所有方法。</p>
-<p>为获得/system/bin/目录的读写权限，因而需要以root为前提。</p>
-<p>###Xposed的hook思想</p>
-<p>那么Xposed是怎么hook java方法的呢？要从XposedBridge看起，重点在<br>XposedBridge.hookmethod(原方法的Member对象，含有新方法的XC_MethodHook对象)；，这里会调到</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> native synchronized <span class="keyword">static</span> void hookMethodNative(Member <span class="function"><span class="keyword">method</span>, <span class="title">Class</span>&lt;?&gt; <span class="title">declaringClass</span>, <span class="title">int</span> <span class="title">slot</span>, <span class="title">Object</span> <span class="title">additionalInfo</span>);</span></span><br></pre></td></tr></table></figure>
-<p>这个native的方法，通过这个方法，可以让所hook的方法，转向native层的一个c方法。如何做到？</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">When a transmit <span class="keyword">from</span> java <span class="keyword">to</span> native occurs, dvm sets up a native stack.</span><br><span class="line"><span class="keyword">In</span> dvmCallJNIMethod(), dvmPlatformInvoke <span class="keyword">is</span> used <span class="keyword">to</span> call the native <span class="function"><span class="keyword">method</span><span class="params">(signature <span class="keyword">in</span> <span class="keyword">Method</span>.insns)</span>.</span></span><br></pre></td></tr></table></figure>
-<p>在jni这个中间世界里，类型数据由jni表来沟通java和c的世界；方法由c++指针结合DVM*系(如dvmSlotToMethod,dvmDecodeIndirectRef等方法)的api方法，操作虚拟机，从而实现java方法与c方法的世界。</p>
-<p>那么hook的过程是这样：首先通过dexclassload来load所要hook的方法，分析类后，进c层，见代码XposedBridge_hookMethodNative方法，拿到要hook的Method类，然后通过dvmslotTomethod方法获取Method*指针，</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">Method</span>* <span class="title">method</span> = <span class="title">dvmSlotToMethod</span><span class="params">(declaredClass, slot)</span>;</span></span><br></pre></td></tr></table></figure>
-<p>declaredClass就是所hook方法所在的类，对应的jobject。slot是Method类中，描述此java对象在vm中的索引；那么通过这个方法，我们就获取了c层的Method指针,通过</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET_METHOD_FLAG(<span class="function"><span class="keyword">method</span>, <span class="title">ACC_NATIVE</span>);</span></span><br></pre></td></tr></table></figure>
-<p>将该方法标记为一个native方法，然后通过</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">nativeFunc</span> = &amp;<span class="title">hookedMethodCallback</span>;</span></span><br></pre></td></tr></table></figure>
-<p>定向c层方法到hookedMethodCallback，这样当被hook的java方法执行时，就会调到c层的hookedMethodCallback方法。</p>
-<p>通过meth-&gt;nativeFunc重定向MethodCallBridge到hookedMethodCallback这个方法上，控制这个c++指针是无视java的private的。</p>
-<p>另外，在method结构体中有</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">method</span>-&gt;<span class="title">insns</span> = <span class="params">(<span class="keyword">const</span> u2*)</span> <span class="title">hookInfo</span>;</span></span><br></pre></td></tr></table></figure>
-<p>用insns指向替换成为的方法，以便hookedMethodCallback可以获取真正期望执行的java方法。</p>
-<p>现在所有被hook的方法，都指向了hookedMethodCallbackc方法中，然后在此方法中实现调用替换成为的java方法。</p>
-<p>###从Xposed提炼精髓</p>
-<p>回顾Xposed，以root为必要条件，在app_process加载XposedBidge.jar，从而实现有hook所有应用的所有方法的能力；而后续动态hook应用内的方法，其实只是load了从zypote进程复制出来的运行时的这个XposedBidge.jar，然后hook而已。因此，若在一个应用范围内的hook，root不是必须的，只是单纯的加载hook的实现方法，即可修改本应用的方法。</p>
-<p>业界内也不乏通过「修改BaseDexClassLoader中的pathList，来动态加载dex」方式实现热修复。后者纯java实现，但需要hack类的优化流程，将打CLASS_ISPREVERIFIED标签的类，去除此标签，以解决类与类引用不在一个dex中的异常问题。这会放弃dex optimize对启动运行速度的优化。原则上，这对于方法数没有大到需要multidex的应用，损失更明显。而前者不触犯原有的优化流程，只点杀需要hook的方法，更为纯粹、有效。</p>
 
           
         
@@ -2237,7 +2544,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2285,7 +2592,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
