@@ -109,7 +109,7 @@
     algolia: {
       applicationID: 'QZGPGZPML9',
       apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
-      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
+      indexName: 'dev_may',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/Mess/专业综合项目/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/CNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -320,7 +320,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/Mess/专业综合项目/" itemprop="url">专业综合项目</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SLAM/CNN/" itemprop="url">CNN</a></h1>
         
 
         <div class="post-meta">
@@ -355,8 +355,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mess/" itemprop="url" rel="index">
-                    <span itemprop="name">Mess</span>
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
                   </a>
                 </span>
 
@@ -373,8 +373,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/Mess/专业综合项目/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/Mess/专业综合项目/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SLAM/CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/CNN/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -406,26 +406,17 @@
       
         
           
-          专业综合项目
-从第3周开始：
-每周选择3组来进行汇报
-每两周研究生会来面对面交流
-可选topic：
+          CNN
+卷积层原图像经过卷积模版之后得到的？
+池化层这里再展开叙述池化层的具体作用。
 
-环视图像中语义视觉目标的分割：识别目标：方向标志、减速带、泊车位
-inverse tone mapping with deep learning，低维到高维的映射（LDR-HDR）
-基于单目相机的时间里程器。15221927149
-移动端游戏平台（休闲类小游戏，时长为几分钟）游戏大厅+游戏 15801758610
-ros驱动的移动机器人
-人脸表情和姿态迁移，facerig
-云书籍，类似豆瓣的东西
-语义slam相关研究
-手写数字串识别：切片+单字识别，CRNN
-为图片自动加标签（微软有相关的AP
+特征不变性，也就是我们在图像处理中经常提到的特征的尺度不变性，池化操作就是图像的resize，平时一张狗的图像被缩小了一倍我们还能认出这是一张狗的照片，这说明这张图像中仍保留着狗最重要的特征，我们一看就能判断图像中画的是一只狗，图像压缩时去掉的信息只是一些无关紧要的信息，而留下的信息则是具有尺度不变性的特征，是最能表达图像的特征。
+
+特征降维，我们知道一幅图像含有的信息是很大的，特征也很多，但是有些信息对于我们做图像任务时没有太多用途或者有重复，我们可以把这类冗余信息去除，把最重要的特征抽取出来，这也是池化
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/Mess/专业综合项目/#more" rel="contents">
+            <a class="btn" href="/2019/05/11/SLAM/CNN/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -809,6 +800,183 @@ ros驱动的移动机器人
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM/" itemprop="url">SLAM</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/SLAM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          SLAM漫谈SLAM技术（上）
+漫谈SLAM技术（下）
+SLAM技术在国内的发展现状
+SLAM介绍（算法基本流程）
+详细分析SLAM的实现和应用
+特征点的匹配
+列举几个目前比较有名的SLAM算法：PTAM,MonoSLAM, ORB-SLAM,RGBD-SLAM,RTAB-SLAM,LSD-SLAM。
+SLAM的两大类别：
+根据传感器类别（激光雷达和摄像头）分为激光SLAM和视觉SLAM
+传感器：
+激光雷达：单线多线
+摄像头：单目、双目、单目结构光、双目结构光、ToF
+不同相机的区别？ 基于单目、双目、全景相机的算法？
+IMU
+名词介绍：1、视觉SLAM方法：（1）图像信息使用
+视觉SLAM方
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/SLAM/SLAM/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_1_视觉SLAM十四讲/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -993,178 +1161,6 @@ RGBD：通过物理方法测量深度
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_0_forDummies/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM_0_forDummies/" itemprop="url">SLAM_0 SLAM for dummies</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/" itemprop="url" rel="index">
-                    <span itemprop="name">SLAM</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/SLAM/SLAM_0_forDummies/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM_0_forDummies/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          SLAM_0 SLAM for dummiesConcept:
-SLAM is concerned with the problem of building a map of an unknown environmentby a mobile robot while at the same time navigating the environment using the map.
-SLAM consists of:
-
-Landmark extraction
-Data association
-State estimation
-state update
-landmark update
-
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/SLAM/SLAM_0_forDummies/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_3_进度汇报/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1271,15 +1267,184 @@ landmark update
         
           
           SLAM_3_进度汇报ppt汇报内容：
-符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：
-
-\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \\  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M去除噪声的理想情况下：
-
-\begin{matrix}x_k = f(x_{k-1},u_k) \\  z_{
+符号定义：$t = 0 ,… ,N$ 时间内，机器人的位姿为：$x_0 , \dots , x_N$    ，同时有路标 $y_1, \dots , y_M$运动和观测方程记为：$$\begin{matrix}x_k = f(x_{k-1},u_k) + w_k \  z_{k,j} = h(y_j,x_k)  + v_{k,j} \end{matrix} \space \space  k = 1,\dots ,N, j = 1,\dots,M$$去除噪声的理想情况下：$$\begin{matrix}x_k = f(x_{k-1},u_k) \  z_{
           ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/11/SLAM/SLAM_3_进度汇报/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_2_矩阵相关知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM_2_矩阵相关知识/" itemprop="url">SLAM_2_矩阵相关知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/SLAM/SLAM_2_矩阵相关知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM_2_矩阵相关知识/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          SLAM_2_矩阵相关知识参考：
+矩阵分析，Roger A.Horn，Charles R.Johnson
+矩阵分析与应用，张贤达
+单应矩阵及其分解
+SVD分解
+本质矩阵及其分解
+奇异值矩阵
+最小二乘和随机采样一致性（RANSAC）
+三角测量
+啊啊啊啊！线代令人忧伤
+​     
+
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/SLAM/SLAM_2_矩阵相关知识/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1499,7 +1664,7 @@ Application:    smart scropping
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SLAM/SLAM_0_forDummies/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1518,7 +1683,7 @@ Application:    smart scropping
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM/" itemprop="url">SLAM</a></h1>
+                <a class="post-title-link" href="/2019/05/11/SLAM/SLAM_0_forDummies/" itemprop="url">SLAM_0 SLAM for dummies</a></h1>
         
 
         <div class="post-meta">
@@ -1571,8 +1736,8 @@ Application:    smart scropping
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/SLAM/SLAM/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/SLAM/SLAM_0_forDummies/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SLAM/SLAM_0_forDummies/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1604,199 +1769,21 @@ Application:    smart scropping
       
         
           
-          SLAM漫谈SLAM技术（上）
-漫谈SLAM技术（下）
-SLAM技术在国内的发展现状
-SLAM介绍（算法基本流程）
-详细分析SLAM的实现和应用
-特征点的匹配
-列举几个目前比较有名的SLAM算法：PTAM,MonoSLAM, ORB-SLAM,RGBD-SLAM,RTAB-SLAM,LSD-SLAM。
-SLAM的两大类别：
-根据传感器类别（激光雷达和摄像头）分为激光SLAM和视觉SLAM
-传感器：
-激光雷达：单线多线
-摄像头：单目、双目、单目结构光、双目结构光、ToF
-不同相机的区别？ 基于单目、双目、全景相机的算法？
-IMU
-名词介绍：1、视觉SLAM方法：（1）图像信息使用
-视觉SLAM方
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/SLAM/SLAM/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
+          SLAM_0 SLAM for dummiesConcept:
+SLAM is concerned with the problem of building a map of an unknown environmentby a mobile robot while at the same time navigating the environment using the map.
+SLAM consists of:
 
-    
+Landmark extraction
+Data association
+State estimation
+state update
+landmark update
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/SoftwareManagement/CaseStudy_0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/SoftwareManagement/CaseStudy_0/" itemprop="url">Case Study</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:36+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SoftwareManagement/" itemprop="url" rel="index">
-                    <span itemprop="name">SoftwareManagement</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/SoftwareManagement/CaseStudy_0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/SoftwareManagement/CaseStudy_0/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Case Studyrisk
-Identification:
-
-Weather
-cooking fuel
-Transportation
-
-analysis:
-Plan:
-Monitor:
-交通、决策、天气
 
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/SoftwareManagement/CaseStudy_0/#more" rel="contents">
+            <a class="btn" href="/2019/05/11/SLAM/SLAM_0_forDummies/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

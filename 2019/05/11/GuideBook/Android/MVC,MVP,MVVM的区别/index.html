@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="MVC,MVP,MVVM的区别 MVC软件可以分为三部分  视图（View）:用户界面 控制器（Controller）:业务逻辑 模型（Model）:数据保存  各部分之间的通信方式如下：  View传送指令到Controller Controller完成业务逻辑后，要求Model改变状态 Model将新的数据发送到View，用户得到反馈  Tips：所有的通信都是单向的。 互动模式接受用户指令时">
+<meta name="description" content="#MVC,MVP,MVVM的区别#MVC软件可以分为三部分  视图（View）:用户界面 控制器（Controller）:业务逻辑 模型（Model）:数据保存  各部分之间的通信方式如下：  View传送指令到Controller Controller完成业务逻辑后，要求Model改变状态 Model将新的数据发送到View，用户得到反馈  Tips：所有的通信都是单向的。 #互动模式接受用户指">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MVC,MVP,MVVM的区别">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="MVC,MVP,MVVM的区别 MVC软件可以分为三部分  视图（View）:用户界面 控制器（Controller）:业务逻辑 模型（Model）:数据保存  各部分之间的通信方式如下：  View传送指令到Controller Controller完成业务逻辑后，要求Model改变状态 Model将新的数据发送到View，用户得到反馈  Tips：所有的通信都是单向的。 互动模式接受用户指令时">
+<meta property="og:description" content="#MVC,MVP,MVVM的区别#MVC软件可以分为三部分  视图（View）:用户界面 控制器（Controller）:业务逻辑 模型（Model）:数据保存  各部分之间的通信方式如下：  View传送指令到Controller Controller完成业务逻辑后，要求Model改变状态 Model将新的数据发送到View，用户得到反馈  Tips：所有的通信都是单向的。 #互动模式接受用户指">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVC,MVP,MVVM的区别">
-<meta name="twitter:description" content="MVC,MVP,MVVM的区别 MVC软件可以分为三部分  视图（View）:用户界面 控制器（Controller）:业务逻辑 模型（Model）:数据保存  各部分之间的通信方式如下：  View传送指令到Controller Controller完成业务逻辑后，要求Model改变状态 Model将新的数据发送到View，用户得到反馈  Tips：所有的通信都是单向的。 互动模式接受用户指令时">
+<meta name="twitter:description" content="#MVC,MVP,MVVM的区别#MVC软件可以分为三部分  视图（View）:用户界面 控制器（Controller）:业务逻辑 模型（Model）:数据保存  各部分之间的通信方式如下：  View传送指令到Controller Controller完成业务逻辑后，要求Model改变状态 Model将新的数据发送到View，用户得到反馈  Tips：所有的通信都是单向的。 #互动模式接受用户指">
 
 
 
@@ -110,7 +110,7 @@
     algolia: {
       applicationID: 'QZGPGZPML9',
       apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
-      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
+      indexName: 'dev_may',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -415,8 +415,7 @@
       
 
       
-        <h1 id="MVC-MVP-MVVM的区别"><a href="#MVC-MVP-MVVM的区别" class="headerlink" title="MVC,MVP,MVVM的区别"></a>MVC,MVP,MVVM的区别</h1><hr>
-<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p>软件可以分为三部分</p>
+        <h2 id="MVC-MVP-MVVM的区别"><a href="#MVC-MVP-MVVM的区别" class="headerlink" title="#MVC,MVP,MVVM的区别"></a>#MVC,MVP,MVVM的区别</h2><p>#MVC<br>软件可以分为三部分</p>
 <ul>
 <li>视图（View）:用户界面</li>
 <li>控制器（Controller）:业务逻辑</li>
@@ -429,15 +428,17 @@
 <li>Model将新的数据发送到View，用户得到反馈</li>
 </ol>
 <p>Tips：所有的通信都是单向的。</p>
-<h1 id="互动模式"><a href="#互动模式" class="headerlink" title="互动模式"></a>互动模式</h1><p>接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。</p>
+<p>#互动模式<br>接受用户指令时，MVC可以分为两种方式。一种是通过View接受指令，传递给Controller。</p>
 <p>另一种是直接通过Controller接受指令</p>
-<h1 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h1><p>MVP模式将Controller改名为Presenter，同时改变了通信方向。</p>
+<p>#MVP</p>
+<p>MVP模式将Controller改名为Presenter，同时改变了通信方向。</p>
 <ol>
 <li>各部分之间的通信，都是双向的</li>
 <li>View和Model不发生联系，都通过Presenter传递</li>
 <li>View非常薄，不部署任何业务逻辑，称为”被动视图”(Passive View)，即没有任何主动性，而Presenter非常厚，所有逻辑都部署在那里。</li>
 </ol>
-<h1 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h1><p>MVVM模式将Presenter改名为ViewModel，基本上与MVP模式完全一致。</p>
+<p>#MVVM</p>
+<p>MVVM模式将Presenter改名为ViewModel，基本上与MVP模式完全一致。</p>
 <p>唯一的区别是，它采用双向绑定(data-binding)：View的变动，自动反映在ViewModel，反之亦然。</p>
 
       
@@ -492,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/MVP/" rel="next" title="MVP">
-                <i class="fa fa-chevron-left"></i> MVP
+              <a href="/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/" rel="next" title="RecyclerView和ListView的异同">
+                <i class="fa fa-chevron-left"></i> RecyclerView和ListView的异同
               </a>
             
           </div>
@@ -658,7 +659,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC-MVP-MVVM的区别"><span class="nav-text">MVC,MVP,MVVM的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC"><span class="nav-text">MVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互动模式"><span class="nav-text">互动模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVP"><span class="nav-text">MVP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVVM"><span class="nav-text">MVVM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC-MVP-MVVM的区别"><span class="nav-text">#MVC,MVP,MVVM的区别</span></a></li></ol></div>
             
 
           </div>

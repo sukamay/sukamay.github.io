@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="RecyclerView和ListView的异同  ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
+<meta name="description" content="#RecyclerView和ListView的异同 ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RecyclerView和ListView的异同">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Recyclerview和Listview的异同/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="RecyclerView和ListView的异同  ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
+<meta property="og:description" content="#RecyclerView和ListView的异同 ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView和ListView的异同">
-<meta name="twitter:description" content="RecyclerView和ListView的异同  ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
+<meta name="twitter:description" content="#RecyclerView和ListView的异同 ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将">
 
 
 
@@ -110,7 +110,7 @@
     algolia: {
       applicationID: 'QZGPGZPML9',
       apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
-      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
+      indexName: 'dev_may',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -415,8 +415,7 @@
       
 
       
-        <h1 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="RecyclerView和ListView的异同"></a>RecyclerView和ListView的异同</h1><hr>
-<ul>
+        <h2 id="RecyclerView和ListView的异同"><a href="#RecyclerView和ListView的异同" class="headerlink" title="#RecyclerView和ListView的异同"></a>#RecyclerView和ListView的异同</h2><ul>
 <li>ViewHolder是用来保存视图引用的类，无论是ListView亦或是RecyclerView。只不过在ListView中，ViewHolder需要自己来定义，且这只是一种推荐的使用方式，不使用当然也可以，这不是必须的。只不过不使用ViewHolder的话，ListView每次getView的时候都会调用findViewById(int)，这将导致ListView性能展示迟缓。而在RecyclerView中使用RecyclerView.ViewHolder则变成了必须，尽管实现起来稍显复杂，但它却解决了ListView面临的上述不使用自定义ViewHolder时所面临的问题。</li>
 <li><p>我们知道ListView只能在垂直方向上滚动，Android API没有提供ListView在水平方向上面滚动的支持。或许有多种方式实现水平滑动，但是请想念我，ListView并不是设计来做这件事情的。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：</p>
 <ol>
@@ -503,8 +502,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/MVP/" rel="prev" title="MVP">
-                MVP <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/MVC,MVP,MVVM的区别/" rel="prev" title="MVC,MVP,MVVM的区别">
+                MVC,MVP,MVVM的区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -659,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RecyclerView和ListView的异同"><span class="nav-text">RecyclerView和ListView的异同</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RecyclerView和ListView的异同"><span class="nav-text">#RecyclerView和ListView的异同</span></a></li></ol></div>
             
 
           </div>

@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Fragment为何产生 同时适配手机和平板、UI和逻辑的共享。  介绍 Fragment也会被加入回退栈中。 Fragment拥有自己的生命周期和接受、处理用户的事件 可以动态的添加、替换和移除某个Fragment  生命周期 必须依存于Activity    Fragment依附于Activity的生命状态   生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命周期方法的含义吧。 F">
+<meta name="description" content="#Fragment ##为何产生  同时适配手机和平板、UI和逻辑的共享。  ##介绍  Fragment也会被加入回退栈中。 Fragment拥有自己的生命周期和接受、处理用户的事件 可以动态的添加、替换和移除某个Fragment  ##生命周期  必须依存于Activity    Fragment依附于Activity的生命状态   生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fragment">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Fragment/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Fragment为何产生 同时适配手机和平板、UI和逻辑的共享。  介绍 Fragment也会被加入回退栈中。 Fragment拥有自己的生命周期和接受、处理用户的事件 可以动态的添加、替换和移除某个Fragment  生命周期 必须依存于Activity    Fragment依附于Activity的生命状态   生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命周期方法的含义吧。 F">
+<meta property="og:description" content="#Fragment ##为何产生  同时适配手机和平板、UI和逻辑的共享。  ##介绍  Fragment也会被加入回退栈中。 Fragment拥有自己的生命周期和接受、处理用户的事件 可以动态的添加、替换和移除某个Fragment  ##生命周期  必须依存于Activity    Fragment依附于Activity的生命状态   生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20140719225005356?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/FlowchartDiagram.jpg?raw=true">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fragment">
-<meta name="twitter:description" content="Fragment为何产生 同时适配手机和平板、UI和逻辑的共享。  介绍 Fragment也会被加入回退栈中。 Fragment拥有自己的生命周期和接受、处理用户的事件 可以动态的添加、替换和移除某个Fragment  生命周期 必须依存于Activity    Fragment依附于Activity的生命状态   生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命周期方法的含义吧。 F">
+<meta name="twitter:description" content="#Fragment ##为何产生  同时适配手机和平板、UI和逻辑的共享。  ##介绍  Fragment也会被加入回退栈中。 Fragment拥有自己的生命周期和接受、处理用户的事件 可以动态的添加、替换和移除某个Fragment  ##生命周期  必须依存于Activity    Fragment依附于Activity的生命状态   生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20140719225005356?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -113,7 +113,7 @@
     algolia: {
       applicationID: 'QZGPGZPML9',
       apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
-      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
+      indexName: 'dev_may',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -418,15 +418,19 @@
       
 
       
-        <h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><h2 id="为何产生"><a href="#为何产生" class="headerlink" title="为何产生"></a>为何产生</h2><ul>
+        <p>#Fragment</p>
+<p>##为何产生</p>
+<ul>
 <li>同时适配手机和平板、UI和逻辑的共享。</li>
 </ul>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ul>
+<p>##介绍</p>
+<ul>
 <li>Fragment也会被加入回退栈中。</li>
 <li>Fragment拥有自己的生命周期和接受、处理用户的事件</li>
 <li>可以动态的添加、替换和移除某个Fragment</li>
 </ul>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<p>##生命周期</p>
+<ul>
 <li>必须依存于Activity</li>
 </ul>
 <p><img src="http://img.blog.csdn.net/20140719225005356?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG1qNjIzNTY1Nzkx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Mou icon"></p>
@@ -435,7 +439,8 @@
 <li><img src="https://github.com/GeniusVJR/LearningNotes/blob/master/Part1/Android/FlowchartDiagram.jpg?raw=true" alt="Mou icon"></li>
 </ul>
 <p>生命周期中那么多方法，懵逼了的话我们就一起来看一下每一个生命周期方法的含义吧。</p>
-<h2 id="Fragment生命周期方法含义："><a href="#Fragment生命周期方法含义：" class="headerlink" title="Fragment生命周期方法含义："></a>Fragment生命周期方法含义：</h2><ul>
+<p>##Fragment生命周期方法含义：</p>
+<ul>
 <li><p><code>public void onAttach(Context context)</code></p>
 <ul>
 <li>onAttach方法会在Fragment于窗口关联后立刻调用。从该方法开始，就可以通过Fragment.getActivity方法获取与Fragment关联的窗口对象，但因为Fragment的控件未初始化，所以不能够操作控件。</li>
@@ -497,17 +502,20 @@
 </ul>
 </li>
 </ul>
-<h2 id="Fragment比Activity多了几个额外的生命周期回调方法："><a href="#Fragment比Activity多了几个额外的生命周期回调方法：" class="headerlink" title="Fragment比Activity多了几个额外的生命周期回调方法："></a>Fragment比Activity多了几个额外的生命周期回调方法：</h2><ul>
+<p>##Fragment比Activity多了几个额外的生命周期回调方法：</p>
+<ul>
 <li>onAttach(Activity):当Fragment和Activity发生关联时使用</li>
 <li>onCreateView(LayoutInflater, ViewGroup, Bundle):创建该Fragment的视图</li>
 <li>onActivityCreate(Bundle):当Activity的onCreate方法返回时调用</li>
 <li>onDestoryView():与onCreateView相对应，当该Fragment的视图被移除时调用</li>
 <li>onDetach():与onAttach相对应，当Fragment与Activity关联被取消时调用</li>
 </ul>
-<h3 id="注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现"><a href="#注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现" class="headerlink" title="注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现"></a>注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现</h3><h2 id="Fragment与Activity之间的交互"><a href="#Fragment与Activity之间的交互" class="headerlink" title="Fragment与Activity之间的交互"></a>Fragment与Activity之间的交互</h2><ul>
+<p>###注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现</p>
+<p>##Fragment与Activity之间的交互</p>
+<ul>
 <li>Fragment与Activity之间的交互可以通过<code>Fragment.setArguments(Bundle args)</code>以及<code>Fragment.getArguments()</code>来实现。</li>
 </ul>
-<h2 id="Fragment状态的持久化。"><a href="#Fragment状态的持久化。" class="headerlink" title="Fragment状态的持久化。"></a>Fragment状态的持久化。</h2><p>由于Activity会经常性的发生配置变化，所以依附它的Fragment就有需要将其状态保存起来问题。下面有两个常用的方法去将Fragment的状态持久化。</p>
+<p>##Fragment状态的持久化。<br>由于Activity会经常性的发生配置变化，所以依附它的Fragment就有需要将其状态保存起来问题。下面有两个常用的方法去将Fragment的状态持久化。</p>
 <ul>
 <li>方法一：<ul>
 <li>可以通过<code>protected void onSaveInstanceState(Bundle outState)</code>,<code>protected void onRestoreInstanceState(Bundle savedInstanceState)</code> 状态保存和恢复的方法将状态持久化。</li>
@@ -525,11 +533,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="静态的使用Fragment"><a href="#静态的使用Fragment" class="headerlink" title="静态的使用Fragment"></a>静态的使用Fragment</h2><ol>
+<p>##静态的使用Fragment</p>
+<ol>
 <li>继承Fragment，重写onCreateView决定Fragment的布局</li>
 <li>在Activity中声明此Fragment,就和普通的View一样</li>
 </ol>
-<h2 id="Fragment常用的API"><a href="#Fragment常用的API" class="headerlink" title="Fragment常用的API"></a>Fragment常用的API</h2><ul>
+<p>##Fragment常用的API</p>
+<ul>
 <li>android.support.v4.app.Fragment 主要用于定义Fragment</li>
 <li>android.support.v4.app.FragmentManager 主要用于在Activity中操作Fragment，可以使用FragmentManager.findFragmenById，FragmentManager.findFragmentByTag等方法去找到一个Fragment</li>
 <li>android.support.v4.app.FragmentTransaction 保证一些列Fragment操作的原子性，熟悉事务这个词</li>
@@ -537,12 +547,13 @@
 <p>  getFragmentManager() // Fragment若使用的是support.v4包中的，那就使用getSupportFragmentManager代替</p>
 </li>
 </ul>
-<p>&lt;/code&gt;</p>
+<p></p>
 <ul>
 <li>主要的操作都是FragmentTransaction的方法</li>
 </ul>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">FragmentTransaction transaction = fm.benginTransatcion();<span class="comment">//开启一个事务</span></span><br><span class="line">transaction.add() </span><br><span class="line"><span class="comment">//往Activity中添加一个Fragment</span></span><br><span class="line"></span><br><span class="line">transaction.<span class="built_in">remove</span>() </span><br><span class="line"><span class="comment">//从Activity中移除一个Fragment，如果被移除的Fragment没有添加到回退栈（回退栈后面会详细说），这个Fragment实例将会被销毁。</span></span><br><span class="line"></span><br><span class="line">transaction.replace()</span><br><span class="line"><span class="comment">//使用另一个Fragment替换当前的，实际上就是remove()然后add()的合体~</span></span><br><span class="line"></span><br><span class="line">transaction.hide()</span><br><span class="line"><span class="comment">//隐藏当前的Fragment，仅仅是设为不可见，并不会销毁</span></span><br><span class="line"></span><br><span class="line">transaction.show()</span><br><span class="line"><span class="comment">//显示之前隐藏的Fragment</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">detach</span>()</span><br><span class="line"><span class="comment">//当fragment被加入到回退栈的时候，该方法与*remove()*的作用是相同的，</span></span><br><span class="line"><span class="comment">//反之，该方法只是将fragment从视图中移除，</span></span><br><span class="line"><span class="comment">//之后仍然可以通过*attach()*方法重新使用fragment，</span></span><br><span class="line"><span class="comment">//而调用了*remove()*方法之后，</span></span><br><span class="line"><span class="comment">//不仅将Fragment从视图中移除，fragment还将不再可用。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">attach</span>()</span><br><span class="line"><span class="comment">//重建view视图，附加到UI上并显示。</span></span><br><span class="line"></span><br><span class="line">transatcion.commit()</span><br><span class="line"><span class="comment">//提交一个事务</span></span><br></pre></td></tr></table></figure>
-<h2 id="管理Fragment回退栈"><a href="#管理Fragment回退栈" class="headerlink" title="管理Fragment回退栈"></a>管理Fragment回退栈</h2><ul>
+<p>##管理Fragment回退栈</p>
+<ul>
 <li>跟踪回退栈状态<ul>
 <li>我们通过实现<em><code>OnBackStackChangedListener</code></em>接口来实现回退栈状态跟踪，具体如下<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> XXX <span class="keyword">implements</span> FragmentManager.OnBackStackChangedListener </span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 实现接口所要实现的方法 **/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="built_in">void</span> onBackStackChanged() &#123;</span><br><span class="line">       <span class="comment">//do whatevery you want</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** 设置回退栈监听接口 **／</span></span><br><span class="line"><span class="comment">   getSupportFragmentManager().addOnBackStackChangedListener(this);</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -551,7 +562,7 @@
 </ul>
 <ul>
 <li>管理回退栈<ul>
-<li><code>FragmentTransaction.addToBackStack(String)</code> <em>—将一个刚刚添加的Fragment加入到回退栈中</em></li>
+<li><code>FragmentTransaction.addToBackStack(String)</code> <em>–将一个刚刚添加的Fragment加入到回退栈中</em></li>
 <li><code>getSupportFragmentManager().getBackStackEntryCount()</code> <em>－获取回退栈中实体数量</em></li>
 <li><code>getSupportFragmentManager().popBackStack(String name, int flags)</code> <em>－根据name立刻弹出栈顶的fragment</em></li>
 <li><code>getSupportFragmentManager().popBackStack(int id, int flags)</code> <em>－根据id立刻弹出栈顶的fragment</em></li>
@@ -611,8 +622,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/插件化技术学习/" rel="next" title="Android动态加载dex技术初探">
-                <i class="fa fa-chevron-left"></i> Android动态加载dex技术初探
+              <a href="/2019/05/11/GuideBook/Android/Git操作/" rel="next" title="Git 操作">
+                <i class="fa fa-chevron-left"></i> Git 操作
               </a>
             
           </div>
@@ -621,8 +632,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/11/GuideBook/Android/开源框架源码分析/" rel="prev" title="框架源码分析">
-                框架源码分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/11/GuideBook/Android/Android图片中的三级缓存/" rel="prev" title="Android图片中的三级缓存">
+                Android图片中的三级缓存 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -685,17 +696,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -767,22 +769,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Fragment"><span class="nav-text">Fragment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为何产生"><span class="nav-text">为何产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment生命周期方法含义："><span class="nav-text">Fragment生命周期方法含义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment比Activity多了几个额外的生命周期回调方法："><span class="nav-text">Fragment比Activity多了几个额外的生命周期回调方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现"><span class="nav-text">注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment与Activity之间的交互"><span class="nav-text">Fragment与Activity之间的交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment状态的持久化。"><span class="nav-text">Fragment状态的持久化。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态的使用Fragment"><span class="nav-text">静态的使用Fragment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment常用的API"><span class="nav-text">Fragment常用的API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理Fragment回退栈"><span class="nav-text">管理Fragment回退栈</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

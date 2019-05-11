@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Handler内存泄漏分析及解决 一、介绍首先，请浏览下面这段handler代码： 12345678public class SampleActivity extends Activity &amp;#123;  private final Handler mLeakyHandler = new Handler() &amp;#123;    @Override    public void handleMess">
+<meta name="description" content="#Handler内存泄漏分析及解决###一、介绍 首先，请浏览下面这段handler代码： 12345678public class SampleActivity extends Activity &amp;#123;  private final Handler mLeakyHandler = new Handler() &amp;#123;    @Override    public void handle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Handler内存泄漏分析及解决">
 <meta property="og:url" content="https://sukamay.github.io/2019/05/11/GuideBook/Android/Handler内存泄漏分析及解决/index.html">
 <meta property="og:site_name" content="May">
-<meta property="og:description" content="Handler内存泄漏分析及解决 一、介绍首先，请浏览下面这段handler代码： 12345678public class SampleActivity extends Activity &amp;#123;  private final Handler mLeakyHandler = new Handler() &amp;#123;    @Override    public void handleMess">
+<meta property="og:description" content="#Handler内存泄漏分析及解决###一、介绍 首先，请浏览下面这段handler代码： 12345678public class SampleActivity extends Activity &amp;#123;  private final Handler mLeakyHandler = new Handler() &amp;#123;    @Override    public void handle">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-10T17:54:35.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Handler内存泄漏分析及解决">
-<meta name="twitter:description" content="Handler内存泄漏分析及解决 一、介绍首先，请浏览下面这段handler代码： 12345678public class SampleActivity extends Activity &amp;#123;  private final Handler mLeakyHandler = new Handler() &amp;#123;    @Override    public void handleMess">
+<meta name="twitter:description" content="#Handler内存泄漏分析及解决###一、介绍 首先，请浏览下面这段handler代码： 12345678public class SampleActivity extends Activity &amp;#123;  private final Handler mLeakyHandler = new Handler() &amp;#123;    @Override    public void handle">
 
 
 
@@ -110,7 +110,7 @@
     algolia: {
       applicationID: 'QZGPGZPML9',
       apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
-      indexName: 'd295a3af2bd71ba1206a1acf91930aac',
+      indexName: 'dev_may',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -415,22 +415,24 @@
       
 
       
-        <h1 id="Handler内存泄漏分析及解决"><a href="#Handler内存泄漏分析及解决" class="headerlink" title="Handler内存泄漏分析及解决"></a>Handler内存泄漏分析及解决</h1><hr>
-<h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><p>首先，请浏览下面这段handler代码：</p>
+        <h2 id="Handler内存泄漏分析及解决"><a href="#Handler内存泄漏分析及解决" class="headerlink" title="#Handler内存泄漏分析及解决"></a>#Handler内存泄漏分析及解决</h2><p>###一、介绍</p>
+<p>首先，请浏览下面这段handler代码：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Handler</span> mLeakyHandler = <span class="keyword">new</span> <span class="type">Handler</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="comment">// ... </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在使用handler时，这是一段很常见的代码。但是，它却会造成严重的内存泄漏问题。在实际编写中，我们往往会得到如下警告：</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">⚠ In <span class="keyword">Android, </span>Handler classes <span class="keyword">should </span><span class="keyword">be </span>static <span class="keyword">or </span>leaks might occur.</span><br></pre></td></tr></table></figure>
-<h3 id="二、分析"><a href="#二、分析" class="headerlink" title="二、分析"></a>二、分析</h3><p>1、 Android角度</p>
+<p>###二、分析</p>
+<p>1、 Android角度</p>
 <p>当Android应用程序启动时，framework会为该应用程序的主线程创建一个Looper对象。这个Looper对象包含一个简单的消息队列Message Queue，并且能够循环的处理队列中的消息。这些消息包括大多数应用程序framework事件，例如Activity生命周期方法调用、button点击等，这些消息都会被添加到消息队列中并被逐个处理。</p>
 <p>另外，主线程的Looper对象会伴随该应用程序的整个生命周期。</p>
 <p>然后，当主线程里，实例化一个Handler对象后，它就会自动与主线程Looper的消息队列关联起来。所有发送到消息队列的消息Message都会拥有一个对Handler的引用，所以当Looper来处理消息时，会据此回调[Handler#handleMessage(Message)]方法来处理消息。</p>
 <p>2、 Java角度</p>
 <p>在java里，非静态内部类 和 匿名类 都会潜在的引用它们所属的外部类。但是，静态内部类却不会。</p>
-<h3 id="三、泄漏来源"><a href="#三、泄漏来源" class="headerlink" title="三、泄漏来源"></a>三、泄漏来源</h3><p>请浏览下面一段代码：</p>
+<p>###三、泄漏来源</p>
+<p>请浏览下面一段代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Handler mLeakyHandler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mLeakyHandler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">    &#125;, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当activity结束(finish)时，里面的延时消息在得到处理前，会一直保存在主线程的消息队列里持续10分钟。而且，由上文可知，这条消息持有对handler的引用，而handler又持有对其外部类（在这里，即SampleActivity）的潜在引用。这条引用关系会一直保持直到消息得到处理，从而，这阻止了SampleActivity被垃圾回收器回收，同时造成应用程序的泄漏。</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>注意，上面代码中的Runnable类—非静态匿名类—同样持有对其外部类的引用。从而也导致泄漏。</p>
-<p>=======<br>注意，上面代码中的Runnable类—非静态匿名类—同样持有对其外部类的引用。从而也导致泄漏。</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
+<p>=======<br>注意，上面代码中的Runnable类–非静态匿名类–同样持有对其外部类的引用。从而也导致泄漏。</p>
 <blockquote>
 <blockquote>
 <blockquote>
@@ -439,13 +441,14 @@
 <blockquote>
 <blockquote>
 <p>c67abfcfd66909095068cb5f0c8632dc5547131b</p>
-<h3 id="四、泄漏解决方案"><a href="#四、泄漏解决方案" class="headerlink" title="四、泄漏解决方案"></a>四、泄漏解决方案</h3></blockquote>
 </blockquote>
 </blockquote>
 </blockquote>
 </blockquote>
 </blockquote>
 </blockquote>
+</blockquote>
+<p>###四、泄漏解决方案</p>
 <p>首先，上面已经明确了内存泄漏来源：</p>
 <p>只要有未处理的消息，那么消息会引用handler，非静态的handler又会引用外部类，即Activity，导致Activity无法被回收，造成泄漏；</p>
 <p>Runnable类属于非静态匿名类，同样会引用外部类。</p>
@@ -453,7 +456,8 @@
 <p>另外，如果想要在handler内部去调用所在的外部类Activity，那么可以在handler内部使用弱引用的方式指向所在Activity，这样统一不会导致内存泄漏。</p>
 <p>对于匿名类Runnable，同样可以将其设置为静态类。因为静态的匿名类不会持有对外部类的引用。</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of static inner classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt; mActivity;</span><br><span class="line"></span><br><span class="line">    public <span class="type">MyHandler</span>(<span class="type">SampleActivity</span> activity) &#123;</span><br><span class="line">      mActivity = <span class="keyword">new</span> <span class="type">WeakReference</span>&lt;<span class="type">SampleActivity</span>&gt;(activity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void handleMessage(<span class="type">Message</span> msg) &#123;</span><br><span class="line">      <span class="type">SampleActivity</span> activity = mActivity.get();</span><br><span class="line">      <span class="keyword">if</span> (activity != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">MyHandler</span> mHandler = <span class="keyword">new</span> <span class="type">MyHandler</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Instances of anonymous classes do not hold an implicit</span></span><br><span class="line"><span class="comment">   * reference to their outer class when they are "static".</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> static <span class="keyword">final</span> <span class="type">Runnable</span> sRunnable = <span class="keyword">new</span> <span class="type">Runnable</span>() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      public void run() &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Post a message and delay its execution for 10 minutes.</span></span><br><span class="line">    mHandler.postDelayed(sRunnable, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Go back to the previous Activity.</span></span><br><span class="line">    finish();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="五、小结"><a href="#五、小结" class="headerlink" title="五、小结"></a>五、小结</h3><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
+<p>###五、小结</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
 <p>原文链接：</p>
 <h1 id="http-www-jianshu-com-p-cb9b4b71a820"><a href="#http-www-jianshu-com-p-cb9b4b71a820" class="headerlink" title="http://www.jianshu.com/p/cb9b4b71a820"></a><a href="http://www.jianshu.com/p/cb9b4b71a820" target="_blank" rel="noopener">http://www.jianshu.com/p/cb9b4b71a820</a></h1><p>虽然静态类与非静态类之间的区别并不大，但是对于Android开发者而言却是必须理解的。至少我们要清楚，如果一个内部类实例的生命周期比Activity更长，那么我们千万不要使用非静态的内部类。最好的做法是，使用静态内部类，然后在该类里使用弱引用来指向所在的Activity。</p>
 <p>原文链接：</p>
@@ -692,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Handler内存泄漏分析及解决"><span class="nav-text">Handler内存泄漏分析及解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、介绍"><span class="nav-text">一、介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、分析"><span class="nav-text">二、分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、泄漏来源"><span class="nav-text">三、泄漏来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、泄漏解决方案"><span class="nav-text">四、泄漏解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、小结"><span class="nav-text">五、小结</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#http-www-jianshu-com-p-cb9b4b71a820"><span class="nav-text">http://www.jianshu.com/p/cb9b4b71a820</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler内存泄漏分析及解决"><span class="nav-text">#Handler内存泄漏分析及解决</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#http-www-jianshu-com-p-cb9b4b71a820"><span class="nav-text">http://www.jianshu.com/p/cb9b4b71a820</span></a></li></div>
             
 
           </div>
