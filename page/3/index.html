@@ -131,6 +131,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?28c7a508ae0eab6ae434f08eb52a19f5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -971,7 +981,7 @@ SLAM学习进度汇报
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/APP启动过程/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/AIDL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -990,7 +1000,7 @@ SLAM学习进度汇报
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/APP启动过程/" itemprop="url">APP启动过程</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/AIDL/" itemprop="url">AIDL</a></h1>
         
 
         <div class="post-meta">
@@ -1054,8 +1064,8 @@ SLAM学习进度汇报
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/APP启动过程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/APP启动过程/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/AIDL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/AIDL/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1087,15 +1097,16 @@ SLAM学习进度汇报
       
         
           
-          #APP启动过程
+          #AIDL
+创建一个接口，再里面定义方法
 
-上图就可以很好的说明App启动的过程
-ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶
-Zygote进程孵化出新的应用进程后，会执行ActivityThread类的main方法.在该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到ActivityManagerService，然后进入loop循环，不断地读取消息
+123456package com.example.taidl;  interface ICalcAIDL  &#123;      int add(int x , int y);      int min(int x , int y );  &#125;
+build一下gen目录下会生成ICalcAIDL.java文件
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/GuideBook/Android/APP启动过程/#more" rel="contents">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/AIDL/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1336,7 +1347,7 @@ UI线程尽量只做跟UI相关的工作
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/AIDL/">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/APP启动过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="May">
@@ -1355,7 +1366,7 @@ UI线程尽量只做跟UI相关的工作
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/AIDL/" itemprop="url">AIDL</a></h1>
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/APP启动过程/" itemprop="url">APP启动过程</a></h1>
         
 
         <div class="post-meta">
@@ -1419,8 +1430,8 @@ UI线程尽量只做跟UI相关的工作
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/11/GuideBook/Android/AIDL/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/AIDL/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/GuideBook/Android/APP启动过程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/APP启动过程/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1452,16 +1463,15 @@ UI线程尽量只做跟UI相关的工作
       
         
           
-          #AIDL
-创建一个接口，再里面定义方法
+          #APP启动过程
 
-123456package com.example.taidl;  interface ICalcAIDL  &#123;      int add(int x , int y);      int min(int x , int y );  &#125;
-build一下gen目录下会生成ICalcAIDL.java文件
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626
+上图就可以很好的说明App启动的过程
+ActivityManagerService组织回退栈时以ActivityRecord为基本单位，所有的ActivityRecord放在同一个ArrayList里，可以将mHistory看作一个栈对象，索引0所指的对象位于栈底，索引mHistory.size()-1所指的对象位于栈顶
+Zygote进程孵化出新的应用进程后，会执行ActivityThread类的main方法.在该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到ActivityManagerService，然后进入loop循环，不断地读取消息
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/GuideBook/Android/AIDL/#more" rel="contents">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/APP启动过程/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1691,183 +1701,6 @@ ApplicationThread，用来实现ActivityManagerService与ActivityThread之间的
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android几种进程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="May">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="May">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android几种进程/" itemprop="url">Android几种进程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
-                    <span itemprop="name">GuideBook</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/11/GuideBook/Android/Android几种进程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Android几种进程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          #Android几种进程
-前台进程：即与用户正在交互的Activity或者Activity用到的Service等，如果系统内存不足时前台进程是最后被杀死的
-可见进程：可以是处于暂停状态(onPause)的Activity或者绑定在其上的Service，即被用户可见，但由于失去了焦点而不能与用户交互
-服务进程：其中运行着使用startService方法启动的Service，虽然不被用户可见，但是却是用户关心的，例如用户正在非音乐界面听的音乐或者正在非下载页面自己下载的文件等；当系统要空间运行前两者进程时才会被终止
-后台进程：其中运行着执行onStop方法而停止的程序，但是却不是用户当前关心的，例
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/11/GuideBook/Android/Android几种进程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android关于oom的解决方案/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2008,6 +1841,183 @@ ApplicationThread，用来实现ActivityManagerService与ActivityThread之间的
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/11/GuideBook/Android/Android关于oom的解决方案/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/11/GuideBook/Android/Android内存泄漏总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/GuideBook/Android/Android内存泄漏总结/" itemprop="url">Android 内存泄漏总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T00:24:37+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/" itemprop="url" rel="index">
+                    <span itemprop="name">GuideBook</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GuideBook/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/11/GuideBook/Android/Android内存泄漏总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/GuideBook/Android/Android内存泄漏总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          #Android 内存泄漏总结
+内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从 java 内存泄漏的基础知识开始，并通过具体例子来说明 Android 引起内存泄漏的各种原因，以及如何利用工具来分析应用内存泄漏，最后再做总结。
+##Java 内存分配策略
+Java 程序运行时
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/11/GuideBook/Android/Android内存泄漏总结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
