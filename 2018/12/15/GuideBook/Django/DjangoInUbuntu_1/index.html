@@ -88,14 +88,14 @@
 
 <meta name="description" content="Django In Ubuntu part11. 数据库配置我们在项目的 settings.py 文件中找到 DATABASES 配置项，将其信息修改为： HelloWorld/HelloWorld/settings.py: 文件代码：1234567891011DATABASES = &amp;#123;         &apos;default&apos;: &amp;#123;                 &apos;ENGINE&apos;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DjangoInUbuntu_1">
+<meta property="og:title" content="May">
 <meta property="og:url" content="https://sukamay.github.io/2018/12/15/GuideBook/Django/DjangoInUbuntu_1/index.html">
 <meta property="og:site_name" content="May">
 <meta property="og:description" content="Django In Ubuntu part11. 数据库配置我们在项目的 settings.py 文件中找到 DATABASES 配置项，将其信息修改为： HelloWorld/HelloWorld/settings.py: 文件代码：1234567891011DATABASES = &amp;#123;         &apos;default&apos;: &amp;#123;                 &apos;ENGINE&apos;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-10T16:24:37.123Z">
+<meta property="og:updated_time" content="2019-05-12T02:48:04.559Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DjangoInUbuntu_1">
+<meta name="twitter:title" content="May">
 <meta name="twitter:description" content="Django In Ubuntu part11. 数据库配置我们在项目的 settings.py 文件中找到 DATABASES 配置项，将其信息修改为： HelloWorld/HelloWorld/settings.py: 文件代码：1234567891011DATABASES = &amp;#123;         &apos;default&apos;: &amp;#123;                 &apos;ENGINE&apos;">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <title>DjangoInUbuntu_1 | May</title>
+  <title> | May</title>
   
 
 
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DjangoInUbuntu_1</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -396,7 +396,7 @@
 <p>上面包含数据库名称和用户的信息，它们与 MySQL 中对应数据库和用户的设置相同。Django 根据这一设置，与 MySQL 中相应的数据库和用户连接起来</p>
 <p><strong>Error:</strong> django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: No module named MySQLdb.</p>
 <p><strong>Solve:</strong>  python2.7 + Django1.11 , 解决方案： <code>pip install mysql-server</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# pip install mysql-python</span><br><span class="line"><span class="meta">#</span><span class="bash">随后验证一下是否安装成功</span></span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python</span><br><span class="line">Python 2.7.12 (default, Nov 12 2018, 14:36:49) </span><br><span class="line">[GCC 5.4.0 20160609] on linux2</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import MYSQLdb</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">ImportError: No module named MYSQLdb</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import MySQLdb</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# pip install mysql-python</span><br><span class="line"><span class="meta">#</span>随后验证一下是否安装成功</span><br><span class="line">root@iZwz969jm0y04abuhgx4byZ:~# python</span><br><span class="line">Python 2.7.12 (default, Nov 12 2018, 14:36:49) </span><br><span class="line">[GCC 5.4.0 20160609] on linux2</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import MYSQLdb</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">ImportError: No module named MYSQLdb</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import MySQLdb</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; exit()</span><br></pre></td></tr></table></figure>
 <h2 id="2-Django表单"><a href="#2-Django表单" class="headerlink" title="2. Django表单"></a>2. Django表单</h2><p>HTML表单是网站交互性的经典方式。 本章将介绍如何用Django对用户提交的表单数据进行处理。 </p>
 <hr>
 <h3 id="HTTP-请求"><a href="#HTTP-请求" class="headerlink" title="HTTP 请求"></a>HTTP 请求</h3><p>HTTP协议以”请求－回复”的方式工作。客户发送请求时，可以在请求中附加数据。服务器通过解析请求，就可以获得客户传来的数据，并根据URL来提供特定的服务。</p>
@@ -406,18 +406,7 @@
 <p>在模板目录 templates 中添加 search_form.html 表单：</p>
 <p>/HelloWorld/templates/search_form.html 文件代码：</p>
 <p>&lt;!DOCTYPE html&gt;</p>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-<meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
-</head>
-<body>
-    <form action="/search" method="get">
-        <input type="text" name="q">
-        <input type="submit" value="搜索">
-    </form>
-</body>
-</html>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta charset="utf-8"><br><title>菜鸟教程(runoob.com)</title><br></head><br><body><br>    <form action="/search" method="get"><br>        <input type="text" name="q"><br>        <input type="submit" value="搜索"><br>    </form><br></body><br></html>
 
 <p>urls.py 规则修改为如下形式：</p>
 <p>/HelloWorld/HelloWorld/urls.py 文件代码：</p>
@@ -586,7 +575,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">120</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -597,7 +586,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -685,7 +674,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">81.9k</span>
+    <span title="Site words total count">87.1k</span>
   
 </div>
 
@@ -843,7 +832,7 @@
         var disqus_config = function () {
           this.page.url = 'https://sukamay.github.io/2018/12/15/GuideBook/Django/DjangoInUbuntu_1/';
           this.page.identifier = '2018/12/15/GuideBook/Django/DjangoInUbuntu_1/';
-          this.page.title = 'DjangoInUbuntu_1';
+          this.page.title = '';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://sukamay.disqus.com/embed.js';

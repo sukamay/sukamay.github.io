@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ORB-SLAM_源码解析前言整体输入： 图像+时间码(传感器融合) 相机内参(标定好的)-相机zoom不可改变， focus尽量不变-给定标定图像的大小，计算内参跟图像大小有关(如果对采集图像进行缩放处理，则内参相应缩放) 相关配置文件，如指定特征检测描述子，给出对应特征描述子的词汇表，具体内部设置的一些经验值等  关键类：1. Tracking 跟踪要处理每帧图像数据 面向对象思想-&amp;gt;封">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ORB_SLAM 源码解析 0">
+<meta property="og:url" content="https://sukamay.github.io/2019/05/12/SLAM/ORB-SLAM_源码解析/index.html">
+<meta property="og:site_name" content="May">
+<meta property="og:description" content="ORB-SLAM_源码解析前言整体输入： 图像+时间码(传感器融合) 相机内参(标定好的)-相机zoom不可改变， focus尽量不变-给定标定图像的大小，计算内参跟图像大小有关(如果对采集图像进行缩放处理，则内参相应缩放) 相关配置文件，如指定特征检测描述子，给出对应特征描述子的词汇表，具体内部设置的一些经验值等  关键类：1. Tracking 跟踪要处理每帧图像数据 面向对象思想-&amp;gt;封">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-13T05:45:37.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ORB_SLAM 源码解析 0">
+<meta name="twitter:description" content="ORB-SLAM_源码解析前言整体输入： 图像+时间码(传感器融合) 相机内参(标定好的)-相机zoom不可改变， focus尽量不变-给定标定图像的大小，计算内参跟图像大小有关(如果对采集图像进行缩放处理，则内参相应缩放) 相关配置文件，如指定特征检测描述子，给出对应特征描述子的词汇表，具体内部设置的一些经验值等  关键类：1. Tracking 跟踪要处理每帧图像数据 面向对象思想-&amp;gt;封">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'QZGPGZPML9',
+      apiKey: 'c861b4d819c1eb8f171d2d182688a3d4',
+      indexName: 'dev_may',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sukamay.github.io/2019/05/12/SLAM/ORB-SLAM_源码解析/">
+
+
+
+
+
+  <title>ORB_SLAM 源码解析 0 | May</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?28c7a508ae0eab6ae434f08eb52a19f5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">May</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sukamay.github.io/2019/05/12/SLAM/ORB-SLAM_源码解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="May">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="May">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ORB_SLAM 源码解析 0</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T15:56:02+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/12/SLAM/ORB-SLAM_源码解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/12/SLAM/ORB-SLAM_源码解析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ORB-SLAM-源码解析"><a href="#ORB-SLAM-源码解析" class="headerlink" title="ORB-SLAM_源码解析"></a>ORB-SLAM_源码解析</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="整体输入："><a href="#整体输入：" class="headerlink" title="整体输入："></a>整体输入：</h3><ol>
+<li>图像+时间码(传感器融合)</li>
+<li>相机内参(标定好的)<br>-相机zoom不可改变， focus尽量不变<br>-给定标定图像的大小，计算内参跟图像大小有关(如果对采集图像进行缩放处理，则内参相应缩放)</li>
+<li>相关配置文件，如指定特征检测描述子，给出对应特征描述子的词汇表，具体内部设置的一些经验值等</li>
+</ol>
+<h3 id="关键类："><a href="#关键类：" class="headerlink" title="关键类："></a>关键类：</h3><h2 id="1-Tracking"><a href="#1-Tracking" class="headerlink" title="1. Tracking"></a>1. Tracking</h2><ol>
+<li>跟踪要处理每帧图像数据</li>
+<li>面向对象思想-&gt;封装<br>-将获取的图像数据封装成帧，后续处理都是针对于帧处理</li>
+<li>具体Frame的结构</li>
+</ol>
+<ul>
+<li>Image-&gt;存储图像数据(输入)</li>
+<li>Camera-&gt;存储相机内参信息(输入)</li>
+<li>Feature-&gt;存储帧对应的特征数据(计算) ( 一对多的关系)</li>
+<li>Mat-&gt;存储帧对应相机姿态(计算)</li>
+</ul>
+<h3 id="1-1-track"><a href="#1-1-track" class="headerlink" title="1.1 track"></a>1.1 track</h3><h4 id="1-1-1-Track-reference-key-frame"><a href="#1-1-1-Track-reference-key-frame" class="headerlink" title="1.1.1 Track reference key frame"></a>1.1.1 Track reference key frame</h4><p>​    初始化的时候根据参考关键帧估计当前帧位姿</p>
+<h4 id="1-1-2-Track-with-motion-model"><a href="#1-1-2-Track-with-motion-model" class="headerlink" title="1.1.2 Track with motion model"></a>1.1.2 Track with motion model</h4><p>​    根据运动模型，估计当前帧位姿</p>
+<h4 id="1-1-3-Track-Local-Map"><a href="#1-1-3-Track-Local-Map" class="headerlink" title="1.1.3 Track Local Map"></a>1.1.3 Track Local Map</h4><p>​    局部地图中的Map point找到了，跟上面一样，将这些Map Point进行投影到当前帧中，寻找匹配，确定3D-2D的关系</p>
+<ol>
+<li>首先确定Map Point能否投影到当前帧上</li>
+<li>Map Point的世界坐标转到相机坐标系下，看点的深度是否为正</li>
+<li>Map Point投影到图像上，是否超出图像边界</li>
+<li>Map Point在深度范围内(每个Map Point产生的最大最小深度)</li>
+<li>当前视图方向与MapPoint的平均视图方向的夹角大于60度</li>
+</ol>
+<p>​    总的来说，这三种跟踪(包括前面的两种)最终目标就是找到Map Point与当前帧的特征形成对应关系，通过PnP对当前帧的位姿进行求解。</p>
+<h3 id="1-2-重定位问题"><a href="#1-2-重定位问题" class="headerlink" title="1.2 重定位问题"></a>1.2 重定位问题</h3><p>​    我们会遇到跟踪丢失的情况，那接下来我们需要移动镜头进行重定位</p>
+<ol>
+<li>具体主要通过关键帧数据库进行查找，找出与当前帧有关系的关键帧，确定候选关键帧</li>
+<li>对每一一个候选关键帧，通过Bow进行匹配，如果有足够的匹配(匹配特征数超过15个) ，则构建PnP进行求解，计算出当前帧的相机外参。</li>
+</ol>
+<ul>
+<li>EPnP算法</li>
+<li>5次RANSAC迭代，计算相机外参</li>
+<li>优化帧，如果匹配特征数没有50个，则将候选关键帧对应的map point投影到当前帧继续寻找匹配，匹配完成之后再次优化帧，如果匹配数还是没有大于50 ，则更改投影匹配阈值，再次匹配，只有匹配的个数大于50 ，才说明重定位成功，最后对大于50个匹配对的帧再次对帧进行优化。</li>
+</ul>
+<h3 id="1-3-跟踪确定关键帧"><a href="#1-3-跟踪确定关键帧" class="headerlink" title="1.3 跟踪确定关键帧"></a>1.3 跟踪确定关键帧</h3><p>​    跟踪除了计算每帧的位姿，还有一个很重要的目的是确定关键帧<br>​    何时添加关键帧，或者说什么是关键帧：</p>
+<ol>
+<li>关键帧不要太稠密(相邻两个关键帧之间有一定的间隔，原作实现时大约是30帧的间隔)</li>
+<li>当前的帧至少匹配到了50个Map Point</li>
+<li>当前帧匹配到的Map Point的个数不能超过参考关键帧(与当前帧拥有最多map point的关键帧)对应Map Point的90%，说明这个时候参考关键帧可以替代当前帧，还没有必要创建关键帧</li>
+<li>局部地图优化空闲的时候</li>
+</ol>
+<h2 id="2-Local-Mapping"><a href="#2-Local-Mapping" class="headerlink" title="2. Local Mapping"></a>2. Local Mapping</h2><h3 id="2-1-处理新关键帧"><a href="#2-1-处理新关键帧" class="headerlink" title="2.1 处理新关键帧"></a>2.1 处理新关键帧</h3><p>​    每添加一个keyframe. ，维护Covisibility Graph ， Spanning Tree ， Mapl以及计算该帧的词袋表示确定匹配，为三角化做准备</p>
+<h3 id="2-2-生成新的Map-Point"><a href="#2-2-生成新的Map-Point" class="headerlink" title="2.2 生成新的Map Point"></a>2.2 生成新的Map Point</h3><ol>
+<li><p>得到当前关键帧(cur_ keyframe)在Covisibility Graph中邻接的一些关键帧(共同的map point数单目设置20 )</p>
+</li>
+<li><p>对邻接的关键帧进行遍历 (每一个设为ref keyframe) ，在极线上进行搜索并三角化</p>
+<ol>
+<li>基线( cur keyframe5ref keyframe )与ef keyframe对应的map point的深度均值比值不能太小，这样形成的3d点不够精确</li>
+<li>对未匹配的特征点，首先通过orb的词汇树进行加速匹配</li>
+</ol>
+</li>
+<li><p>根据匹配点对，通过三角化计算3d点</p>
+<ol>
+<li>检测三角化之后的点在相机前</li>
+<li>在参考帧的重投影误差进行检测</li>
+<li>对尺度进行检查</li>
+</ol>
+</li>
+<li><p>确定Map Point的相关属性(平均观察方向，观测距离，最佳描述子等)</p>
+<p>产生了新的Map Point之后r该Map Point可能会被其他关键帧找到，为之前帧添加对应关</p>
+</li>
+</ol>
+<p>系，或者该Map Point与其他关键帧之间创建的Map Point有交集，具体做法为：</p>
+<ol>
+<li>根据covisibility grapb找到邻接关键帧(共同map point数20 )</li>
+<li>遍历邻接关键帧，对每一个邻接关键帧再次计算有关系的关键帧(共同map point数5 )得到二级邻接关键帧</li>
+<li>遍历当前帧的一级邻接和二级邻接的关键帧( each_ keyframe ) ，将当前帧对应的map point投影到each_ keyframe上，确定对应的特征是否已经有对应的map point ，如果有，我们选择map point对应观测量多的那个，没有则添加到each_ keyframe对应的特征上</li>
+</ol>
+<h3 id="2-3-Map-Point剔除"><a href="#2-3-Map-Point剔除" class="headerlink" title="2.3 Map Point剔除"></a>2.3 Map Point剔除</h3><ol>
+<li>是否为坏点（坏点为观察到它的关键帧的个数小于3），若为坏点直接剔除</li>
+<li>能找到该点的帧不应该少于理论上观测到该点的帧的1/4<ol>
+<li>理论观察该点表示，该点能投影到的局部关键帧的个数</li>
+<li>实际观测该点表示，优化后，能投影的关键帧的个数</li>
+<li>从创建该Map Point开始到现在已经过了至少2个关键帧，但是观察到该点的关键帧不超过2个</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-4-关键帧剔除"><a href="#2-4-关键帧剔除" class="headerlink" title="2.4 关键帧剔除"></a>2.4 关键帧剔除</h3><ol>
+<li>根据Covisibility Graph确定局部关键帧，对所有局部关键帧都进行遍（each_keyframe）</li>
+<li>对each_keyframe对应的每一个Map Point进行分析，与该Map Point对应的特征的个数大于3 </li>
+<li>如果each_frame上对应的Map Point能被其他至少3个关键帧观测到90%以上的话，就剔除它</li>
+</ol>
+<h3 id="2-5-local-BA"><a href="#2-5-local-BA" class="headerlink" title="2.5 local BA"></a>2.5 local BA</h3><p>​    添加完了关键帧及对应mappoint，有了这些新的约束，进行一次局部bundle adjustment，具体做法:</p>
+<ol>
+<li>根据Covisibility Graph确定局部关键帧，设为图节点</li>
+<li>根据局部关键帧，确定局部的map point ，设为图节点</li>
+<li>再找到那些可以看到局部map point的关键帧，但是不是局部关键帧的，到时在优化的时候，设置为fixed ，不进行优化</li>
+<li>把局部map point中每一个map point与观察到该map point的所有关键帧构建边， 边的观测值为map point对应的特征坐标，边的信息矩阵，考虑误差是一个像素*尺度</li>
+<li>去除一些不好的边，再次进行优化，即对keyframe对应的相机外参和mappoint的世界坐标系中的位置进行了修正</li>
+</ol>
+<h2 id="3-Loop-Closing"><a href="#3-Loop-Closing" class="headerlink" title="3. Loop Closing"></a>3. Loop Closing</h2><p>​    通过Local Mapping我们对KeyFrame的位姿和Map Point的位置进行了优化，但是实际计算出的位姿还是有误差的， 误差积累之后，则尺度不再统一，这就会产生尺度漂移问题，轨迹的误差也会越来越大，因此需要进行回环检测来解决它。</p>
+<h3 id="3-1-检测回环"><a href="#3-1-检测回环" class="headerlink" title="3.1 检测回环"></a>3.1 检测回环</h3><p>Loop Candidates Detection</p>
+<p>​    Local Mapping线程处理之后，在Loop closing插入关键帧cur_ keyframe ，则Loop Closing线程处理，首先闭环检测，具体处理:</p>
+<ol>
+<li>根据Covisility Graph确定局部关键帧( each_ keyframe )</li>
+<li>计算cur_ keyframe的词袋向量与所有each_ keyframe的词袋向量的相似度，得到最小相似度</li>
+<li>在关键帧数据库中找到相似度不小于最小相似度的关键帧作为闭环的候选关键帧</li>
+<li>一对每一 个候选关键帧检测其与之前回环的一致性。主要也就是通过连续三次的关键帧对应相同的候选闭环帧，则认为该帧为闭环帧。</li>
+</ol>
+<h3 id="3-2-计算相似变换"><a href="#3-2-计算相似变换" class="headerlink" title="3.2 计算相似变换"></a>3.2 计算相似变换</h3><p>Compute the Similarity Transformation</p>
+<ol>
+<li>找到了当前关键帧可能的候选闭环帧，计算当前关键帧与可能的候选闭环帧的匹配，根据特征的匹配，确定两帧之间map point的匹配(匹配数大于20 )</li>
+<li>通过RANSAC计算Sim3 ，然后根据这个Sim3进行处理，优化所有的对应。</li>
+<li>两帧进行相互投影各自根据自己对应的map point寻找对应帧的匹配，最后看两个匹配一致的数目。</li>
+<li>优化重投影误差optimizeSim3</li>
+<li>将闭环帧及其相邻帧对应的mappoint投影到当前帧上，这边用sim3 ，寻找更多的匹配</li>
+<li>如果匹配数大于40 ，则认为计算成功</li>
+</ol>
+<h3 id="3-3-闭环融合"><a href="#3-3-闭环融合" class="headerlink" title="3.3 闭环融合"></a>3.3 闭环融合</h3><p>Loop Fusion<br>    通过上一步计算，我们确定了闭环帧以及对应的Sim3，我们要做的是：</p>
+<ol>
+<li>将当前关键帧对应的map point换成闭环帧对应的map point (这边都包括相邻的帧对应)</li>
+<li>重新构建covisibility graph（考虑到环，需要更新相邻关键帧）</li>
+</ol>
+<h3 id="3-4-优化Essential-Graph"><a href="#3-4-优化Essential-Graph" class="headerlink" title="3.4 优化Essential Graph"></a>3.4 优化Essential Graph</h3><p>在Essential graph上进行姿态图优化</p>
+<ol>
+<li>将地图中的所有关键帧设为顶点，估计量为每个关键帧对应的Sim3 ，闭环帧不做优化</li>
+<li>添加闭环边，当前帧的集合与闭环帧的集合构成图中的边，权重小于100的不考虑，边的观测值是两帧之间的相对变化量，信息矩阵是单位阵</li>
+<li>添加正常边，遍历所有的关键帧，找到关键帧对应的父节点也就是Spanning tree的边，边的观测值是两帧之间的相对变化量，信息矩阵是单位阵，继续遍历当前帧所对应的闭环帧，如果闭环帧在当前帧之间，则添加边，继续对covisibilitygraph权重大于100构成边，最后优化</li>
+</ol>
+<h2 id="4-Viewer"><a href="#4-Viewer" class="headerlink" title="4. Viewer"></a>4. Viewer</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>给咱来个🍰，啾咪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="May 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="May 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/GuideBook/Django/Django_1/" rel="next" title="Django">
+                <i class="fa fa-chevron-left"></i> Django
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/12/SLAM/ORB_SLAM_源码解析_1/" rel="prev" title="ORB_SLAM 源码解析 1">
+                ORB_SLAM 源码解析 1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/profile.JPG" alt="May">
+            
+              <p class="site-author-name" itemprop="name">May</p>
+              <p class="site-description motion-element" itemprop="description">Life is fantastic!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">120</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sukamay" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ORB-SLAM-源码解析"><span class="nav-text">ORB-SLAM_源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整体输入："><span class="nav-text">整体输入：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键类："><span class="nav-text">关键类：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Tracking"><span class="nav-text">1. Tracking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-track"><span class="nav-text">1.1 track</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-Track-reference-key-frame"><span class="nav-text">1.1.1 Track reference key frame</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-Track-with-motion-model"><span class="nav-text">1.1.2 Track with motion model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-3-Track-Local-Map"><span class="nav-text">1.1.3 Track Local Map</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-重定位问题"><span class="nav-text">1.2 重定位问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-跟踪确定关键帧"><span class="nav-text">1.3 跟踪确定关键帧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Local-Mapping"><span class="nav-text">2. Local Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-处理新关键帧"><span class="nav-text">2.1 处理新关键帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-生成新的Map-Point"><span class="nav-text">2.2 生成新的Map Point</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Map-Point剔除"><span class="nav-text">2.3 Map Point剔除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-关键帧剔除"><span class="nav-text">2.4 关键帧剔除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-local-BA"><span class="nav-text">2.5 local BA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Loop-Closing"><span class="nav-text">3. Loop Closing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-检测回环"><span class="nav-text">3.1 检测回环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-计算相似变换"><span class="nav-text">3.2 计算相似变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-闭环融合"><span class="nav-text">3.3 闭环融合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-优化Essential-Graph"><span class="nav-text">3.4 优化Essential Graph</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Viewer"><span class="nav-text">4. Viewer</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">May</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">87.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://sukamay.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sukamay.github.io/2019/05/12/SLAM/ORB-SLAM_源码解析/';
+          this.page.identifier = '2019/05/12/SLAM/ORB-SLAM_源码解析/';
+          this.page.title = 'ORB_SLAM 源码解析 0';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://sukamay.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'sukamay',
+            repo: 'https://sukamay.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ec260ff37dc5d39cce52a4f6dd87dd27ec0ecf40',
+            
+                client_id: 'f67dc7daeb0698c01d94'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
